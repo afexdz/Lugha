@@ -17,15 +17,23 @@
   // ================= COQUE =================
   function shell(app, active, view, r, onLeave) {
     const u = me(), p = prof(), L = D.langs[p.lang];
-    const nav = [
-      ['apprendre', 'Apprendre', 'home'], ['classement', 'Classement', 'trophy'], ['boutique', 'Boutique', 'gem'],
-      ['profil', 'Profil', 'user'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []), ['parametres', 'Réglages', 'settings']
+    const sideNav = [
+      ['apprendre', 'Apprendre', 'home'], ['classement', 'Classement', 'trophy'],
+      ['voyage', 'Voyage', 'globe'], ['boutique', 'Boutique', 'gem'],
+      ['profil', 'Profil', 'user'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []),
+      ['parametres', 'Réglages', 'settings']
+    ];
+    const tabNav = [
+      ['apprendre', 'Apprendre', 'home'], ['classement', 'Classement', 'trophy'],
+      ['voyage', 'Voyage', 'globe'],
+      ['profil', 'Profil', 'user'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []),
+      ['parametres', 'Réglages', 'settings']
     ];
     const today = dayKey();
     app.innerHTML = `<div class="shell">
       <aside class="side" aria-label="Navigation principale">
         <a class="logo" href="#/">${logo()}</a>
-        <nav>${nav.map(([k, l, ic]) => `<a href="#/${k}" class="side-link ${k === active ? 'on' : ''}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${l}</span></a>`).join('')}</nav>
+        <nav>${sideNav.map(([k, l, ic]) => `<a href="#/${k}" class="side-link ${k === active ? 'on' : ''}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${l}</span></a>`).join('')}</nav>
         <button class="side-prof" id="switchProf" aria-label="Changer de profil"><span class="sp-av">${p.avatar}</span><span class="sp-t"><b>${esc(p.name)}</b><small>${u.role === 'parent' ? 'Changer de profil' : 'Mon compte'}</small></span>${icon('swap')}</button>
       </aside>
       <div class="main">
@@ -41,7 +49,7 @@
         <main class="view" id="view" tabindex="-1"></main>
       </div>
       <aside class="rail" id="rail" aria-label="Objectifs et quêtes"></aside>
-      <nav class="tabbar" aria-label="Navigation">${nav.map(([k, l, ic]) => `<a href="#/${k}" class="tab ${k === active ? 'on' : ''}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${l}</span></a>`).join('')}</nav>
+      <nav class="tabbar" aria-label="Navigation">${tabNav.map(([k, l, ic]) => `<a href="#/${k}" class="tab ${k === active ? 'on' : ''}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${l}</span></a>`).join('')}</nav>
     </div>`;
     view($('#view'), r, onLeave);
     rail($('#rail'));
@@ -146,6 +154,14 @@
     const limit = overLimit(p);
     let html = '';
     if (limit) html += `<div class="limit-note">${mascot('calm')}<div><b>C’est tout pour aujourd’hui</b><p>Le temps fixé par tes parents est atteint. Rendez-vous demain, ta série t’attend !</p></div></div>`;
+    const isle = D.islands[p.lang];
+    const vcEarned = done - Math.floor(done / 5);
+    html += `<a class="voyage-card" href="#/voyage" style="--c:${L.color}">`
+      + `<span class="vc-isle">${isle.embleme}</span>`
+      + `<div class="vc-info"><b>Mon voyage · ${esc(L.name)}</b>`
+      + `<small>${vcEarned === 1 ? '1 autocollant collecté' : vcEarned + ' autocollants collectés'} sur 20</small></div>`
+      + `${icon('next')}</a>`;
+
     D.units.forEach((un, ui) => {
       const start = ui * PER_UNIT;
       const uDone = clamp(done - start, 0, PER_UNIT);
@@ -551,8 +567,88 @@
     animate($$('.course', el), { opacity: [0, 1], scale: [0.9, 1] }, { delay: stagger(0.03), ...spring(260, 20) });
   }
 
+
+  // ================= VOYAGE =================
+  function voyage(el) {
+    const p = prof();
+    const TOTAL_STEPS = D.units.length * PER_UNIT;
+    const stickerCount = lang => { const c = p.courses[lang]; const d = c ? c.done : 0; return d - Math.floor(d / 5); };
+
+    const pathHtml = D.order.map((lang, i) => {
+      const L = D.langs[lang], isle = D.islands[lang], c = p.courses[lang];
+      const started = !!c, earned = stickerCount(lang), pct = c ? Math.round(c.done / TOTAL_STEPS * 100) : 0;
+      const isActive = lang === p.lang, side = i % 2 === 0 ? 'left' : 'right';
+      return `<div class="isle-stop ${started ? 'started' : 'locked'} ${isActive ? 'active' : ''} ${side}" data-lang="${lang}" style="--c:${L.color}">`
+        + (isActive ? `<div class="bulle-float">${mascot('happy', 'isle-mascot')}</div>` : '')
+        + `<button class="isle-btn" ${!started ? 'disabled' : ''} aria-label="${esc(L.name)}${started ? `, ${earned} autocollants, ${pct}%` : ', non commencee'}">`
+        + `<div class="isle-dot"><span>${started ? isle.embleme : '\u{1F310}'}</span></div>`
+        + `<div class="isle-info"><b>${esc(L.name)}</b>`
+        + `<small>${started ? earned + '/20 autocollants · ' + pct + '%' : 'Pas encore commencée'}</small>`
+        + `</div></button></div>`;
+    }).join('');
+
+    el.innerHTML = `<div class="page voyage-page">`
+      + `<h1 class="page-title">Mon voyage</h1>`
+      + `<p class="page-sub">Bulle explore le monde. Fais des leçons pour débloquer des autocollants.</p>`
+      + `<div class="isle-path">${pathHtml}</div>`
+      + `<div class="album" id="album"></div>`
+      + `</div>`;
+
+    let selLang = p.lang;
+
+    function renderAlbum(lang) {
+      const isle = D.islands[lang], L = D.langs[lang], c = p.courses[lang], earned = stickerCount(lang);
+      const albumEl = $('#album', el);
+      const stickersHtml = isle.stickers.map((s, i) =>
+        `<button class="sticker ${i < earned ? 'earned' : 'locked'}" data-i="${i}" ${i >= earned ? 'disabled' : ''} aria-label="${i < earned ? esc(s.nom) : 'Mystère'}">`
+        + `<span class="s-e">${i < earned ? s.e : '❓'}</span>`
+        + (i < earned ? `<span class="s-nom">${esc(s.nom)}</span>` : '')
+        + `</button>`
+      ).join('');
+      albumEl.innerHTML = `<div class="album-header">`
+        + `<div class="album-badge" style="--c:${L.color}"><span>${isle.embleme}</span><b>${esc(L.name)}</b></div>`
+        + `<span class="album-count">${earned} / 20 autocollants</span>`
+        + `</div><div class="sticker-grid">${stickersHtml}</div>`
+        + (!c ? `<p class="album-empty">Commence le cours de ${esc(L.name.toLowerCase())} pour débloquer des autocollants.</p>` : '');
+
+      $$('.sticker.earned', albumEl).forEach(btn => {
+        const i = +btn.dataset.i, s = isle.stickers[i];
+        btn.addEventListener('click', () => {
+          modal(`<div class="sticker-reveal">`
+            + `<div class="sr-card" id="srCard"><span class="sr-e">${s.e}</span></div>`
+            + `<p class="sr-nom">${esc(s.nom)}</p>`
+            + `<p class="sr-lang">${esc(L.name)}</p>`
+            + `<div class="modal-actions"><button class="btn btn-primary" data-close>Super !</button></div></div>`, {
+            onMount: box => animate($('#srCard', box), { rotateY: [-90, 0], scale: [0.6, 1] }, spring(160, 14))
+          });
+        });
+      });
+      animate($$('.sticker', albumEl), { opacity: [0, 1], scale: [0.5, 1] },
+        { delay: stagger(0.025, { startDelay: 0.05 }), ...spring(260, 20) });
+    }
+
+    $$('.isle-stop', el).forEach(s => s.classList.toggle('sel', s.dataset.lang === selLang));
+    renderAlbum(selLang);
+
+    $$('.isle-stop.started .isle-btn', el).forEach(btn => {
+      const stop = btn.closest('.isle-stop');
+      btn.addEventListener('click', () => {
+        selLang = stop.dataset.lang;
+        $$('.isle-stop', el).forEach(s => s.classList.toggle('sel', s.dataset.lang === selLang));
+        renderAlbum(selLang);
+        setTimeout(() => {
+          const a = $('#album', el);
+          a && a.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'nearest' });
+        }, 80);
+      });
+    });
+
+    animate($$('.isle-stop', el), { opacity: [0, 1], y: [14, 0] },
+      { delay: stagger(0.04), duration: 0.38, ease: [0.2, 0.8, 0.2, 1] });
+  }
+
   LZ.views = LZ.views || {};
   LZ.shell = shell;
   LZ.heartsModal = heartsModal;
-  Object.assign(LZ.views, { learn, league, shop, profile, parents, settings, courses });
+  Object.assign(LZ.views, { learn, league, shop, profile, parents, settings, courses, voyage });
 })();

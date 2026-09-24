@@ -359,8 +359,11 @@
       save();
       Sfx.done();
       const acc = Math.round(st.correct / Math.max(1, st.correct + st.wrong) * 100);
+      const newEarned = c.done - Math.floor(c.done / 5);
+      const stickerIdx = newEarned - 1;
       const screens = [
         () => resultScreen({ xp, gems, acc, secs, perfect, boost, goalHit }),
+        (!practice && D.islands && D.islands[lang]) ? () => stickerScreen(lang, stickerIdx) : null,
         first ? () => streakScreen(prevStreak, p.streak) : null,
         rankAfter > rankBefore ? () => rankScreen(rankAfter) : null
       ].filter(Boolean);
@@ -429,6 +432,30 @@
         animate($('.medal'), { rotateY: [540, 0], scale: [0.3, 1] }, spring(60, 12));
         Sfx.streak();
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
+      };
+    }
+
+    function stickerScreen(lang, stickerIdx) {
+      return nextFn => {
+        const isle = D.islands[lang], s = isle.stickers[stickerIdx], L = D.langs[lang];
+        app.innerHTML = `<div class="end sticker-s">
+          <div class="end-in">
+            <p class="end-sub">Nouvel autocollant !</p>
+            <div class="s-card-wrap">
+              <div class="s-card" id="sCard">${s.e}</div>
+            </div>
+            <h1>${esc(s.nom)}</h1>
+            <p class="end-sub">${esc(L.name)} · autocollant ${stickerIdx + 1} sur 20</p>
+          </div>
+          <footer class="end-foot">
+            <a class="btn btn-ghost btn-lg" href="#/voyage">Voir l'album</a>
+            <button class="btn btn-primary btn-lg" id="endNext">Continuer</button>
+          </footer>
+        </div>`;
+        animate($('#sCard'), { rotateY: [-90, 0], scale: [0.4, 1.08, 1] }, { delay: 0.3, ...spring(150, 12) });
+        Sfx.coin();
+        $('#endNext').addEventListener('click', nextFn);
+        setTimeout(() => { const k = $('#endNext'); k && k.focus(); }, 200);
       };
     }
 

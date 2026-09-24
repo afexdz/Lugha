@@ -138,5 +138,144 @@ window.LISSAN_DATA = (() => {
   const praise = ['Excellent !', 'Bravo !', 'Parfait !', 'Génial !', 'Super !', 'Bien joué !', 'Magnifique !', 'Tu assures !'];
   const comfort = ['Presque !', 'Pas grave, on continue.', 'Tu y es presque.', 'Chaque erreur fait apprendre.'];
 
-  return { langs, order, units, words, phrase, phrases, leagues, bots, ranks, avatars, praise, comfort };
+  // ---------- Îles & autocollants (Le voyage de Bulle) ----------
+  const islands = {
+    en: { embleme: '🏰', nom: 'Île de la Tamise', stickers: [
+      { e: '🫖', nom: 'Thé anglais' }, { e: '🚌', nom: 'Bus rouge' }, { e: '🏰', nom: 'Tour de Londres' },
+      { e: '⚽', nom: 'Football' }, { e: '🎭', nom: 'Théâtre Shakespeare' }, { e: '☔', nom: 'Parapluie' },
+      { e: '🐟', nom: 'Fish & chips' }, { e: '🎩', nom: 'Haut-de-forme' }, { e: '🦁', nom: 'Lion royal' },
+      { e: '🐑', nom: 'Mouton anglais' }, { e: '🎡', nom: 'London Eye' }, { e: '📞', nom: 'Cabine rouge' },
+      { e: '🍰', nom: 'Pudding' }, { e: '🦊', nom: 'Renard roux' }, { e: '🏉', nom: 'Rugby' },
+      { e: '🌹', nom: 'Rose Tudor' }, { e: '🎸', nom: 'Rock music' }, { e: '🍺', nom: 'Pub anglais' },
+      { e: '🎄', nom: 'Noël britannique' }, { e: '🐝', nom: 'Abeille royale' }
+    ]},
+    fr: { embleme: '🗼', nom: 'Île de la Seine', stickers: [
+      { e: '🥐', nom: 'Croissant' }, { e: '🥖', nom: 'Baguette' }, { e: '🧀', nom: 'Fromage français' },
+      { e: '🗼', nom: 'Tour Eiffel' }, { e: '🍷', nom: 'Vin rouge' }, { e: '🥂', nom: 'Champagne' },
+      { e: '🎨', nom: 'Peinture Louvre' }, { e: '🪗', nom: 'Accordéon' }, { e: '💐', nom: 'Lavande' },
+      { e: '🐓', nom: 'Coq gaulois' }, { e: '⚜️', nom: 'Fleur de lys' }, { e: '🍰', nom: 'Macaron' },
+      { e: '🚴', nom: 'Tour de France' }, { e: '🌺', nom: 'Coquelicot' }, { e: '🥞', nom: 'Crêpe bretonne' },
+      { e: '🏰', nom: 'Château Loire' }, { e: '🌊', nom: "Côte d'Azur" }, { e: '🎊', nom: 'Bastille' },
+      { e: '🦔', nom: 'Hérisson' }, { e: '🎪', nom: 'Fête foraine' }
+    ]},
+    es: { embleme: '💃', nom: 'Île du Soleil', stickers: [
+      { e: '🥘', nom: 'Paella' }, { e: '💃', nom: 'Flamenco' }, { e: '🐂', nom: 'Taureau' },
+      { e: '🍊', nom: 'Orange Valence' }, { e: '⛪', nom: 'Sagrada Família' }, { e: '🎸', nom: 'Guitare' },
+      { e: '🍷', nom: 'Rioja' }, { e: '🫒', nom: 'Olive' }, { e: '🏰', nom: 'Alhambra' },
+      { e: '🧁', nom: 'Churro' }, { e: '🌞', nom: 'Soleil espagnol' }, { e: '🎊', nom: 'Feria' },
+      { e: '🐟', nom: 'Anchois' }, { e: '🌹', nom: 'Rose' }, { e: '🦅', nom: 'Aigle royal' },
+      { e: '⚽', nom: 'Fútbol' }, { e: '🎭', nom: 'Théâtre Siglo' }, { e: '🌶️', nom: 'Piment' },
+      { e: '🎉', nom: 'Tomatina' }, { e: '🐙', nom: 'Pieuvre galice' }
+    ]},
+    de: { embleme: '🍺', nom: 'Île du Rhin', stickers: [
+      { e: '🍺', nom: 'Bière bavaroise' }, { e: '🥨', nom: 'Bretzel' }, { e: '🌭', nom: 'Bratwurst' },
+      { e: '🏰', nom: 'Neuschwanstein' }, { e: '🎄', nom: 'Marché de Noël' }, { e: '🚗', nom: 'Voiture allemande' },
+      { e: '🎻', nom: 'Violon classique' }, { e: '🦅', nom: 'Aigle impérial' }, { e: '🥾', nom: 'Randonnée' },
+      { e: '📚', nom: 'Gutenberg' }, { e: '🌲', nom: 'Forêt Noire' }, { e: '🍫', nom: 'Chocolat' },
+      { e: '🐻', nom: 'Ours de Berlin' }, { e: '🎡', nom: 'Oktoberfest' }, { e: '🥮', nom: 'Pain épicé' },
+      { e: '⛪', nom: 'Cathédrale Cologne' }, { e: '⚽', nom: 'Bundesliga' }, { e: '🌺', nom: 'Bruyère' },
+      { e: '🎺', nom: 'Fanfare' }, { e: '🦌', nom: 'Cerf de forêt' }
+    ]},
+    it: { embleme: '🍕', nom: 'Île de la Botte', stickers: [
+      { e: '🍕', nom: 'Pizza napolitaine' }, { e: '🍝', nom: 'Spaghetti' }, { e: '🏛️', nom: 'Colisée' },
+      { e: '☕', nom: 'Espresso' }, { e: '🍦', nom: 'Gelato' }, { e: '🎭', nom: 'Carnaval Venise' },
+      { e: '🚤', nom: 'Gondole' }, { e: '🏎️', nom: 'Ferrari' }, { e: '🍋', nom: 'Limoncello' },
+      { e: '🌋', nom: 'Vésuve' }, { e: '🫒', nom: 'Olive toscane' }, { e: '🧀', nom: 'Parmesan' },
+      { e: '🎵', nom: 'Opéra' }, { e: '🎨', nom: 'Renaissance' }, { e: '🦁', nom: 'Lion Saint-Marc' },
+      { e: '🌹', nom: 'Rose italienne' }, { e: '🍇', nom: 'Raisin toscan' }, { e: '🏺', nom: 'Poterie antique' },
+      { e: '🎊', nom: 'Carnaval' }, { e: '🐺', nom: 'Loup légendaire' }
+    ]},
+    pt: { embleme: '⛵', nom: 'Île des Caravelles', stickers: [
+      { e: '🐟', nom: 'Bacalhau' }, { e: '⛵', nom: 'Caravelle' }, { e: '🎵', nom: 'Fado' },
+      { e: '🏰', nom: 'Tour de Belém' }, { e: '🍊', nom: 'Orange Algarve' }, { e: '🌊', nom: 'Atlantique' },
+      { e: '⚽', nom: 'Football' }, { e: '🐓', nom: 'Coq de Barcelos' }, { e: '🍷', nom: 'Porto' },
+      { e: '🎨', nom: 'Azulejo' }, { e: '🌞', nom: 'Soleil Algarve' }, { e: '🥐', nom: 'Pastel de nata' },
+      { e: '🐬', nom: 'Dauphin' }, { e: '🌳', nom: 'Chêne-liège' }, { e: '🎭', nom: 'São João' },
+      { e: '🧂', nom: 'Fleur de sel' }, { e: '🦅', nom: 'Aigle ibérique' }, { e: '⚓', nom: 'Ancre Vasco' },
+      { e: '🌺', nom: 'Azalée' }, { e: '🏄', nom: 'Surf Nazaré' }
+    ]},
+    tr: { embleme: '🕌', nom: 'Île du Bosphore', stickers: [
+      { e: '🕌', nom: 'Mosquée Bleue' }, { e: '🫖', nom: 'Thé turc' }, { e: '🥙', nom: 'Kebab' },
+      { e: '🍆', nom: 'Aubergine' }, { e: '🌷', nom: 'Tulipe ottomane' }, { e: '🏺', nom: 'Grand Bazar' },
+      { e: '🛥️', nom: 'Bosphore' }, { e: '🌙', nom: 'Croissant de lune' }, { e: '🧿', nom: 'Œil Nazar' },
+      { e: '🦅', nom: 'Aigle anatolien' }, { e: '🍦', nom: 'Dondurma' }, { e: '🐱', nom: 'Chat Istanbul' },
+      { e: '🎊', nom: 'Hıdırellez' }, { e: '🌊', nom: 'Mer Égée' }, { e: '🥜', nom: 'Pistache' },
+      { e: '🎭', nom: "Théâtre d'ombres" }, { e: '🏔️', nom: 'Mont Ararat' }, { e: '🪘', nom: 'Darbuka' },
+      { e: '🍯', nom: 'Miel anatolien' }, { e: '🦋', nom: 'Papillon de printemps' }
+    ]},
+    ko: { embleme: '🏮', nom: 'Île du Matin Calme', stickers: [
+      { e: '🌶️', nom: 'Kimchi' }, { e: '🍜', nom: 'Ramyeon' }, { e: '🎵', nom: 'K-pop' },
+      { e: '🏮', nom: 'Lanterne Séoul' }, { e: '🏯', nom: 'Gyeongbokgung' }, { e: '🐯', nom: 'Tigre coréen' },
+      { e: '🌸', nom: 'Cerisier' }, { e: '🥋', nom: 'Taekwondo' }, { e: '📱', nom: 'High-tech' },
+      { e: '🌺', nom: 'Mugunghwa' }, { e: '🍵', nom: 'Thé vert' }, { e: '🎑', nom: 'Chuseok' },
+      { e: '🏔️', nom: 'Hallasan' }, { e: '👘', nom: 'Hanbok' }, { e: '🌊', nom: "Mer de l'Est" },
+      { e: '🎎', nom: 'Poupée coréenne' }, { e: '🍡', nom: 'Tteok' }, { e: '🎋', nom: 'Bambou' },
+      { e: '🎭', nom: 'Nanta' }, { e: '🦅', nom: 'Aigle coréen' }
+    ]},
+    zh: { embleme: '🐉', nom: 'Île du Dragon', stickers: [
+      { e: '🐉', nom: 'Dragon impérial' }, { e: '🥟', nom: 'Dumplings' }, { e: '🏮', nom: 'Lanterne rouge' },
+      { e: '🐼', nom: 'Panda géant' }, { e: '🏯', nom: 'Grande Muraille' }, { e: '🍵', nom: 'Thé oolong' },
+      { e: '🎆', nom: 'Feux artifice' }, { e: '🎋', nom: 'Bambou' }, { e: '🌸', nom: 'Prunier fleuri' },
+      { e: '🎊', nom: 'Nouvel An lunaire' }, { e: '🌺', nom: 'Pivoine impériale' }, { e: '🦁', nom: 'Lion dansant' },
+      { e: '🌙', nom: 'Fête de la lune' }, { e: '🎵', nom: 'Erhu' }, { e: '🐠', nom: 'Carpe koï' },
+      { e: '🏔️', nom: 'Mont Huangshan' }, { e: '🐒', nom: 'Singe doré' }, { e: '🎨', nom: 'Calligraphie' },
+      { e: '🥡', nom: 'Riz sauté' }, { e: '🦋', nom: 'Papillon de soie' }
+    ]},
+    ja: { embleme: '🗻', nom: 'Île du Soleil Levant', stickers: [
+      { e: '🌸', nom: 'Hanami' }, { e: '🗻', nom: 'Mont Fuji' }, { e: '⛩️', nom: 'Torii' },
+      { e: '🍱', nom: 'Bento' }, { e: '🥷', nom: 'Ninja' }, { e: '🍜', nom: 'Ramen' },
+      { e: '🎎', nom: 'Poupée Daruma' }, { e: '🎋', nom: 'Tanabata' }, { e: '🏯', nom: 'Château Himeji' },
+      { e: '🐟', nom: 'Sushi' }, { e: '🌺', nom: 'Chrysanthème' }, { e: '🎊', nom: 'Matsuri' },
+      { e: '🦊', nom: 'Renard Kitsune' }, { e: '🌙', nom: 'O-tsukimi' }, { e: '🎮', nom: 'Jeux vidéo' },
+      { e: '👘', nom: 'Kimono' }, { e: '🎍', nom: 'Kadomatsu' }, { e: '🎏', nom: 'Koinobori' },
+      { e: '🐉', nom: 'Dragon japonais' }, { e: '🍡', nom: 'Dango' }
+    ]},
+    ru: { embleme: '🪆', nom: 'Île des Neiges', stickers: [
+      { e: '🪆', nom: 'Matriochka' }, { e: '🏰', nom: 'Kremlin' }, { e: '🎭', nom: 'Ballet impérial' },
+      { e: '🎻', nom: 'Violon classique' }, { e: '❄️', nom: 'Hiver sibérien' }, { e: '🐻', nom: 'Ours brun' },
+      { e: '🌻', nom: 'Tournesol' }, { e: '🚂', nom: 'Transsibérien' }, { e: '🍵', nom: 'Samovar' },
+      { e: '⭐', nom: 'Étoile rouge' }, { e: '🎊', nom: 'Maslenitsa' }, { e: '🌺', nom: 'Lilas de mai' },
+      { e: '🦅', nom: 'Aigle bicéphale' }, { e: '🥞', nom: 'Blini' }, { e: '🐟', nom: 'Caviar beluga' },
+      { e: '🏔️', nom: 'Mont Elbrouz' }, { e: '🎠', nom: 'Cirque de Moscou' }, { e: '🧣', nom: 'Châle Pavlovo' },
+      { e: '🌙', nom: 'Nuit blanche' }, { e: '🎶', nom: 'Balalaïka' }
+    ]},
+    ar: { embleme: '🐪', nom: 'Île du Croissant', stickers: [
+      { e: '🐪', nom: 'Chameau du désert' }, { e: '🌙', nom: 'Croissant sacré' }, { e: '🏺', nom: 'Grand Bazar' },
+      { e: '🌴', nom: 'Palmier dattier' }, { e: '🎵', nom: 'Oud' }, { e: '☕', nom: 'Café arabe' },
+      { e: '🐎', nom: 'Cheval arabe' }, { e: '🏜️', nom: 'Désert Sahara' }, { e: '🕌', nom: 'Mosquée' },
+      { e: '🦅', nom: 'Aigle Quraysh' }, { e: '🌹', nom: 'Rose de Damas' }, { e: '🎊', nom: 'Aïd al-Fitr' },
+      { e: '🍯', nom: 'Miel sidr' }, { e: '🪔', nom: 'Lampe Aladin' }, { e: '🌟', nom: "Étoile d'Orient" },
+      { e: '🐆', nom: 'Guépard arabe' }, { e: '🌺', nom: "Fleur d'oranger" }, { e: '🎨', nom: 'Calligraphie' },
+      { e: '🏔️', nom: 'Mont Sinaï' }, { e: '🎭', nom: 'Théâtre Khayal' }
+    ]},
+    hi: { embleme: '🪔', nom: 'Île du Lotus', stickers: [
+      { e: '🪔', nom: 'Diwali' }, { e: '🐘', nom: 'Éléphant sacré' }, { e: '🏛️', nom: 'Taj Mahal' },
+      { e: '🌺', nom: 'Lotus national' }, { e: '🦚', nom: 'Paon impérial' }, { e: '🎊', nom: 'Holi' },
+      { e: '🍛', nom: 'Curry épicé' }, { e: '🥛', nom: 'Lassi' }, { e: '🎭', nom: 'Bharatanatyam' },
+      { e: '🐅', nom: 'Tigre du Bengale' }, { e: '🌿', nom: 'Ayurveda' }, { e: '🎵', nom: 'Sitar' },
+      { e: '🏔️', nom: 'Himalaya' }, { e: '🐒', nom: 'Singe langur' }, { e: '🌸', nom: 'Jasmin' },
+      { e: '🐄', nom: 'Vache sacrée' }, { e: '🎪', nom: 'Bazar coloré' }, { e: '⭐', nom: 'Étoile Inde' },
+      { e: '🌊', nom: "Mer d'Arabie" }, { e: '🎋', nom: 'Bambou indien' }
+    ]},
+    nl: { embleme: '🌷', nom: 'Île des Polders', stickers: [
+      { e: '🌷', nom: 'Tulipe Keukenhof' }, { e: '🚲', nom: 'Vélo Amsterdam' }, { e: '⛵', nom: 'Canal Amsterdam' },
+      { e: '🧀', nom: 'Gouda' }, { e: '🌼', nom: 'Champs fleuris' }, { e: '🌬️', nom: 'Moulin à vent' },
+      { e: '🎨', nom: 'Vermeer' }, { e: '🐄', nom: 'Vache frisonne' }, { e: '🌊', nom: 'Polders' },
+      { e: '🍻', nom: 'Bière Heineken' }, { e: '💎', nom: 'Diamant Anvers' }, { e: '🐟', nom: 'Hareng mariné' },
+      { e: '🎁', nom: 'Sinterklaas' }, { e: '⛸️', nom: 'Patinage' }, { e: '📚', nom: 'Érasme' },
+      { e: '🏠', nom: 'Maison en brique' }, { e: '🦆', nom: 'Canard' }, { e: '🍪', nom: 'Stroopwafel' },
+      { e: '🌍', nom: 'Pays-Bas' }, { e: '🛶', nom: 'Péniche' }
+    ]},
+    sv: { embleme: '🦌', nom: 'Île du Soleil de Minuit', stickers: [
+      { e: '🦌', nom: 'Renne Laponie' }, { e: '❄️', nom: 'Aurore boréale' }, { e: '🍖', nom: 'Köttbullar' },
+      { e: '🎄', nom: 'Noël suédois' }, { e: '🌲', nom: 'Forêt de pins' }, { e: '⚓', nom: 'Vikings' },
+      { e: '🎵', nom: 'ABBA' }, { e: '🪑', nom: 'Design suédois' }, { e: '🌊', nom: 'Archipel' },
+      { e: '🦅', nom: 'Aigle doré' }, { e: '🏒', nom: 'Hockey sur glace' }, { e: '🌺', nom: 'Linnée boréale' },
+      { e: '🎊', nom: 'Midsommar' }, { e: '🍓', nom: 'Fraises été' }, { e: '☀️', nom: 'Soleil de minuit' },
+      { e: '🐻', nom: 'Ours de Suède' }, { e: '🏠', nom: 'Chalet rouge' }, { e: '🧸', nom: 'Pippi Långstrump' },
+      { e: '🎭', nom: 'Bergman cinéma' }, { e: '🐳', nom: 'Baleine Arctique' }
+    ]}
+  };
+
+  return { langs, order, units, words, phrase, phrases, leagues, bots, ranks, avatars, praise, comfort, islands };
 })();
