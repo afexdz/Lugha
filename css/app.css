@@ -1116,3 +1116,8 @@ html.rm .bulle-float { animation: none; }
   .auth-main { min-height: 0; }
 }
 
+/* La bulle d'une étape passe toujours au-dessus des autres étapes */
+.node-row { position: relative; z-index: 1; }
+.node-row:has(.node-pop) { z-index: 30; }
+.node-pop { z-index: 30; }
+
