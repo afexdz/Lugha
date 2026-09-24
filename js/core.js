@@ -25,8 +25,8 @@ window.LZ = (() => {
   const fmtTime = s => `${Math.floor(s / 60)}:${pad(s % 60)}`;
   const hashStr = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
   const rng = seed => () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
-  const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.,!?;:'’"¿¡]/g, '').replace(/\s+/g, ' ').trim();
-  const loose = s => String(s).toLowerCase().replace(/[.,!?;:"¿¡]/g, '').replace(/’/g, "'").replace(/\s+/g, ' ').trim();
+  const norm = s => String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[.,!?;:''"¿¡]/g, '').replace(/\s+/g, ' ').trim();
+  const loose = s => String(s).toLowerCase().replace(/[.,!?;:"¿¡]/g, '').replace(/'/g, "'").replace(/\s+/g, ' ').trim();
 
   async function hash(pw) {
     try {
@@ -210,16 +210,39 @@ window.LZ = (() => {
   // ---------- Voix (Speech Synthesis) ----------
   const canSpeak = 'speechSynthesis' in window;
   if (canSpeak) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
+  const _noVoiceWarn = new Set();
   function speak(text, lang, rate = 0.85) {
-    if (!canSpeak) { toast('La voix n’est pas disponible sur ce navigateur.', { icon: '🔇' }); return; }
+    if (!canSpeak) return;
     const L = D.langs[lang]; if (!L) return;
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = L.voice; u.rate = rate;
-    const code = L.voice.slice(0, 2).toLowerCase();
-    const v = speechSynthesis.getVoices().find(v => v.lang.replace('_', '-').toLowerCase() === L.voice.toLowerCase())
-      || speechSynthesis.getVoices().find(v => v.lang.toLowerCase().startsWith(code));
-    if (v) u.voice = v;
-    speechSynthesis.cancel(); speechSynthesis.speak(u);
+    function _doSpeak() {
+      const voices = speechSynthesis.getVoices();
+      const code = L.voice.slice(0, 2).toLowerCase();
+      const v = voices.find(v => v.lang.replace('_', '-').toLowerCase() === L.voice.toLowerCase())
+        || voices.find(v => v.lang.toLowerCase().startsWith(code));
+      if (!v && voices.length > 0 && !_noVoiceWarn.has(lang)) {
+        _noVoiceWarn.add(lang);
+        toast(`Aucune voix ${L.name} sur cet appareil.`, { icon: '🔇' });
+      }
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = L.voice; u.rate = rate;
+      if (v) u.voice = v;
+      LZ._utt = u;
+      speechSynthesis.resume();
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        setTimeout(() => { speechSynthesis.resume(); speechSynthesis.speak(LZ._utt); }, 80);
+      } else {
+        speechSynthesis.speak(u);
+      }
+    }
+    if (speechSynthesis.getVoices().length > 0) {
+      _doSpeak();
+    } else {
+      let fired = false;
+      const onReady = () => { if (fired) return; fired = true; speechSynthesis.removeEventListener('voiceschanged', onReady); _doSpeak(); };
+      speechSynthesis.addEventListener('voiceschanged', onReady);
+      setTimeout(onReady, 1500);
+    }
   }
 
   // ---------- Icônes ----------
