@@ -1104,3 +1104,15 @@ html.rm .bulle-float { animation: none; }
   .s-card { width: 140px; height: 140px; font-size: 4rem; }
 }
 
+/* Panneau illustré de connexion/inscription : toujours à la taille de l'écran */
+.auth { align-items: start; }
+.auth-art { position: sticky; top: 0; height: 100vh; height: 100dvh; }
+.auth-main { min-height: 100dvh; }
+@media (max-width: 960px) {
+  .auth-art { display: flex; align-items: center; justify-content: center; gap: 1rem; position: relative; height: auto; padding: calc(1rem + var(--safe-t)) 1.25rem 1rem; }
+  .aa-float { display: none; }
+  .aa-m { width: 76px; flex: none; }
+  .aa-quote { position: static; text-align: left; font-size: 1.1rem; padding: 0; max-width: 16em; }
+  .auth-main { min-height: 0; }
+}
+
