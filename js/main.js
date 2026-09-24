@@ -14,7 +14,8 @@
     parents: V.parents, parametres: V.settings, langues: V.courses
   };
   const TITLES = {
-    '': 'Lugha : apprends les langues en jouant', connexion: 'Connexion', inscription: 'Créer un compte', 'mot-de-passe': 'Mot de passe oublié',
+    '': 'Lugha : apprends les langues en jouant', connexion: 'Connexion', inscription: 'Créer un compte',
+    'mot-de-passe': 'Mot de passe oublié', 'nouveau-mot-de-passe': 'Nouveau mot de passe',
     bienvenue: 'Bienvenue', lecon: 'Leçon', apprendre: 'Apprendre', classement: 'Classement', boutique: 'Boutique',
     profil: 'Profil', parents: 'Espace parents', parametres: 'Réglages', langues: 'Langues'
   };
@@ -34,7 +35,6 @@
     $('#modal-root').innerHTML = '';
 
     const r = parse();
-    // Liens d'ancre de la vitrine (#methode...) : on reste sur l'accueil
     if (r.name && !TITLES[r.name] && document.getElementById(r.name)) return;
     const u = me(), p = prof();
     if (p) { tick(p); save(); }
@@ -45,6 +45,7 @@
     if (r.name !== '') { const ld = document.getElementById('loader'); ld && ld.remove(); }
     const needOnb = u && (!p || !p.lang);
     if (r.name === '') return V.home(app, r, onLeave);
+    if (r.name === 'nouveau-mot-de-passe') return V.newPassword(app, r, onLeave);
     if (['connexion', 'inscription', 'mot-de-passe'].includes(r.name)) {
       if (u) return go(needOnb ? '#/bienvenue' : '#/apprendre');
       return ({ connexion: V.login, inscription: V.signup, 'mot-de-passe': V.forgot })[r.name](app, r, onLeave);
@@ -60,11 +61,72 @@
     const v = $('#view'); v && v.focus({ preventScroll: true });
   }
 
+  // Crée ou met à jour l'utilisateur local à partir de la session Supabase
+  async function syncUser(sbUser) {
+    const db = LZ.db;
+    let u = db.users.find(x => x.id === sbUser.id);
+    if (!u) {
+      const meta = sbUser.user_metadata || {};
+      const role = meta.role || 'learner';
+      u = {
+        id: sbUser.id,
+        name: meta.prenom || sbUser.email?.split('@')[0] || 'Utilisateur',
+        email: sbUser.email || '',
+        role,
+        pass: '',
+        created: Date.now(),
+        profiles: [],
+        active: null,
+        pin: meta.code_parent || null
+      };
+      if (role === 'learner') {
+        const p = LZ.newProfile({ name: u.name, kind: 'self' });
+        u.profiles.push(p);
+        u.active = p.id;
+      }
+      db.users.push(u);
+    } else {
+      if (sbUser.email) u.email = sbUser.email;
+      const meta = sbUser.user_metadata || {};
+      if (meta.prenom && !u.name) u.name = meta.prenom;
+    }
+    db.session = u.id;
+    LZ.save();
+    return u;
+  }
+  LZ.syncUser = syncUser;
+
   LZ.render = render;
   LZ.go = go;
   applyPrefs();
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', applyPrefs);
   addEventListener('hashchange', render);
   addEventListener('storage', e => { if (e.key === 'lugha:v1') location.reload(); });
-  render();
+
+  // Initialisation Supabase puis premier rendu
+  init();
+
+  async function init() {
+    if (LZ.sb) {
+      const { data: { session } } = await LZ.sb.auth.getSession();
+      if (session) await syncUser(session.user);
+
+      LZ.sb.auth.onAuthStateChange(async (event, session) => {
+        if (event === 'INITIAL_SESSION') return; // déjà géré via getSession
+        if (session) {
+          await syncUser(session.user);
+          if (event === 'PASSWORD_RECOVERY') {
+            location.hash = '#/nouveau-mot-de-passe';
+            render();
+            return;
+          }
+        } else if (event === 'SIGNED_OUT') {
+          LZ.db.session = null;
+          LZ.save();
+        }
+        render();
+      });
+    }
+    render();
+  }
 })();

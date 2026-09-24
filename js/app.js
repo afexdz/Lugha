@@ -449,7 +449,15 @@
   }
   function setPin(u, change, el) {
     const html = `<div class="pin-box">${icon('shield')}<h1 class="page-title">${change ? 'Nouveau code parent' : 'Créez votre code parent'}</h1><p class="page-sub">4 chiffres que vos enfants ne connaissent pas. Ils protègent cet espace.</p>${pinInputs()}<p class="err center" id="pinErr"></p></div>`;
-    const done = async (code, close) => { u.pin = await hash('pin:' + code); parentsOk = true; sessionStorage.setItem('lugha:pin', u.id); save(); close && close(); toast('Code parent enregistré', { icon: '🔒' }); LZ.render(); };
+    const done = async (code, close) => {
+      const hashedPin = await hash('pin:' + code);
+      u.pin = hashedPin; parentsOk = true; sessionStorage.setItem('lugha:pin', u.id); save();
+      if (LZ.sb && u.id && u.email !== 'demo@lugha.academy') {
+        LZ.sb.from('comptes').update({ code_parent: hashedPin }).eq('id', u.id)
+          .then(({ error }) => { if (error) console.warn('Supabase pin:', error.message); });
+      }
+      close && close(); toast('Code parent enregistré', { icon: '🔒' }); LZ.render();
+    };
     if (el) { el.innerHTML = `<div class="page pin-page">${html}</div>`; wirePin(el, c => done(c)); }
     else modal(html, { onMount: (box, close) => wirePin(box, c => done(c, close)) });
   }
@@ -515,7 +523,12 @@
       if (!(await confirmBox('Supprimer le compte ?', 'Tous les profils, progrès et réglages seront effacés de cet appareil. Cette action est définitive.', 'Supprimer définitivement', true))) return;
       db().users = db().users.filter(x => x.id !== u.id); db().session = null; save(); toast('Compte supprimé', { icon: '👋' }); location.hash = '#/';
     });
-    $('#logout').addEventListener('click', () => { db().session = null; sessionStorage.removeItem('lugha:pin'); parentsOk = false; save(); toast('À bientôt !', { icon: '👋' }); location.hash = '#/'; });
+    $('#logout').addEventListener('click', async () => {
+      db().session = null; sessionStorage.removeItem('lugha:pin'); parentsOk = false; save();
+      toast('À bientôt !', { icon: '👋' });
+      if (LZ.sb) await LZ.sb.auth.signOut();
+      location.hash = '#/';
+    });
   }
 
   // ================= LANGUES =================
