@@ -11,7 +11,9 @@
     animate, spring, stagger, countUp, speak, icon, mascot, logo, toast, modal, confirmBox, applyPrefs, Sfx
   } = LZ;
   const db = () => LZ.db;
-  const PER_UNIT = 5, TOTAL = D.units.length * PER_UNIT;
+  const PER_UNIT = 5;
+  const totalFor = lang => (lang === 'en' && LZ.engine?.getTotal) ? LZ.engine.getTotal() : D.units.length * PER_UNIT;
+  const TOTAL = D.units.length * PER_UNIT; // pour les langues autres qu'anglais
   const lessonMin = sec => Math.round(sec / 60);
 
   // ================= COQUE =================
@@ -70,7 +72,7 @@
     const m = document.createElement('div');
     m.className = 'menu-pop'; m.setAttribute('role', 'menu');
     m.innerHTML = `<p class="mp-t">Mes langues</p>${Object.keys(p.courses).map(c => { const L = D.langs[c]; const d = p.courses[c].done;
-      return `<button role="menuitem" class="mp-i ${c === p.lang ? 'on' : ''}" data-c="${c}"><span class="lang-dot" style="--c:${L.color}">${L.abbr}</span><span>${L.name}</span><small>${Math.round(d / TOTAL * 100)} %</small></button>`; }).join('')}
+      return `<button role="menuitem" class="mp-i ${c === p.lang ? 'on' : ''}" data-c="${c}"><span class="lang-dot" style="--c:${L.color}">${L.abbr}</span><span>${L.name}</span><small>${Math.round(d / totalFor(c) * 100)} %</small></button>`; }).join('')}
       <a role="menuitem" class="mp-i add" href="#/langues">${icon('plus')}<span>Ajouter une langue</span></a>`;
     btn.parentElement.appendChild(m);
     btn.setAttribute('aria-expanded', 'true');
@@ -162,7 +164,8 @@
       + `<small>${vcEarned === 1 ? '1 autocollant collecté' : vcEarned + ' autocollants collectés'} sur 20</small></div>`
       + `${icon('next')}</a>`;
 
-    D.units.forEach((un, ui) => {
+    const activeUnits = (p.lang === 'en' && LZ.engine?.getA1Units()) ? LZ.engine.getA1Units() : D.units;
+    activeUnits.forEach((un, ui) => {
       const start = ui * PER_UNIT;
       const uDone = clamp(done - start, 0, PER_UNIT);
       html += `<section class="unit ${done < start ? 'future' : ''}" style="--u:${un.color}">
