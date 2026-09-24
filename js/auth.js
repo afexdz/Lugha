@@ -63,7 +63,7 @@
   function login(app) {
     app.innerHTML = `<div class="auth">${art()}
       <main class="auth-main">
-        <div class="auth-top"><a class="logo" href="#/">${logo()}</a><a class="link" href="#/">Retour à l'accueil</a></div>
+        <div class="auth-top"><a class="logo" href="#/">${logo()}</a><a class="link" href="#/">Retour à l’accueil</a></div>
         <div class="auth-card">
           <h1>Bon retour parmi nous</h1>
           <p class="auth-sub">Connectez-vous pour reprendre là où vous vous êtes arrêté.</p>
@@ -81,11 +81,11 @@
       </main></div>`;
     const f = $('#f');
     wirePw(f);
-    $('#email', f).addEventListener('blur', e => { if (e.target.value) setErr(f, 'email', EMAIL.test(e.target.value.trim()) ? '' : 'Cette adresse e-mail n'est pas valide.'); });
+    $('#email', f).addEventListener('blur', e => { if (e.target.value) setErr(f, 'email', EMAIL.test(e.target.value.trim()) ? '' : 'Cette adresse e-mail n’est pas valide.'); });
     f.addEventListener('submit', async e => {
       e.preventDefault();
       const email = $('#email', f).value.trim().toLowerCase(), pw = $('#pw', f).value;
-      let ok = setErr(f, 'email', !email ? 'Entrez votre adresse e-mail.' : !EMAIL.test(email) ? 'Cette adresse e-mail n'est pas valide.' : '');
+      let ok = setErr(f, 'email', !email ? 'Entrez votre adresse e-mail.' : !EMAIL.test(email) ? 'Cette adresse e-mail n’est pas valide.' : '');
       ok = setErr(f, 'pw', !pw ? 'Entrez votre mot de passe.' : '') && ok;
       if (!ok) return;
       const btn = $('[type=submit]', f);
@@ -126,13 +126,13 @@
           <form id="f" novalidate>
             <fieldset class="roles"><legend>Qui crée le compte ?</legend>
               <label class="role"><input type="radio" name="role" value="parent" ${role0 === 'parent' ? 'checked' : ''}><span><b>👨‍👩‍👧 Je suis parent</b><small>Je crée un profil pour mon enfant et je suis ses progrès.</small></span></label>
-              <label class="role"><input type="radio" name="role" value="learner" ${role0 === 'learner' ? 'checked' : ''}><span><b>🎒 J'apprends moi-même</b><small>Un compte pour moi, à mon rythme.</small></span></label>
+              <label class="role"><input type="radio" name="role" value="learner" ${role0 === 'learner' ? 'checked' : ''}><span><b>🎒 J’apprends moi-même</b><small>Un compte pour moi, à mon rythme.</small></span></label>
             </fieldset>
             ${field({ id: 'name', label: 'Votre prénom', ac: 'given-name', ph: 'Abdennour' })}
             ${field({ id: 'email', label: 'Adresse e-mail', type: 'email', ac: 'email', ph: 'vous@exemple.com' })}
             ${field({ id: 'pw', label: 'Mot de passe', type: 'password', ac: 'new-password', hint: 'Au moins 8 caractères, avec un chiffre.' })}
             <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-            <label class="check"><input type="checkbox" id="terms"><span>J'accepte les conditions d'utilisation et la politique de confidentialité.</span></label>
+            <label class="check"><input type="checkbox" id="terms"><span>J’accepte les conditions d’utilisation et la politique de confidentialité.</span></label>
             <p class="err" id="terms-err" aria-live="polite"></p>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Créer mon compte</button>
           </form>
@@ -146,7 +146,7 @@
     const strength = v => (v.length >= 8) + /\d/.test(v) + /[A-Z]/.test(v) + (/[^A-Za-z0-9]/.test(v) || v.length >= 12);
     pwIn.addEventListener('input', () => { const s = pwIn.value ? strength(pwIn.value) : 0; bars.forEach((b, i) => b.className = i < s ? 'on s' + s : ''); });
     $('#name', f).addEventListener('blur', e => { if (e.target.value) setErr(f, 'name', e.target.value.trim().length < 2 ? 'Le prénom doit avoir au moins 2 lettres.' : ''); });
-    $('#email', f).addEventListener('blur', e => { if (e.target.value) setErr(f, 'email', EMAIL.test(e.target.value.trim()) ? '' : 'Cette adresse e-mail n'est pas valide.'); });
+    $('#email', f).addEventListener('blur', e => { if (e.target.value) setErr(f, 'email', EMAIL.test(e.target.value.trim()) ? '' : 'Cette adresse e-mail n’est pas valide.'); });
     pwIn.addEventListener('blur', () => { if (pwIn.value) setErr(f, 'pw', pwErr(pwIn.value)); });
     f.addEventListener('submit', async e => {
       e.preventDefault();
@@ -194,7 +194,7 @@
           <p class="auth-sub">Entrez votre e-mail : nous vous enverrons un lien pour en choisir un nouveau.</p>
           <form id="f" novalidate>${field({ id: 'email', label: 'Adresse e-mail', type: 'email', ac: 'email' })}
           <button class="btn btn-primary btn-lg btn-block" type="submit">Envoyer le lien</button></form>
-          <div class="sent" id="sent" hidden>${icon('mail')}<p>Si un compte existe pour cette adresse, un lien vient d'être envoyé. Pensez à vérifier les courriers indésirables.</p></div>
+          <div class="sent" id="sent" hidden>${icon('mail')}<p>Si un compte existe pour cette adresse, un lien vient d’être envoyé. Pensez à vérifier les courriers indésirables.</p></div>
           <p class="auth-foot"><a class="link" href="#/connexion">Retour à la connexion</a></p>
         </div>
       </main></div>`;
@@ -302,7 +302,7 @@
     const body = {
       child: () => `
         <div class="ob-form">
-          <label class="ob-label" for="cname">Prénom de l'enfant</label>
+          <label class="ob-label" for="cname">Prénom de l’enfant</label>
           <input class="ob-input" id="cname" maxlength="24" placeholder="Yasmine" value="${esc(st.name)}" autocomplete="off">
           <p class="err" id="cname-err" aria-live="polite"></p>
           <p class="ob-label">Âge</p>
@@ -313,12 +313,12 @@
       lang: () => `<div class="ob-langs">${D.order.map(c => { const L = D.langs[c]; return `<button class="ob-lang ${st.lang === c ? 'on' : ''}" data-lang="${c}" style="--c:${L.color}" aria-pressed="${st.lang === c}">
           <span class="ol-hi" ${L.rtl ? 'dir="rtl"' : ''}>${esc(D.words(c)[0].t)}</span><span class="ol-name">${L.name}</span></button>`; }).join('')}</div>`,
       why: () => `<div class="ob-list">${[
-        ['school', '🎒', 'Pour l'école'], ['travel', '✈️', 'Pour voyager'], ['family', '👨‍👩‍👧', 'Pour parler avec la famille'],
-        ['culture', '🎬', 'Pour les dessins animés, films et chansons'], ['brain', '🧠', 'Pour faire travailler le cerveau'], ['job', '💼', 'Pour l'avenir et le travail']
+        ['school', '🎒', 'Pour l’école'], ['travel', '✈️', 'Pour voyager'], ['family', '👨‍👩‍👧', 'Pour parler avec la famille'],
+        ['culture', '🎬', 'Pour les dessins animés, films et chansons'], ['brain', '🧠', 'Pour faire travailler le cerveau'], ['job', '💼', 'Pour l’avenir et le travail']
       ].map(([k, e, l]) => `<button class="ob-opt ${st.why === k ? 'on' : ''}" data-why="${k}" aria-pressed="${st.why === k}"><span>${e}</span>${l}</button>`).join('')}</div>`,
       level: () => `<div class="ob-list">
           <button class="ob-opt ${st.level === 'new' ? 'on' : ''}" data-level="new" aria-pressed="${st.level === 'new'}"><span>🌱</span><div><b>Je débute complètement</b><small>On commence par les tout premiers mots.</small></div></button>
-          <button class="ob-opt ${st.level === 'some' ? 'on' : ''}" data-level="some" aria-pressed="${st.level === 'some'}"><span>🌿</span><div><b>Je connais déjà quelques mots</b><small>On saute l'unité « Premiers mots ».</small></div></button></div>`,
+          <button class="ob-opt ${st.level === 'some' ? 'on' : ''}" data-level="some" aria-pressed="${st.level === 'some'}"><span>🌿</span><div><b>Je connais déjà quelques mots</b><small>On saute l’unité « Premiers mots ».</small></div></button></div>`,
       goal: () => `<div class="ob-list">${[[10, 'Détente', '5 minutes par jour'], [20, 'Normal', '10 minutes par jour'], [30, 'Sérieux', '15 minutes par jour'], [50, 'Intense', '25 minutes par jour']]
         .map(([g, n, d]) => `<button class="ob-opt ${st.goal === g ? 'on' : ''}" data-goal="${g}" aria-pressed="${st.goal === g}"><span>${g === 10 ? '🐢' : g === 20 ? '🚲' : g === 30 ? '🚀' : '⚡'}</span><div><b>${n}</b><small>${d}</small></div><em>${g} XP</em></button>`).join('')}</div>`,
       ready: () => { const L = D.langs[st.lang]; return `<div class="ob-ready">
