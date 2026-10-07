@@ -12,6 +12,9 @@
    - si la banque ne permet pas un exercice sûr (pas de phrase pour
      un trou, mot trop long pour une anagramme…), on choisit un
      autre type plutôt que de produire une question ambiguë.
+   - aucun exercice n'oblige à écouter une voix de synthèse : les
+     exercices d'écoute sont retirés tant que de vrais enregistrements
+     ne sont pas disponibles (le bouton « écouter » reste facultatif).
    ============================================================ */
 (() => {
   'use strict';
@@ -48,7 +51,8 @@
       .finally(() => { clearTimeout(timer); pending = null; });
     return pending;
   }
-  load().catch(() => {});
+  // Contenu chargé seulement pour un compte connecté (pas sur la page d'accueil)
+  { const Z = window.LZ; if (Z && Z.db && Z.db.session) load().catch(() => {}); }
 
   function getStatus() { return { status, error: lastError ? String(lastError.message || lastError) : null }; }
   function getA1Data() { return _a1; }
@@ -270,19 +274,19 @@
       push(make('pickImage', a, unit, ui));
       push(B.intro(b));
       push(make('pickImage', b, unit, ui));
-      push(make('listen', a, unit, ui));
+      push(make('pickWord', a, unit, ui));
       push(make('frToEn', b, unit, ui));
       push(make('meaning', a, unit, ui));
       push(li === 1 ? (B.match([a, b, ...unitW]) || make('pickWord', b, unit, ui)) : make('pickWord', b, unit, ui));
-      push(make('soundImage', b, unit, ui));
+      push(make('pickImage', b, unit, ui));
     } else if (li === 2) {
       push(make('pickImage', t(0), unit, ui));
-      push(make('listen', t(1), unit, ui));
+      push(make('pickWord', t(1), unit, ui));
       push(B.match(targets.concat(unitW)));
       push(make('frToEn', t(2), unit, ui));
       push(make('fillBlank', t(3), unit, ui));
       push(B.build(unit, ui));
-      push(make('soundImage', t(4), unit, ui));
+      push(make('pickImage', t(4), unit, ui));
       push(make('meaning', t(0), unit, ui));
     } else {
       // Révision : mots de l'unité + quelques mots des unités précédentes
@@ -290,13 +294,13 @@
       const rev = pickCompatible([...targets, ...prev], 8, []);
       const g = i => rev[i % rev.length];
       push(B.build(unit, ui));
-      push(make('listen', g(0), unit, ui));
+      push(make('pickWord', g(0), unit, ui));
       push(B.match(rev));
       push(make('oddOneOut', g(1), unit, ui));
       push(make('pickWord', g(2), unit, ui));
       push(make('anagram', g(3), unit, ui));
-      push(make('listeningCloze', g(4), unit, ui));
-      push(make('dictation', g(5), unit, ui));
+      push(make('fillBlank', g(4), unit, ui));
+      push(make('frToEn', g(5), unit, ui));
       push(make('trueFalse', g(6), unit, ui));
     }
     return noConsecutive(seq);

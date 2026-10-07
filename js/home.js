@@ -12,7 +12,7 @@
   function view(app, r, onLeave) {
     const u = me();
     const ctaHref = u ? '#/apprendre' : '#/inscription';
-    const ctaLabel = u ? 'Continuer à apprendre' : 'Commencer gratuitement';
+    const ctaLabel = u ? 'Continuer à apprendre' : 'Essayer 7 jours';
 
     app.innerHTML = `
     <div class="home">
@@ -40,7 +40,7 @@
         <div class="hero-copy">
           <p class="hero-hi"><span class="hero-m">${mascot('happy')}</span><span>Salut, moi c’est Bulle. On apprend ensemble ?</span></p>
           <h1 class="hero-title" id="heroTitle">Le monde entier, un mot à la fois.</h1>
-          <p class="hero-lead">Des petits jeux de dix minutes pour apprendre l’anglais, le coréen, le turc et douze autres langues. Gratuit, sans publicité, pensé pour les enfants et suivi par les parents.</p>
+          <p class="hero-lead">Des petits jeux de dix minutes pour apprendre l’anglais, le coréen, le turc et douze autres langues. Sans publicité, pensé pour les enfants et suivi par les parents.</p>
           <div class="hero-cta">
             <a class="btn btn-primary btn-lg" href="${ctaHref}">${ctaLabel}</a>
             ${u ? '' : '<a class="btn btn-ghost btn-lg" href="#/connexion">J’ai déjà un compte</a>'}
@@ -90,7 +90,7 @@
           <p class="sec-lead">Jamais deux fois la même chose : le cerveau reste éveillé, l’enfant aussi.</p>
           <div class="game-grid">
             <article class="game-card tilt3d" style="--g:#6C4DFF"><div class="gc-demo gd-pick"><span>🍎</span><span class="hit">🍞</span><span>💧</span><span>🥛</span></div><h3>Trouve l’image</h3><p>« pan » ? Un seul dessin correspond.</p></article>
-            <article class="game-card tilt3d" style="--g:#14B8A6"><div class="gc-demo gd-listen">${icon('volume')}<span class="bars"><i></i><i></i><i></i><i></i><i></i></span></div><h3>Écoute et choisis</h3><p>La voix dit un mot, on reconnaît la bonne écriture.</p></article>
+            <article class="game-card tilt3d" style="--g:#14B8A6"><div class="gc-demo gd-build"><span>cat = chat ?</span><span>Vrai</span><span>Faux</span></div><h3>Vrai ou faux</h3><p>Le mot et sa traduction vont-ils ensemble ? On tranche vite.</p></article>
             <article class="game-card tilt3d" style="--g:#E64980"><div class="gc-demo gd-match"><span>cat</span><span>chat</span><span>dog</span><span>chien</span><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M30 14 C50 14 50 14 70 14"/><path d="M30 46 C50 46 50 46 70 46"/></svg></div><h3>Relie les paires</h3><p>Un mot, sa traduction, le plus vite possible.</p></article>
             <article class="game-card tilt3d" style="--g:#F59F00"><div class="gc-demo gd-build"><span>Ich</span><span>trinke</span><span>Wasser</span></div><h3>Construis la phrase</h3><p>On pose les mots dans le bon ordre.</p></article>
             <article class="game-card tilt3d" style="--g:#1C7ED6"><div class="gc-demo gd-type"><span class="typed">merhaba</span></div><h3>Écris le mot</h3><p>Au clavier, pour ancrer l’orthographe.</p></article>
@@ -145,25 +145,28 @@
 
       <section class="pricing" id="tarif">
         <div class="wrap">
-          <h2 class="sec-title">Gratuit, pendant tout le lancement.</h2>
-          <p class="sec-lead">Tout est ouvert. Aucune carte bancaire demandée.</p>
+          <h2 class="sec-title">Un seul prix, tout compris.</h2>
+          <p class="sec-lead">7 jours pour tout essayer. Ensuite 2 000 DA pour 3 mois. Pas de renouvellement automatique.</p>
           <div class="price-row">
             <div class="price-stage"><div class="price-card" id="priceCard">
               <div class="pc-shine"></div>
-              <p class="pc-name">Lugha Libre</p>
-              <p class="pc-price"><b id="priceNum">0</b><span>DA / mois</span></p>
+              <p class="pc-name">Lugha</p>
+              <p class="pc-price"><b id="priceNum">2 000</b><span>DA — 3 mois</span></p>
               <ul class="pc-list">
                 <li>${icon('check')}Les 15 langues et tous les jeux</li>
                 <li>${icon('check')}Espace parents et rapports</li>
-                <li>${icon('check')}Jusqu’à 5 profils enfants</li>
+                <li>${icon('check')}Jusqu’à 6 profils par famille</li>
                 <li>${icon('check')}Aucune publicité, jamais</li>
               </ul>
-              <a class="btn btn-primary btn-lg btn-block" href="${ctaHref}">${u ? 'Continuer' : 'Créer mon compte gratuit'}</a>
+              <a class="btn btn-primary btn-lg btn-block" href="${ctaHref}">${u ? 'Continuer' : 'Commencer l’essai de 7 jours'}</a>
             </div></div>
             <div class="soon-card">
-              <p class="soon-tag">Bientôt</p><h3>Famille+</h3>
-              <p>Histoires audio, niveaux avancés, certificats à imprimer. Les comptes créés pendant le lancement garderont un avantage.</p>
-              <button class="btn btn-ghost" id="notify">Me prévenir</button>
+              <h3>Comment ça marche</h3>
+              <ol class="how-pay">
+                <li>Crée ton compte : 7 jours d’essai, tout est ouvert.</li>
+                <li>Paie 2 000 DA par BaridiMob et envoie la photo du reçu.</li>
+                <li>Après vérification, l’accès est ouvert pour 3 mois.</li>
+              </ol>
             </div>
           </div>
         </div>
@@ -172,7 +175,7 @@
       <section class="faq"><div class="wrap narrow">
         <h2 class="sec-title">Questions des parents</h2>
         ${[
-          ['C’est vraiment gratuit ?', 'Oui. Pendant le lancement, tout Lugha est gratuit et sans publicité. Une formule Famille+ arrivera plus tard avec des contenus en plus ; la version gratuite restera.'],
+          ['Combien ça coûte ?', '7 jours d’essai pour tout découvrir, puis 2 000 DA pour 3 mois, pour toute la famille. Pas de renouvellement automatique : vous payez seulement si vous voulez continuer.'],
           ['À partir de quel âge ?', 'Dès 5 ou 6 ans avec un parent à côté, en autonomie à partir de 7 ans. Les jeux avec images et la voix aident ceux qui lisent encore peu.'],
           ['Combien de temps par jour ?', 'Dix minutes suffisent. La régularité compte plus que la durée : c’est pour ça que Lugha récompense les séries de jours.'],
           ['Puis-je limiter le temps d’écran ?', 'Oui. Dans l’espace parents, fixez une durée par jour pour chaque enfant. Une fois atteinte, les leçons se mettent en pause jusqu’au lendemain.'],
@@ -246,10 +249,7 @@
 
     $$('.lang-card', app).forEach(b => b.addEventListener('click', () => {
       const c = b.dataset.lang;
-      speak(hello(c), c);
-      const p = prof();
-      if (p) { p.lang = c; course(p); save(); location.hash = '#/apprendre'; }
-      else setTimeout(() => { location.hash = `#/inscription?l=${c}`; }, 450);
+      location.hash = prof() ? '#/langues' : `#/inscription?l=${c}`;
     }));
 
     // ---- Rapport parent qui se retourne ----
@@ -262,10 +262,8 @@
     onLeave(onView(card, () => {
       card.classList.remove('pre');
       animate(card, { rotateY: [-200, 0], opacity: [0, 1], scale: [0.7, 1] }, spring(38, 9)).then(() => card.classList.add('floating'));
-      countUp($('#priceNum'), 0, { from: 15, dur: 1400 });
     }, 0.35));
     onLeave(tilt(card, 14));
-    $('#notify').addEventListener('click', () => toast('C’est noté. Vous serez prévenu au lancement de Famille+.', { icon: '🔔' }));
 
     // FAQ : animation d'ouverture
     $$('.qa', app).forEach(d => d.addEventListener('toggle', () => { if (d.open) animate($('p', d), { opacity: [0, 1], y: [-6, 0] }, { duration: 0.3 }); }));

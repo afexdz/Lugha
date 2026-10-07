@@ -27,22 +27,22 @@
       seq = [
         { type: 'intro', w: a }, { type: 'pickImage', w: a },
         { type: 'intro', w: b }, { type: 'pickImage', w: b },
-        { type: 'listen', w: a }, { type: 'pickWord', w: b }, { type: 'meaning', w: a },
+        { type: 'pickWord', w: a }, { type: 'pickWord', w: b }, { type: 'meaning', w: a },
         li === 1 ? { type: 'match', pairs: shuffle(unitW) } : typeOr(b),
-        { type: 'listen', w: b }
+        { type: 'pickWord', w: b }
       ];
     } else if (li === 2) {
       const s = shuffle(unitW);
       seq = [
-        { type: 'pickImage', w: s[0] }, { type: 'listen', w: s[1] }, { type: 'match', pairs: shuffle(unitW) },
-        { type: 'pickWord', w: s[2] }, typeOr(s[3]), { type: 'build', ph }, { type: 'listen', w: s[2] }, { type: 'meaning', w: s[0] }
+        { type: 'pickImage', w: s[0] }, { type: 'pickImage', w: s[1] }, { type: 'match', pairs: shuffle(unitW) },
+        { type: 'pickWord', w: s[2] }, typeOr(s[3]), { type: 'build', ph }, { type: 'meaning', w: s[2] }, { type: 'meaning', w: s[0] }
       ];
     } else {
       const rev = shuffle([...unitW, ...shuffle(prev).slice(0, 4)]);
       const g = i => rev[i % rev.length];
       seq = [
-        { type: 'build', ph }, { type: 'listen', w: g(0) }, { type: 'match', pairs: shuffle(rev).slice(0, 4) },
-        typeOr(g(1)), { type: 'pickWord', w: g(2) }, { type: 'listen', w: g(3) }, { type: 'meaning', w: g(4) },
+        { type: 'build', ph }, { type: 'pickImage', w: g(0) }, { type: 'match', pairs: shuffle(rev).slice(0, 4) },
+        typeOr(g(1)), { type: 'pickWord', w: g(2) }, { type: 'meaning', w: g(3) }, { type: 'meaning', w: g(4) },
         typeOr(g(5)), { type: 'pickImage', w: g(6) }
       ];
     }
@@ -52,9 +52,15 @@
   }
 
   const rtl = lang => D.langs[lang].rtl ? 'dir="rtl"' : '';
+  // Jamais deux fois le même type d'exercice d'affilée
+  function noRepeat(seq) {
+    for (let i = 1; i < seq.length; i++) if (seq[i].type === seq[i - 1].type)
+      for (let j = i + 1; j < seq.length; j++) if (seq[j].type !== seq[i - 1].type) { [seq[i], seq[j]] = [seq[j], seq[i]]; break; }
+    return seq;
+  }
   // Mot visé par un exercice, quel que soit son format (e.w ou e.word)
   const targetOf = e => e.w || e.word || null;
-  // Appareil sans synthèse vocale : version écrite équivalente, jamais un exercice impossible
+  // Exercice d'écoute éventuel (ancienne file, reprise) : toujours converti en version écrite
   function silentVersion(e) {
     switch (e.type) {
       case 'listen': return { ...e, type: 'pickWord' };
@@ -89,7 +95,6 @@
           <p class="ic-m">${esc(e.w.m)}</p>
           <button class="say-btn" data-say aria-label="Écouter">${icon('volume')}</button></div>`;
       $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 450);
       animate($('.intro-card', card), { rotateY: [-90, 0], opacity: [0, 1] }, spring(140, 16));
       ctx.setReady(true);
       return { check: () => ({ ok: true }) };
@@ -99,7 +104,6 @@
         <div class="ex-sub">${roman(e.w)}<button class="say-mini" data-say aria-label="Écouter">${icon('volume')}</button></div>
         <div class="opts grid">${e.options.map((o, i) => `<button class="opt pic" data-i="${i}" aria-pressed="false"><span class="pic-e">${o.e}</span><span class="pic-t">${esc(o.m)}</span><kbd>${i + 1}</kbd></button>`).join('')}</div>`;
       $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 300);
       const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: `${e.w.e} ${e.w.m}`, pick: s.i }) };
     },
@@ -107,7 +111,7 @@
       card.innerHTML = `<h2 class="ex-title">Comment dit-on « ${esc(e.w.m)} » ?</h2>
         <div class="big-e">${e.w.e}</div>
         <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" ${rtl(ctx.lang)}>${esc(o.t)}</span>${o.r ? `<small>${esc(o.r)}</small>` : ''}</button>`).join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
     meaning(card, e, ctx) {
@@ -115,22 +119,8 @@
         <div class="speech">${mascot('happy')}<button class="bubble" data-say aria-label="Écouter le mot">${icon('volume')}<span ${rtl(ctx.lang)}>${esc(e.w.t)}</span>${e.w.r ? `<small>${esc(e.w.r)}</small>` : ''}</button></div>
         <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot">${esc(o.m)}</span></button>`).join('')}</div>`;
       $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 300);
       const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.m, pick: s.i }) };
-    },
-    listen(card, e, ctx) {
-      card.innerHTML = `<h2 class="ex-title">Écoute et choisis ce que tu entends</h2>
-        <div class="listen-row"><button class="say-big" data-say aria-label="Écouter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Écouter lentement">🐢</button></div>
-        ${canSpeak ? '' : `<p class="note">Voix indisponible sur ce navigateur. Indice : ${e.w.e}</p>`}
-        <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" ${rtl(ctx.lang)}>${esc(o.t)}</span></button>`).join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.w.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
     type(card, e, ctx) {
       const extra = [...new Set(D.words(ctx.lang).map(w => w.t).join('').split('').filter(ch => /[^\x00-\x7F]/.test(ch) && ch.trim()))].slice(0, 10);
@@ -167,7 +157,6 @@
         const side = b.dataset.side;
         if (sel[side]) sel[side].classList.remove('sel');
         sel[side] = b; b.classList.add('sel'); Sfx.tap();
-        if (side === 'l') { const w = e.pairs.find(x => x.id === b.dataset.id); speak(w.t, ctx.lang); }
         if (sel.l && sel.r) {
           const a = sel.l, c = sel.r; sel = { l: null, r: null };
           if (a.dataset.id === c.dataset.id) {
@@ -202,7 +191,6 @@
         c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); Sfx.tap(); });
         ans.appendChild(c);
         animate(c, { scale: [0.6, 1], y: [30, 0] }, spring(500, 22));
-        speak(b.textContent, ctx.lang, 1);
         sync();
       }));
       return {
@@ -220,7 +208,7 @@
         + `<p class="fb-sentence" ${rtl(ctx.lang)}>${esc(e.masked)}</p>`
         + `<p class="ic-m">${esc(e.fr)}</p>`
         + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i]?.id === e.word.id, answer: e.word.t, say: e.word.t, pick: s.i }) };
     },
     trueFalse(card, e, ctx) {
@@ -264,66 +252,24 @@
         return { ok, answer: e.word.t, say: e.word.t };
       }};
     },
-    dictation(card, e, ctx) {
-      const extra = [...new Set(D.words(ctx.lang).map(w => w.t).join('').split('').filter(ch => /[^\x00-\x7F]/.test(ch) && ch.trim()))].slice(0, 10);
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute et \u00e9cris le mot</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Lentement">\U0001f422</button></div>`
-        + '<input class="type-in" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ce que tu entends" aria-label="Ta r\u00e9ponse">'
-        + (extra.length ? `<div class="accents">${extra.map(ch => '<button type="button" data-ch="' + esc(ch) + '">' + esc(ch) + '</button>').join('')}</div>` : '');
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.word.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const inp = $('#typeIn', card);
-      inp.addEventListener('input', () => ctx.setReady(inp.value.trim().length > 0));
-      $$('[data-ch]', card).forEach(b => b.addEventListener('click', () => {
-        const p = inp.selectionStart ?? inp.value.length;
-        inp.value = inp.value.slice(0, p) + b.dataset.ch + inp.value.slice(inp.selectionEnd ?? p);
-        inp.focus(); inp.setSelectionRange(p + 1, p + 1); ctx.setReady(true);
-      }));
-      setTimeout(() => inp.focus(), 600);
-      return { check: () => {
-        const v = inp.value; inp.disabled = true;
-        if (loose(v) === loose(e.word.t)) return { ok: true, say: e.word.t };
-        if (norm(v) === norm(e.word.t)) return { ok: true, note: 'Attention : ' + e.word.t, say: e.word.t };
-        return { ok: false, answer: e.word.t, say: e.word.t };
-      }};
-    },
     frToEn(card, e, ctx) {
       card.innerHTML = '<h2 class="ex-title">Comment dit-on en anglais ?</h2>'
         + `<div class="speech">${mascot('happy')}<div class="bubble">${esc(e.w.m)}</div></div>`
         + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i]?.id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
-    soundImage(card, e, ctx) {
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute et trouve l\u2019image</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Lentement">\U0001f422</button></div>`
-        + `<div class="opts grid">${e.options.map((o, i) => '<button class="opt pic" data-i="' + i + '" aria-pressed="false"><span class="pic-e">' + o.e + '</span><span class="pic-t">' + esc(o.m) + '</span><kbd>' + (i+1) + '</kbd></button>').join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.w.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i]?.id === e.w.id, answer: e.w.e + ' ' + e.w.m, say: e.w.t, pick: s.i }) };
-    },
-    listeningCloze(card, e, ctx) {
-      const phText = e.phrase?.tokens?.join(' ') || e.word.t;
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute la phrase et compl\u00e8te</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button></div>`
-        + `<p class="fb-sentence">${esc(e.masked)}</p>`
-        + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = () => { speak(phText, ctx.lang, 0.75); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', play);
-      setTimeout(play, 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i]?.id === e.word.id, answer: e.word.t, say: e.word.t, pick: s.i }) };
-    }
-
   };
+
+  // ---------- Fin d'essai : écran simple, une seule action ----------
+  function paywallScreen(app) {
+    app.innerHTML = `<div class="end"><div class="end-in">
+        <div class="end-m">${mascot('calm')}</div>
+        <h1>Ton essai de 7 jours est terminé</h1>
+        <p class="end-sub">Ta progression est gardée. Continue avec l’abonnement : <b>2 000 DA pour 3 mois</b>, toutes les langues et toutes les leçons.</p>
+      </div>
+      <footer class="end-foot"><a class="btn btn-ghost btn-lg" href="#/apprendre">Plus tard</a><a class="btn btn-primary btn-lg" href="#/abonnement">S’abonner</a></footer></div>`;
+  }
 
   // ---------- Vue leçon ----------
   function view(app, r, onLeave) {
@@ -347,12 +293,14 @@
     const back = () => { location.hash = '#/apprendre'; };
     if (!Number.isInteger(idx) || idx < 0 || idx > c.done || idx >= myTotal || idx % PER_UNIT === PER_UNIT - 1) return back();
     if (overLimit(p)) { toast('Le temps d’écran du jour est atteint. À demain !', { icon: '⏱️' }); return back(); }
+    const u0 = LZ.me();
+    if (u0 && u0.acces && u0.acces.actif === false) return paywallScreen(app);
     const practice = idx < c.done;
     if (p.hearts <= 0 && !practice) { back(); setTimeout(LZ.heartsModal, 400); return; }
     const ui = Math.floor(idx / PER_UNIT), li = idx % PER_UNIT;
     let queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
     if (!queue || !queue.length) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }
-    if (!canSpeak) queue = queue.map(silentVersion);
+    queue = noRepeat(queue.map(silentVersion));
     const st = { attempts: {}, queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
 
     const unitColor = (lang === 'en' && eng?.getA1Units()) ? (eng.getA1Units()[ui]?.color || '#6C4DFF') : D.units[ui]?.color || '#6C4DFF';
@@ -439,7 +387,7 @@
       }
       if (res.ok) {
         st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo);
-        Sfx.ok(); if (res.say) speak(res.say, lang);
+        Sfx.ok();
         animate(card, { scale: [1, 1.02, 1] }, { duration: 0.3 });
       } else {
         st.wrong++; st.combo = 0; Sfx.bad();
@@ -493,52 +441,73 @@
         <button class="btn btn-ghost btn-block" id="qt">Quitter la leçon</button></div></div>`, {
         dismiss: false,
         onMount: (box, close) => {
-          $('#rf', box).addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next(); });
+          $('#rf', box).addEventListener('click', async ev => {
+            const b = ev.currentTarget; if (b.disabled) return; b.disabled = true;
+            try { await LZ.cloud.buy(p, 'coeurs'); }
+            catch (e) { b.disabled = false; return toast(e.message, { icon: '⚠️' }); }
+            p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next();
+          });
           $('#qt', box).addEventListener('click', () => { close(); back(); });
         }
       });
     }
 
-    function finish() {
+    // Fin de leçon : le serveur calcule XP, gemmes, série et étape.
+    // Hors ligne, le résultat attend dans une file et part au retour du réseau.
+    async function finish() {
+      if (st.phase === 'done') return;
       st.phase = 'done';
       const secs = Math.max(15, Math.round((Date.now() - st.start) / 1000));
       const perfect = st.wrong === 0;
-      const boost = p.boostUntil > Date.now();
-      let xp = (practice ? 5 : 10) + (perfect ? 5 : 0); if (boost) xp *= 2;
-      const gems = practice ? 0 : perfect ? 10 : 5;
-      const t = dayKey(), first = p.lastDay !== t, prevStreak = p.streak;
-      if (first) { p.streak = p.lastDay === addDays(t, -1) ? p.streak + 1 : 1; p.lastDay = t; p.bestStreak = Math.max(p.bestStreak, p.streak); }
-      const rankBefore = rankOf(p.xp), beforeToday = p.days[t] || 0;
-      p.xp += xp; p.weekXp += xp; p.days[t] = beforeToday + xp; p.time[t] = (p.time[t] || 0) + secs;
-      p.gems += gems; p.lessons++; if (perfect) p.perfect++;
-      p.ans.ok += st.correct; p.ans.n += st.correct + st.wrong;
-      Object.entries(st.attempts).forEach(([id, a]) => {
-        if (a.first === 'ok' && a.fail === 0) { const k = `${lang}:${id}`; if (!p.words.includes(k)) p.words.push(k); }
-      });
-      if (!practice) c.done = Math.max(c.done, idx + 1);
+      const t = dayKey();
+      const before = { xp: p.xp, lastDay: p.lastDay, streak: p.streak, today: p.days[t] || 0, done: c.done };
+      const mots = Object.entries(st.attempts).filter(([, a]) => a.first === 'ok' && a.fail === 0).map(([id]) => id);
+      stage.innerHTML = '<p class="load-state" aria-live="polite">Enregistrement de ta leçon…</p>';
+      foot.innerHTML = '';
+      let r;
+      try {
+        r = await LZ.cloud.finishLesson({ profil: p.id, langue: lang, etape: idx, justes: st.correct, total: st.correct + st.wrong, secondes: secs, mots });
+      } catch (e) {
+        if (e.code === 'acces_expire') { LZ.cloud.refreshAccess().catch(() => {}); return paywallScreen(app); }
+        toast(e.message, { icon: '⚠️' }); return back();
+      }
+      const pending = !!r.attente;
+      let xp, gems;
+      if (pending) {
+        // Estimation affichée, corrigée par le serveur à la synchronisation
+        xp = (practice ? 5 : 10) + (perfect ? 5 : 0); gems = practice ? 0 : perfect ? 10 : 5;
+        if (!practice) c.done = Math.max(c.done, idx + 1);
+      } else { xp = r.xp; gems = r.gemmes; }
+      p.days[t] = before.today + xp; p.time[t] = (p.time[t] || 0) + secs;
+      mots.forEach(id => { const k = `${lang}:${id}`; if (!p.words.includes(k)) p.words.push(k); });
       p.quest.lessons++; p.quest.combo = Math.max(p.quest.combo, st.maxCombo);
-      const rankAfter = rankOf(p.xp);
-      const goalHit = beforeToday < p.goal && p.days[t] >= p.goal;
       save();
       Sfx.done();
+      const first = before.lastDay !== t;
+      const rankBefore = rankOf(before.xp), rankAfter = rankOf(before.xp + xp);
+      const goalHit = before.today < p.goal && p.days[t] >= p.goal;
       const acc = Math.round(st.correct / Math.max(1, st.correct + st.wrong) * 100);
-      const newEarned = c.done - Math.floor(c.done / 5);
-      const stickerIdx = newEarned - 1;
+      const advanced = c.done > before.done;
+      const stickerIdx = c.done - Math.floor(c.done / 5) - 1;
       const screens = [
-        () => resultScreen({ xp, gems, acc, secs, perfect, boost, goalHit }),
-        (!practice && D.islands && D.islands[lang]) ? () => stickerScreen(lang, stickerIdx) : null,
-        first ? () => streakScreen(prevStreak, p.streak) : null,
+        () => resultScreen({ xp, gems, acc, secs, perfect, boost: p.boostUntil > Date.now(), goalHit, pending }),
+        (advanced && D.islands && D.islands[lang]) ? () => stickerScreen(lang, stickerIdx) : null,
+        (first && !pending) ? () => streakScreen(before.streak, p.streak) : null,
         rankAfter > rankBefore ? () => rankScreen(rankAfter) : null
       ].filter(Boolean);
       let k = 0;
       const run = () => {
-        if (k >= screens.length) { claimQuests(p); checkAch(p); save(); back(); return; }
-        screens[k++]()(run);
+        if (k >= screens.length) { app.style.pointerEvents = ''; claimQuests(p); checkAch(p); save(); back(); return; }
+        let used = false;   // double clic : un écran ne passe qu'une fois
+        screens[k++]()(() => { if (used) return; used = true; run(); });
+        // …et le second clic ne doit pas toucher l'écran suivant
+        app.style.pointerEvents = 'none';
+        setTimeout(() => { app.style.pointerEvents = ''; }, 400);
       };
       run();
     }
 
-    function resultScreen({ xp, gems, acc, secs, perfect, boost, goalHit }) {
+    function resultScreen({ xp, gems, acc, secs, perfect, boost, goalHit, pending }) {
       return nextFn => {
         app.innerHTML = `<div class="end"><canvas class="confetti" id="cf"></canvas>
           <div class="end-in">
@@ -552,6 +521,7 @@
             </div>
             ${gems ? `<p class="end-pill">${icon('gem')}+${gems} gemmes</p>` : ''}
             ${goalHit ? `<p class="end-pill goal">${icon('target')}Objectif du jour atteint !</p>` : ''}
+            ${pending ? `<p class="end-sync">Enregistré sur cet appareil. Envoi automatique dès le retour du réseau.</p>` : ''}
           </div>
           <footer class="end-foot"><button class="btn btn-primary btn-lg" id="endNext">Continuer</button></footer></div>`;
         const stop = confetti($('#cf'));
@@ -577,7 +547,7 @@
             <p class="end-sub">${now === 1 ? 'Une flamme vient de s’allumer. Reviens demain pour la faire grandir.' : 'Tu as appris chaque jour. Reviens demain pour continuer.'}</p>
           </div><footer class="end-foot"><button class="btn btn-sun btn-lg" id="endNext">Je reviens demain</button></footer></div>`;
         animate($('.big-flame'), { scale: [0, 1.15, 1], rotate: [-20, 8, 0] }, { duration: 0.8 });
-        setTimeout(() => { Sfx.streak(); const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
+        setTimeout(() => { const n = $('#sn'); if (!n) return; Sfx.streak(); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
         const today = $('.week .today i'); today && animate(today, { scale: [0, 1.3, 1] }, { delay: 0.9, duration: 0.5 });
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
       };

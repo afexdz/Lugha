@@ -7,7 +7,7 @@
   'use strict';
   const {
     D, $, $$, esc, clamp, dayKey, addDays, save, me, prof, course, newProfile, hash,
-    MAX_H, HEART_MS, rankOf, leagueList, overLimit, quests, ACH, achLevel,
+    MAX_H, HEART_MS, rankOf, overLimit, quests, ACH, achLevel,
     animate, spring, stagger, countUp, speak, icon, mascot, logo, toast, modal, confirmBox, applyPrefs, Sfx
   } = LZ;
   const db = () => LZ.db;
@@ -23,6 +23,8 @@
       ['apprendre', 'Apprendre', 'home'], ['classement', 'Classement', 'trophy'],
       ['voyage', 'Voyage', 'globe'], ['boutique', 'Boutique', 'gem'],
       ['profil', 'Profil', 'user'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []),
+      ['abonnement', 'Abonnement', 'star'],
+      ...(u.acces && u.acces.admin ? [['admin', 'Admin', 'shield']] : []),
       ['parametres', 'Réglages', 'settings']
     ];
     const tabNav = [
@@ -47,6 +49,7 @@
             <button class="stat gem" id="stGem" aria-label="${p.gems} gemmes">${icon('gem')}<b id="gemCount">${p.gems}</b></button>
             <button class="stat heart" id="stHeart" aria-label="${p.hearts} cœurs">${icon('heart')}<b>${p.hearts}</b></button>
           </div>
+          ${accessBadge(u)}
           <button class="tb-av" id="switchProf2" aria-label="Changer de profil">${p.avatar}</button>
         </header>
         <main class="view" id="view" tabindex="-1"></main>
@@ -79,7 +82,10 @@
     btn.parentElement.appendChild(m);
     btn.setAttribute('aria-expanded', 'true');
     animate(m, { opacity: [0, 1], y: [-8, 0], scale: [0.96, 1] }, spring(400, 28));
-    $$('[data-c]', m).forEach(b => b.addEventListener('click', () => { p.lang = b.dataset.c; save(); m.remove(); LZ.render(); }));
+    $$('[data-c]', m).forEach(b => b.addEventListener('click', () => {
+      m.remove(); p.lang = b.dataset.c; save(); LZ.render();
+      LZ.cloud.updateProfile(p, { lang: b.dataset.c }).catch(e => toast(e.message, { icon: '⚠️' }));
+    }));
     $('a', m).addEventListener('click', () => m.remove());
     const off = e => { if (!m.contains(e.target) && e.target !== btn && !btn.contains(e.target)) { m.remove(); btn.setAttribute('aria-expanded', 'false'); document.removeEventListener('pointerdown', off); } };
     setTimeout(() => document.addEventListener('pointerdown', off), 0);
@@ -125,7 +131,11 @@
       <h2 class="modal-title">${p.hearts === MAX_H ? 'Tous tes cœurs sont là' : `${p.hearts} cœur${p.hearts > 1 ? 's' : ''} sur ${MAX_H}`}</h2>
       <p class="modal-text">Une erreur coûte un cœur. ${p.hearts < MAX_H ? `Prochain cœur dans ${next} min.` : ''} Les révisions ne coûtent rien.</p>
       <div class="modal-actions"><button class="btn btn-ghost" data-close>Fermer</button>${p.hearts < MAX_H ? `<button class="btn btn-primary" id="refill" ${p.gems < 350 ? 'disabled' : ''}>${icon('gem')}Tout recharger (350)</button>` : ''}</div></div>`, {
-      onMount: (box, close) => { const b = $('#refill', box); b && b.addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); close(); toast('Cœurs rechargés !', { icon: '❤️' }); LZ.render(); }); }
+      onMount: (box, close) => { const b = $('#refill', box); b && b.addEventListener('click', async () => {
+        if (b.disabled) return; b.disabled = true;
+        try { await LZ.cloud.buy(p, 'coeurs'); p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); close(); toast('Cœurs rechargés !', { icon: '❤️' }); LZ.render(); }
+        catch (e) { b.disabled = false; toast(e.message, { icon: '⚠️' }); }
+      }); }
     });
   }
 
@@ -133,22 +143,36 @@
   function rail(el) {
     const p = prof(), u = me(), t = dayKey();
     const today = p.days[t] || 0, pct = clamp(today / p.goal, 0, 1);
-    const list = leagueList(p), rank = list.findIndex(x => x.me) + 1, lg = D.leagues[p.league];
     el.innerHTML = `
       <section class="card goal-card">
         <div class="ring" style="--p:${pct}"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" pathLength="100"/><circle class="fg" cx="22" cy="22" r="18" pathLength="100" style="stroke-dasharray:${pct * 100} 100"/></svg><span>${Math.round(pct * 100)}%</span></div>
         <div><h3>Objectif du jour</h3><p>${today} / ${p.goal} XP${pct >= 1 ? ', atteint !' : ''}</p></div>
       </section>
       <section class="card">
-        <div class="card-h"><h3>Ligue ${lg.name}</h3><a class="link small" href="#/classement">Voir</a></div>
-        <div class="lg-mini"><span class="lg-gem" style="--c:${lg.color}">${icon('gem')}</span><p>Tu es <b>${rank}${rank === 1 ? 'er' : 'e'}</b> avec ${p.weekXp} XP cette semaine.${rank > 5 ? ' Encore un effort pour la zone de promotion.' : ' Tu es en zone de promotion !'}</p></div>
+        <div class="card-h"><h3>Classement de la semaine</h3><a class="link small" href="#/classement">Voir</a></div>
+        <div class="lg-mini"><span class="lg-gem" style="--c:#F59F00">${icon('trophy')}</span><p id="railRank">${p.weekXp ? `${p.weekXp} XP cette semaine.` : 'Termine une leçon pour entrer dans le classement.'}</p></div>
       </section>
       <section class="card">
         <div class="card-h"><h3>Quêtes du jour</h3></div>
         <ul class="quests">${quests(p).map(q => `<li class="${q.cur >= q.max ? 'done' : ''}">${icon(q.icon)}<div><b>${q.label}</b><span class="qbar"><i style="width:${(q.cur / q.max) * 100}%"></i></span><small>${q.cur} / ${q.max}</small></div><span class="q-gift">${q.cur >= q.max ? icon('check') : '🎁'}</span></li>`).join('')}</ul>
       </section>
       ${u.role === 'parent' ? `<a class="card parent-promo" href="#/parents">${icon('family')}<div><b>Espace parents</b><small>Rapports, temps d’écran, profils</small></div></a>` : ''}
-      <p class="rail-foot">lugha.academy <a class="link" href="#/">Accueil</a></p>`;
+      <p class="rail-foot">lugha.world · <a class="link" href="#/">Accueil</a></p>`;
+    if (p.weekXp) LZ.cloud.leaderboard(p).then(list => {
+      const mine = list.find(x => x.moi), el2 = $('#railRank');
+      if (mine && el2) el2.innerHTML = `Tu es <b>${mine.rang}${mine.rang === 1 ? 'er' : 'e'}</b> avec ${mine.xp} XP cette semaine.`;
+    }).catch(() => {});
+  }
+
+  // Badge d'essai / abonnement dans la barre du haut
+  function accessBadge(u) {
+    const a = u.acces || {};
+    if (a.actif && !a.en_essai) return '';
+    if (a.en_essai) {
+      const d = Math.max(0, Math.ceil((Date.parse(a.essai_jusqua) - Date.now()) / 864e5));
+      return `<a class="trial-badge" href="#/abonnement" aria-label="Essai : encore ${d} jour${d > 1 ? 's' : ''}"><span class="tl">Essai : </span>${d}&nbsp;j<span class="tl">our${d > 1 ? 's' : ''}</span></a>`;
+    }
+    return `<a class="trial-badge off" href="#/abonnement">S’abonner</a>`;
   }
 
   // ================= APPRENDRE =================
@@ -166,6 +190,9 @@
       + `<small>${vcEarned === 1 ? '1 autocollant collecté' : vcEarned + ' autocollants collectés'} sur 20</small></div>`
       + `${icon('next')}</a>`;
 
+    if (p.lang === 'en' && LZ.engine && !LZ.engine.getA1Units()) {
+      LZ.engine.ensureA1().then(() => { if (LZ.engine.getA1Units() && location.hash === '#/apprendre') LZ.render(); }).catch(() => {});
+    }
     const activeUnits = (p.lang === 'en' && LZ.engine?.getA1Units()) ? LZ.engine.getA1Units() : D.units;
     activeUnits.forEach((un, ui) => {
       const start = ui * PER_UNIT;
@@ -230,10 +257,17 @@
     animate($$('.node', el), { scale: [0.4, 1], opacity: [0, 1] }, { delay: stagger(0.025), ...spring(360, 18) });
   }
 
-  function openChest(idx) {
+  let chestBusy = false;
+  async function openChest(idx) {
     const p = prof(), c = course(p);
-    if (idx !== c.done) return;
-    c.done++; p.gems += 20; save();
+    if (idx !== c.done || chestBusy) return;
+    chestBusy = true;
+    // Le serveur valide l'étape et crédite les gemmes (une seule fois)
+    let r;
+    try { r = await LZ.cloud.finishLesson({ profil: p.id, langue: p.lang, etape: idx, justes: 0, total: 0, secondes: 0, mots: [] }); }
+    catch (e) { chestBusy = false; if (e.code === 'acces_expire') { location.hash = '#/abonnement'; } return toast(e.message, { icon: '⚠️' }); }
+    chestBusy = false;
+    if (r && r.attente) return toast('Pas de connexion. Le coffre sera ouvert dès ton retour en ligne.', { icon: '📶' });
     Sfx.done();
     modal(`<div class="chest-m"><div class="cm-box">🎁</div><h2 class="modal-title">Coffre ouvert !</h2><p class="modal-text">Unité terminée. Voici 20 gemmes pour toi.</p>
       <p class="cm-gems">${icon('gem')}<b>+20</b></p><div class="modal-actions"><button class="btn btn-primary" data-close>Super !</button></div></div>`, {
@@ -262,20 +296,43 @@
   }
 
   // ================= CLASSEMENT =================
+  // Vrais élèves uniquement : XP de la semaine calculés par le serveur.
+  // Égalité : celui qui a atteint ce score en premier passe devant.
   function league(el) {
-    const p = prof(), lg = D.leagues[p.league], list = leagueList(p);
-    const now = new Date(), end = LZ.addDays(LZ.weekKey(), 7);
-    const left = LZ.daysBetween(dayKey(now), end);
+    const p = prof();
+    const end = LZ.addDays(LZ.weekKey(), 7);
+    const left = Math.max(1, LZ.daysBetween(dayKey(), end));
     el.innerHTML = `<div class="page">
-      <div class="lg-tiers" aria-label="Ligues">${D.leagues.map((l, i) => `<span class="lg-t ${i === p.league ? 'on' : ''} ${i > p.league ? 'locked' : ''}" style="--c:${l.color}" title="Ligue ${l.name}">${i > p.league ? icon('lock') : icon('gem')}</span>`).join('')}</div>
-      <h1 class="page-title center">Ligue ${lg.name}</h1>
-      <p class="page-sub center">Les 5 premiers montent en ligue supérieure. Fin dans ${left} jour${left > 1 ? 's' : ''}.</p>
-      <ol class="board">${list.map((x, i) => `${i === 5 ? '<li class="zone up">Zone de promotion</li>' : ''}${i === list.length - 3 ? '<li class="zone down">Zone de relégation</li>' : ''}
-        <li class="row ${x.me ? 'me' : ''} ${i < 5 ? 'top' : ''}"><span class="rk">${i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1}</span><span class="av">${x.avatar}</span><span class="nm">${esc(x.name)}${x.me ? ' <small>(toi)</small>' : ''}</span><span class="xp">${x.xp} XP</span></li>`).join('')}</ol>
-      <p class="page-note">Version locale : les autres joueurs sont simulés. Le vrai classement arrivera avec Supabase.</p>
+      <h1 class="page-title center">Classement de la semaine</h1>
+      <p class="page-sub center">Chaque leçon terminée rapporte des XP. Remise à zéro dans ${left} jour${left > 1 ? 's' : ''}.</p>
+      <div id="board"><div class="load-state small"><span class="spinner" aria-hidden="true"></span><p>Chargement du classement…</p></div></div>
+      <div class="set-row lb-vis"><span id="visL">Apparaître dans le classement</span><button class="switch ${p.visible !== false ? 'on' : ''}" role="switch" aria-checked="${p.visible !== false}" aria-labelledby="visL" id="vis"><i></i></button></div>
     </div>`;
-    animate($$('.board .row', el), { opacity: [0, 1], x: [-24, 0] }, { delay: stagger(0.03), ...spring(260, 24) });
-    const mine = $('.row.me', el); mine && animate(mine, { scale: [1, 1.04, 1] }, { delay: 0.8, duration: 0.5 });
+    const board = $('#board', el);
+    const draw = list => {
+      if (!list.length) {
+        board.innerHTML = `<div class="empty-board"><span>🏁</span><p><b>Personne n’a encore d’XP cette semaine.</b><br>Termine une leçon pour entrer dans le classement.</p><a class="btn btn-primary" href="#/apprendre">Commencer une leçon</a></div>`;
+        return;
+      }
+      const mine = list.find(x => x.moi);
+      board.innerHTML = `<ol class="board">${list.map(x => `${x.rang > 30 ? '<li class="zone">…</li>' : ''}
+        <li class="row ${x.moi ? 'me' : ''} ${x.rang <= 3 ? 'top' : ''}"><span class="rk">${x.rang <= 3 ? ['🥇', '🥈', '🥉'][x.rang - 1] : x.rang}</span><span class="av">${esc(x.avatar)}</span><span class="nm">${esc(x.prenom)}${x.moi ? ' <small>(toi)</small>' : ''}</span><span class="xp">${x.xp} XP</span></li>`).join('')}</ol>
+        ${mine ? '' : '<p class="page-note">Termine une leçon cette semaine pour apparaître ici.</p>'}`;
+      animate($$('.board .row', board), { opacity: [0, 1], x: [-24, 0] }, { delay: stagger(0.03), ...spring(260, 24) });
+    };
+    const load = () => LZ.cloud.leaderboard(p).then(draw).catch(e => {
+      board.innerHTML = `<div class="load-state small"><p>${esc(e.message)}</p><button class="btn btn-ghost btn-sm" id="lbRetry">Réessayer</button></div>`;
+      $('#lbRetry', board).addEventListener('click', load);
+    });
+    load();
+    let busy = false;
+    $('#vis', el).addEventListener('click', async e => {
+      if (busy) return; busy = true;
+      const v = !(p.visible !== false);
+      try { await LZ.cloud.updateProfile(p, { visible: v }); LZ.render(); }
+      catch (err) { toast(err.message, { icon: '⚠️' }); }
+      busy = false;
+    });
   }
 
   // ================= BOUTIQUE =================
@@ -291,18 +348,21 @@
       <div class="shop-head"><div><h1 class="page-title">Boutique</h1><p class="page-sub">Les gemmes se gagnent en jouant : leçons, coffres et quêtes.</p></div><div class="wallet">${icon('gem')}<b>${p.gems}</b></div></div>
       <div class="shop-grid">${items.map(it => `<article class="item"><span class="it-e">${it.e}</span><div class="it-t"><h3>${it.t}</h3><p>${it.d}</p><small>${it.note}</small></div>
         <button class="btn ${it.dis ? 'btn-ghost' : 'btn-primary'}" data-buy="${it.id}" ${it.dis || p.gems < it.price ? 'disabled' : ''}>${icon('gem')}${it.price}</button></article>`).join('')}</div>
-      <section class="card earn"><h3>Gagner des gemmes</h3><ul><li>Leçon terminée : 5 gemmes, 10 si elle est parfaite</li><li>Coffre de fin d’unité : 20 gemmes</li><li>Chaque quête du jour : 10 gemmes</li></ul></section>
+      <section class="card earn"><h3>Gagner des gemmes</h3><ul><li>Leçon terminée : 5 gemmes, 10 si elle est parfaite</li><li>Coffre de fin d’unité : 20 gemmes</li></ul></section>
     </div>`;
+    const ART = { freeze: 'gel', hearts: 'coeurs', boost: 'double_xp' };
+    let busy = false;
     $$('[data-buy]', el).forEach(b => b.addEventListener('click', async () => {
+      if (busy) return;
       const it = items.find(x => x.id === b.dataset.buy);
       if (!(await confirmBox(`Acheter « ${it.t} » ?`, `Cela coûte ${it.price} gemmes. Il t’en restera ${p.gems - it.price}.`, 'Acheter'))) return;
-      p.gems -= it.price;
-      if (it.id === 'freeze') p.freeze++;
-      if (it.id === 'hearts') { p.hearts = MAX_H; p.heartsAt = Date.now(); }
-      if (it.id === 'boost') p.boostUntil = Date.now() + 15 * 60000;
-      save(); Sfx.coin();
-      toast(`${it.t} : c’est à toi !`, { icon: it.e });
-      LZ.render();
+      busy = true; b.disabled = true;
+      try {
+        await LZ.cloud.buy(p, ART[it.id]);   // le serveur vérifie et débite les gemmes
+        if (it.id === 'hearts') { p.hearts = MAX_H; p.heartsAt = Date.now(); save(); }
+        Sfx.coin(); toast(`${it.t} : c’est à toi !`, { icon: it.e });
+      } catch (e) { toast(e.message, { icon: '⚠️' }); }
+      busy = false; LZ.render();
     }));
     animate($$('.item', el), { opacity: [0, 1], y: [20, 0] }, { delay: stagger(0.06), ...spring(220, 22) });
   }
@@ -322,7 +382,7 @@
         <div class="sg"><span class="sg-ic fire">${icon('flame')}</span><b data-n="${p.streak}">0</b><small>Jours de série</small></div>
         <div class="sg"><span class="sg-ic bolt">${icon('bolt')}</span><b data-n="${p.xp}">0</b><small>XP au total</small></div>
         <div class="sg"><span class="sg-ic book">${icon('book')}</span><b data-n="${p.words.length}">0</b><small>Mots appris</small></div>
-        <div class="sg"><span class="sg-ic gem">${icon('trophy')}</span><b>${D.leagues[p.league].name}</b><small>Ligue actuelle</small></div>
+        <div class="sg"><span class="sg-ic gem">${icon('trophy')}</span><b data-n="${p.weekXp}">0</b><small>XP cette semaine</small></div>
       </section>
       <section class="card rank-card" style="--c:${R.color}">
         <h2 class="card-title">Statut</h2>
@@ -348,7 +408,11 @@
 
   function pickAvatar(p) {
     modal(`<h2 class="modal-title">Choisis ton avatar</h2><div class="avatars big">${D.avatars.map(a => `<button class="av ${a === p.avatar ? 'on' : ''}" data-av="${a}" aria-pressed="${a === p.avatar}">${a}</button>`).join('')}</div>`, {
-      onMount: (box, close) => $$('[data-av]', box).forEach(b => b.addEventListener('click', () => { p.avatar = b.dataset.av; save(); close(); LZ.render(); }))
+      onMount: (box, close) => $$('[data-av]', box).forEach(b => b.addEventListener('click', async () => {
+        close();
+        try { await LZ.cloud.updateProfile(p, { avatar: b.dataset.av }); } catch (e) { toast(e.message, { icon: '⚠️' }); }
+        LZ.render();
+      }))
     });
   }
 
@@ -384,17 +448,22 @@
     $$('[data-use]', el).forEach(b => b.addEventListener('click', () => { u.active = b.dataset.use; save(); const p = prof(); toast(`Profil de ${p.name} activé`, { icon: p.avatar }); location.hash = p.lang ? '#/apprendre' : '#/langues'; }));
     $$('[data-edit]', el).forEach(b => b.addEventListener('click', () => kidForm(u, u.profiles.find(k => k.id === b.dataset.edit))));
     $('#addKid').addEventListener('click', () => {
-      if (u.profiles.filter(k => k.kind === 'child').length >= 5) return toast('Cinq profils enfants maximum pour l’instant.', { icon: 'ℹ️' });
+      if (u.profiles.length >= 6) return toast('Six profils au maximum par compte.', { icon: 'ℹ️' });
       kidForm(u, null);
     });
-    const as = $('#addSelf'); as && as.addEventListener('click', () => {
-      const p = newProfile({ name: u.name, avatar: '🦉', kind: 'self' }); p.lang = 'en'; course(p);
-      u.profiles.push(p); save(); toast('Ton profil est créé. Choisis ta langue !', { icon: '🦉' });
-      u.active = p.id; save(); location.hash = '#/langues';
+    const as = $('#addSelf'); as && as.addEventListener('click', async () => {
+      if (as.disabled) return; as.disabled = true;
+      try {
+        await LZ.cloud.createProfile({ name: u.name, avatar: '🦉', kind: 'self', lang: 'en' });
+        toast('Ton profil est créé. Choisis ta langue !', { icon: '🦉' }); location.hash = '#/langues';
+      } catch (e) { as.disabled = false; toast(e.message, { icon: '⚠️' }); }
     });
     $('#chgPin').addEventListener('click', () => setPin(u, true));
     const lim = $('#limitSel');
-    lim && lim.addEventListener('change', () => { sel.limit = +lim.value; save(); toast(lim.value === '0' ? 'Temps d’écran : sans limite' : `Limite fixée à ${lim.value} minutes par jour`, { icon: '⏱️' }); });
+    lim && lim.addEventListener('change', async () => {
+      try { await LZ.cloud.updateProfile(sel, { limit: +lim.value }); toast(lim.value === '0' ? 'Temps d’écran : sans limite' : `Limite fixée à ${lim.value} minutes par jour`, { icon: '⏱️' }); }
+      catch (e) { toast(e.message, { icon: '⚠️' }); lim.value = String(sel.limit || 0); }
+    });
     animate($$('.kid', el), { opacity: [0, 1], y: [16, 0] }, { delay: stagger(0.05), ...spring(240, 22) });
     animate($$('.rchart i', el), { scaleY: [0, 1] }, { delay: stagger(0.05, { startDelay: 0.2 }), ...spring(160, 16) });
   }
@@ -437,23 +506,32 @@
       </form>`, {
       onMount: (box, close) => {
         $$('[data-av]', box).forEach(b => b.addEventListener('click', () => { st.avatar = b.dataset.av; $$('[data-av]', box).forEach(x => { x.classList.toggle('on', x === b); x.setAttribute('aria-pressed', String(x === b)); }); }));
-        $('#kf', box).addEventListener('submit', e => {
+        let busy = false;
+        $('#kf', box).addEventListener('submit', async e => {
           e.preventDefault();
+          if (busy) return;
           const name = $('#kn', box).value.trim();
           if (name.length < 2) { $('#kn-err', box).textContent = 'Entrez un prénom d’au moins 2 lettres.'; return; }
           const age = $('#ka', box) ? +$('#ka', box).value : null;
-          if (edit) { k.name = name; k.avatar = st.avatar; if (age) k.age = age; }
-          else { const p = newProfile({ name, avatar: st.avatar, age, kind: 'child' }); p.lang = $('#kl', box).value; course(p); u.profiles.push(p); }
-          save(); close(); toast(edit ? 'Profil mis à jour' : `Profil de ${name} créé`, { icon: st.avatar }); LZ.render();
+          busy = true; $('[type=submit]', box).disabled = true;
+          try {
+            if (edit) await LZ.cloud.updateProfile(k, age ? { name, avatar: st.avatar, age } : { name, avatar: st.avatar });
+            else {
+              const keep = u.active;
+              await LZ.cloud.createProfile({ name, avatar: st.avatar, age, kind: 'child', lang: $('#kl', box).value });
+              if (keep) { u.active = keep; save(); }   // le parent reste sur son profil
+            }
+            close(); toast(edit ? 'Profil mis à jour' : `Profil de ${name} créé`, { icon: st.avatar }); LZ.render();
+          } catch (err) { busy = false; $('[type=submit]', box).disabled = false; $('#kn-err', box).textContent = err.message; }
         });
         const del = $('#kdel', box);
         del && del.addEventListener('click', async () => {
           if (u.profiles.length <= 1) return toast('Gardez au moins un profil.', { icon: 'ℹ️' });
           close();
           if (!(await confirmBox(`Supprimer le profil de ${k.name} ?`, 'Sa progression, ses séries et ses gemmes seront effacées. Cette action est définitive.', 'Supprimer', true))) return;
-          u.profiles = u.profiles.filter(x => x.id !== k.id);
-          if (u.active === k.id) u.active = u.profiles[0].id;
-          save(); toast('Profil supprimé', { icon: '🗑️' }); location.hash = '#/parents'; LZ.render();
+          try { await LZ.cloud.deleteProfile(k); toast('Profil supprimé', { icon: '🗑️' }); }
+          catch (err) { toast(err.message, { icon: '⚠️' }); }
+          location.hash = '#/parents'; LZ.render();
         });
       }
     });
@@ -472,11 +550,9 @@
     const html = `<div class="pin-box">${icon('shield')}<h1 class="page-title">${change ? 'Nouveau code parent' : 'Créez votre code parent'}</h1><p class="page-sub">4 chiffres que vos enfants ne connaissent pas. Ils protègent cet espace.</p>${pinInputs()}<p class="err center" id="pinErr"></p></div>`;
     const done = async (code, close) => {
       const hashedPin = await hash('pin:' + code);
-      u.pin = hashedPin; parentsOk = true; sessionStorage.setItem('lugha:pin', u.id); save();
-      if (LZ.sb && u.id && u.email !== 'demo@lugha.academy') {
-        LZ.sb.from('comptes').update({ code_parent: hashedPin }).eq('id', u.id)
-          .then(({ error }) => { if (error) console.warn('Supabase pin:', error.message); });
-      }
+      try { await LZ.cloud.setPin(hashedPin); }
+      catch (e) { toast(e.message, { icon: '⚠️' }); return false; }
+      parentsOk = true; sessionStorage.setItem('lugha:pin', u.id);
       close && close(); toast('Code parent enregistré', { icon: '🔒' }); LZ.render();
     };
     if (el) { el.innerHTML = `<div class="page pin-page">${html}</div>`; wirePin(el, c => done(c)); }
@@ -508,6 +584,7 @@
         <form id="nameF" class="set-row"><label for="uname">Prénom affiché</label><div class="inline"><input id="uname" class="ob-input" value="${esc(u.role === 'parent' ? u.name : p.name)}" maxlength="24"><button class="btn btn-ghost btn-sm" type="submit">Enregistrer</button></div></form>
         <div class="set-row"><span>E-mail</span><b>${esc(u.email)}</b></div>
         <div class="set-row"><span>Type de compte</span><b>${u.role === 'parent' ? 'Parent' : 'Apprenant'}</b></div>
+        <div class="set-row"><span>Abonnement</span><a class="btn btn-ghost btn-sm" href="#/abonnement">${u.acces && u.acces.abonne_jusqua && Date.parse(u.acces.abonne_jusqua) > Date.now() ? 'Actif' : 'S’abonner'}</a></div>
       </section>
       <section class="card set">
         <h2 class="card-title">Apprentissage de ${esc(p.name)}</h2>
@@ -522,37 +599,52 @@
       </section>
       <section class="card set danger">
         <h2 class="card-title">Zone sensible</h2>
-        <div class="set-row"><span>Recommencer le cours de ${D.langs[p.lang].name.toLowerCase()}</span><button class="btn btn-danger-ghost btn-sm" id="reset">Réinitialiser</button></div>
         <div class="set-row"><span>Supprimer le compte et toutes les données</span><button class="btn btn-danger-ghost btn-sm" id="delAcc">Supprimer</button></div>
       </section>
       <button class="btn btn-ghost btn-block" id="logout">${icon('logout')}Se déconnecter</button>
     </div>`;
+    let busy = false;
+    const run = async fn => { if (busy) return; busy = true; try { await fn(); } catch (e) { toast(e.message, { icon: '⚠️' }); } busy = false; };
     $('#nameF').addEventListener('submit', e => {
       e.preventDefault(); const v = $('#uname').value.trim(); if (v.length < 2) return toast('Le prénom doit avoir au moins 2 lettres.', { icon: '⚠️' });
-      if (u.role === 'parent') u.name = v; else { u.name = v; p.name = v; }
-      save(); toast('Prénom enregistré', { icon: '✅' }); LZ.render();
+      run(async () => {
+        await LZ.cloud.setName(v);
+        if (u.role !== 'parent') await LZ.cloud.updateProfile(p, { name: v });
+        toast('Prénom enregistré', { icon: '✅' }); LZ.render();
+      });
     });
-    $$('[data-goal]', el).forEach(b => b.addEventListener('click', () => { p.goal = +b.dataset.goal; save(); toast(`Objectif : ${p.goal} XP par jour`, { icon: '🎯' }); LZ.render(); }));
+    $$('[data-goal]', el).forEach(b => b.addEventListener('click', () => run(async () => {
+      await LZ.cloud.updateProfile(p, { goal: +b.dataset.goal });
+      toast(`Objectif : ${p.goal} XP par jour`, { icon: '🎯' }); LZ.render();
+    })));
     $$('[data-theme]', el).forEach(b => b.addEventListener('click', () => { pr.theme = b.dataset.theme; save(); applyPrefs(); LZ.render(); }));
     $$('[data-motion]', el).forEach(b => b.addEventListener('click', () => { pr.motion = b.dataset.motion; save(); applyPrefs(); LZ.render(); }));
     $('#snd').addEventListener('click', () => { pr.sound = !pr.sound; save(); if (pr.sound) Sfx.ok(); LZ.render(); });
-    $('#reset').addEventListener('click', async () => {
-      if (!(await confirmBox('Recommencer ce cours ?', `Toutes les étapes du cours de ${D.langs[p.lang].name.toLowerCase()} seront reverrouillées. Tes XP et ta série sont conservés.`, 'Recommencer', true))) return;
-      p.courses[p.lang] = { done: 0, started: Date.now() }; save(); toast('Cours remis à zéro', { icon: '🔄' }); location.hash = '#/apprendre';
-    });
     $('#delAcc').addEventListener('click', async () => {
-      if (!(await confirmBox('Supprimer le compte ?', 'Tous les profils, progrès et réglages seront effacés de cet appareil. Cette action est définitive.', 'Supprimer définitivement', true))) return;
-      db().users = db().users.filter(x => x.id !== u.id); db().session = null; save(); toast('Compte supprimé', { icon: '👋' }); location.hash = '#/';
+      if (!(await confirmBox('Supprimer le compte ?', 'Tous les profils, progrès et abonnements seront effacés définitivement de nos serveurs.', 'Supprimer définitivement', true))) return;
+      run(async () => {
+        await LZ.cloud.deleteAccount();
+        LZ.cloud.clearLocal(); parentsOk = false;
+        try { await LZ.sb.auth.signOut({ scope: 'local' }); } catch {}
+        toast('Compte supprimé', { icon: '👋' }); location.hash = '#/';
+      });
     });
     $('#logout').addEventListener('click', logout);
   }
 
-  // Déconnexion : session locale, code parent et session Supabase
+  // Déconnexion : on envoie d'abord les leçons en attente, puis on efface
+  // tout ce qui concerne le compte sur cet appareil, même sans réseau.
+  let leaving = false;
   async function logout() {
-    db().session = null; sessionStorage.removeItem('lugha:pin'); parentsOk = false; save();
+    if (leaving) return; leaving = true;
+    try { await Promise.race([LZ.cloud.flush(), new Promise(r => setTimeout(r, 2500))]); } catch {}
+    try { const { error } = await LZ.sb.auth.signOut(); if (error) throw error; }
+    catch { try { await LZ.sb.auth.signOut({ scope: 'local' }); } catch {} }
+    LZ.cloud.clearLocal(); parentsOk = false;
+    leaving = false;
     toast('À bientôt !', { icon: '👋' });
-    try { if (LZ.sb) await LZ.sb.auth.signOut(); } catch (e) { console.warn(e); }
     location.hash = '#/';
+    LZ.render();
   }
 
   // ================= LANGUES =================
@@ -565,12 +657,18 @@
           <span class="co-hi" ${L.rtl ? 'dir="rtl"' : ''}>${esc(D.words(c)[0].t)}</span><b>${L.name}</b><small>${esc(L.native)}</small>
           ${cc ? `<span class="bar"><i style="width:${pct}%"></i></span><em>${c === p.lang ? 'Cours actuel' : `${pct} %`}</em>` : '<em class="new">Commencer</em>'}</button>`; }).join('')}</div>
     </div>`;
-    $$('[data-c]', el).forEach(b => b.addEventListener('click', () => {
+    let busy = false;
+    $$('[data-c]', el).forEach(b => b.addEventListener('click', async () => {
+      if (busy) return; busy = true;
       const c = b.dataset.c, isNew = !p.courses[c];
-      p.lang = c; course(p); LZ.checkAch(p); save();
-      speak(D.words(c)[0].t, c);
-      toast(isNew ? `C’est parti pour le ${D.langs[c].name.toLowerCase()} !` : `Cours de ${D.langs[c].name.toLowerCase()}`, { icon: '🌍' });
-      location.hash = '#/apprendre';
+      try {
+        if (isNew) await LZ.cloud.startCourse(p, c);
+        await LZ.cloud.updateProfile(p, { lang: c });
+        course(p); LZ.checkAch(p); save();
+        toast(isNew ? `C’est parti pour le ${D.langs[c].name.toLowerCase()} !` : `Cours de ${D.langs[c].name.toLowerCase()}`, { icon: '🌍' });
+        location.hash = '#/apprendre';
+      } catch (e) { toast(e.message, { icon: '⚠️' }); }
+      busy = false;
     }));
     animate($$('.course', el), { opacity: [0, 1], scale: [0.9, 1] }, { delay: stagger(0.03), ...spring(260, 20) });
   }
@@ -655,8 +753,133 @@
       { delay: stagger(0.04), duration: 0.38, ease: [0.2, 0.8, 0.2, 1] });
   }
 
+  // ================= ABONNEMENT =================
+  // Coordonnées BaridiMob affichées aux clients (à remplir avant le lancement)
+  const PAY = { rip: '', titulaire: '' };
+  const fmtDate = s => new Date(s).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  function subscribe(el, r, onLeave) {
+    const u = me(), a = u.acces || {};
+    const subUntil = a.abonne_jusqua && Date.parse(a.abonne_jusqua) > Date.now() ? a.abonne_jusqua : null;
+    let status;
+    if (a.paiement_en_attente) status = `<div class="sub-status wait">⏳<div><b>Reçu en cours de vérification</b><p>Nous vérifions ton paiement, en général en moins de 24 heures. Ton accès s’ouvrira automatiquement.</p></div></div>`;
+    else if (subUntil) status = `<div class="sub-status ok">✅<div><b>Abonnement actif</b><p>Jusqu’au ${fmtDate(subUntil)}. Tu peux le prolonger à tout moment : les 3 mois s’ajoutent à la suite.</p></div></div>`;
+    else if (a.en_essai) { const d = Math.max(1, Math.ceil((Date.parse(a.essai_jusqua) - Date.now()) / 864e5)); status = `<div class="sub-status trial">🎁<div><b>Essai gratuit : encore ${d} jour${d > 1 ? 's' : ''}</b><p>Tout est ouvert jusqu’au ${fmtDate(a.essai_jusqua)}.</p></div></div>`; }
+    else status = `<div class="sub-status off">🔒<div><b>Ton essai est terminé</b><p>Ta progression est gardée. Abonne-toi pour continuer les leçons.</p></div></div>`;
+    const refus = !a.paiement_en_attente && a.dernier_refus ? `<p class="sub-refus">Ton dernier reçu n’a pas été accepté${a.dernier_refus ? ` : ${esc(a.dernier_refus)}` : ''}. Tu peux en envoyer un nouveau.</p>` : '';
+
+    el.innerHTML = `<div class="page sub-page">
+      <h1 class="page-title">Abonnement</h1>
+      ${status}
+      <section class="card sub-offer">
+        <p class="sub-price"><b>2 000 DA</b><span>— 3 mois</span></p>
+        <ul class="pc-list">
+          <li>${icon('check')}Les 15 langues et toutes les leçons</li>
+          <li>${icon('check')}Jusqu’à 6 profils pour la famille</li>
+          <li>${icon('check')}Espace parents et rapports</li>
+          <li>${icon('check')}Sans publicité, sans renouvellement automatique</li>
+        </ul>
+      </section>
+      ${a.paiement_en_attente ? '' : `<section class="card sub-steps">
+        <h2 class="card-title">Comment payer</h2>
+        <ol class="how-pay">
+          <li>Envoie <b>2 000 DA</b> par BaridiMob${PAY.rip ? ` au RIP ci-dessous.` : '.'}</li>
+          <li>Fais une capture d’écran ou une photo du reçu.</li>
+          <li>Envoie-la ici. Après vérification, ton accès est ouvert pour 3 mois.</li>
+        </ol>
+        ${PAY.rip ? `<div class="rip"><div><small>RIP BaridiMob</small><b id="ripVal">${esc(PAY.rip)}</b>${PAY.titulaire ? `<small>${esc(PAY.titulaire)}</small>` : ''}</div><button class="btn btn-ghost btn-sm" id="copyRip">Copier</button></div>` : ''}
+        ${refus}
+        <form id="recuF" class="recu-form" novalidate>
+          <label class="recu-drop" for="recuFile"><span id="recuName">${icon('plus')}Choisir la photo du reçu</span><small>JPG, PNG ou PDF, 5 Mo maximum</small></label>
+          <input id="recuFile" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" hidden>
+          <label class="ob-label" for="recuRef">Référence de la transaction (facultatif)</label>
+          <input id="recuRef" class="ob-input" maxlength="60" autocomplete="off" placeholder="Ex. 0012345678">
+          <p class="err" id="recuErr" aria-live="polite"></p>
+          <button class="btn btn-primary btn-block" type="submit" id="recuBtn" disabled>Envoyer le reçu</button>
+        </form>
+      </section>`}
+    </div>`;
+
+    // L'état d'accès vient toujours du serveur : on le relit à l'ouverture
+    LZ.cloud.refreshAccess().then(n => { if (n && JSON.stringify(n) !== JSON.stringify(a) && location.hash === '#/abonnement') LZ.render(); }).catch(() => {});
+
+    const cp = $('#copyRip', el);
+    cp && cp.addEventListener('click', () => { navigator.clipboard?.writeText(PAY.rip).then(() => toast('RIP copié', { icon: '📋' }), () => {}); });
+    const f = $('#recuF', el); if (!f) return;
+    const file = $('#recuFile', el), btn = $('#recuBtn', el), err = $('#recuErr', el);
+    let chosen = null, busy = false;
+    file.addEventListener('change', () => {
+      const x = file.files[0]; err.textContent = '';
+      if (!x) return;
+      if (!/^(image\/(jpeg|png|webp)|application\/pdf)$/.test(x.type)) { err.textContent = 'Choisis une image (JPG, PNG) ou un PDF.'; return; }
+      if (x.size > 5 * 1024 * 1024) { err.textContent = 'Fichier trop lourd : 5 Mo maximum.'; return; }
+      chosen = x; $('#recuName', el).textContent = '📎 ' + x.name; btn.disabled = false;
+    });
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      if (busy || !chosen) return;
+      busy = true; btn.disabled = true; btn.textContent = 'Envoi en cours…'; err.textContent = '';
+      try {
+        await LZ.cloud.sendReceipt(chosen, $('#recuRef', el).value.trim());
+        toast('Reçu envoyé. Nous le vérifions rapidement.', { icon: '✅' });
+        LZ.render();
+      } catch (x) {
+        busy = false; btn.disabled = false; btn.textContent = 'Envoyer le reçu';
+        err.textContent = x.code === 'doublon' ? x.message : 'L’envoi n’a pas abouti. Réessaie.';
+        if (x.code === 'doublon') LZ.cloud.refreshAccess().then(() => LZ.render()).catch(() => {});
+      }
+    });
+  }
+
+  // ================= ADMIN : validation des reçus =================
+  function admin(el) {
+    el.innerHTML = `<div class="page"><h1 class="page-title">Paiements</h1><p class="page-sub">Vérifie chaque reçu : 2 000 DA reçus sur le compte BaridiMob. Valider ouvre 3 mois d’accès.</p>
+      <div id="payList"><div class="load-state small"><span class="spinner" aria-hidden="true"></span><p>Chargement…</p></div></div></div>`;
+    const box = $('#payList', el);
+    const STAT = { en_attente: 'À vérifier', valide: 'Validé', refuse: 'Refusé' };
+    const load = () => LZ.cloud.adminList().then(list => {
+      if (!list.length) { box.innerHTML = '<p class="empty">Aucun paiement pour le moment.</p>'; return; }
+      box.innerHTML = `<div class="pay-list">${list.map(x => `<article class="pay ${x.statut}" data-id="${x.id}">
+        <div class="pay-t"><b>${esc(x.prenom || '')}</b><small>${esc(x.email)}</small><small>${new Date(x.cree_le).toLocaleString('fr-FR')}${x.reference ? ` · Réf. ${esc(x.reference)}` : ''}</small></div>
+        <span class="pay-s">${STAT[x.statut] || x.statut}</span>
+        <div class="pay-a"><button class="btn btn-ghost btn-sm" data-see="${esc(x.recu_path)}">Voir le reçu</button>
+        ${x.statut === 'en_attente' ? `<button class="btn btn-primary btn-sm" data-ok="${x.id}">Valider</button><button class="btn btn-danger-ghost btn-sm" data-no="${x.id}">Refuser</button>` : ''}</div>
+      </article>`).join('')}</div>`;
+      $$('[data-see]', box).forEach(b => b.addEventListener('click', async () => {
+        const w = window.open('', '_blank');
+        try { const url = await LZ.cloud.receiptUrl(b.dataset.see); if (w) w.location = url; else location.href = url; }
+        catch (e) { w && w.close(); toast(e.message, { icon: '⚠️' }); }
+      }));
+      let busy = false;
+      $$('[data-ok]', box).forEach(b => b.addEventListener('click', async () => {
+        if (busy || !(await confirmBox('Valider ce paiement ?', 'Le compte aura accès pendant 3 mois de plus.', 'Valider'))) return;
+        busy = true; b.disabled = true;
+        try { const until = await LZ.cloud.adminValidate(b.dataset.ok); toast(`Validé : accès jusqu’au ${fmtDate(until)}`, { icon: '✅' }); }
+        catch (e) { toast(e.message, { icon: '⚠️' }); }
+        busy = false; load();
+      }));
+      $$('[data-no]', box).forEach(b => b.addEventListener('click', () => {
+        if (busy) return;
+        modal(`<h2 class="modal-title">Refuser ce reçu</h2><p class="modal-text">Le client verra ce motif et pourra renvoyer un reçu.</p>
+          <input class="ob-input" id="motif" maxlength="140" placeholder="Ex. montant incorrect, reçu illisible">
+          <div class="modal-actions"><button class="btn btn-ghost" data-close>Annuler</button><button class="btn btn-danger-ghost" id="doRefuse">Refuser</button></div>`, {
+          onMount: (m, close) => $('#doRefuse', m).addEventListener('click', async () => {
+            if (busy) return; busy = true;
+            try { await LZ.cloud.adminRefuse(b.dataset.no, $('#motif', m).value.trim() || 'Reçu non valide'); toast('Paiement refusé', { icon: '🗑️' }); }
+            catch (e) { toast(e.message, { icon: '⚠️' }); }
+            busy = false; close(); load();
+          })
+        });
+      }));
+    }).catch(e => {
+      box.innerHTML = `<div class="load-state small"><p>${esc(e.message)}</p><button class="btn btn-ghost btn-sm" id="payRetry">Réessayer</button></div>`;
+      $('#payRetry', box).addEventListener('click', load);
+    });
+    load();
+  }
+
   LZ.views = LZ.views || {};
   LZ.shell = shell;
   LZ.heartsModal = heartsModal;
-  Object.assign(LZ.views, { learn, league, shop, profile, parents, settings, courses, voyage });
+  Object.assign(LZ.views, { learn, league, shop, profile, parents, settings, courses, voyage, subscribe, admin });
 })();

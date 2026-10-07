@@ -111,20 +111,6 @@ window.LISSAN_DATA = (() => {
   }
   function phrases(lang) { return P[lang]; }
 
-  // ---------- Ligues ----------
-  const leagues = [
-    { name: 'Bronze', color: '#C98A55' }, { name: 'Argent', color: '#9AA7B8' },
-    { name: 'Or', color: '#F2B92E' }, { name: 'Saphir', color: '#3E7BFA' },
-    { name: 'Rubis', color: '#E5484D' }, { name: 'Émeraude', color: '#20B26B' },
-    { name: 'Améthyste', color: '#9B6BFF' }, { name: 'Perle', color: '#D9B99B' },
-    { name: 'Obsidienne', color: '#4A4468' }, { name: 'Diamant', color: '#38C6E8' }
-  ];
-  const bots = [
-    ['Yasmine', '🦄'], ['Karim', '🐯'], ['Lina', '🐰'], ['Adam', '🦁'], ['Sofia', '🐼'],
-    ['Rayan', '🐸'], ['Inès', '🦉'], ['Mehdi', '🐙'], ['Emma', '🐧'], ['Youcef', '🦊'],
-    ['Nour', '🐨'], ['Lucas', '🐢'], ['Amira', '🐝'], ['Ilyes', '🐳']
-  ];
-
   // ---------- Statuts (5 niveaux) ----------
   const ranks = [
     { min: 0,    name: 'Explorateur',    icon: '🧭', color: '#14B8A6' },
@@ -277,5 +263,5 @@ window.LISSAN_DATA = (() => {
     ]}
   };
 
-  return { langs, order, units, words, phrase, phrases, leagues, bots, ranks, avatars, praise, comfort, islands };
+  return { langs, order, units, words, phrase, phrases, ranks, avatars, praise, comfort, islands };
 })();

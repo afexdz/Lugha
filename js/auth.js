@@ -75,8 +75,7 @@
           </form>
           <div class="or"><span>ou</span></div>
           <button class="btn btn-ghost btn-block" id="google">${googleIcon()}Continuer avec Google</button>
-          <button class="btn btn-ghost btn-block" id="demo">${icon('sparkle')}Essayer avec un compte démo</button>
-          <p class="auth-foot">Pas encore de compte ? <a class="link" href="#/inscription">Créer un compte gratuit</a></p>
+          <p class="auth-foot">Pas encore de compte ? <a class="link" href="#/inscription">Créer un compte</a></p>
         </div>
       </main></div>`;
     const f = $('#f');
@@ -97,19 +96,21 @@
         setErr(f, e2.field, e2.text);
         return;
       }
-      await LZ.syncUser(data.user);
+      try { await LZ.syncUser(data.user); }
+      catch (err) { setErr(f, 'pw', 'Connexion impossible pour le moment. Réessaie.'); return; }
       toast(`Content de te revoir !`, { icon: '👋' });
       const u = me(), p = prof();
-      location.hash = (!p || !p.lang) ? '#/bienvenue' : '#/apprendre';
+      location.hash = (!u.role || !p || !p.lang) ? '#/bienvenue' : '#/apprendre';
     });
-    $('#google').addEventListener('click', async () => {
+    $('#google').addEventListener('click', async e => {
+      const b = e.currentTarget; if (b.disabled) return;
+      b.disabled = true;
       const { error } = await LZ.sb.auth.signInWithOAuth({
         provider: 'google',
-        options: { redirectTo: window.location.origin }
+        options: { redirectTo: window.location.origin + '/', queryParams: { prompt: 'select_account' } }
       });
-      if (error) toast('Erreur Google : ' + error.message, { icon: '❌' });
+      if (error) { b.disabled = false; console.warn(error); toast('La connexion avec Google n’a pas abouti. Réessaie.', { icon: '⚠️' }); }
     });
-    $('#demo').addEventListener('click', openDemo);
     intro();
   }
 
@@ -121,8 +122,8 @@
       <main class="auth-main">
         <div class="auth-top"><a class="logo" href="#/">${logo()}</a><a class="link" href="#/connexion">Se connecter</a></div>
         <div class="auth-card">
-          <h1>Créer un compte gratuit</h1>
-          <p class="auth-sub">Deux minutes, et la première leçon commence.</p>
+          <h1>Créer ton compte</h1>
+          <p class="auth-sub">7 jours pour tout essayer. La première leçon commence dans deux minutes.</p>
           <form id="f" novalidate>
             <fieldset class="roles"><legend>Qui crée le compte ?</legend>
               <label class="role"><input type="radio" name="role" value="parent" ${role0 === 'parent' ? 'checked' : ''}><span><b>👨‍👩‍👧 Je suis parent</b><small>Je crée un profil pour mon enfant et je suis ses progrès.</small></span></label>
@@ -177,7 +178,7 @@
         animate(conf, { opacity: [0, 1], y: [12, 0] }, spring(200, 20));
         return;
       }
-      await LZ.syncUser(data.user);
+      try { await LZ.syncUser(data.user); } catch (err) { setErr(f, 'email', 'Compte créé, mais le chargement a échoué. Connecte-toi.'); return; }
       location.hash = '#/bienvenue';
     });
     intro();
@@ -256,42 +257,21 @@
     animate($('.aa-m'), { opacity: [0, 1], scale: [0.6, 1], rotate: [-10, 0] }, spring(120, 11));
   }
 
-  // ---------- Compte démo (100 % local, sans Supabase) ----------
-  async function openDemo() {
-    const email = 'demo@lugha.academy';
-    let u = db().users.find(x => x.email === email);
-    if (!u) {
-      u = { id: uid(), name: 'Invité', email, pass: await hash('demo1234'), role: 'parent', created: Date.now(), profiles: [], active: null, pin: null };
-      const p = newProfile({ name: 'Yasmine', avatar: '🦄', age: 9, kind: 'child' });
-      p.lang = 'en'; p.courses = { en: { done: 3, started: Date.now() } };
-      const t = dayKey();
-      [30, 20, 0, 25, 40, 15].forEach((x, i) => { const k = addDays(t, -(6 - i)); if (x) { p.days[k] = x; p.time[k] = x * 12; } });
-      p.xp = 130; p.weekXp = 60; p.streak = 2; p.bestStreak = 4; p.lastDay = addDays(t, -1); p.lessons = 6; p.perfect = 2; p.gems = 240;
-      p.ans = { ok: 52, n: 60 };
-      p.words = D.words('en').slice(0, 6).map(w => 'en:' + w.id);
-      p.ach = ['first:1', 'words:0', 'perfect:1', 'xp:1'];
-      const k = newProfile({ name: 'Adam', avatar: '🦁', age: 6, kind: 'child' });
-      k.lang = 'es'; k.courses = { es: { done: 1, started: Date.now() } }; k.xp = 15; k.lessons = 1; k.ach = ['first:1'];
-      u.profiles.push(p, k); u.active = p.id;
-      db().users.push(u);
-    }
-    db().session = u.id; save();
-    toast('Compte démo ouvert : espace parent avec Yasmine et Adam. Code parent : 1234.', { icon: '✨' });
-    if (!u.pin) { u.pin = await hash('pin:1234'); save(); }
-    location.hash = '#/apprendre';
-  }
-
   // ---------- Parcours de bienvenue ----------
   function onboarding(app) {
     const u = me();
-    const isParent = u.role === 'parent';
     const pre = sessionStorage.getItem('lugha:lang');
-    const st = { name: '', age: 8, avatar: D.avatars[0], lang: pre && D.langs[pre] ? pre : null, why: null, level: 'new', goal: 20 };
-    const steps = [...(isParent ? ['child'] : []), 'lang', 'why', 'level', 'goal', 'ready'];
-    let i = 0;
+    const st = { role: u.role, name: '', age: 8, avatar: D.avatars[0], lang: pre && D.langs[pre] ? pre : null, why: null, level: 'new', goal: 20 };
+    const askRole = !u.role;               // connexion Google : rôle pas encore choisi
+    let isParent = u.role === 'parent';
+    const own = () => u.profiles.find(x => x.kind === 'self');
+    const stepsFor = () => [...(askRole ? ['role'] : []), ...(isParent ? ['child'] : []), 'lang', 'why', 'level', 'goal', 'ready'];
+    let steps = stepsFor();
+    let i = 0, busy = false;
     const who = () => isParent ? (st.name || 'votre enfant') : 'toi';
 
     const q = {
+      role: () => 'Qui va utiliser Lugha ?',
       child: () => `Pour qui créons-nous ce profil ?`,
       lang: () => isParent ? `Quelle langue pour ${esc(who())} ?` : 'Quelle langue veux-tu apprendre ?',
       why: () => isParent ? `Pourquoi ${esc(who())} apprend-il cette langue ?` : 'Pourquoi apprends-tu cette langue ?',
@@ -300,6 +280,9 @@
       ready: () => 'Tout est prêt. On commence ?'
     };
     const body = {
+      role: () => `<div class="ob-list">
+          <button class="ob-opt ${st.role === 'learner' ? 'on' : ''}" data-role="learner" aria-pressed="${st.role === 'learner'}"><span>🎒</span><div><b>J’apprends moi-même</b><small>Collège, lycée, études ou adulte.</small></div></button>
+          <button class="ob-opt ${st.role === 'parent' ? 'on' : ''}" data-role="parent" aria-pressed="${st.role === 'parent'}"><span>👨‍👩‍👧</span><div><b>Je suis parent</b><small>Je crée un profil pour mon enfant et je suis ses progrès.</small></div></button></div>`,
       child: () => `
         <div class="ob-form">
           <label class="ob-label" for="cname">Prénom de l’enfant</label>
@@ -323,9 +306,9 @@
         .map(([g, n, d]) => `<button class="ob-opt ${st.goal === g ? 'on' : ''}" data-goal="${g}" aria-pressed="${st.goal === g}"><span>${g === 10 ? '🐢' : g === 20 ? '🚲' : g === 30 ? '🚀' : '⚡'}</span><div><b>${n}</b><small>${d}</small></div><em>${g} XP</em></button>`).join('')}</div>`,
       ready: () => { const L = D.langs[st.lang]; return `<div class="ob-ready">
           <div class="ob-sum"><span class="ob-sum-av">${isParent ? st.avatar : '🎒'}</span><div><b>${esc(isParent ? st.name : u.name)}</b><small>${L.name}, objectif ${st.goal} XP par jour</small></div></div>
-          <p>La première leçon dure environ trois minutes. Mets le son : chaque mot est prononcé.</p></div>`; }
+          <p>La première leçon dure environ trois minutes. Réponds aux questions, gagne des XP et entre dans le classement de la semaine.</p></div>`; }
     };
-    const canNext = () => ({ child: st.name.trim().length >= 2, lang: !!st.lang, why: !!st.why, level: true, goal: true, ready: true }[steps[i]]);
+    const canNext = () => ({ role: !!st.role, child: st.name.trim().length >= 2, lang: !!st.lang, why: !!st.why, level: true, goal: true, ready: true }[steps[i]]);
 
     function draw(dir = 1) {
       const s = steps[i];
@@ -349,37 +332,47 @@
         st[key] = parse(b.dataset[key === 'avatar' ? 'av' : key]);
         $$(sel, ob).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute(x.getAttribute('role') === 'radio' ? 'aria-checked' : 'aria-pressed', String(on)); });
         LZ.Sfx.tap(); refresh();
-        if (key === 'lang') speak(D.words(st.lang)[0].t, st.lang);
       }));
       if (s === 'child') {
         const n = $('#cname'); n.addEventListener('input', () => { st.name = n.value; $('#cname-err').textContent = ''; refresh(); });
         n.focus();
         pick('[data-age]', 'age', Number); pick('[data-av]', 'avatar');
       }
+      if (s === 'role') pick('[data-role]', 'role');
       if (s === 'lang') pick('[data-lang]', 'lang');
       if (s === 'why') pick('[data-why]', 'why');
       if (s === 'level') pick('[data-level]', 'level');
       if (s === 'goal') pick('[data-goal]', 'goal', Number);
       $('#back').addEventListener('click', () => { if (i > 0) { i--; draw(-1); } });
       $('#next').addEventListener('click', () => {
-        if (!canNext()) return;
+        if (!canNext() || busy) return;
         if (s === 'ready') return finish();
+        if (s === 'role') { isParent = st.role === 'parent'; steps = stepsFor(); }
         i++; draw(1);
       });
     }
 
-    function finish() {
-      let p = prof();
-      if (isParent && (!p || p.kind !== 'child' || p.lang)) {
-        p = newProfile({ name: st.name.trim(), avatar: st.avatar, age: st.age, kind: 'child' });
-        u.profiles.push(p); u.active = p.id;
+    async function finish() {
+      const btn = $('#next'); busy = true; btn.disabled = true; btn.textContent = 'Enregistrement…';
+      try {
+        if (askRole) await LZ.cloud.setRole(st.role);
+        const depart = st.level === 'some' ? 5 : 0;
+        let p;
+        if (isParent) {
+          p = await LZ.cloud.createProfile({ name: st.name.trim(), avatar: st.avatar, age: st.age, kind: 'child', lang: st.lang, goal: st.goal, motive: st.why, depart });
+        } else if (own()) {
+          p = own(); u.active = p.id;
+          await LZ.cloud.updateProfile(p, { goal: st.goal, motive: st.why });
+          await LZ.cloud.startCourse(p, st.lang, depart);
+        } else {
+          p = await LZ.cloud.createProfile({ name: u.name || 'Moi', avatar: '🦊', kind: 'self', lang: st.lang, goal: st.goal, motive: st.why, depart });
+        }
+        sessionStorage.removeItem('lugha:lang');
+        location.hash = `#/lecon/${course(p).done}`;
+      } catch (e) {
+        busy = false; btn.disabled = false; btn.textContent = 'Commencer la première leçon';
+        toast(e.message || 'Une erreur est survenue. Réessaie.', { icon: '⚠️' });
       }
-      p.lang = st.lang; p.goal = st.goal; p.motive = st.why;
-      const c = course(p);
-      if (st.level === 'some') c.done = Math.max(c.done, 5);
-      sessionStorage.removeItem('lugha:lang');
-      save();
-      location.hash = `#/lecon/${c.done}`;
     }
     draw();
   }
@@ -390,5 +383,4 @@
 
   LZ.views = LZ.views || {};
   Object.assign(LZ.views, { login, signup, forgot, newPassword, onboarding });
-  LZ.openDemo = openDemo;
 })();

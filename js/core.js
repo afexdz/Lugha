@@ -51,7 +51,7 @@ window.LZ = (() => {
       id: uid(), name, avatar, age, kind, lang: null, courses: {}, goal: 20, motive: null,
       xp: 0, gems: 150, hearts: 5, heartsAt: Date.now(), streak: 0, bestStreak: 0, lastDay: null, freeze: 0,
       days: {}, time: {}, words: [], perfect: 0, lessons: 0, ans: { ok: 0, n: 0 },
-      league: 0, week: weekKey(), weekXp: 0, quest: { day: null }, ach: [], boostUntil: 0,
+      week: weekKey(), weekXp: 0, quest: { day: null }, ach: [], boostUntil: 0,
       limit: 0, created: Date.now()
     };
   }
@@ -60,14 +60,6 @@ window.LZ = (() => {
   const MAX_H = 5, HEART_MS = 30 * 60 * 1000;
   const rankOf = xp => { let r = 0; D.ranks.forEach((k, i) => { if (xp >= k.min) r = i; }); return r; };
   const weekProgress = () => { const now = new Date(); const start = toDate(weekKey(now)); return clamp((now - start) / (7 * 864e5), 0.04, 1); };
-
-  function leagueList(p, wk = p.week, final = false) {
-    const prog = final ? 1 : weekProgress();
-    const r = rng(hashStr(wk + p.id));
-    const list = D.bots.map(([name, avatar]) => ({ name, avatar, xp: Math.round((30 + r() * 320) * (1 + p.league * 0.3) * prog) }));
-    list.push({ name: p.name, avatar: p.avatar, xp: p.weekXp, me: true });
-    return list.sort((a, b) => b.xp - a.xp || (a.me ? -1 : 1));
-  }
 
   function tick(p) {
     if (!p) return;
@@ -82,14 +74,9 @@ window.LZ = (() => {
       if (p.freeze >= missed && missed <= 2) { p.freeze -= missed; p.lastDay = y; p.flash = `Gel de série utilisé : ta série de ${p.streak} jours est sauvée.`; }
       else p.streak = 0;
     }
+    // Affichage seulement : le serveur recalcule série et XP de la semaine à chaque leçon
     const wk = weekKey();
-    if (p.week !== wk) {
-      const list = leagueList(p, p.week, true);
-      const rank = list.findIndex(x => x.me) + 1;
-      if (p.weekXp > 0 && rank <= 5 && p.league < D.leagues.length - 1) { p.league++; p.flash = `Promotion ! Tu passes en ligue ${D.leagues[p.league].name}.`; }
-      else if (rank > list.length - 3 && p.league > 0) p.league--;
-      p.week = wk; p.weekXp = 0;
-    }
+    if (p.week !== wk) { p.week = wk; p.weekXp = 0; }
     if (!p.quest || p.quest.day !== t) p.quest = { day: t, lessons: 0, combo: 0, claimed: [] };
   }
 
@@ -106,8 +93,8 @@ window.LZ = (() => {
   function claimQuests(p) {
     quests(p).forEach(q => {
       if (q.cur >= q.max && !p.quest.claimed.includes(q.id)) {
-        p.quest.claimed.push(q.id); p.gems += 10;
-        toast(`Quête accomplie : ${q.label}. +10 gemmes`, { icon: '🎯' });
+        p.quest.claimed.push(q.id);
+        toast(`Quête accomplie : ${q.label}`, { icon: '🎯' });
       }
     });
   }
@@ -227,6 +214,8 @@ window.LZ = (() => {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = L.voice; u.rate = rate;
       if (v) u.voice = v;
+      // Voix en panne : un message simple, l'exercice continue normalement
+      u.onerror = ev => { if (ev && /interrupted|canceled/.test(ev.error || '')) return; toast('Audio indisponible. Réessaie.', { icon: '🔇' }); };
       LZ._utt = u;
       speechSynthesis.resume();
       if (speechSynthesis.speaking) {
@@ -422,7 +411,7 @@ window.LZ = (() => {
   return {
     D, M, $, $$, esc, clamp, rand, shuffle, dayKey, addDays, daysBetween, weekKey, uid, fmtTime, hashStr, rng, norm, loose, hash,
     get db() { return db; }, save, me, prof, course, newProfile,
-    MAX_H, HEART_MS, rankOf, leagueList, tick, overLimit, quests, claimQuests, ACH, achLevel, checkAch,
+    MAX_H, HEART_MS, rankOf, tick, overLimit, quests, claimQuests, ACH, achLevel, checkAch,
     reduced, applyPrefs, spring, stagger, animate, countUp, onView, Sfx, speak, canSpeak,
     icon, mascot, logo, toast, modal, confirmBox, confetti, tilt, canHover
   };
