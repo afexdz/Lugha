@@ -37,6 +37,7 @@
         <a class="logo" href="#/">${logo()}</a>
         <nav>${sideNav.map(([k, l, ic]) => `<a href="#/${k}" class="side-link ${k === active ? 'on' : ''}" ${k === active ? 'aria-current="page"' : ''}>${icon(ic)}<span>${l}</span></a>`).join('')}</nav>
         <button class="side-prof" id="switchProf" aria-label="Changer de profil"><span class="sp-av">${p.avatar}</span><span class="sp-t"><b>${esc(p.name)}</b><small>${u.role === 'parent' ? 'Changer de profil' : 'Mon compte'}</small></span>${icon('swap')}</button>
+        <button class="side-logout" id="sideLogout">${icon('logout')}<span>Se déconnecter</span></button>
       </aside>
       <div class="main">
         <header class="topbar">
@@ -57,6 +58,7 @@
     rail($('#rail'));
 
     $('#courseBtn').addEventListener('click', e => courseMenu(e.currentTarget));
+    $('#sideLogout').addEventListener('click', logout);
     [$('#switchProf'), $('#switchProf2')].forEach(b => b.addEventListener('click', () => u.role === 'parent' ? switcher() : (location.hash = '#/profil')));
     $('#stFire').addEventListener('click', streakModal);
     $('#stGem').addEventListener('click', () => (location.hash = '#/boutique'));
@@ -542,12 +544,15 @@
       if (!(await confirmBox('Supprimer le compte ?', 'Tous les profils, progrès et réglages seront effacés de cet appareil. Cette action est définitive.', 'Supprimer définitivement', true))) return;
       db().users = db().users.filter(x => x.id !== u.id); db().session = null; save(); toast('Compte supprimé', { icon: '👋' }); location.hash = '#/';
     });
-    $('#logout').addEventListener('click', async () => {
-      db().session = null; sessionStorage.removeItem('lugha:pin'); parentsOk = false; save();
-      toast('À bientôt !', { icon: '👋' });
-      if (LZ.sb) await LZ.sb.auth.signOut();
-      location.hash = '#/';
-    });
+    $('#logout').addEventListener('click', logout);
+  }
+
+  // Déconnexion : session locale, code parent et session Supabase
+  async function logout() {
+    db().session = null; sessionStorage.removeItem('lugha:pin'); parentsOk = false; save();
+    toast('À bientôt !', { icon: '👋' });
+    try { if (LZ.sb) await LZ.sb.auth.signOut(); } catch (e) { console.warn(e); }
+    location.hash = '#/';
   }
 
   // ================= LANGUES =================

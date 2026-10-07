@@ -1125,3 +1125,9 @@ html.rm .bulle-float { animation: none; }
 /* État de chargement / erreur d'une leçon */
 .load-state { min-height: 70dvh; display: grid; place-items: center; align-content: center; gap: .8rem; padding: 2rem 1.25rem; text-align: center; color: var(--ink-2); font-weight: 700; }
 .load-state h2 { font-size: 1.4rem; color: var(--ink); }
+
+/* Déconnexion, toujours visible en bas de la barre latérale */
+.side-logout { display: flex; align-items: center; gap: .9rem; width: 100%; padding: .65rem .9rem; border: 0; border-radius: 14px; background: none; color: var(--ink-3); font-weight: 800; text-align: left; transition: background .15s, color .15s; }
+.side-logout .ic { width: 22px; height: 22px; }
+.side-logout:hover { background: var(--bad-soft); color: var(--bad-ink); }
+.side { overflow-y: auto; }
