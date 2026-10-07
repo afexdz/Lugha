@@ -208,7 +208,8 @@ window.LZ = (() => {
   })();
 
   // ---------- Voix (Speech Synthesis) ----------
-  const canSpeak = 'speechSynthesis' in window;
+  // Certains navigateurs et WebView exposent speechSynthesis sans moteur utilisable
+  const canSpeak = !!(window.speechSynthesis && typeof window.SpeechSynthesisUtterance === 'function');
   if (canSpeak) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
   const _noVoiceWarn = new Set();
   function speak(text, lang, rate = 0.85) {

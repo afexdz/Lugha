@@ -18,10 +18,22 @@ Puis ouvrir http://localhost:8000
 - `js/home.js` — vitrine animée
 - `js/auth.js` — connexion, inscription, parcours de bienvenue
 - `js/app.js` — apprendre, classement, boutique, profil, parents, réglages
-- `js/lesson.js` — moteur de leçon (8 types d'exercices)
+- `js/engine.js` — moteur anglais A1 (génération fiable des exercices)
+- `js/lesson.js` — affichage, correction et fin de leçon
+- `content/en/A1.json` — contenu anglais A1 (12 unités)
 - `js/main.js` — routeur
 - `vendor/` — Motion et Lenis en local (aucun CDN)
 
+## Tests
+
+    node tools/validate-content.js          # structure du contenu anglais
+    node tools/test-engine.js 1000 42       # 2 000 leçons générées, invariants de correction
+    node tools/e2e-lesson.js http://localhost:8000   # parcours réel (Playwright installé à part)
+
+Rapport : `docs/QA_REPORT.md`.
+
 ## À faire ensuite
 
-Brancher Supabase : comptes, profils, progression, classement réel.
+1. Progression fondée sur les tentatives et sauvegarde Supabase multiappareil.
+2. Parcours CEM / Lycée / Enfants et premières missions.
+3. PWA, puis application Android (Capacitor).

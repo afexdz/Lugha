@@ -1,25 +1,59 @@
 /* ============================================================
    Lugha — moteur de contenu anglais A1
-   Charge content/en/A1.json au démarrage, expose une API
-   synchrone une fois les données disponibles.
+   Charge content/en/A1.json et génère des leçons.
+
+   Règles de fiabilité (vérifiées par tools/test-engine.js) :
+   - chaque exercice est construit en une seule décision : l'énoncé
+     et sa clé de correction viennent du même tirage ;
+   - la bonne réponse figure toujours une seule fois parmi les choix ;
+   - deux choix n'affichent jamais le même mot, la même traduction
+     ou la même image, et un distracteur n'est jamais une traduction
+     valable de la cible (ex. « orange » fruit / couleur) ;
+   - si la banque ne permet pas un exercice sûr (pas de phrase pour
+     un trou, mot trop long pour une anagramme…), on choisit un
+     autre type plutôt que de produire une question ambiguë.
    ============================================================ */
 (() => {
   'use strict';
 
   const PER_UNIT = 5;
   const UNIT_COLORS = [
-    '#6C4DFF','#14B8A6','#F59F00','#E64980','#1C7ED6',
-    '#4F7CFF','#A020F0','#E64980','#20B26B','#C92A2A','#F59F00','#087F5B'
+    '#6C4DFF', '#14B8A6', '#F59F00', '#E64980', '#1C7ED6',
+    '#4F7CFF', '#A020F0', '#E64980', '#20B26B', '#C92A2A', '#F59F00', '#087F5B'
   ];
+  // « L'intrus » ne porte que sur des noms concrets, groupés par thème :
+  // famille, nourriture, animaux, école, maison, corps, vêtements,
+  // météo, jours. Les mots trop généraux sont exclus, et deux thèmes
+  // proches (météo / jours et heures) ne sont jamais opposés.
+  const THEME_UNITS = new Set([1, 2, 3, 6, 7, 8, 9, 10, 11]);
+  const GENERIC = new Set(['love', 'home', 'family', 'pet', 'body', 'size', 'colour', 'shop',
+    'weather', 'season', 'temperature', 'clock', 'name', 'friend', 'class', 'lesson', 'question', 'answer']);
+  const CLOSE_THEMES = [[10, 11]];
+  const close = (a, b) => CLOSE_THEMES.some(([x, y]) => (a === x && b === y) || (a === y && b === x));
 
-  let _a1 = null;
-  // Preload immediately — will be ready long before user starts a lesson
-  fetch('content/en/A1.json').then(r => r.json()).then(d => { _a1 = d; }).catch(console.error);
+  // ── Chargement avec état explicite ─────────────────────────
+  let _a1 = null, _idx = null;
+  let status = 'idle', lastError = null, pending = null;
 
+  function load() {
+    if (_a1) return Promise.resolve(_a1);
+    if (pending) return pending;
+    status = 'loading'; lastError = null;
+    const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
+    pending = fetch('content/en/A1.json', ctrl ? { signal: ctrl.signal } : undefined)
+      .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
+      .catch(err => { status = 'error'; lastError = err; throw err; })
+      .finally(() => { clearTimeout(timer); pending = null; });
+    return pending;
+  }
+  load().catch(() => {});
+
+  function getStatus() { return { status, error: lastError ? String(lastError.message || lastError) : null }; }
   function getA1Data() { return _a1; }
-  function getTotal()  { return _a1 ? _a1.units.length * PER_UNIT : D.units.length * PER_UNIT; }
-
-  // Returns array of unit descriptors matching the shape app.js expects
+  function getTotal() { return _a1 ? _a1.units.length * PER_UNIT : 12 * PER_UNIT; }
+  function ensureA1() { return load(); }
   function getA1Units() {
     if (!_a1) return null;
     return _a1.units.map((u, i) => ({
@@ -28,52 +62,50 @@
     }));
   }
 
-  // Wait up to 3 s for data — resolves immediately if already loaded
-  function ensureA1() {
-    if (_a1) return Promise.resolve(_a1);
-    return new Promise((resolve, reject) => {
-      const deadline = Date.now() + 3000;
-      const poll = () => {
-        if (_a1) return resolve(_a1);
-        if (Date.now() > deadline) return reject(new Error('A1 timeout'));
-        setTimeout(poll, 60);
-      };
-      poll();
-    });
-  }
-
   // ── Normalisation ──────────────────────────────────────────
-  // A1 word {id, t, fr, e, type, unite} → lesson.js shape {id, t, m, e, r, u}
-  function normalize(w) {
-    return { id: w.id, t: w.t, m: w.fr, e: w.e, r: '', u: w.unite };
-  }
-  // A1 phrase {id, tokens, fr, unite} → lesson.js shape {tokens, m, unit}
-  function normalizePh(p) {
-    return { tokens: p.tokens, m: p.fr, unit: p.unite };
+  function normalize(w) { return { id: w.id, t: w.t, m: w.fr, e: w.e, r: '', u: w.unite, type: w.type }; }
+  function normalizePh(p) { return { tokens: p.tokens, m: p.fr, unit: p.unite }; }
+  const low = s => String(s || '').toLowerCase().trim();
+
+  // Index : mots, traductions valables par texte anglais, ambiguïtés
+  function index(d) {
+    const all = d.units.flatMap(u => u.words.map(normalize));
+    const transByEn = new Map(), enByFr = new Map(), countEn = new Map(), countFr = new Map();
+    for (const w of all) {
+      const t = low(w.t), m = low(w.m);
+      if (!transByEn.has(t)) transByEn.set(t, new Set());
+      transByEn.get(t).add(m);
+      if (!enByFr.has(m)) enByFr.set(m, new Set());
+      enByFr.get(m).add(t);
+      countEn.set(t, (countEn.get(t) || 0) + 1);
+      countFr.set(m, (countFr.get(m) || 0) + 1);
+    }
+    // Un mot est « ambigu » si son texte anglais ou sa traduction apparaît plusieurs fois
+    const ambiguous = new Set(all.filter(w => countEn.get(low(w.t)) > 1 || countFr.get(low(w.m)) > 1).map(w => w.id));
+    return { all, transByEn, enByFr, ambiguous };
   }
 
-  // ── Utilitaires ────────────────────────────────────────────
-  const rnd  = arr => arr[Math.floor(Math.random() * arr.length)];
+  // ── Hasard ─────────────────────────────────────────────────
+  const rnd = arr => arr[Math.floor(Math.random() * arr.length)];
   const shuf = arr => {
     const a = [...arr];
     for (let i = a.length - 1; i > 0; i--) {
-      const j = 0 | Math.random() * (i + 1);
+      const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
   };
 
-  // ── Répétition espacée ─────────────────────────────────────
+  // ── Force des mots (sera remplacée par le modèle de progression) ──
   function getStrengths(profile) {
     if (!profile.strength) profile.strength = {};
     if (!profile.strength.en) profile.strength.en = {};
     return profile.strength.en;
   }
-  function wordWeight(str, id) { return 6 - Math.min(5, Math.max(0, str[id] || 0)); }
+  const wordWeight = (str, id) => 6 - Math.min(5, Math.max(0, str[id] || 0));
   function weightedPick(words, str) {
     const w = words.map(x => wordWeight(str, x.id));
-    const tot = w.reduce((a, b) => a + b, 0);
-    let r = Math.random() * tot;
+    let r = Math.random() * w.reduce((a, b) => a + b, 0);
     for (let i = 0; i < words.length; i++) { r -= w[i]; if (r <= 0) return words[i]; }
     return words[words.length - 1];
   }
@@ -82,135 +114,195 @@
     str[wordId] = ok ? Math.min(5, (str[wordId] || 0) + 1) : Math.max(0, (str[wordId] || 0) - 1);
   }
 
-  // ── Distracteurs ───────────────────────────────────────────
-  function distractors(word, allWords, n) {
-    const sameUnit = allWords.filter(w => w.id !== word.id && w.u === word.u);
-    const sameType = sameUnit.filter(w => w.type === word.type);
-    const pool = sameType.length >= n ? sameType : (sameUnit.length >= n ? sameUnit : allWords.filter(w => w.id !== word.id));
-    return shuf(pool).slice(0, n);
+  // ── Compatibilité entre deux mots dans un même exercice ────
+  // Deux mots peuvent cohabiter s'ils n'affichent ni le même anglais,
+  // ni la même traduction, ni la même image, et si aucun n'est une
+  // traduction valable de l'autre.
+  function clash(a, b) {
+    const ta = low(a.t), tb = low(b.t), ma = low(a.m), mb = low(b.m);
+    if (a.id === b.id || ta === tb || ma === mb || a.e === b.e) return true;
+    const trA = _idx.transByEn.get(ta), trB = _idx.transByEn.get(tb);
+    return (trA && trA.has(mb)) || (trB && trB.has(ma));
+  }
+  function pickCompatible(pool, n, already) {
+    const chosen = [...already];
+    for (const c of shuf(pool)) {
+      if (chosen.length - already.length >= n) break;
+      if (!chosen.some(x => clash(x, c))) chosen.push(c);
+    }
+    return chosen.slice(already.length);
+  }
+  // Distracteurs : même unité et même nature si possible, puis élargissement
+  function distractors(word, n) {
+    const others = _idx.all.filter(w => w.id !== word.id);
+    const tiers = [
+      others.filter(w => w.u === word.u && w.type === word.type),
+      others.filter(w => w.u === word.u),
+      others.filter(w => w.type === word.type),
+      others
+    ];
+    let picked = [];
+    for (const pool of tiers) {
+      picked = picked.concat(pickCompatible(pool.filter(w => !picked.some(p => p.id === w.id)), n - picked.length, [word, ...picked]));
+      if (picked.length >= n) break;
+    }
+    return picked.slice(0, n);
+  }
+  const options = w => shuf([w, ...distractors(w, 3)]);
+
+  // ── Phrases : recherche d'une expression, y compris composée ──
+  const isPunct = tok => /^[.,!?;:…]+$/.test(tok);
+  function findSpan(tokens, word) {
+    const parts = low(word.t).split(/\s+/);
+    const toks = tokens.map(low);
+    for (let i = 0; i + parts.length <= toks.length; i++) {
+      if (parts.every((p, k) => toks[i + k] === p)) return { start: i, len: parts.length };
+    }
+    return null;
+  }
+  const joinTokens = toks => toks.reduce((s, t, i) => (i === 0 ? t : isPunct(t) ? s + t : s + ' ' + t), '');
+  function clozeFor(word, unit) {
+    const units = unit ? [unit, ..._a1.units.filter(u => u !== unit)] : _a1.units;
+    for (const u of units) {
+      for (const p of shuf(u.phrases)) {
+        const span = findSpan(p.tokens, word);
+        if (span) {
+          const masked = [...p.tokens.slice(0, span.start), '___', ...p.tokens.slice(span.start + span.len)];
+          return { masked: joinTokens(masked), full: joinTokens(p.tokens), fr: p.fr, phrase: normalizePh(p) };
+        }
+      }
+    }
+    return null;
   }
 
-  // ── Construction de leçon A1 ───────────────────────────────
-  // Retourne un tableau d'exercices compatible avec les EX de lesson.js,
-  // en utilisant les 8 types existants + 8 nouveaux.
+  // ── Constructeurs d'exercices sûrs ─────────────────────────
+  // Chaque constructeur renvoie un exercice cohérent, ou null si la
+  // banque ne permet pas de le construire sans ambiguïté.
+  const B = {
+    intro: w => ({ type: 'intro', w }),
+    pickImage: w => ({ type: 'pickImage', w, options: options(w) }),
+    pickWord: w => ({ type: 'pickWord', w, options: options(w) }),
+    meaning: w => ({ type: 'meaning', w, options: options(w) }),
+    listen: w => ({ type: 'listen', w, options: options(w) }),
+    frToEn: w => ({ type: 'frToEn', w, options: options(w) }),
+    soundImage: w => ({ type: 'soundImage', w, options: options(w) }),
+    dictation: w => ({ type: 'dictation', word: w }),
+    fillBlank: (w, unit) => {
+      const c = clozeFor(w, unit); if (!c) return null;
+      return { type: 'fillBlank', word: w, masked: c.masked, fr: c.fr, options: options(w) };
+    },
+    listeningCloze: (w, unit) => {
+      const c = clozeFor(w, unit); if (!c) return null;
+      return { type: 'listeningCloze', word: w, masked: c.masked, phrase: c.phrase, fr: c.fr, options: options(w) };
+    },
+    anagram: w => {
+      if (!/^[a-z]{3,8}$/i.test(w.t)) return null;
+      let letters = shuf(w.t.split('')), tries = 0;
+      while (letters.join('') === w.t && tries++ < 10) letters = shuf(w.t.split(''));
+      return { type: 'anagram', word: w, letters };
+    },
+    // Vrai/faux : la clé est décidée AVANT l'énoncé, en un seul tirage
+    trueFalse: w => {
+      const correct = Math.random() < 0.5;
+      if (correct) return { type: 'trueFalse', word: w, shownFr: w.m, correct: true };
+      const valid = _idx.transByEn.get(low(w.t)) || new Set([low(w.m)]);
+      const pool = _idx.all.filter(o => o.id !== w.id && !valid.has(low(o.m)) && low(o.t) !== low(w.t));
+      const near = pool.filter(o => o.u === w.u);
+      const other = rnd(near.length ? near : pool);
+      return other ? { type: 'trueFalse', word: w, shownFr: other.m, correct: false } : null;
+    },
+    // Intrus : le groupe et l'intrus sont construits ensemble
+    oddOneOut: (w, unit, ui) => {
+      const ok = x => x.type === 'noun' && THEME_UNITS.has(x.u) && !_idx.ambiguous.has(x.id) && !GENERIC.has(low(x.t));
+      const order = [ui, ...shuf([..._a1.units.keys()])].filter((u, i, a) => THEME_UNITS.has(u) && a.indexOf(u) === i);
+      for (const gu of order) {
+        const peers = pickCompatible(_idx.all.filter(x => x.u === gu && ok(x)), 3, []);
+        if (peers.length < 3) continue;
+        const outPool = _idx.all.filter(x => x.u !== gu && !close(x.u, gu) && ok(x));
+        const intruder = pickCompatible(outPool, 1, peers)[0];
+        if (!intruder) continue;
+        return { type: 'oddOneOut', group: shuf([...peers, intruder]), intruder, theme: _a1.units[gu].nom };
+      }
+      return null;
+    },
+    match: pool => {
+      const pairs = pickCompatible(pool, 4, []);
+      return pairs.length === 4 ? { type: 'match', pairs } : null;
+    },
+    build: (unit, ui) => {
+      const p = unit.phrases.length ? rnd(unit.phrases) : null;
+      return p ? { type: 'build', ph: normalizePh(p) } : null;
+    }
+  };
+  // Si un exercice ne peut pas être construit, on se replie sur un type sûr
+  const FALLBACK = ['frToEn', 'pickWord', 'meaning', 'pickImage'];
+  function make(type, w, unit, ui) {
+    const ex = B[type](w, unit, ui);
+    if (ex) return ex;
+    for (const t of FALLBACK) { const f = B[t](w, unit, ui); if (f) return f; }
+    return null;
+  }
+
+  // ── Construction d'une leçon ───────────────────────────────
   function buildA1Lesson(ui, li, profile) {
     if (!_a1) return null;
     const unit = _a1.units[ui];
     if (!unit) return null;
+    const unitW = unit.words.map(normalize);
+    const str = profile ? getStrengths(profile) : {};
 
-    const allRaw  = _a1.units.flatMap(u => u.words);
-    const allW    = allRaw.map(w => ({ ...normalize(w), type: w.type }));
-    const unitW   = unit.words.map(w => ({ ...normalize(w), type: w.type }));
-    const str     = profile ? getStrengths(profile) : {};
-
-    // Sélectionne 4-5 mots cibles selon la force
-    const n = li <= 1 ? 4 : 5;
+    // Mots cibles, sans deux mots qui se confondent
+    const n = li <= 1 ? 4 : 6;
     const targets = [];
-    const used = new Set();
-    for (let i = 0; i < n; i++) {
-      const rem = unitW.filter(w => !used.has(w.id));
-      if (!rem.length) break;
+    let rem = [...unitW];
+    while (targets.length < n && rem.length) {
       const w = profile ? weightedPick(rem, str) : rnd(rem);
-      targets.push(w); used.add(w.id);
+      rem = rem.filter(x => x.id !== w.id);
+      if (!targets.some(x => clash(x, w))) targets.push(w);
     }
-    const t0 = targets[0], t1 = targets[1] || t0, t2 = targets[2] || t0, t3 = targets[3] || t0;
-
-    const opts  = w => shuf([w, ...distractors(w, allW, 3)]);
-    const ph    = unit.phrases.length ? normalizePh(rnd(unit.phrases)) : null;
-
-    // Phrase helper for build exercise
-    const buildEx = ph ? (() => {
-      const otherTokens = _a1.units.filter((_, i) => i !== ui)
-        .flatMap(u => u.phrases.flatMap(p => p.tokens));
-      const dis = shuf([...new Set(otherTokens.filter(t => !ph.tokens.includes(t)))]).slice(0, 3);
-      return { type: 'build', ph };
-    })() : null;
-
+    const t = i => targets[i % targets.length];
     const seq = [];
+    const push = ex => { if (ex) seq.push(ex); };
 
     if (li === 0 || li === 1) {
-      const [a, b] = li === 0 ? [t0, t1] : [t2, t3];
-      seq.push({ type: 'intro',     w: a });
-      seq.push({ type: 'pickImage', w: a, options: opts(a) });
-      seq.push({ type: 'intro',     w: b });
-      seq.push({ type: 'pickImage', w: b, options: opts(b) });
-      seq.push({ type: 'listen',    w: a, options: opts(a) });
-      seq.push({ type: 'frToEn',    w: b, options: opts(b) });
-      seq.push({ type: 'meaning',   w: a, options: opts(a) });
-      seq.push(li === 1
-        ? { type: 'match', pairs: shuf(unitW.slice(0, 4)) }
-        : { type: 'pickWord', w: b, options: opts(b) });
-      seq.push({ type: 'soundImage', w: b, options: opts(b) });
+      const [a, b] = li === 0 ? [t(0), t(1)] : [t(2), t(3)];
+      push(B.intro(a));
+      push(make('pickImage', a, unit, ui));
+      push(B.intro(b));
+      push(make('pickImage', b, unit, ui));
+      push(make('listen', a, unit, ui));
+      push(make('frToEn', b, unit, ui));
+      push(make('meaning', a, unit, ui));
+      push(li === 1 ? (B.match([a, b, ...unitW]) || make('pickWord', b, unit, ui)) : make('pickWord', b, unit, ui));
+      push(make('soundImage', b, unit, ui));
     } else if (li === 2) {
-      const s = shuf(unitW);
-      seq.push({ type: 'pickImage',     w: s[0], options: opts(s[0]) });
-      seq.push({ type: 'listen',        w: s[1], options: opts(s[1]) });
-      seq.push({ type: 'match',         pairs: shuf(unitW.slice(0, 4)) });
-      seq.push({ type: 'frToEn',        w: s[2], options: opts(s[2]) });
-      seq.push({ type: 'fillBlank',     word: s[3], masked: makeMasked(s[3], unit), fr: makeFr(s[3], unit), options: opts(s[3]) });
-      if (buildEx) seq.push(buildEx);
-      seq.push({ type: 'soundImage',    w: s[4] || s[0], options: opts(s[4] || s[0]) });
-      seq.push({ type: 'meaning',       w: s[0], options: opts(s[0]) });
+      push(make('pickImage', t(0), unit, ui));
+      push(make('listen', t(1), unit, ui));
+      push(B.match(targets.concat(unitW)));
+      push(make('frToEn', t(2), unit, ui));
+      push(make('fillBlank', t(3), unit, ui));
+      push(B.build(unit, ui));
+      push(make('soundImage', t(4), unit, ui));
+      push(make('meaning', t(0), unit, ui));
     } else {
-      const rev = shuf([...unitW, ...shuf(allW.filter(w => w.u < ui)).slice(0, 4)]);
+      // Révision : mots de l'unité + quelques mots des unités précédentes
+      const prev = shuf(_idx.all.filter(w => w.u < ui)).slice(0, 4);
+      const rev = pickCompatible([...targets, ...prev], 8, []);
       const g = i => rev[i % rev.length];
-      if (buildEx) seq.push(buildEx);
-      seq.push({ type: 'listen',        w: g(0), options: opts(g(0)) });
-      seq.push({ type: 'match',         pairs: shuf(rev.slice(0, 4)) });
-      seq.push({ type: 'oddOneOut',     group: makeOddGroup(g(1), allW), intruder: makeIntruder(g(1), allW) });
-      seq.push({ type: 'pickWord',      w: g(2), options: opts(g(2)) });
-      seq.push({ type: 'anagram',       word: g(3), letters: shuf(g(3).t.split('')) });
-      seq.push({ type: 'listeningCloze',word: g(4), masked: makeMasked(g(4), unit), phrase: findPhrase(g(4), unit), options: opts(g(4)) });
-      seq.push({ type: 'dictation',     word: g(5) });
-      seq.push({ type: 'trueFalse',     word: g(6), shownFr: makeTFShown(g(6), allW), correct: makeTFCorrect(g(6), allW) });
+      push(B.build(unit, ui));
+      push(make('listen', g(0), unit, ui));
+      push(B.match(rev));
+      push(make('oddOneOut', g(1), unit, ui));
+      push(make('pickWord', g(2), unit, ui));
+      push(make('anagram', g(3), unit, ui));
+      push(make('listeningCloze', g(4), unit, ui));
+      push(make('dictation', g(5), unit, ui));
+      push(make('trueFalse', g(6), unit, ui));
     }
-
-    noConsecutive(seq);
-    return seq;
+    return noConsecutive(seq);
   }
 
-  // ── Helpers pour exercices ─────────────────────────────────
-  function makeMasked(word, unit) {
-    const ph = unit.phrases.find(p =>
-      p.tokens.some(t => t.toLowerCase() === word.t.toLowerCase())
-    );
-    if (!ph) return '___ ?';
-    return ph.tokens.map(t =>
-      t.toLowerCase() === word.t.toLowerCase() ? '___' : t
-    ).join(' ');
-  }
-  function makeFr(word, unit) {
-    const ph = unit.phrases.find(p =>
-      p.tokens.some(t => t.toLowerCase() === word.t.toLowerCase())
-    );
-    return ph ? ph.fr : word.m;
-  }
-  function findPhrase(word, unit) {
-    const ph = unit.phrases.find(p =>
-      p.tokens.some(t => t.toLowerCase() === word.t.toLowerCase())
-    );
-    return ph ? normalizePh(ph) : { tokens: [word.t], m: word.fr || word.m, unit: word.u };
-  }
-  function makeOddGroup(word, allW) {
-    const same = allW.filter(w => w.type === word.type && w.id !== word.id);
-    const other = allW.filter(w => w.type !== word.type);
-    const intruder = other.length ? rnd(other) : rnd(allW.filter(w => w.id !== word.id));
-    const peers = shuf(same).slice(0, 2);
-    return shuf([word, ...peers, intruder]);
-  }
-  function makeIntruder(word, allW) {
-    const group = makeOddGroup(word, allW);
-    return group.find(w => w.type !== word.type) || group[group.length - 1];
-  }
-  function makeTFCorrect(word, allW) { return Math.random() > 0.5; }
-  function makeTFShown(word, allW) {
-    const correct = Math.random() > 0.5;
-    if (correct) return word.m;
-    const other = allW.find(w => w.id !== word.id);
-    return other ? other.m : word.m;
-  }
-
-  // ── Pas de type consécutif identique ──────────────────────
+  // ── Pas deux fois le même type d'affilée ──────────────────
   function noConsecutive(seq) {
     for (let i = 1; i < seq.length; i++) {
       if (seq[i].type === seq[i - 1].type) {
@@ -225,12 +317,9 @@
   // ── Export ─────────────────────────────────────────────────
   const LZ = window.LZ || (window.LZ = {});
   LZ.engine = {
-    getA1Data, getTotal, getA1Units, ensureA1,
+    getA1Data, getTotal, getA1Units, ensureA1, getStatus, reload: () => { status = 'idle'; return load(); },
     normalize, normalizePh,
     buildA1Lesson,
     updateStrength, getStrengths
   };
-
-  // D est disponible car data.js est chargé avant engine.js
-  const D = window.LISSAN_DATA;
 })();

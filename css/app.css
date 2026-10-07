@@ -1121,3 +1121,7 @@ html.rm .bulle-float { animation: none; }
 .node-row:has(.node-pop) { z-index: 30; }
 .node-pop { z-index: 30; }
 
+
+/* État de chargement / erreur d'une leçon */
+.load-state { min-height: 70dvh; display: grid; place-items: center; align-content: center; gap: .8rem; padding: 2rem 1.25rem; text-align: center; color: var(--ink-2); font-weight: 700; }
+.load-state h2 { font-size: 1.4rem; color: var(--ink); }

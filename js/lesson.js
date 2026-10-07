@@ -52,6 +52,18 @@
   }
 
   const rtl = lang => D.langs[lang].rtl ? 'dir="rtl"' : '';
+  // Mot visé par un exercice, quel que soit son format (e.w ou e.word)
+  const targetOf = e => e.w || e.word || null;
+  // Appareil sans synthèse vocale : version écrite équivalente, jamais un exercice impossible
+  function silentVersion(e) {
+    switch (e.type) {
+      case 'listen': return { ...e, type: 'pickWord' };
+      case 'soundImage': return { ...e, type: 'pickImage' };
+      case 'dictation': return { type: 'type', w: e.word, _from: 'dictation' };
+      case 'listeningCloze': return { ...e, type: 'fillBlank', fr: e.fr || e.phrase?.m || '' };
+      default: return e;
+    }
+  }
   const roman = w => w.r ? `<p class="roman">${esc(w.r)}</p>` : '';
 
   // ---------- Options à choix ----------
@@ -226,7 +238,7 @@
       }};
     },
     oddOneOut(card, e, ctx) {
-      card.innerHTML = '<h2 class="ex-title">Quel mot n\u2019appartient pas au groupe ?</h2>'
+      card.innerHTML = '<h2 class="ex-title">Quel mot n\u2019est pas du même thème ?</h2>'
         + `<div class="opts grid">${e.group.map((w, i) => '<button class="opt pic" data-i="' + i + '" aria-pressed="false"><span class="pic-e">' + w.e + '</span><span class="pic-t" ' + rtl(ctx.lang) + '>' + esc(w.t) + '</span><kbd>' + (i+1) + '</kbd></button>').join('')}</div>`;
       const s = selectable(card, ctx);
       return { check: () => ({ ok: e.group[s.i]?.id === e.intruder.id, answer: e.intruder.t }) };
@@ -319,8 +331,16 @@
     const lang = p.lang;
     const eng = LZ.engine;
     if (lang === 'en' && eng && !eng.getA1Data()) {
-      app.innerHTML = '<p style="padding:2rem;text-align:center">Chargement…</p>';
-      setTimeout(() => LZ.render(), 200);
+      const st0 = eng.getStatus ? eng.getStatus().status : 'loading';
+      if (st0 === 'error') {
+        app.innerHTML = `<div class="load-state" role="alert">${mascot('sad', 'm-md')}<h2>La leçon n’a pas pu se charger</h2>
+          <p>Vérifie ta connexion internet, puis réessaie.</p>
+          <div class="modal-actions"><a class="btn btn-ghost" href="#/apprendre">Retour</a><button class="btn btn-primary" id="retryLoad">Réessayer</button></div></div>`;
+        $('#retryLoad').addEventListener('click', () => { app.innerHTML = '<p class="load-state" aria-live="polite">Chargement…</p>'; eng.reload().then(LZ.render, LZ.render); });
+      } else {
+        app.innerHTML = '<p class="load-state" aria-live="polite">Chargement de la leçon…</p>';
+        eng.ensureA1().then(LZ.render, LZ.render);
+      }
       return;
     }
     const myTotal = (lang === 'en' && eng) ? eng.getTotal() : TOTAL;
@@ -330,9 +350,10 @@
     const practice = idx < c.done;
     if (p.hearts <= 0 && !practice) { back(); setTimeout(LZ.heartsModal, 400); return; }
     const ui = Math.floor(idx / PER_UNIT), li = idx % PER_UNIT;
-    const queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
-    if (!queue) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }
-    const st = { queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
+    let queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
+    if (!queue || !queue.length) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }
+    if (!canSpeak) queue = queue.map(silentVersion);
+    const st = { attempts: {}, queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
 
     const unitColor = (lang === 'en' && eng?.getA1Units()) ? (eng.getA1Units()[ui]?.color || '#6C4DFF') : D.units[ui]?.color || '#6C4DFF';
     app.innerHTML = `<div class="lesson" style="--u:${unitColor}">
@@ -372,9 +393,15 @@
       foot.innerHTML = `<div class="l-foot-in">${e.type === 'intro' || e.type === 'match' ? '<span></span>' : '<button class="btn btn-ghost btn-lg" id="skip">Passer</button>'}
         <button class="btn btn-primary btn-lg" id="check" ${e.type === 'intro' ? '' : 'disabled'}>${e.type === 'intro' ? 'Continuer' : 'Vérifier'}</button></div>`;
       $('#check').addEventListener('click', onCheck);
-      const sk = $('#skip'); sk && sk.addEventListener('click', () => { if (st.phase !== 'answer') return; grade({ ok: false, answer: answerOf(e), say: e.w?.t }); });
+      const sk = $('#skip'); sk && sk.addEventListener('click', () => { if (st.phase !== 'answer') return; grade({ ok: false, skipped: true, answer: answerOf(e), say: targetOf(e)?.t }); });
     }
-    const answerOf = e => e.type === 'build' ? e.ph.tokens.join(D.langs[lang].noSpace ? '' : ' ') : e.type === 'pickImage' || e.type === 'meaning' ? e.w.m : e.w?.t || '';
+    const answerOf = e => {
+      if (e.type === 'build') return e.ph.tokens.join(D.langs[lang].noSpace ? '' : ' ');
+      if (e.type === 'oddOneOut') return e.intruder.t;
+      if (e.type === 'trueFalse') return `${e.correct ? 'Vrai' : 'Faux'} : ${e.word.t} = ${e.word.m}`;
+      const t = targetOf(e); if (!t) return '';
+      return (e.type === 'pickImage' || e.type === 'meaning' || e.type === 'soundImage') ? t.m : t.t;
+    };
 
     function show(dir = 1) {
       st.phase = 'answer';
@@ -402,11 +429,13 @@
     function grade(res) {
       const e = st.queue[st.i], card = $('.ex', stage);
       st.phase = 'feedback';
+      trackAttempt(e, res);
       $$('.opt', card).forEach(b => { b.disabled = true; });
       if (res.pick != null) {
         const btn = $(`.opt[data-i="${res.pick}"]`, card);
         btn && btn.classList.add(res.ok ? 'right' : 'wrong');
-        if (!res.ok) { const good = e.options.findIndex(o => o.id === e.w.id); const g = $(`.opt[data-i="${good}"]`, card); g && g.classList.add('right'); }
+        const tgt = targetOf(e);
+        if (!res.ok && e.options && tgt) { const good = e.options.findIndex(o => o.id === tgt.id); const g = $(`.opt[data-i="${good}"]`, card); g && g.classList.add('right'); }
       }
       if (res.ok) {
         st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo);
@@ -433,6 +462,19 @@
       const fs = $('.fb-say', foot); fs && fs.addEventListener('click', () => speak(res.say, lang));
       $('#check').addEventListener('click', onCheck);
       setTimeout(() => { const k = $('#check'); k && k.focus(); }, 60);
+    }
+
+    // Mots réellement travaillés pendant la leçon : résultat du premier essai
+    // et des reprises, séparément. Un mot n'est compté comme réussi que s'il
+    // est réussi du premier coup, sans avoir été passé.
+    function trackAttempt(e, res) {
+      const ids = e.type === 'match' ? e.pairs.map(w => w.id) : e.type === 'oddOneOut' ? [] : [targetOf(e)?.id].filter(Boolean);
+      ids.forEach(id => {
+        const a = st.attempts[id] || (st.attempts[id] = { first: null, retries: 0, ok: 0, fail: 0 });
+        if (e._retry) a.retries++;
+        else if (a.first === null) a.first = res.skipped ? 'skipped' : res.ok ? 'ok' : 'fail';
+        res.ok ? a.ok++ : a.fail++;
+      });
     }
 
     function next() {
@@ -470,11 +512,9 @@
       p.xp += xp; p.weekXp += xp; p.days[t] = beforeToday + xp; p.time[t] = (p.time[t] || 0) + secs;
       p.gems += gems; p.lessons++; if (perfect) p.perfect++;
       p.ans.ok += st.correct; p.ans.n += st.correct + st.wrong;
-      const unitW = (lang === 'en' && LZ.engine?.getA1Data())
-        ? (LZ.engine.getA1Data().units[ui]?.words.map(LZ.engine.normalize) || [])
-        : D.words(lang).filter(w => w.u === ui);
-      const learned = li === 0 ? unitW.slice(0, 2) : li === 1 ? unitW : unitW;
-      learned.forEach(w => { const k = `${lang}:${w.id}`; if (!p.words.includes(k)) p.words.push(k); });
+      Object.entries(st.attempts).forEach(([id, a]) => {
+        if (a.first === 'ok' && a.fail === 0) { const k = `${lang}:${id}`; if (!p.words.includes(k)) p.words.push(k); }
+      });
       if (!practice) c.done = Math.max(c.done, idx + 1);
       p.quest.lessons++; p.quest.combo = Math.max(p.quest.combo, st.maxCombo);
       const rankAfter = rankOf(p.xp);
