@@ -1,0 +1,1634 @@
+[
+  {
+    "id": "en-a1-u0-reading-0-0",
+    "unitIndex": 0,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Hello! My name is Lina. I am fourteen. I am from Algeria.",
+    "prompt": "What is her name?",
+    "choices": [
+      "Lina",
+      "Sara",
+      "Emma",
+      "Nora"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Lina. Lis le texte : « Hello! My name is Lina. I am fourteen. I am from Algeria. »"
+  },
+  {
+    "id": "en-a1-u0-reading-0-1",
+    "unitIndex": 0,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Hello! My name is Lina. I am fourteen. I am from Algeria.",
+    "prompt": "How old is Lina?",
+    "choices": [
+      "Fourteen",
+      "Thirteen",
+      "Fifteen",
+      "Eighteen"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Fourteen. Lis le texte : « Hello! My name is Lina. I am fourteen. I am from Algeria. »"
+  },
+  {
+    "id": "en-a1-u0-reading-1-0",
+    "unitIndex": 0,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Tom: Good morning, Mia! Mia: Good morning, Tom! I am fine, thank you.",
+    "prompt": "Who is Tom talking to?",
+    "choices": [
+      "Mia",
+      "Lina",
+      "Sam",
+      "Ben"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Mia. Lis le texte : « Tom: Good morning, Mia! Mia: Good morning, Tom! I am fine, thank you. »"
+  },
+  {
+    "id": "en-a1-u0-reading-1-1",
+    "unitIndex": 0,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Tom: Good morning, Mia! Mia: Good morning, Tom! I am fine, thank you.",
+    "prompt": "How does Mia feel?",
+    "choices": [
+      "Fine",
+      "Sad",
+      "Cold",
+      "Hungry"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Fine. Lis le texte : « Tom: Good morning, Mia! Mia: Good morning, Tom! I am fine, thank you. »"
+  },
+  {
+    "id": "en-a1-u0-reading-2-0",
+    "unitIndex": 0,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My name is Adam. I live in London. My friend Omar lives in Paris.",
+    "prompt": "Where does Adam live?",
+    "choices": [
+      "London",
+      "Paris",
+      "Rome",
+      "Madrid"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : London. Lis le texte : « My name is Adam. I live in London. My friend Omar lives in Paris. »"
+  },
+  {
+    "id": "en-a1-u0-reading-2-1",
+    "unitIndex": 0,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My name is Adam. I live in London. My friend Omar lives in Paris.",
+    "prompt": "Who is Adam's friend?",
+    "choices": [
+      "Omar",
+      "Tom",
+      "Leo",
+      "Ben"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Omar. Lis le texte : « My name is Adam. I live in London. My friend Omar lives in Paris. »"
+  },
+  {
+    "id": "en-a1-u0-reading-3-0",
+    "unitIndex": 0,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Eva: Hi! Are you new here? Max: Yes. My name is Max. Eva: Welcome, Max!",
+    "prompt": "Who is new here?",
+    "choices": [
+      "Max",
+      "Eva",
+      "Both speakers",
+      "Nobody"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Max. Lis le texte : « Eva: Hi! Are you new here? Max: Yes. My name is Max. Eva: Welcome, Max! »"
+  },
+  {
+    "id": "en-a1-u0-reading-3-1",
+    "unitIndex": 0,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Eva: Hi! Are you new here? Max: Yes. My name is Max. Eva: Welcome, Max!",
+    "prompt": "What does Eva say to welcome Max?",
+    "choices": [
+      "Welcome, Max!",
+      "Goodbye, Max!",
+      "Good night, Max!",
+      "See you tomorrow, Max!"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Welcome, Max!. Lis le texte : « Eva: Hi! Are you new here? Max: Yes. My name is Max. Eva: Welcome, Max! »"
+  },
+  {
+    "id": "en-a1-u1-reading-0-0",
+    "unitIndex": 1,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "This is my sister, Anna. She is sixteen. My brother, Leo, is twelve.",
+    "prompt": "Who is sixteen?",
+    "choices": [
+      "Anna",
+      "Leo",
+      "Their mother",
+      "Their father"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Anna. Lis le texte : « This is my sister, Anna. She is sixteen. My brother, Leo, is twelve. »"
+  },
+  {
+    "id": "en-a1-u1-reading-0-1",
+    "unitIndex": 1,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "This is my sister, Anna. She is sixteen. My brother, Leo, is twelve.",
+    "prompt": "Who is Leo?",
+    "choices": [
+      "The speaker's brother",
+      "The speaker's sister",
+      "The speaker's mother",
+      "The speaker's father"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The speaker's brother. Lis le texte : « This is my sister, Anna. She is sixteen. My brother, Leo, is twelve. »"
+  },
+  {
+    "id": "en-a1-u1-reading-1-0",
+    "unitIndex": 1,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "I live with my mother and my grandfather. My grandfather cooks dinner.",
+    "prompt": "Who cooks dinner?",
+    "choices": [
+      "The grandfather",
+      "The mother",
+      "The speaker",
+      "The sister"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The grandfather. Lis le texte : « I live with my mother and my grandfather. My grandfather cooks dinner. »"
+  },
+  {
+    "id": "en-a1-u1-reading-1-1",
+    "unitIndex": 1,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "I live with my mother and my grandfather. My grandfather cooks dinner.",
+    "prompt": "Who lives with the speaker?",
+    "choices": [
+      "Their mother and grandfather",
+      "Their father and grandmother",
+      "Their brother and sister",
+      "Their aunt and uncle"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Their mother and grandfather. Lis le texte : « I live with my mother and my grandfather. My grandfather cooks dinner. »"
+  },
+  {
+    "id": "en-a1-u1-reading-2-0",
+    "unitIndex": 1,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My aunt has two children, Maya and Ali. They are my cousins.",
+    "prompt": "Who are Maya and Ali?",
+    "choices": [
+      "The speaker's cousins",
+      "The speaker's parents",
+      "The speaker's grandparents",
+      "The speaker's teachers"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The speaker's cousins. Lis le texte : « My aunt has two children, Maya and Ali. They are my cousins. »"
+  },
+  {
+    "id": "en-a1-u1-reading-2-1",
+    "unitIndex": 1,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My aunt has two children, Maya and Ali. They are my cousins.",
+    "prompt": "How many children does the aunt have?",
+    "choices": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « My aunt has two children, Maya and Ali. They are my cousins. »"
+  },
+  {
+    "id": "en-a1-u1-reading-3-0",
+    "unitIndex": 1,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Dad is in the kitchen. Mum is in the garden. My little brother is in his bedroom.",
+    "prompt": "Where is Mum?",
+    "choices": [
+      "In the garden",
+      "In the kitchen",
+      "In the bedroom",
+      "At school"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : In the garden. Lis le texte : « Dad is in the kitchen. Mum is in the garden. My little brother is in his bedroom. »"
+  },
+  {
+    "id": "en-a1-u1-reading-3-1",
+    "unitIndex": 1,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Dad is in the kitchen. Mum is in the garden. My little brother is in his bedroom.",
+    "prompt": "Who is in the kitchen?",
+    "choices": [
+      "Dad",
+      "Mum",
+      "The brother",
+      "The sister"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Dad. Lis le texte : « Dad is in the kitchen. Mum is in the garden. My little brother is in his bedroom. »"
+  },
+  {
+    "id": "en-a1-u2-reading-0-0",
+    "unitIndex": 2,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "For breakfast, I eat bread and an egg. I drink water. I do not drink coffee.",
+    "prompt": "What does the speaker drink?",
+    "choices": [
+      "Water",
+      "Coffee",
+      "Milk",
+      "Tea"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Water. Lis le texte : « For breakfast, I eat bread and an egg. I drink water. I do not drink coffee. »"
+  },
+  {
+    "id": "en-a1-u2-reading-0-1",
+    "unitIndex": 2,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "For breakfast, I eat bread and an egg. I drink water. I do not drink coffee.",
+    "prompt": "What does the speaker eat with bread?",
+    "choices": [
+      "An egg",
+      "An apple",
+      "A banana",
+      "Some rice"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : An egg. Lis le texte : « For breakfast, I eat bread and an egg. I drink water. I do not drink coffee. »"
+  },
+  {
+    "id": "en-a1-u2-reading-1-0",
+    "unitIndex": 2,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Waiter: Would you like rice or pasta? Sara: Pasta, please. And some water.",
+    "prompt": "What does Sara order to eat?",
+    "choices": [
+      "Pasta",
+      "Rice",
+      "Soup",
+      "Bread"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Pasta. Lis le texte : « Waiter: Would you like rice or pasta? Sara: Pasta, please. And some water. »"
+  },
+  {
+    "id": "en-a1-u2-reading-1-1",
+    "unitIndex": 2,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Waiter: Would you like rice or pasta? Sara: Pasta, please. And some water.",
+    "prompt": "What does Sara order to drink?",
+    "choices": [
+      "Water",
+      "Juice",
+      "Milk",
+      "Tea"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Water. Lis le texte : « Waiter: Would you like rice or pasta? Sara: Pasta, please. And some water. »"
+  },
+  {
+    "id": "en-a1-u2-reading-2-0",
+    "unitIndex": 2,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "In my lunch box, there is a cheese sandwich and an apple. My banana is at home.",
+    "prompt": "Which fruit is in the lunch box?",
+    "choices": [
+      "An apple",
+      "A banana",
+      "An orange",
+      "A pear"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : An apple. Lis le texte : « In my lunch box, there is a cheese sandwich and an apple. My banana is at home. »"
+  },
+  {
+    "id": "en-a1-u2-reading-2-1",
+    "unitIndex": 2,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "In my lunch box, there is a cheese sandwich and an apple. My banana is at home.",
+    "prompt": "Where is the banana?",
+    "choices": [
+      "At home",
+      "In the lunch box",
+      "At the shop",
+      "On the bus"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : At home. Lis le texte : « In my lunch box, there is a cheese sandwich and an apple. My banana is at home. »"
+  },
+  {
+    "id": "en-a1-u2-reading-3-0",
+    "unitIndex": 2,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "We need tomatoes for dinner. We have bread and cheese, but we have no tomatoes.",
+    "prompt": "What do they need to buy?",
+    "choices": [
+      "Tomatoes",
+      "Bread",
+      "Cheese",
+      "Eggs"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Tomatoes. Lis le texte : « We need tomatoes for dinner. We have bread and cheese, but we have no tomatoes. »"
+  },
+  {
+    "id": "en-a1-u2-reading-3-1",
+    "unitIndex": 2,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "We need tomatoes for dinner. We have bread and cheese, but we have no tomatoes.",
+    "prompt": "What do they already have?",
+    "choices": [
+      "Bread and cheese",
+      "Tomatoes and eggs",
+      "Rice and fish",
+      "Apples and milk"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Bread and cheese. Lis le texte : « We need tomatoes for dinner. We have bread and cheese, but we have no tomatoes. »"
+  },
+  {
+    "id": "en-a1-u3-reading-0-0",
+    "unitIndex": 3,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Our cat, Snow, is white. Our dog, Rex, is brown. Rex sleeps in the garden.",
+    "prompt": "What colour is Snow?",
+    "choices": [
+      "White",
+      "Brown",
+      "Black",
+      "Grey"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : White. Lis le texte : « Our cat, Snow, is white. Our dog, Rex, is brown. Rex sleeps in the garden. »"
+  },
+  {
+    "id": "en-a1-u3-reading-0-1",
+    "unitIndex": 3,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Our cat, Snow, is white. Our dog, Rex, is brown. Rex sleeps in the garden.",
+    "prompt": "Which animal sleeps in the garden?",
+    "choices": [
+      "Rex the dog",
+      "Snow the cat",
+      "A bird",
+      "A rabbit"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Rex the dog. Lis le texte : « Our cat, Snow, is white. Our dog, Rex, is brown. Rex sleeps in the garden. »"
+  },
+  {
+    "id": "en-a1-u3-reading-1-0",
+    "unitIndex": 3,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "At the farm, I see three cows and two horses. There are no sheep.",
+    "prompt": "How many horses are there?",
+    "choices": [
+      "Two",
+      "Three",
+      "Four",
+      "Five"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « At the farm, I see three cows and two horses. There are no sheep. »"
+  },
+  {
+    "id": "en-a1-u3-reading-1-1",
+    "unitIndex": 3,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "At the farm, I see three cows and two horses. There are no sheep.",
+    "prompt": "Which animals are not at this farm?",
+    "choices": [
+      "Sheep",
+      "Cows",
+      "Horses",
+      "Cows and horses"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Sheep. Lis le texte : « At the farm, I see three cows and two horses. There are no sheep. »"
+  },
+  {
+    "id": "en-a1-u3-reading-2-0",
+    "unitIndex": 3,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The duck is in the water. The chicken is next to the tree. The rabbit is under the chair.",
+    "prompt": "Where is the rabbit?",
+    "choices": [
+      "Under the chair",
+      "In the water",
+      "Next to the tree",
+      "On the chair"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Under the chair. Lis le texte : « The duck is in the water. The chicken is next to the tree. The rabbit is under the chair. »"
+  },
+  {
+    "id": "en-a1-u3-reading-2-1",
+    "unitIndex": 3,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The duck is in the water. The chicken is next to the tree. The rabbit is under the chair.",
+    "prompt": "Which animal is in the water?",
+    "choices": [
+      "The duck",
+      "The chicken",
+      "The rabbit",
+      "The horse"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The duck. Lis le texte : « The duck is in the water. The chicken is next to the tree. The rabbit is under the chair. »"
+  },
+  {
+    "id": "en-a1-u3-reading-3-0",
+    "unitIndex": 3,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "My pet is a small bird. It has yellow feathers. It eats seeds.",
+    "prompt": "What is the speaker's pet?",
+    "choices": [
+      "A bird",
+      "A cat",
+      "A dog",
+      "A fish"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A bird. Lis le texte : « My pet is a small bird. It has yellow feathers. It eats seeds. »"
+  },
+  {
+    "id": "en-a1-u3-reading-3-1",
+    "unitIndex": 3,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "My pet is a small bird. It has yellow feathers. It eats seeds.",
+    "prompt": "What does the pet eat?",
+    "choices": [
+      "Seeds",
+      "Cheese",
+      "Bread",
+      "Grass"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Seeds. Lis le texte : « My pet is a small bird. It has yellow feathers. It eats seeds. »"
+  },
+  {
+    "id": "en-a1-u4-reading-0-0",
+    "unitIndex": 4,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I have a red pen and a blue pencil. My notebook is green.",
+    "prompt": "What colour is the pencil?",
+    "choices": [
+      "Blue",
+      "Red",
+      "Green",
+      "Yellow"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Blue. Lis le texte : « I have a red pen and a blue pencil. My notebook is green. »"
+  },
+  {
+    "id": "en-a1-u4-reading-0-1",
+    "unitIndex": 4,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I have a red pen and a blue pencil. My notebook is green.",
+    "prompt": "Which thing is green?",
+    "choices": [
+      "The notebook",
+      "The pen",
+      "The pencil",
+      "The bag"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The notebook. Lis le texte : « I have a red pen and a blue pencil. My notebook is green. »"
+  },
+  {
+    "id": "en-a1-u4-reading-1-0",
+    "unitIndex": 4,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "The small box is yellow. The big box is black. Put the ball in the small box.",
+    "prompt": "Which box should hold the ball?",
+    "choices": [
+      "The yellow box",
+      "The black box",
+      "The white box",
+      "The red box"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The yellow box. Lis le texte : « The small box is yellow. The big box is black. Put the ball in the small box. »"
+  },
+  {
+    "id": "en-a1-u4-reading-1-1",
+    "unitIndex": 4,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "The small box is yellow. The big box is black. Put the ball in the small box.",
+    "prompt": "What colour is the big box?",
+    "choices": [
+      "Black",
+      "Yellow",
+      "Blue",
+      "Pink"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Black. Lis le texte : « The small box is yellow. The big box is black. Put the ball in the small box. »"
+  },
+  {
+    "id": "en-a1-u4-reading-2-0",
+    "unitIndex": 4,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My school bag is purple. My friend's bag is orange. Both bags are on the table.",
+    "prompt": "What colour is the friend's bag?",
+    "choices": [
+      "Orange",
+      "Purple",
+      "Blue",
+      "Brown"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Orange. Lis le texte : « My school bag is purple. My friend's bag is orange. Both bags are on the table. »"
+  },
+  {
+    "id": "en-a1-u4-reading-2-1",
+    "unitIndex": 4,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "My school bag is purple. My friend's bag is orange. Both bags are on the table.",
+    "prompt": "Where are the bags?",
+    "choices": [
+      "On the table",
+      "Under the bed",
+      "In the cupboard",
+      "Next to the door"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : On the table. Lis le texte : « My school bag is purple. My friend's bag is orange. Both bags are on the table. »"
+  },
+  {
+    "id": "en-a1-u4-reading-3-0",
+    "unitIndex": 4,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "There are two cups: a white cup and a pink cup. The white cup is clean. The pink cup is dirty.",
+    "prompt": "Which cup is clean?",
+    "choices": [
+      "The white cup",
+      "The pink cup",
+      "Both cups",
+      "Neither cup"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The white cup. Lis le texte : « There are two cups: a white cup and a pink cup. The white cup is clean. The pink cup is dirty. »"
+  },
+  {
+    "id": "en-a1-u4-reading-3-1",
+    "unitIndex": 4,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "There are two cups: a white cup and a pink cup. The white cup is clean. The pink cup is dirty.",
+    "prompt": "How many cups are there?",
+    "choices": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « There are two cups: a white cup and a pink cup. The white cup is clean. The pink cup is dirty. »"
+  },
+  {
+    "id": "en-a1-u5-reading-0-0",
+    "unitIndex": 5,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I have six pencils. My friend gives me two more. Now I have eight pencils.",
+    "prompt": "How many pencils does the friend give?",
+    "choices": [
+      "Two",
+      "Six",
+      "Eight",
+      "Four"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « I have six pencils. My friend gives me two more. Now I have eight pencils. »"
+  },
+  {
+    "id": "en-a1-u5-reading-0-1",
+    "unitIndex": 5,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I have six pencils. My friend gives me two more. Now I have eight pencils.",
+    "prompt": "How many pencils does the speaker have now?",
+    "choices": [
+      "Eight",
+      "Six",
+      "Two",
+      "Ten"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Eight. Lis le texte : « I have six pencils. My friend gives me two more. Now I have eight pencils. »"
+  },
+  {
+    "id": "en-a1-u5-reading-1-0",
+    "unitIndex": 5,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Four students are in the room. Three more students come in. Now there are seven students.",
+    "prompt": "How many students are there at first?",
+    "choices": [
+      "Four",
+      "Three",
+      "Seven",
+      "Eight"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Four. Lis le texte : « Four students are in the room. Three more students come in. Now there are seven students. »"
+  },
+  {
+    "id": "en-a1-u5-reading-1-1",
+    "unitIndex": 5,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Four students are in the room. Three more students come in. Now there are seven students.",
+    "prompt": "How many students come in?",
+    "choices": [
+      "Three",
+      "Four",
+      "Seven",
+      "One"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Three. Lis le texte : « Four students are in the room. Three more students come in. Now there are seven students. »"
+  },
+  {
+    "id": "en-a1-u5-reading-2-0",
+    "unitIndex": 5,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The blue bus is number twelve. The red bus is number twenty. We take the blue bus.",
+    "prompt": "Which bus do they take?",
+    "choices": [
+      "Number twelve",
+      "Number twenty",
+      "Number two",
+      "Number ten"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Number twelve. Lis le texte : « The blue bus is number twelve. The red bus is number twenty. We take the blue bus. »"
+  },
+  {
+    "id": "en-a1-u5-reading-2-1",
+    "unitIndex": 5,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The blue bus is number twelve. The red bus is number twenty. We take the blue bus.",
+    "prompt": "What colour is bus number twenty?",
+    "choices": [
+      "Red",
+      "Blue",
+      "Green",
+      "White"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Red. Lis le texte : « The blue bus is number twelve. The red bus is number twenty. We take the blue bus. »"
+  },
+  {
+    "id": "en-a1-u5-reading-3-0",
+    "unitIndex": 5,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "There are ten biscuits on the plate. I eat one. Nine biscuits are left.",
+    "prompt": "How many biscuits are on the plate at first?",
+    "choices": [
+      "Ten",
+      "Nine",
+      "One",
+      "Eleven"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Ten. Lis le texte : « There are ten biscuits on the plate. I eat one. Nine biscuits are left. »"
+  },
+  {
+    "id": "en-a1-u5-reading-3-1",
+    "unitIndex": 5,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "There are ten biscuits on the plate. I eat one. Nine biscuits are left.",
+    "prompt": "How many biscuits are left?",
+    "choices": [
+      "Nine",
+      "Ten",
+      "Eight",
+      "One"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Nine. Lis le texte : « There are ten biscuits on the plate. I eat one. Nine biscuits are left. »"
+  },
+  {
+    "id": "en-a1-u6-reading-0-0",
+    "unitIndex": 6,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "English starts at nine. Maths starts at ten. My English teacher is Ms Green.",
+    "prompt": "Which lesson starts at nine?",
+    "choices": [
+      "English",
+      "Maths",
+      "Art",
+      "Music"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : English. Lis le texte : « English starts at nine. Maths starts at ten. My English teacher is Ms Green. »"
+  },
+  {
+    "id": "en-a1-u6-reading-0-1",
+    "unitIndex": 6,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "English starts at nine. Maths starts at ten. My English teacher is Ms Green.",
+    "prompt": "Who teaches English?",
+    "choices": [
+      "Ms Green",
+      "Mr Brown",
+      "Ms White",
+      "Mr Black"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Ms Green. Lis le texte : « English starts at nine. Maths starts at ten. My English teacher is Ms Green. »"
+  },
+  {
+    "id": "en-a1-u6-reading-1-0",
+    "unitIndex": 6,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Please bring a pencil and a ruler to class. You do not need scissors today.",
+    "prompt": "What should students bring?",
+    "choices": [
+      "A pencil and a ruler",
+      "A pen and scissors",
+      "A book and glue",
+      "A bag and a ball"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A pencil and a ruler. Lis le texte : « Please bring a pencil and a ruler to class. You do not need scissors today. »"
+  },
+  {
+    "id": "en-a1-u6-reading-1-1",
+    "unitIndex": 6,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Please bring a pencil and a ruler to class. You do not need scissors today.",
+    "prompt": "What is not needed today?",
+    "choices": [
+      "Scissors",
+      "A pencil",
+      "A ruler",
+      "A pencil and a ruler"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Scissors. Lis le texte : « Please bring a pencil and a ruler to class. You do not need scissors today. »"
+  },
+  {
+    "id": "en-a1-u6-reading-2-0",
+    "unitIndex": 6,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The library is next to our classroom. We read books there after lunch.",
+    "prompt": "What is next to the classroom?",
+    "choices": [
+      "The library",
+      "The gym",
+      "The garden",
+      "The kitchen"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The library. Lis le texte : « The library is next to our classroom. We read books there after lunch. »"
+  },
+  {
+    "id": "en-a1-u6-reading-2-1",
+    "unitIndex": 6,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The library is next to our classroom. We read books there after lunch.",
+    "prompt": "When do they read in the library?",
+    "choices": [
+      "After lunch",
+      "Before breakfast",
+      "At midnight",
+      "Before lunch"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : After lunch. Lis le texte : « The library is next to our classroom. We read books there after lunch. »"
+  },
+  {
+    "id": "en-a1-u6-reading-3-0",
+    "unitIndex": 6,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Teacher: Open your books to page five. Work with a partner. Write three words.",
+    "prompt": "Which page should students open?",
+    "choices": [
+      "Page five",
+      "Page three",
+      "Page ten",
+      "Page one"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Page five. Lis le texte : « Teacher: Open your books to page five. Work with a partner. Write three words. »"
+  },
+  {
+    "id": "en-a1-u6-reading-3-1",
+    "unitIndex": 6,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Teacher: Open your books to page five. Work with a partner. Write three words.",
+    "prompt": "How should students work?",
+    "choices": [
+      "With a partner",
+      "Alone",
+      "With the whole school",
+      "With their parents"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : With a partner. Lis le texte : « Teacher: Open your books to page five. Work with a partner. Write three words. »"
+  },
+  {
+    "id": "en-a1-u7-reading-0-0",
+    "unitIndex": 7,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Our flat has two bedrooms and one kitchen. My bedroom is next to the bathroom.",
+    "prompt": "How many bedrooms are there?",
+    "choices": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « Our flat has two bedrooms and one kitchen. My bedroom is next to the bathroom. »"
+  },
+  {
+    "id": "en-a1-u7-reading-0-1",
+    "unitIndex": 7,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Our flat has two bedrooms and one kitchen. My bedroom is next to the bathroom.",
+    "prompt": "What is next to the speaker's bedroom?",
+    "choices": [
+      "The bathroom",
+      "The garden",
+      "The garage",
+      "The kitchen"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The bathroom. Lis le texte : « Our flat has two bedrooms and one kitchen. My bedroom is next to the bathroom. »"
+  },
+  {
+    "id": "en-a1-u7-reading-1-0",
+    "unitIndex": 7,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "The keys are on the kitchen table. My phone is on the sofa in the living room.",
+    "prompt": "Where are the keys?",
+    "choices": [
+      "On the kitchen table",
+      "On the sofa",
+      "Under the bed",
+      "In the bathroom"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : On the kitchen table. Lis le texte : « The keys are on the kitchen table. My phone is on the sofa in the living room. »"
+  },
+  {
+    "id": "en-a1-u7-reading-1-1",
+    "unitIndex": 7,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "The keys are on the kitchen table. My phone is on the sofa in the living room.",
+    "prompt": "What is on the sofa?",
+    "choices": [
+      "The phone",
+      "The keys",
+      "The cup",
+      "The book"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The phone. Lis le texte : « The keys are on the kitchen table. My phone is on the sofa in the living room. »"
+  },
+  {
+    "id": "en-a1-u7-reading-2-0",
+    "unitIndex": 7,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "There is a lamp beside my bed. There is a desk under the window.",
+    "prompt": "What is beside the bed?",
+    "choices": [
+      "A lamp",
+      "A desk",
+      "A window",
+      "A sofa"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A lamp. Lis le texte : « There is a lamp beside my bed. There is a desk under the window. »"
+  },
+  {
+    "id": "en-a1-u7-reading-2-1",
+    "unitIndex": 7,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "There is a lamp beside my bed. There is a desk under the window.",
+    "prompt": "Where is the desk?",
+    "choices": [
+      "Under the window",
+      "Beside the sofa",
+      "Behind the door",
+      "On the bed"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Under the window. Lis le texte : « There is a lamp beside my bed. There is a desk under the window. »"
+  },
+  {
+    "id": "en-a1-u7-reading-3-0",
+    "unitIndex": 7,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Our garden is behind the house. We eat outside in the garden on sunny days.",
+    "prompt": "Where is the garden?",
+    "choices": [
+      "Behind the house",
+      "Inside the house",
+      "Above the kitchen",
+      "In front of the school"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Behind the house. Lis le texte : « Our garden is behind the house. We eat outside in the garden on sunny days. »"
+  },
+  {
+    "id": "en-a1-u7-reading-3-1",
+    "unitIndex": 7,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Our garden is behind the house. We eat outside in the garden on sunny days.",
+    "prompt": "When do they eat in the garden?",
+    "choices": [
+      "On sunny days",
+      "On rainy days",
+      "On snowy days",
+      "Every night"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : On sunny days. Lis le texte : « Our garden is behind the house. We eat outside in the garden on sunny days. »"
+  },
+  {
+    "id": "en-a1-u8-reading-0-0",
+    "unitIndex": 8,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I draw a face with two eyes and a big smile. The nose is below the eyes.",
+    "prompt": "How many eyes are in the drawing?",
+    "choices": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Two. Lis le texte : « I draw a face with two eyes and a big smile. The nose is below the eyes. »"
+  },
+  {
+    "id": "en-a1-u8-reading-0-1",
+    "unitIndex": 8,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I draw a face with two eyes and a big smile. The nose is below the eyes.",
+    "prompt": "What is below the eyes in this face?",
+    "choices": [
+      "A nose",
+      "A hand",
+      "A knee",
+      "A foot"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A nose. Lis le texte : « I draw a face with two eyes and a big smile. The nose is below the eyes. »"
+  },
+  {
+    "id": "en-a1-u8-reading-1-0",
+    "unitIndex": 8,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Doctor: What hurts? Ben: My left arm hurts. My right arm is fine.",
+    "prompt": "Which arm hurts?",
+    "choices": [
+      "The left arm",
+      "The right arm",
+      "Both arms",
+      "Neither arm"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The left arm. Lis le texte : « Doctor: What hurts? Ben: My left arm hurts. My right arm is fine. »"
+  },
+  {
+    "id": "en-a1-u8-reading-1-1",
+    "unitIndex": 8,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Doctor: What hurts? Ben: My left arm hurts. My right arm is fine.",
+    "prompt": "Who is Ben talking to?",
+    "choices": [
+      "A doctor",
+      "A teacher",
+      "A waiter",
+      "A driver"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A doctor. Lis le texte : « Doctor: What hurts? Ben: My left arm hurts. My right arm is fine. »"
+  },
+  {
+    "id": "en-a1-u8-reading-2-0",
+    "unitIndex": 8,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "In the game, touch your head first. Then clap your hands. Finally, stamp your feet.",
+    "prompt": "What do you touch first?",
+    "choices": [
+      "Your head",
+      "Your hands",
+      "Your feet",
+      "Your knees"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Your head. Lis le texte : « In the game, touch your head first. Then clap your hands. Finally, stamp your feet. »"
+  },
+  {
+    "id": "en-a1-u8-reading-2-1",
+    "unitIndex": 8,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "In the game, touch your head first. Then clap your hands. Finally, stamp your feet.",
+    "prompt": "What do you do last?",
+    "choices": [
+      "Stamp your feet",
+      "Clap your hands",
+      "Touch your head",
+      "Close your eyes"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Stamp your feet. Lis le texte : « In the game, touch your head first. Then clap your hands. Finally, stamp your feet. »"
+  },
+  {
+    "id": "en-a1-u8-reading-3-0",
+    "unitIndex": 8,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Nora wears glasses to read. She listens to music with her ears.",
+    "prompt": "Why does Nora wear glasses?",
+    "choices": [
+      "To read",
+      "To cook",
+      "To swim",
+      "To run"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : To read. Lis le texte : « Nora wears glasses to read. She listens to music with her ears. »"
+  },
+  {
+    "id": "en-a1-u8-reading-3-1",
+    "unitIndex": 8,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "Nora wears glasses to read. She listens to music with her ears.",
+    "prompt": "Which body part does she use to listen?",
+    "choices": [
+      "Her ears",
+      "Her nose",
+      "Her hands",
+      "Her knees"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Her ears. Lis le texte : « Nora wears glasses to read. She listens to music with her ears. »"
+  },
+  {
+    "id": "en-a1-u9-reading-0-0",
+    "unitIndex": 9,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "It is cold today. I wear a coat, a scarf and boots. My shorts stay in the cupboard.",
+    "prompt": "Which clothes stay in the cupboard?",
+    "choices": [
+      "The shorts",
+      "The coat",
+      "The scarf",
+      "The boots"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The shorts. Lis le texte : « It is cold today. I wear a coat, a scarf and boots. My shorts stay in the cupboard. »"
+  },
+  {
+    "id": "en-a1-u9-reading-0-1",
+    "unitIndex": 9,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "It is cold today. I wear a coat, a scarf and boots. My shorts stay in the cupboard.",
+    "prompt": "Why does the speaker wear a coat?",
+    "choices": [
+      "It is cold",
+      "It is hot",
+      "They are swimming",
+      "They are going to bed"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : It is cold. Lis le texte : « It is cold today. I wear a coat, a scarf and boots. My shorts stay in the cupboard. »"
+  },
+  {
+    "id": "en-a1-u9-reading-1-0",
+    "unitIndex": 9,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Sam wears a white shirt and black trousers to school. His shoes are brown.",
+    "prompt": "What colour are Sam's trousers?",
+    "choices": [
+      "Black",
+      "White",
+      "Brown",
+      "Blue"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Black. Lis le texte : « Sam wears a white shirt and black trousers to school. His shoes are brown. »"
+  },
+  {
+    "id": "en-a1-u9-reading-1-1",
+    "unitIndex": 9,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "Sam wears a white shirt and black trousers to school. His shoes are brown.",
+    "prompt": "What colour are his shoes?",
+    "choices": [
+      "Brown",
+      "Black",
+      "White",
+      "Red"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Brown. Lis le texte : « Sam wears a white shirt and black trousers to school. His shoes are brown. »"
+  },
+  {
+    "id": "en-a1-u9-reading-2-0",
+    "unitIndex": 9,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "Shop assistant: This T-shirt is small. That one is large. Amy: I need the large one, please.",
+    "prompt": "Which size does Amy want?",
+    "choices": [
+      "Large",
+      "Small",
+      "Medium",
+      "Extra small"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Large. Lis le texte : « Shop assistant: This T-shirt is small. That one is large. Amy: I need the large one, please. »"
+  },
+  {
+    "id": "en-a1-u9-reading-2-1",
+    "unitIndex": 9,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "Shop assistant: This T-shirt is small. That one is large. Amy: I need the large one, please.",
+    "prompt": "What does Amy want to buy?",
+    "choices": [
+      "A T-shirt",
+      "A coat",
+      "A dress",
+      "A scarf"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : A T-shirt. Lis le texte : « Shop assistant: This T-shirt is small. That one is large. Amy: I need the large one, please. »"
+  },
+  {
+    "id": "en-a1-u9-reading-3-0",
+    "unitIndex": 9,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "My blue jacket is on the chair. My red jumper is on the bed. My hat is in my bag.",
+    "prompt": "What is on the bed?",
+    "choices": [
+      "The red jumper",
+      "The blue jacket",
+      "The hat",
+      "The bag"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The red jumper. Lis le texte : « My blue jacket is on the chair. My red jumper is on the bed. My hat is in my bag. »"
+  },
+  {
+    "id": "en-a1-u9-reading-3-1",
+    "unitIndex": 9,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "My blue jacket is on the chair. My red jumper is on the bed. My hat is in my bag.",
+    "prompt": "Where is the hat?",
+    "choices": [
+      "In the bag",
+      "On the chair",
+      "On the bed",
+      "Under the table"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : In the bag. Lis le texte : « My blue jacket is on the chair. My red jumper is on the bed. My hat is in my bag. »"
+  },
+  {
+    "id": "en-a1-u10-reading-0-0",
+    "unitIndex": 10,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Today it is raining. We take umbrellas and walk to school. Yesterday it was sunny.",
+    "prompt": "What is the weather like today?",
+    "choices": [
+      "Rainy",
+      "Sunny",
+      "Snowy",
+      "Dry"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Rainy. Lis le texte : « Today it is raining. We take umbrellas and walk to school. Yesterday it was sunny. »"
+  },
+  {
+    "id": "en-a1-u10-reading-0-1",
+    "unitIndex": 10,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "Today it is raining. We take umbrellas and walk to school. Yesterday it was sunny.",
+    "prompt": "What do they take to school?",
+    "choices": [
+      "Umbrellas",
+      "Sunglasses",
+      "Swimsuits",
+      "Sandals"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Umbrellas. Lis le texte : « Today it is raining. We take umbrellas and walk to school. Yesterday it was sunny. »"
+  },
+  {
+    "id": "en-a1-u10-reading-1-0",
+    "unitIndex": 10,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "In summer, our town is hot. In winter, it is cold. I go swimming in summer.",
+    "prompt": "When is the town hot?",
+    "choices": [
+      "In summer",
+      "In winter",
+      "Every winter night",
+      "In both seasons"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : In summer. Lis le texte : « In summer, our town is hot. In winter, it is cold. I go swimming in summer. »"
+  },
+  {
+    "id": "en-a1-u10-reading-1-1",
+    "unitIndex": 10,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "In summer, our town is hot. In winter, it is cold. I go swimming in summer.",
+    "prompt": "What does the speaker do in summer?",
+    "choices": [
+      "Go swimming",
+      "Go skiing",
+      "Make snowballs",
+      "Wear winter gloves"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Go swimming. Lis le texte : « In summer, our town is hot. In winter, it is cold. I go swimming in summer. »"
+  },
+  {
+    "id": "en-a1-u10-reading-2-0",
+    "unitIndex": 10,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The sky is grey and it is windy. We fly a kite in the park.",
+    "prompt": "Where do they fly a kite?",
+    "choices": [
+      "In the park",
+      "In the bedroom",
+      "In the kitchen",
+      "In the library"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : In the park. Lis le texte : « The sky is grey and it is windy. We fly a kite in the park. »"
+  },
+  {
+    "id": "en-a1-u10-reading-2-1",
+    "unitIndex": 10,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "The sky is grey and it is windy. We fly a kite in the park.",
+    "prompt": "What helps the kite fly?",
+    "choices": [
+      "The wind",
+      "The rain",
+      "The snow",
+      "The fog"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The wind. Lis le texte : « The sky is grey and it is windy. We fly a kite in the park. »"
+  },
+  {
+    "id": "en-a1-u10-reading-3-0",
+    "unitIndex": 10,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "It is snowing outside. We stay at home and drink warm tea. Our dog stays inside too.",
+    "prompt": "Where do they stay?",
+    "choices": [
+      "At home",
+      "At the beach",
+      "At school",
+      "In the park"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : At home. Lis le texte : « It is snowing outside. We stay at home and drink warm tea. Our dog stays inside too. »"
+  },
+  {
+    "id": "en-a1-u10-reading-3-1",
+    "unitIndex": 10,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "It is snowing outside. We stay at home and drink warm tea. Our dog stays inside too.",
+    "prompt": "What do they drink?",
+    "choices": [
+      "Warm tea",
+      "Cold juice",
+      "Milk",
+      "Water"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Warm tea. Lis le texte : « It is snowing outside. We stay at home and drink warm tea. Our dog stays inside too. »"
+  },
+  {
+    "id": "en-a1-u11-reading-0-0",
+    "unitIndex": 11,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I get up at seven. I eat breakfast at half past seven. I leave home at eight.",
+    "prompt": "What time does the speaker get up?",
+    "choices": [
+      "Seven",
+      "Half past seven",
+      "Eight",
+      "Nine"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Seven. Lis le texte : « I get up at seven. I eat breakfast at half past seven. I leave home at eight. »"
+  },
+  {
+    "id": "en-a1-u11-reading-0-1",
+    "unitIndex": 11,
+    "lessonIndex": 0,
+    "type": "choice",
+    "passage": "I get up at seven. I eat breakfast at half past seven. I leave home at eight.",
+    "prompt": "What happens at eight?",
+    "choices": [
+      "The speaker leaves home",
+      "The speaker gets up",
+      "The speaker eats breakfast",
+      "The speaker goes to bed"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : The speaker leaves home. Lis le texte : « I get up at seven. I eat breakfast at half past seven. I leave home at eight. »"
+  },
+  {
+    "id": "en-a1-u11-reading-1-0",
+    "unitIndex": 11,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "On Monday, I play football after school. On Tuesday, I visit my grandmother.",
+    "prompt": "When does the speaker play football?",
+    "choices": [
+      "On Monday",
+      "On Tuesday",
+      "On Wednesday",
+      "On Sunday"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : On Monday. Lis le texte : « On Monday, I play football after school. On Tuesday, I visit my grandmother. »"
+  },
+  {
+    "id": "en-a1-u11-reading-1-1",
+    "unitIndex": 11,
+    "lessonIndex": 1,
+    "type": "choice",
+    "passage": "On Monday, I play football after school. On Tuesday, I visit my grandmother.",
+    "prompt": "Who does the speaker visit on Tuesday?",
+    "choices": [
+      "Their grandmother",
+      "Their teacher",
+      "Their cousin",
+      "Their neighbour"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Their grandmother. Lis le texte : « On Monday, I play football after school. On Tuesday, I visit my grandmother. »"
+  },
+  {
+    "id": "en-a1-u11-reading-2-0",
+    "unitIndex": 11,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "Our class starts at eight thirty. The bus arrives at eight. We have thirty minutes before class.",
+    "prompt": "What time does class start?",
+    "choices": [
+      "Eight thirty",
+      "Eight",
+      "Nine",
+      "Seven thirty"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Eight thirty. Lis le texte : « Our class starts at eight thirty. The bus arrives at eight. We have thirty minutes before class. »"
+  },
+  {
+    "id": "en-a1-u11-reading-2-1",
+    "unitIndex": 11,
+    "lessonIndex": 2,
+    "type": "choice",
+    "passage": "Our class starts at eight thirty. The bus arrives at eight. We have thirty minutes before class.",
+    "prompt": "How long is there between the bus and class?",
+    "choices": [
+      "Thirty minutes",
+      "Ten minutes",
+      "One hour",
+      "Two hours"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Thirty minutes. Lis le texte : « Our class starts at eight thirty. The bus arrives at eight. We have thirty minutes before class. »"
+  },
+  {
+    "id": "en-a1-u11-reading-3-0",
+    "unitIndex": 11,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "I do my homework before dinner. After dinner, I read a book. I go to bed at ten.",
+    "prompt": "What does the speaker do before dinner?",
+    "choices": [
+      "Homework",
+      "Read a book",
+      "Go to bed",
+      "Eat breakfast"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Homework. Lis le texte : « I do my homework before dinner. After dinner, I read a book. I go to bed at ten. »"
+  },
+  {
+    "id": "en-a1-u11-reading-3-1",
+    "unitIndex": 11,
+    "lessonIndex": 3,
+    "type": "choice",
+    "passage": "I do my homework before dinner. After dinner, I read a book. I go to bed at ten.",
+    "prompt": "What time does the speaker go to bed?",
+    "choices": [
+      "Ten",
+      "Eight",
+      "Nine",
+      "Eleven"
+    ],
+    "answer": 0,
+    "objective": "reading-comprehension",
+    "explanation": "Réponse : Ten. Lis le texte : « I do my homework before dinner. After dinner, I read a book. I go to bed at ten. »"
+  }
+]

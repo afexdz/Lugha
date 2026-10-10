@@ -99,6 +99,14 @@ for ui,u in enumerate(d['units']):
     for li,(scene,prompt,*opts) in enumerate(scene_rows.get(ui,[])):
         u['lessons'][li]['questions'].append(dict(id=f'en-a1-u{ui}-picture-{li}',type='choice',prompt=prompt,choices=opts,answer=0,image=f'assets/english/{scene}.svg',imageAlt=f'Illustration originale : {scene}',objective='picture-comprehension',explanation='Observe les objets, leur nombre et leur position dans le dessin.',sourceRefs=topic_refs(ui)))
 
+# Additional authored microtexts are part of the active lesson schedule.
+for authored in json.loads((root/'content/en/A1-reading.json').read_text()):
+    q = dict(authored)
+    ui = q.pop('unitIndex')
+    li = q.pop('lessonIndex')
+    q['sourceRefs'] = topic_refs(ui)
+    d['units'][ui]['lessons'][li]['questions'].append(q)
+
 # Each extension unit has four compact lessons. These are reviewed-course candidates,
 # not a claim that forty questions establish CEFR proficiency.
 extension=[
