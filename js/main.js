@@ -58,6 +58,20 @@
     if (r.name === 'parents' && u.role !== 'parent') return go('#/apprendre');
     const view = APP[r.name];
     if (!view) return go('#/apprendre');
+    // Never show the legacy five-unit English map while the A1 bank loads.
+    if (p.lang === 'en' && LZ.engine && !LZ.engine.getA1Data()) {
+      const state = LZ.engine.getStatus();
+      app.innerHTML = state.status === 'error'
+        ? '<main class="page"><h1>Contenu indisponible</h1><p>Vérifie ta connexion puis réessaie.</p><button class="btn btn-primary" id="retryCourse">Réessayer</button></main>'
+        : '<main class="page"><p role="status">Chargement du cours anglais…</p></main>';
+      let active = true;
+      onLeave(() => { active = false; });
+      const loadCourse = () => LZ.engine.ensureA1().then(() => { if (active) render(); }, () => { if (active) render(); });
+      const retry = $('#retryCourse');
+      if (retry) retry.addEventListener('click', loadCourse, { once: true });
+      else loadCourse();
+      return;
+    }
     LZ.shell(app, r.name, view, r, onLeave);
     const v = $('#view'); v && v.focus({ preventScroll: true });
   }

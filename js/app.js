@@ -167,6 +167,9 @@
       + `${icon('next')}</a>`;
 
     const activeUnits = (p.lang === 'en' && LZ.engine?.getA1Units()) ? LZ.engine.getA1Units() : D.units;
+    if (p.lang === 'en' && LZ.engine?.getA1Data()?.levels) {
+      html += '<section class="card"><h2>Ton parcours anglais</h2><p>Des fondations aux activités avancées : vocabulaire, grammaire, images, lecture et jeux.</p><p class="small">Les parcours A2 à C2 sont une première sélection en préparation. Terminer ces activités ne valide pas à lui seul un niveau CECRL.</p></section>';
+    }
     activeUnits.forEach((un, ui) => {
       const start = ui * PER_UNIT;
       const uDone = clamp(done - start, 0, PER_UNIT);
@@ -203,10 +206,10 @@
       const idx = +b.dataset.idx, li = idx % PER_UNIT, ui = Math.floor(idx / PER_UNIT), chest = li === PER_UNIT - 1;
       const state = idx < done ? 'done' : idx === done ? 'current' : 'locked';
       const pop = document.createElement('div');
-      pop.className = `node-pop ${state}`; pop.style.setProperty('--u', D.units[ui].color);
+      pop.className = `node-pop ${state}`; pop.style.setProperty('--u', activeUnits[ui].color);
       if (state === 'locked') pop.innerHTML = `<b>${chest ? 'Coffre verrouillé' : `Leçon ${li + 1}`}</b><p>Termine les étapes précédentes pour la débloquer.</p>`;
       else if (chest) pop.innerHTML = `<b>Coffre de l’unité ${ui + 1}</b><p>${state === 'done' ? 'Déjà ouvert. Bravo !' : 'Tu as fini l’unité : ouvre ton coffre.'}</p>${state === 'current' ? `<button class="btn btn-sun btn-block" data-open>Ouvrir le coffre</button>` : ''}`;
-      else pop.innerHTML = `<b>${D.units[ui].title}</b><p>Leçon ${li + 1} sur 4</p>
+      else pop.innerHTML = `<b>${esc(activeUnits[ui].title)}</b><p>Leçon ${li + 1} sur 4</p>
         ${limit ? '<p class="small">Temps du jour atteint.</p>' : `<a class="btn ${state === 'done' ? 'btn-ghost' : 'btn-white'} btn-block" href="#/lecon/${idx}">${state === 'done' ? 'Réviser, +5 XP' : 'Commencer, +10 XP'}</a>`}`;
       b.parentElement.appendChild(pop);
       animate(pop, { opacity: [0, 1], y: [-8, 0], scale: [0.9, 1] }, spring(420, 26));
@@ -250,11 +253,14 @@
 
   function guide(ui) {
     const p = prof(), L = D.langs[p.lang];
-    const ws = D.words(p.lang).filter(w => w.u === ui), ph = D.phrase(p.lang, ui);
+    const unit = p.lang === 'en' ? LZ.engine?.getA1Data()?.units[ui] : null;
+    const ws = unit ? unit.words.map(LZ.engine.normalize) : D.words(p.lang).filter(w => w.u === ui);
+    const phrases = unit ? unit.phrases.map(LZ.engine.normalizePh) : [D.phrase(p.lang, ui)];
     const sep = L.noSpace ? '' : ' ';
-    modal(`<h2 class="modal-title">${D.units[ui].icon} ${D.units[ui].title}</h2><p class="modal-text">Les mots de l’unité. Touche un mot pour l’écouter.</p>
+    const phraseText = ph => unit ? LZ.engine.joinTokens(ph.tokens) : ph.tokens.join(sep);
+    modal(`<h2 class="modal-title">${unit?.emoji || D.units[ui].icon} ${esc(unit?.nom || D.units[ui].title)}</h2><p class="modal-text">Les mots de l’unité. Touche un mot pour l’écouter.</p>
       <div class="guide">${ws.map(w => `<button class="g-w" data-say="${esc(w.t)}"><span class="g-e">${w.e}</span><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(w.t)}</span>${w.r ? `<small>${esc(w.r)}</small>` : ''}<em>${esc(w.m)}</em>${icon('volume')}</button>`).join('')}</div>
-      <div class="g-ph"><p class="small">Phrase de l’unité</p><button class="g-w wide" data-say="${esc(ph.tokens.join(sep))}"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(ph.tokens.join(sep))}</span><em>${esc(ph.m)}</em>${icon('volume')}</button></div>
+      <div class="g-ph"><p class="small">Phrases de l’unité</p>${phrases.map(ph => `<button class="g-w wide" data-say="${esc(phraseText(ph))}"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(phraseText(ph))}</span><em>${esc(ph.m)}</em>${icon('volume')}</button>`).join('')}</div>
       <div class="modal-actions"><button class="btn btn-primary" data-close>Fermer</button></div>`, {
       cls: 'wide',
       onMount: box => $$('[data-say]', box).forEach(b => b.addEventListener('click', () => speak(b.dataset.say, p.lang)))
@@ -405,7 +411,7 @@
     const mx = Math.max(10, ...xp);
     const totalMin = min.reduce((a, b) => a + b, 0), acc = k.ans.n ? Math.round(k.ans.ok / k.ans.n * 100) : null;
     const L = k.lang && D.langs[k.lang];
-    const ws = k.words.map(id => { const [lg, w] = id.split(':'); return D.words(lg).find(x => x.id === w) && { ...D.words(lg).find(x => x.id === w), lg }; }).filter(Boolean).slice(-16);
+    const ws = k.words.map(id => { const [lg, w] = id.split(':'); return (lg === 'en' && LZ.engine?.getA1Data() ? LZ.engine.getA1Data().units.flatMap(u => u.words.map(LZ.engine.normalize)) : D.words(lg)).find(x => x.id === w) && { ...(lg === 'en' && LZ.engine?.getA1Data() ? LZ.engine.getA1Data().units.flatMap(u => u.words.map(LZ.engine.normalize)) : D.words(lg)).find(x => x.id === w), lg }; }).filter(Boolean).slice(-16);
     const names = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
     return `<section class="card report-card">
       <div class="rc-head"><span class="kid-av">${k.avatar}</span><div><h2 class="card-title">Rapport de ${esc(k.name)}</h2><small>7 derniers jours${L ? `, cours de ${L.name.toLowerCase()}` : ''}</small></div></div>

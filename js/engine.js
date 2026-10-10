@@ -41,7 +41,7 @@
     status = 'loading'; lastError = null;
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
-    pending = fetch('content/en/A1.json', ctrl ? { signal: ctrl.signal } : undefined)
+    pending = fetch('content/en/course.json', ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
       .catch(err => { status = 'error'; lastError = err; throw err; })
@@ -57,7 +57,7 @@
   function getA1Units() {
     if (!_a1) return null;
     return _a1.units.map((u, i) => ({
-      title: u.nom, sub: u.emoji + ' ' + u.nom,
+      title: u.level + ' · ' + u.nom, sub: u.emoji + ' ' + (u.objectives?.[0] || u.nom),
       icon: u.emoji, color: UNIT_COLORS[i] || '#6C4DFF'
     }));
   }
@@ -134,7 +134,7 @@
   }
   // Distracteurs : même unité et même nature si possible, puis élargissement
   function distractors(word, n) {
-    const others = _idx.all.filter(w => w.id !== word.id);
+    const others = _idx.all.filter(w => w.id !== word.id && w.u <= word.u);
     const tiers = [
       others.filter(w => w.u === word.u && w.type === word.type),
       others.filter(w => w.u === word.u),
@@ -248,58 +248,26 @@
     if (!_a1) return null;
     const unit = _a1.units[ui];
     if (!unit) return null;
-    const unitW = unit.words.map(normalize);
-    const str = profile ? getStrengths(profile) : {};
-
-    // Mots cibles, sans deux mots qui se confondent
-    const n = li <= 1 ? 4 : 6;
-    const targets = [];
-    let rem = [...unitW];
-    while (targets.length < n && rem.length) {
-      const w = profile ? weightedPick(rem, str) : rnd(rem);
-      rem = rem.filter(x => x.id !== w.id);
-      if (!targets.some(x => clash(x, w))) targets.push(w);
-    }
-    const t = i => targets[i % targets.length];
-    const seq = [];
-    const push = ex => { if (ex) seq.push(ex); };
-
-    if (li === 0 || li === 1) {
-      const [a, b] = li === 0 ? [t(0), t(1)] : [t(2), t(3)];
-      push(B.intro(a));
-      push(make('pickImage', a, unit, ui));
-      push(B.intro(b));
-      push(make('pickImage', b, unit, ui));
-      push(make('listen', a, unit, ui));
-      push(make('frToEn', b, unit, ui));
-      push(make('meaning', a, unit, ui));
-      push(li === 1 ? (B.match([a, b, ...unitW]) || make('pickWord', b, unit, ui)) : make('pickWord', b, unit, ui));
-      push(make('soundImage', b, unit, ui));
-    } else if (li === 2) {
-      push(make('pickImage', t(0), unit, ui));
-      push(make('listen', t(1), unit, ui));
-      push(B.match(targets.concat(unitW)));
-      push(make('frToEn', t(2), unit, ui));
-      push(make('fillBlank', t(3), unit, ui));
-      push(B.build(unit, ui));
-      push(make('soundImage', t(4), unit, ui));
-      push(make('meaning', t(0), unit, ui));
-    } else {
-      // Révision : mots de l'unité + quelques mots des unités précédentes
-      const prev = shuf(_idx.all.filter(w => w.u < ui)).slice(0, 4);
-      const rev = pickCompatible([...targets, ...prev], 8, []);
-      const g = i => rev[i % rev.length];
-      push(B.build(unit, ui));
-      push(make('listen', g(0), unit, ui));
-      push(B.match(rev));
-      push(make('oddOneOut', g(1), unit, ui));
-      push(make('pickWord', g(2), unit, ui));
-      push(make('anagram', g(3), unit, ui));
-      push(make('listeningCloze', g(4), unit, ui));
-      push(make('dictation', g(5), unit, ui));
-      push(make('trueFalse', g(6), unit, ui));
-    }
-    return noConsecutive(seq);
+    if (!Number.isInteger(li) || li < 0 || li >= PER_UNIT - 1) return null;
+    const lesson = unit.lessons && unit.lessons[li];
+    if (!lesson) return null;
+    const words = new Map(unit.words.map(w => [w.id, normalize(w)]));
+    const phrases = new Map(unit.phrases.map(p => [p.id, p]));
+    // The curriculum owns selection. Randomness only changes option order.
+    // Reopening a completed lesson is explicit practice of that same lesson.
+    return lesson.questions.map(q => {
+      let ex;
+      if (q.type === 'build') ex = { type: 'build', ph: normalizePh(phrases.get(q.phraseId)) };
+      else if (q.type === 'match') ex = { type: 'match', pairs: q.pairIds.map(id => words.get(id)) };
+      else if (q.type === 'choice') ex = {
+        type: 'choice', prompt: q.prompt, passage: q.passage, image: q.image,
+        imageAlt: q.imageAlt, explanation: q.explanation,
+        options: shuf(q.choices.map((label, i) => ({ id: q.id + '-option-' + i, t: label }))),
+        correctChoiceId: q.id + '-option-' + q.answer
+      };
+      else ex = B[q.type](words.get(q.wordId), unit, ui);
+      return { ...ex, questionId: q.id, objective: q.objective, sourceRefs: q.sourceRefs || unit.sourceRefs };
+    });
   }
 
   // ── Pas deux fois le même type d'affilée ──────────────────
@@ -318,7 +286,7 @@
   const LZ = window.LZ || (window.LZ = {});
   LZ.engine = {
     getA1Data, getTotal, getA1Units, ensureA1, getStatus, reload: () => { status = 'idle'; return load(); },
-    normalize, normalizePh,
+    normalize, normalizePh, joinTokens,
     buildA1Lesson,
     updateStrength, getStrengths
   };

@@ -53,6 +53,11 @@ async function answer(page, e, { wrong = false, skip = false } = {}) {
   const tgt = e.w || e.word;
   if (skip) { await page.click('#skip'); return; }
   switch (e.type) {
+    case 'choice': {
+      const index = e.options.findIndex(o => (o.id === e.correctChoiceId) !== wrong);
+      await page.click(`.opt[data-i="${index}"]`);
+      break;
+    }
     case 'intro': await page.click('#check'); return 'intro';
     case 'match':
       for (const w of e.pairs) {
@@ -109,7 +114,7 @@ async function playLesson(page, idx, { injectWrong = true } = {}) {
     const shownType = await page.$eval('.ex', n => n.className.replace('ex ex-', ''));
     let mode = {};
     // Erreur volontaire au premier exercice à trou et au premier vrai/faux (ancien cas d'écran bloqué)
-    if (injectWrong && ['fillBlank', 'listeningCloze', 'trueFalse'].includes(shownType) && !e._retry && !wrongTypes.has(shownType)) { mode = { wrong: true }; wrongTypes.add(shownType); wrongDone = true; }
+    if (injectWrong && ['frToEn', 'meaning'].includes(shownType) && !e._retry && !wrongTypes.has(shownType)) { mode = { wrong: true }; wrongTypes.add(shownType); wrongDone = true; }
     else if (!skipDone && !['intro', 'match'].includes(shownType) && !e._retry) { mode = { skip: true }; skipDone = true; }
     await answer(page, { ...e, type: shownType === 'type' ? 'type' : e.type }, mode);
     if (shownType !== 'intro') {
@@ -134,7 +139,7 @@ async function playLesson(page, idx, { injectWrong = true } = {}) {
     await openDemo(page);
     const before = await page.evaluate(() => LZ.prof().words.length);
     const { played } = await playLesson(page, 3);
-    ok('Erreurs volontaires sur un trou et un vrai/faux', played.filter(p => !p.expected).length >= 2, played.filter(p => !p.expected).map(p => p.type).join(', '));
+    ok('Erreurs volontaires et passage sur la banque anglaise', played.filter(p => !p.expected).length >= 2, played.filter(p => !p.expected).map(p => p.type).join(', '));
     const mism = played.filter(p => p.expected !== p.got);
     ok('Révision : chaque bonne réponse est acceptée, chaque erreur refusée', !mism.length, mism.map(m => m.type).join(', '));
     ok('Révision : la leçon se termine', await page.$('#endNext'));
@@ -166,13 +171,13 @@ async function playLesson(page, idx, { injectWrong = true } = {}) {
   // 3. Échec puis reprise du chargement
   {
     const ctx = await browser.newContext();
-    await ctx.route('**/content/en/A1.json', r => r.abort());
+    await ctx.route('**/content/en/course.json', r => r.abort());
     const page = await ctx.newPage();
     await openDemo(page);
     await page.goto(BASE + '/#/lecon/3');
     await page.waitForSelector('#retryLoad', { timeout: 15000 }).catch(() => {});
     ok('Réseau en erreur : message clair et bouton Réessayer', await page.$('#retryLoad'));
-    await ctx.unroute('**/content/en/A1.json');
+    await ctx.unroute('**/content/en/course.json');
     if (await page.$('#retryLoad')) { await page.click('#retryLoad'); await page.waitForSelector('.ex', { timeout: 15000 }).catch(() => {}); }
     ok('Réessayer : la leçon s’ouvre', await page.$('.ex'));
     await ctx.close();

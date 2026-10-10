@@ -28,7 +28,7 @@ function mulberry32(a) {
 }
 
 async function loadEngine() {
-  const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/en/A1.json'), 'utf8'));
+  const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'content/en/course.json'), 'utf8'));
   const math = Object.create(Math);
   math.random = mulberry32(SEED);
   const window = { LZ: {} };
@@ -54,7 +54,11 @@ function checkExercise(e, fails, ctx) {
 
   // Les exercices à choix doivent contenir la cible une seule fois,
   // sans deux options affichant le même texte, la même traduction ou la même image.
-  if (Array.isArray(e.options) && e.options.length) {
+  if (e.type === 'choice') {
+    if (e.options.filter(o => o.id === e.correctChoiceId).length !== 1) f('choice answer not present once');
+    if (new Set(e.options.map(o => norm(o.t))).size !== 4) f('choice labels repeat');
+    if (!e.prompt) f('choice prompt absent');
+  } else if (Array.isArray(e.options) && e.options.length) {
     if (!t) return f('options sans cible (e.w / e.word absent)');
     const hits = e.options.filter(o => o.id === t.id).length;
     if (hits !== 1) f(`cible présente ${hits} fois dans les choix`);
@@ -112,6 +116,27 @@ function checkExercise(e, fails, ctx) {
   const counts = {};
   const fails = [];
   let lessons = 0, exercises = 0;
+
+  // Play the complete fresh course, then retry with a different strength profile.
+  const seen = new Set();
+  for (let ui = 0; ui < units; ui++) {
+    for (let li = 0; li < 4; li++) {
+      const first = eng.buildA1Lesson(ui, li, {});
+      const replay = eng.buildA1Lesson(ui, li, { strength: { en: { 'en-u0-w0': 5 } } });
+      if (!first || first.length !== data.units[ui].lessons[li].questions.length) fails.push(`u${ui} l${li}: missing scheduled lesson`);
+      if (JSON.stringify(first.map(e => e.questionId)) !== JSON.stringify(replay.map(e => e.questionId))) {
+        fails.push(`u${ui} l${li}: curriculum changes with random seed/profile`);
+      }
+      first.forEach(e => {
+        if (!e.questionId || seen.has(e.questionId)) fails.push(`Repeated/missing question ID ${e.questionId}`);
+        seen.add(e.questionId);
+        if (e.options && e.options.length !== 4) fails.push(`${e.questionId}: fewer than four choices`);
+        if (e.options && e.type !== 'choice' && e.options.some(w => w.u > ui)) fails.push(`${e.questionId}: future-unit distractor`);
+      });
+    }
+    if (eng.buildA1Lesson(ui, 4, {}) !== null) fails.push(`u${ui}: chest should not generate a lesson`);
+  }
+  console.log(`Complete course: ${seen.size} distinct scheduled questions`);
 
   // 1) Protocole de l'audit : unités i modulo 12, leçon 3, profil vide
   for (let i = 0; i < N; i++) {

@@ -59,7 +59,7 @@
     switch (e.type) {
       case 'listen': return { ...e, type: 'pickWord' };
       case 'soundImage': return { ...e, type: 'pickImage' };
-      case 'dictation': return { type: 'type', w: e.word, _from: 'dictation' };
+      case 'dictation': return { ...e, type: 'type', w: e.word, _from: 'dictation' };
       case 'listeningCloze': return { ...e, type: 'fillBlank', fr: e.fr || e.phrase?.m || '' };
       default: return e;
     }
@@ -82,6 +82,18 @@
 
   // ---------- Exercices ----------
   const EX = {
+    choice(card, e, ctx) {
+      card.innerHTML = `<h2 class="ex-title">${esc(e.prompt)}</h2>`
+        + (e.passage ? `<p class="reading-passage" lang="en">${esc(e.passage)}</p>` : '')
+        + (e.image ? `<img class="english-scene" src="${esc(e.image)}" alt="${esc(e.imageAlt || 'Illustration de la question')}" />` : '')
+        + `<div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" lang="en">${esc(o.t)}</span></button>`).join('')}</div>`;
+      const s = selectable(card, ctx);
+      return { check: () => ({
+        ok: e.options[s.i]?.id === e.correctChoiceId,
+        answer: e.options.find(o => o.id === e.correctChoiceId).t,
+        note: e.explanation, pick: s.i
+      }) };
+    },
     intro(card, e, ctx) {
       card.innerHTML = `<p class="new-tag">${icon('sparkle')}Nouveau mot</p>
         <div class="intro-card"><span class="ic-e">${e.w.e}</span>
@@ -393,9 +405,10 @@
       foot.innerHTML = `<div class="l-foot-in">${e.type === 'intro' || e.type === 'match' ? '<span></span>' : '<button class="btn btn-ghost btn-lg" id="skip">Passer</button>'}
         <button class="btn btn-primary btn-lg" id="check" ${e.type === 'intro' ? '' : 'disabled'}>${e.type === 'intro' ? 'Continuer' : 'Vérifier'}</button></div>`;
       $('#check').addEventListener('click', onCheck);
-      const sk = $('#skip'); sk && sk.addEventListener('click', () => { if (st.phase !== 'answer') return; grade({ ok: false, skipped: true, answer: answerOf(e), say: targetOf(e)?.t }); });
+      const sk = $('#skip'); sk && sk.addEventListener('click', () => { if (st.phase !== 'answer') return; grade({ ok: false, skipped: true, answer: answerOf(e), note: e.explanation, say: targetOf(e)?.t }); });
     }
     const answerOf = e => {
+      if (e.type === 'choice') return e.options.find(o => o.id === e.correctChoiceId)?.t || '';
       if (e.type === 'build') return e.ph.tokens.join(D.langs[lang].noSpace ? '' : ' ');
       if (e.type === 'oddOneOut') return e.intruder.t;
       if (e.type === 'trueFalse') return `${e.correct ? 'Vrai' : 'Faux'} : ${e.word.t} = ${e.word.m}`;
@@ -435,7 +448,7 @@
         const btn = $(`.opt[data-i="${res.pick}"]`, card);
         btn && btn.classList.add(res.ok ? 'right' : 'wrong');
         const tgt = targetOf(e);
-        if (!res.ok && e.options && tgt) { const good = e.options.findIndex(o => o.id === tgt.id); const g = $(`.opt[data-i="${good}"]`, card); g && g.classList.add('right'); }
+        if (!res.ok && e.options && (tgt || e.correctChoiceId)) { const good = e.options.findIndex(o => o.id === (e.correctChoiceId || tgt.id)); const g = $(`.opt[data-i="${good}"]`, card); g && g.classList.add('right'); }
       }
       if (res.ok) {
         st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo);
@@ -455,7 +468,7 @@
     function feedback(res) {
       foot.className = 'l-foot ' + (res.ok ? 'ok' : 'bad');
       foot.innerHTML = `<div class="l-foot-in"><div class="fb"><span class="fb-ic">${icon(res.ok ? 'check' : 'x')}</span>
-        <div><b>${res.ok ? rand(D.praise) : rand(D.comfort)}</b>${res.ok ? (res.note ? `<p>${esc(res.note)}</p>` : '') : `<p>Bonne réponse : <span class="fb-ans" ${rtl(lang)}>${esc(res.answer)}</span></p>`}</div>
+        <div><b>${res.ok ? rand(D.praise) : rand(D.comfort)}</b>${res.ok ? '' : `<p>Bonne réponse : <span class="fb-ans" ${rtl(lang)}>${esc(res.answer)}</span></p>`}${res.note ? `<p>${esc(res.note)}</p>` : ''}</div>
         ${res.say && !res.ok ? `<button class="icon-btn fb-say" aria-label="Écouter la bonne réponse">${icon('volume')}</button>` : ''}</div>
         <button class="btn ${res.ok ? 'btn-ok' : 'btn-bad'} btn-lg" id="check">Continuer</button></div>`;
       animate(foot.firstElementChild, { y: [30, 0], opacity: [0, 1] }, spring(420, 30));

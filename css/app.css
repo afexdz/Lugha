@@ -1131,3 +1131,6 @@ html.rm .bulle-float { animation: none; }
 .side-logout .ic { width: 22px; height: 22px; }
 .side-logout:hover { background: var(--bad-soft); color: var(--bad-ink); }
 .side { overflow-y: auto; }
+/* English visual and reading activities. */
+.english-scene{display:block;width:100%;max-height:270px;object-fit:contain;border-radius:20px;margin:12px auto 20px}
+.reading-passage{background:var(--bg,#F4F5FF);border:1px solid #C9BFF5;border-radius:18px;padding:18px;line-height:1.7;text-align:left;max-width:640px;margin:12px auto 20px}
