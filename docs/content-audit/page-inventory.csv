@@ -1,0 +1,613 @@
+source,pdfPage,topic,formats,method,reviewDepth,individualAnswersValidated
+source-1,1,Couverture dépliée et verso,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,2,Couverture dépliée et verso,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,3,Titre et mentions éditoriales,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,4,Titre et mentions éditoriales,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,5,Suivi des huit thèmes,progression,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,6,Sommaire : lexique et structures des leçons,index,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,7,Sommaire : lexique et structures des leçons,index,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,8,Salutations selon le moment de la journée,dialogue et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,9,Salutations selon le moment de la journée,dialogue et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,10,"Identité, âge et nombres 1-10","dialogue, choix et écriture",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,11,"Identité, âge et nombres 1-10","dialogue, choix et écriture",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,12,Famille et relations,association et oral,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,13,Métiers de la famille,association et phrases,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,14,Consignes en classe,écoute et action,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,15,Matériel scolaire et impératifs,"comptage, dialogue et consignes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,16,Matériel scolaire et impératifs,"comptage, dialogue et consignes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,17,Classe et déplacement vers un objet,jeu de consignes,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,18,"Maison, taille et éléments extérieurs",description et reconnaissance,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,19,Pièces et fonctions de la maison,localisation et phrases,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,20,Meubles de la chambre,description et dessin,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,21,Jouets et quantités,comptage et préférences,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,22,Fête de Noël et souhaits,"dialogue, message, labyrinthe et chant",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,23,Fête de Noël et souhaits,"dialogue, message, labyrinthe et chant",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,24,Fête de Noël et souhaits,"dialogue, message, labyrinthe et chant",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,25,"Visage, corps et impératifs","association, comptage et rimes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,26,"Visage, corps et impératifs","association, comptage et rimes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,27,"Visage, corps et impératifs","association, comptage et rimes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,28,Émotions,choix et description,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,29,Vêtements,association et dessin,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,30,Bilan des thèmes 1-4,révision mixte,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,31,Bilan des thèmes 1-4,révision mixte,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,32,Animaux domestiques,dialogue et description,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,33,Animaux de ferme,identification et comptage,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,34,Animaux de ferme,identification et comptage,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,35,Animaux de forêt et position,localisation et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,36,Animaux de zoo,"mime, identification et recherche visuelle",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,37,Animaux de zoo,"mime, identification et recherche visuelle",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,38,Animaux aquatiques et capacités,choix oui/non et can,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,39,Animaux aquatiques et capacités,choix oui/non et can,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,40,Petites créatures et nature,labyrinthe et description,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,41,"Repas, horaires et préférences",lecture des heures et dialogue,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,42,"Repas, horaires et préférences",lecture des heures et dialogue,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,43,Fruits et légumes,"nommer, classer et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,44,Fruits et légumes,"nommer, classer et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,45,Saisons,préférences et jeu de logique,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,46,Saisons,préférences et jeu de logique,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,47,Météo,description et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,48,Météo,description et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,49,Couleurs,consigne et code numérique,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,50,Couleurs,consigne et code numérique,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,51,Fête de Pâques,"recherche, message et instructions",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,52,Fête de Pâques,"recherche, message et instructions",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,53,Anniversaire et âge,"dialogue, nombres et carte",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,54,Anniversaire et âge,"dialogue, nombres et carte",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,55,Jours de la semaine,séquençage,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,56,Transports et trajet,choix contextuel,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,57,Transports et trajet,choix contextuel,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,58,Capacités et loisirs,can et association,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,59,Éléments de plage et composition de scène,assemblage et oral,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,60,Éléments de plage et composition de scène,assemblage et oral,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,61,Éléments de plage et composition de scène,assemblage et oral,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,62,Bilan des thèmes 5-8,révision mixte,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,63,Bilan des thèmes 5-8,révision mixte,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,64,Verso de découpage sans texte pédagogique,support,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,65,Vignettes et corrigés des bilans,support et correction,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,66,Versos et ligne de découpe,support,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,67,Versos et ligne de découpe,support,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-1,68,Couverture répétée,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,1,Titre et édition,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,2,Titre et édition,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,3,Sommaire des neuf unités,index,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,4,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,5,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,6,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,7,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,8,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,9,"Marché : ordre des mots, adjectifs et have/has got","lexique, association, classement, description et recette",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,10,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,11,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,12,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,13,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,14,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,15,Voyage : présent continu,"orthographe -ing, descriptions, dialogue et lettre",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,16,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,17,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,18,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,19,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,20,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,21,Capacités : can/cannot,"vrai/faux, tableau, enquête et devinettes",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,22,Premier bilan,"ordre des mots, can et présent continu",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,23,Premier bilan,"ordre des mots, can et présent continu",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,24,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,25,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,26,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,27,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,28,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,29,Bibliothèque : présent simple,"pluriels, likes/wants, do/does, tableaux et préférences",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,30,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,31,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,32,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,33,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,34,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,35,Agenda : heures et prépositions temporelles,"calendrier, horaires et dialogue",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,36,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,37,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,38,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,39,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,40,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,41,Métiers : interrogatifs,"questions/réponses, interview et quiz",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,42,Deuxième bilan,"présent simple, prépositions temporelles et interrogatifs",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,43,Deuxième bilan,"présent simple, prépositions temporelles et interrogatifs",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,44,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,45,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,46,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,47,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,48,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,49,Plage : présent simple ou continu,"comparaison de scènes, mémoire et enquête",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,50,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,51,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,52,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,53,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,54,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,55,Pique-nique : articles et quantités,"contenants, there is/are, some/any et demande polie",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,56,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,57,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,58,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,59,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,60,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,61,Quiz : how much/how many,"comptage, unités, enquête et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,62,Troisième bilan,"présents, articles et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,63,Troisième bilan,"présents, articles et quantités",OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,64,Synthèse grammaticale,règles et formes,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,65,Synthèse grammaticale,règles et formes,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,66,Lexique final par unité,vocabulaire et expressions,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,67,Lexique final par unité,vocabulaire et expressions,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-2,68,Présentation de la collection,administratif,OCR intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,1,Identité et école,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,2,Mentions éditoriales,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,3,Consignes pédagogiques pour enseignants,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,4,Carte des huit thèmes et suivi,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,5,Visage et nombres,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,6,"Âge, lieu et famille","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,7,Présentation personnelle,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,8,Préférences vêtements et aliments,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,9,Autoévaluation identité/famille,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,10,"Classe, objets, nombres et horloge","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,11,Contenu du sac scolaire,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,12,"Livres, crayons, couleurs et tailles","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,13,Carte et poubelle en classe,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,14,Autoévaluation école,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,15,Chapeaux et vêtements du bas,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,16,Chemises et parties des vêtements,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,17,Vêtements par temps froid,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,18,Vêtements par temps chaud,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,19,Vêtements et accessoires : reconnaissance visuelle,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,20,Autoévaluation vêtements,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,21,Aliments et premières écritures,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,22,Boissons et préférences,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,23,Repas et préférences,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,24,Lexique alimentaire illustré,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,25,Autoévaluation alimentation,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,26,"Bus, formes et dimensions","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,27,Bateau et triangles,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,28,Ballons : couleurs et comptage,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,29,Aliments : formes et comptage,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,30,Opposés et consignes de couleurs,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,31,Maison : formes et fenêtres,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,32,Nombres et rythme oral,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,33,Révision formes et couleurs,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,34,Autoévaluation formes/nombres,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,35,"Mois, hiver et printemps","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,36,Été et vacances,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,37,Automne et fêtes,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,38,Célébration personnelle,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,39,Autoévaluation saisons/fêtes,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,40,"Animaux, habitats et rythme oral","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,41,Petites créatures et mouvement,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,42,Araignée et souris,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,43,"Oiseaux, chien et chat","oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,44,Vache et animal préféré,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,45,Autoévaluation animaux,"oral, image, comptage ou suivi",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,46,Certificat de participation,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,47,Contacts institutionnels,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-3,48,Page finale sans texte pédagogique extrait,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-4,1,Couverture et public annoncé,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,2,Verso,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,3,Titre,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,4,Édition,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,5,Sommaire présent/passé/futur/modaux,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,6,Sommaire conditionnels/passif/discours/infinitifs,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,7,Sommaire déterminants/relatives/adjectifs,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,8,Sommaire prépositions/phrasal verbs/annexes,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,9,Remerciements,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,10,Guide étudiant : niveau et méthode,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,11,Guide exercices supplémentaires,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,12,Guide enseignant : adaptation intermédiaire,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,13,Page de titre,support et guide,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,14,Unité 1 : Present continuous ( I am doing),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,15,Unité 1 : Present continuous ( I am doing),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,16,Unité 2 : Present simple ( I do),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,17,Unité 2 : Present simple ( I do),"exercices : texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,18,Unité 3 : Present continuous and present simple 1  (I am doing and I do),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,19,Unité 3 : Present continuous and present simple 1  (I am doing and I do),"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,20,Unité 4 : Present continuous and present simple 2 ( I am doing and I do),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,21,Unité 4 : Present continuous and present simple 2 ( I am doing and I do),"exercices : texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,22,Unité 5 : Past simple ( I did),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,23,Unité 5 : Past simple ( I did),"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,24,Unité 6 : Past continuous ( I was doing),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,25,Unité 6 : Past continuous ( I was doing),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,26,Unité 7 : Present perfect 1  (I have done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,27,Unité 7 : Present perfect 1  (I have done),"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,28,Unité 8 : Present perfect 2 ( I have done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,29,Unité 8 : Present perfect 2 ( I have done),"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,30,Unité 9 : Present perfect continuous ( I have been doing),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,31,Unité 9 : Present perfect continuous ( I have been doing),"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,32,Unité 10 : Present perfect continuous and simple ( I have been doing and I have done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,33,Unité 10 : Present perfect continuous and simple ( I have been doing and I have done),"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,34,Unité 11 : how long have you (been) … ?,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,35,Unité 11 : how long have you (been) … ?,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,36,Unité 12 : for and since    when … ? and how long … ?,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,37,Unité 12 : for and since    when … ? and how long … ?,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,38,Unité 13 : Present perfect and past 1 ( I have done and I did),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,39,Unité 13 : Present perfect and past 1 ( I have done and I did),"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,40,Unité 14 : Present perfect and past 2 ( I have done and I did),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,41,Unité 14 : Present perfect and past 2 ( I have done and I did),"exercices : texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,42,Unité 15 : Past perfect ( I had done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,43,Unité 15 : Past perfect ( I had done),"exercices : image à interpréter, choix de réponse, texte à compléter, remise en ordre, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,44,Unité 16 : Past perfect continuous ( I had been doing),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,45,Unité 16 : Past perfect continuous ( I had been doing),"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,46,Unité 17 : have and have got,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,47,Unité 17 : have and have got,"exercices : choix de réponse, texte à compléter, correction d’erreur, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,48,Unité 18 : used to (do),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,49,Unité 18 : used to (do),"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,50,Unité 19 : Present tenses ( I am doing / I do) for the future,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,51,Unité 19 : Present tenses ( I am doing / I do) for the future,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,52,Unité 20 : I’m going to (do),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,53,Unité 20 : I’m going to (do),"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,54,Unité 21 : will and shall 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,55,Unité 21 : will and shall 1,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,56,Unité 22 : will and shall 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,57,Unité 22 : will and shall 2,"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,58,Unité 23 : I will and I’m going to,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,59,Unité 23 : I will and I’m going to,"exercices : choix de réponse, texte à compléter, correction d’erreur, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,60,Unité 24 : will be doing and will have done,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,61,Unité 24 : will be doing and will have done,"exercices : choix de réponse, texte à compléter, correction d’erreur, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,62,Unité 25 : when I do and when I’ve done      if and when,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,63,Unité 25 : when I do and when I’ve done      if and when,"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,64,"Unité 26 : can , could and (be) able to",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,65,"Unité 26 : can , could and (be) able to","exercices : choix de réponse, texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,66,Unité 27 : could (do) and could have (done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,67,Unité 27 : could (do) and could have (done),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,68,Unité 28 : must and can’t,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,69,Unité 28 : must and can’t,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,70,Unité 29 : may and might 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,71,Unité 29 : may and might 1,"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,72,Unité 30 : may and might 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,73,Unité 30 : may and might 2,"exercices : image à interpréter, choix de réponse, texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,74,Unité 31 : have to and must,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,75,Unité 31 : have to and must,"exercices : choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,76,Unité 32 : must   mustn’t   needn’t,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,77,Unité 32 : must   mustn’t   needn’t,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,78,Unité 33 : should 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,79,Unité 33 : should 1,"exercices : image à interpréter, texte à compléter, production guidée, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,80,Unité 34 : should 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,81,Unité 34 : should 2,"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,82,Unité 35 : I’d better …     it’s time …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,83,Unité 35 : I’d better …     it’s time …,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,84,Unité 36 : would,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,85,Unité 36 : would,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,86,"Unité 37 : can /could/would you … ? etc.  (Requests, offers, permission and invitations)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,87,"Unité 37 : can /could/would you … ? etc.  (Requests, offers, permission and invitations)","exercices : choix de réponse, texte à compléter, remise en ordre, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,88,Unité 38 : if I do …  and if I did …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,89,Unité 38 : if I do …  and if I did …,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,90,Unité 39 : if I knew …     I wish I knew …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,91,Unité 39 : if I knew …     I wish I knew …,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,92,Unité 40 : if I had known …     I wish I had known …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,93,Unité 40 : if I had known …     I wish I had known …,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,94,Unité 41 : wish,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,95,Unité 41 : wish,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,96,Unité 42 : Passive 1  (is done / was done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,97,Unité 42 : Passive 1  (is done / was done),"exercices : texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,98,Unité 43 : Passive 2 ( be done / been done / being done),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,99,Unité 43 : Passive 2 ( be done / been done / being done),"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,100,Unité 44 : Passive 3,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,101,Unité 44 : Passive 3,"exercices : choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,102,Unité 45 : it is said that …   he is said to …   he is supposed to …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,103,Unité 45 : it is said that …   he is said to …   he is supposed to …,"exercices : texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,104,Unité 46 : have  something done,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,105,Unité 46 : have  something done,"exercices : image à interpréter, choix de réponse, texte à compléter, remise en ordre, correction d’erreur, production guidée, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,106,Unité 47 : Reported speech 1 ( he said that … ),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,107,Unité 47 : Reported speech 1 ( he said that … ),"exercices : choix de réponse, texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,108,Unité 48 : Reported speech 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,109,Unité 48 : Reported speech 2,"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,110,Unité 49 : Questions 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,111,Unité 49 : Questions 1,"exercices : remise en ordre, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,112,Unité 50 : Questions 2 ( do you know where … ? / he asked me where … ),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,113,Unité 50 : Questions 2 ( do you know where … ? / he asked me where … ),"exercices : choix de réponse, remise en ordre, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,114,Unité 51 : Auxiliary verbs ( have/do/can etc.)   I think so / I hope so etc.,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,115,Unité 51 : Auxiliary verbs ( have/do/can etc.)   I think so / I hope so etc.,"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,116,Unité 52 : Question tags ( do you? isn’t it? etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,117,Unité 52 : Question tags ( do you? isn’t it? etc.),"exercices : image à interpréter, choix de réponse, texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,118,Unité 53 : Verb +  -ing (enjoy doing / stop doing etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,119,Unité 53 : Verb +  -ing (enjoy doing / stop doing etc.),"exercices : texte à compléter, remise en ordre, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,120,Unité 54 : Verb + to …  (decide to …  / forget to …  etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,121,Unité 54 : Verb + to …  (decide to …  / forget to …  etc.),"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,122,Unité 55 : Verb (+ object) + to …  (I want you to … ),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,123,Unité 55 : Verb (+ object) + to …  (I want you to … ),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,124,"Unité 56 : Verb + - ing or to …  1 (remember, regret etc.)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,125,"Unité 56 : Verb + - ing or to …  1 (remember, regret etc.)","exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,126,"Unité 57 : Verb + - ing or to …  2 (try, need, help)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,127,"Unité 57 : Verb + - ing or to …  2 (try, need, help)","exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,128,Unité 58 : Verb + - ing or to …  3 (like / would like etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,129,Unité 58 : Verb + - ing or to …  3 (like / would like etc.),"exercices : image à interpréter, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,130,Unité 59 : prefer and would rather,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,131,Unité 59 : prefer and would rather,"exercices : choix de réponse, texte à compléter, production guidée, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,132,Unité 60 : Preposition ( in/for/about etc.) + -ing,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,133,Unité 60 : Preposition ( in/for/about etc.) + -ing,"exercices : image à interpréter, texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,134,Unité 61 : be /get used to …  (I’m used to …),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,135,Unité 61 : be /get used to …  (I’m used to …),"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,136,Unité 62 : Verb + preposition + - ing (succeed in -ing / insist on -ing etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,137,Unité 62 : Verb + preposition + - ing (succeed in -ing / insist on -ing etc.),"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,138,"Unité 63 : there’s no point in -ing, it’s worth -ing etc.",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,139,"Unité 63 : there’s no point in -ing, it’s worth -ing etc.","exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, association, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,140,"Unité 64 : to …  , for …  and so that …",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,141,"Unité 64 : to …  , for …  and so that …","exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,142,Unité 65 : Adjective + to …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,143,Unité 65 : Adjective + to …,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,144,Unité 66 : to …  (afraid to do) and preposition + -ing (afraid of -ing),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,145,Unité 66 : to …  (afraid to do) and preposition + -ing (afraid of -ing),"exercices : texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,146,Unité 67 : see somebody do and see somebody doing,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,147,Unité 67 : see somebody do and see somebody doing,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,148,Unité 68 : -ing clauses (He hurt his knee playing football.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,149,Unité 68 : -ing clauses (He hurt his knee playing football.),"exercices : image à interpréter, choix de réponse, texte à compléter, remise en ordre, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,150,Unité 69 : Countable and uncountable 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,151,Unité 69 : Countable and uncountable 1,"exercices : image à interpréter, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,152,Unité 70 : Countable and uncountable 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,153,Unité 70 : Countable and uncountable 2,"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,154,Unité 71 : Countable nouns with a/an and some,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,155,Unité 71 : Countable nouns with a/an and some,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,156,Unité 72 : a /an and the,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,157,Unité 72 : a /an and the,exercices : texte à compléter,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,158,Unité 73 : the 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,159,Unité 73 : the 1,"exercices : choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,160,Unité 74 : the 2 (school / the school etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,161,Unité 74 : the 2 (school / the school etc.),"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,162,Unité 75 : the 3 (children / the children),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,163,Unité 75 : the 3 (children / the children),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,164,Unité 76 : the 4 (the giraffe / the telephone / the old etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,165,Unité 76 : the 4 (the giraffe / the telephone / the old etc.),"exercices : choix de réponse, texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,166,Unité 77 : Names with and without the 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,167,Unité 77 : Names with and without the 1,"exercices : choix de réponse, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,168,Unité 78 : Names with and without the 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,169,Unité 78 : Names with and without the 2,"exercices : choix de réponse, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,170,Unité 79 : Singular and plural,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,171,Unité 79 : Singular and plural,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,172,Unité 80 : Noun + noun (a bus driver / a headache),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,173,Unité 80 : Noun + noun (a bus driver / a headache),"exercices : choix de réponse, remise en ordre, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,174,Unité 81 : -’s (your sister’s name) and of …  (the name of the book),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,175,Unité 81 : -’s (your sister’s name) and of …  (the name of the book),"exercices : choix de réponse, texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,176,Unité 82 : myself /yourself/themselves etc.,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,177,Unité 82 : myself /yourself/themselves etc.,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,178,Unité 83 : a friend of mine      my own house      on my own / by myself,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,179,Unité 83 : a friend of mine      my own house      on my own / by myself,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,180,Unité 84 : there … and it …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,181,Unité 84 : there … and it …,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,182,Unité 85 : some and any,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,183,Unité 85 : some and any,"exercices : choix de réponse, texte à compléter","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,184,Unité 86 : no /none/any      nothing/nobody etc.,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,185,Unité 86 : no /none/any      nothing/nobody etc.,"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,186,"Unité 87 : much , many, little, few, a lot, plenty",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,187,"Unité 87 : much , many, little, few, a lot, plenty","exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,188,Unité 88 : all / all of      most / most of     no / none of etc.,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,189,Unité 88 : all / all of      most / most of     no / none of etc.,"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,190,Unité 89 : both / both of      neither / neither of      either / either of,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,191,Unité 89 : both / both of      neither / neither of      either / either of,"exercices : choix de réponse, texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,192,Unité 90 : all    every    whole,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,193,Unité 90 : all    every    whole,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,194,Unité 91 : each and every,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,195,Unité 91 : each and every,"exercices : image à interpréter, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,196,Unité 92 : Relative clauses 1: clauses with who/that/which,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,197,Unité 92 : Relative clauses 1: clauses with who/that/which,"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,198,Unité 93 : Relative clauses 2: clauses with and without who/that/which,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,199,Unité 93 : Relative clauses 2: clauses with and without who/that/which,"exercices : texte à compléter, remise en ordre, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,200,Unité 94 : Relative clauses 3: whose/whom/where,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,201,Unité 94 : Relative clauses 3: whose/whom/where,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,202,Unité 95 : Relative clauses 4: extra information clauses (1),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,203,Unité 95 : Relative clauses 4: extra information clauses (1),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,204,Unité 96 : Relative clauses 5: extra information clauses (2),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,205,Unité 96 : Relative clauses 5: extra information clauses (2),"exercices : image à interpréter, choix de réponse, texte à compléter","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,206,"Unité 97 : -ing and -ed clauses (the woman talking to Tom, the boy injured in the accident)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,207,"Unité 97 : -ing and -ed clauses (the woman talking to Tom, the boy injured in the accident)","exercices : image à interpréter, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,208,Unité 98 : Adjectives ending in - ing and -ed (boring/bored etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,209,Unité 98 : Adjectives ending in - ing and -ed (boring/bored etc.),"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,210,"Unité 99 : Adjectives: a nice new house, you look tired",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,211,"Unité 99 : Adjectives: a nice new house, you look tired","exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,212,Unité 100 : Adjectives and adverbs 1 ( quick/quickly),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,213,Unité 100 : Adjectives and adverbs 1 ( quick/quickly),"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,214,"Unité 101 : Adjectives and adverbs 2 ( well, fast, late, hard/hardly)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,215,"Unité 101 : Adjectives and adverbs 2 ( well, fast, late, hard/hardly)","exercices : choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,216,Unité 102 : so and such,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,217,Unité 102 : so and such,"exercices : texte à compléter, remise en ordre, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,218,Unité 103 : enough and too,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,219,Unité 103 : enough and too,"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,220,"Unité 104 : quite , pretty, rather and fairly",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,221,"Unité 104 : quite , pretty, rather and fairly","exercices : choix de réponse, texte à compléter, remise en ordre","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,222,"Unité 105 : Comparative 1 ( cheaper, more expensive etc.)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,223,"Unité 105 : Comparative 1 ( cheaper, more expensive etc.)","exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,224,Unité 106 : Comparative 2 ( much better / any better etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,225,Unité 106 : Comparative 2 ( much better / any better etc.),exercices : texte à compléter,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,226,Unité 107 : Comparative 3 ( as …  as / than),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,227,Unité 107 : Comparative 3 ( as …  as / than),"exercices : texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,228,"Unité 108 : Superlative ( the longest, the most enjoyable etc.)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,229,"Unité 108 : Superlative ( the longest, the most enjoyable etc.)","exercices : choix de réponse, texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,230,Unité 109 : Word order 1: verb + object; place and time,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,231,Unité 109 : Word order 1: verb + object; place and time,"exercices : texte à compléter, remise en ordre, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,232,Unité 110 : Word order 2: adverbs with the verb,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,233,Unité 110 : Word order 2: adverbs with the verb,"exercices : texte à compléter, remise en ordre, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,234,Unité 111 : still    any more     yet      already,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,235,Unité 111 : still    any more     yet      already,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,236,Unité 112 : even,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,237,Unité 112 : even,"exercices : image à interpréter, texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,238,Unité 113 : although     though      even though       in spite of       despite,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,239,Unité 113 : although     though      even though       in spite of       despite,"exercices : choix de réponse, texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,240,Unité 114 : in case,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,241,Unité 114 : in case,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,242,Unité 115 : unless      as long as      provided,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,243,Unité 115 : unless      as long as      provided,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,244,Unité 116 : as (as I walked … / as I was … etc.),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,245,Unité 116 : as (as I walked … / as I was … etc.),"exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,246,Unité 117 : like and as,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,247,Unité 117 : like and as,"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,248,Unité 118 : like      as if,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,249,Unité 118 : like      as if,"exercices : texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,250,Unité 119 : during     for      while,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,251,Unité 119 : during     for      while,exercices : texte à compléter,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,252,Unité 120 : by and until      by the time …,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,253,Unité 120 : by and until      by the time …,"exercices : texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,254,Unité 121 : at /on/in (time),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,255,Unité 121 : at /on/in (time),"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,256,Unité 122 : on time and in time      at the end and in the end,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,257,Unité 122 : on time and in time      at the end and in the end,"exercices : texte à compléter, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,258,Unité 123 : in /at/on (position) 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,259,Unité 123 : in /at/on (position) 1,"exercices : image à interpréter, texte à compléter, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,260,Unité 124 : in /at/on (position) 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,261,Unité 124 : in /at/on (position) 2,"exercices : image à interpréter, texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,262,Unité 125 : in /at/on (position) 3,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,263,Unité 125 : in /at/on (position) 3,"exercices : image à interpréter, texte à compléter","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,264,"Unité 126 : to , at, in and into",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,265,"Unité 126 : to , at, in and into","exercices : texte à compléter, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,266,Unité 127 : in /on/at (other uses),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,267,Unité 127 : in /on/at (other uses),"exercices : choix de réponse, texte à compléter","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,268,Unité 128 : by,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,269,Unité 128 : by,"exercices : image à interpréter, texte à compléter","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,270,"Unité 129 : Noun + preposition ( reason for, cause of etc.)",explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,271,"Unité 129 : Noun + preposition ( reason for, cause of etc.)","exercices : image à interpréter, choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,272,Unité 130 : Adjective + preposition 1,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,273,Unité 130 : Adjective + preposition 1,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,274,Unité 131 : Adjective + preposition 2,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,275,Unité 131 : Adjective + preposition 2,"exercices : texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,276,Unité 132 : Verb + preposition 1  to and at,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,277,Unité 132 : Verb + preposition 1  to and at,"exercices : choix de réponse, texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,278,Unité 133 : Verb + preposition 2  about/for/of/after,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,279,Unité 133 : Verb + preposition 2  about/for/of/after,"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,280,Unité 134 : Verb + preposition 3  about and of,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,281,Unité 134 : Verb + preposition 3  about and of,"exercices : texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,282,Unité 135 : Verb + preposition 4  of/for/from/on,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,283,Unité 135 : Verb + preposition 4  of/for/from/on,"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,284,Unité 136 : Verb + preposition 5  in/into/with/to/on,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,285,Unité 136 : Verb + preposition 5  in/into/with/to/on,"exercices : choix de réponse, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,286,Unité 137 : Phrasal verbs 1   Introduction,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,287,Unité 137 : Phrasal verbs 1   Introduction,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,288,Unité 138 : Phrasal verbs 2   in/out,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,289,Unité 138 : Phrasal verbs 2   in/out,"exercices : texte à compléter, correction d’erreur","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,290,Unité 139 : Phrasal verbs 3   out,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,291,Unité 139 : Phrasal verbs 3   out,"exercices : image à interpréter, choix de réponse, texte à compléter, remise en ordre","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,292,Unité 140 : Phrasal verbs 4   on/off (1),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,293,Unité 140 : Phrasal verbs 4   on/off (1),"exercices : image à interpréter, texte à compléter, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,294,Unité 141 : Phrasal verbs 5   on/off (2),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,295,Unité 141 : Phrasal verbs 5   on/off (2),"exercices : choix de réponse, texte à compléter, correction d’erreur, production guidée, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,296,Unité 142 : Phrasal verbs 6   up/down,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,297,Unité 142 : Phrasal verbs 6   up/down,"exercices : image à interpréter, texte à compléter, correction d’erreur, production guidée","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,298,Unité 143 : Phrasal verbs 7   up (1),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,299,Unité 143 : Phrasal verbs 7   up (1),"exercices : image à interpréter, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,300,Unité 144 : Phrasal verbs 8   up (2),explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,301,Unité 144 : Phrasal verbs 8   up (2),"exercices : image à interpréter, choix de réponse, texte à compléter, association","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,302,Unité 145 : Phrasal verbs 9   away/back,explications,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,303,Unité 145 : Phrasal verbs 9   away/back,"exercices : image à interpréter, texte à compléter, correction d’erreur, contexte à lire","texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,304,Annexe 1 : verbes réguliers et irréguliers,référence morphologique,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,305,Annexe 1 : verbes réguliers et irréguliers,référence morphologique,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,306,Annexe 2 : temps présents et passés,synthèse,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,307,Annexe 3 : futur,synthèse,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,308,Annexe 4 : modaux,synthèse,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,309,Annexe 5 : contractions,orthographe et registre,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,310,Annexe 6 : orthographe des terminaisons,morphologie,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,311,Annexe 6 : orthographe des terminaisons,morphologie,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,312,Annexe 7 : anglais britannique et américain,variantes acceptables,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,313,Annexe 7 : anglais britannique et américain,variantes acceptables,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,314,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,315,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,316,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,317,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,318,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,319,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,320,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,321,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,322,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,323,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,324,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,325,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,326,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,327,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,328,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,329,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,330,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,331,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,332,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,333,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,334,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,335,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,336,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,337,41 exercices supplémentaires transversaux,révision mixte,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,338,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,339,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,340,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,341,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,342,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,343,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,344,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,345,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,346,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,347,Guide diagnostique,orientation selon erreurs,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,348,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,349,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,350,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,351,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,352,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,353,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,354,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,355,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,356,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,357,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,358,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,359,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,360,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,361,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,362,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,363,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,364,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,365,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,366,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,367,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,368,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,369,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,370,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,371,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,372,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,373,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,374,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,375,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,376,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,377,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,378,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,379,Corrigés des unités 1-145,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,380,Corrigés des exercices supplémentaires,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,381,Corrigés des exercices supplémentaires,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,382,Corrigés des exercices supplémentaires,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,383,Corrigés des exercices supplémentaires,réponses et variantes,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,384,Corrigé du guide diagnostique,réponses multiples possibles,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,385,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,386,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,387,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,388,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,389,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,390,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,391,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-4,392,Index grammatical,navigation et renvois,"texte extrait, relevé par page des règles et groupes d’exercices",inventaire structuré; pas une résolution de chaque item,False
+source-5,1,Titre et verso,administratif,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,2,Titre et verso,administratif,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,3,Sommaire,index,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,4,Mode d’utilisation du livre,guide,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,5,Place du pré-A1 dans les examens,orientation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,6,Personnages et scènes à retrouver,recherche visuelle,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,7,Corps et émotions,lexique et conversation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,8,Zoo et animaux,lexique et localisation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,9,Zoo et animaux,lexique et localisation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,10,Boutique de vêtements et couleurs,"lexique, comptage et préférences",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,11,Boutique de vêtements et couleurs,"lexique, comptage et préférences",texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,12,"Anniversaire, personnes et famille",lexique et dialogue,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,13,"Anniversaire, personnes et famille",lexique et dialogue,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,14,Aliments et repas,lexique et préférences,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,15,Aliments et repas,lexique et préférences,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,16,Maison et pièces,lexique et localisation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,17,Maison et pièces,lexique et localisation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,18,École et activités,lexique et action,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,19,École et activités,lexique et action,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,20,"Plage, loisirs et sports",lexique et conversation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,21,"Plage, loisirs et sports",lexique et conversation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,22,Rue et transports,lexique et position,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,23,Rue et transports,lexique et position,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,24,Mots mêlés,recherche orthographique,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,25,Nombres de 1 à 20,association et orthographe,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,26,Sept relations de position,localisation,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,27,Liste alphabétique : mots et catégories grammaticales,référence lexicale,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,28,Liste alphabétique : mots et catégories grammaticales,référence lexicale,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,29,Liste alphabétique : mots et catégories grammaticales,référence lexicale,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,30,Liste alphabétique : mots et catégories grammaticales,référence lexicale,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,31,Liste alphabétique : mots et catégories grammaticales,référence lexicale,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,32,Prénoms à reconnaître et écrire,référence orthographique,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,33,Corrigés des activités,correction,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,34,Activité finale de coloriage,support visuel,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,35,Verso sans texte extrait,support,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False
+source-5,36,Présentation et mentions éditoriales,administratif,texte intégral lu; images ciblées,repérage pédagogique des notions et formats,False

@@ -584,9 +584,26 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    8,
+                    9,
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5,
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7
                   ]
                 }
               ],
@@ -683,9 +700,26 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    8,
+                    9,
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5,
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7
                   ]
                 }
               ],
@@ -782,9 +816,26 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    8,
+                    9,
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5,
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7
                   ]
                 }
               ],
@@ -881,9 +932,26 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    8,
+                    9,
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5,
+                    6,
+                    7
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7
                   ]
                 }
               ],
@@ -945,7 +1013,23 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
+                    8,
+                    9,
+                    10,
+                    11
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5,
                     6,
+                    7
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
                     7
                   ]
                 }
@@ -960,32 +1044,28 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
-          ]
-        },
-        {
-          "sourceId": "picture-grammar",
-          "pdfPages": [
-            3
+            8,
+            9,
+            10,
+            11
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            5,
+            6,
+            7
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            7
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u1",
@@ -1567,9 +1647,24 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    12
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    6,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    12,
+                    13,
+                    29
                   ]
                 }
               ],
@@ -1666,9 +1761,24 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    12
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    6,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    12,
+                    13,
+                    29
                   ]
                 }
               ],
@@ -1765,9 +1875,24 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    12
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    6,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    12,
+                    13,
+                    29
                   ]
                 }
               ],
@@ -1864,9 +1989,24 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    12
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    6,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    12,
+                    13,
+                    29
                   ]
                 }
               ],
@@ -1928,8 +2068,22 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
+                    12
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
                     6,
-                    7
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    12,
+                    13,
+                    29
                   ]
                 }
               ]
@@ -1943,32 +2097,26 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
-          ]
-        },
-        {
-          "sourceId": "picture-grammar",
-          "pdfPages": [
-            3
+            12
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            6,
+            9
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            12,
+            13,
+            29
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u2",
@@ -2557,9 +2705,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ],
@@ -2624,16 +2803,40 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
-                    10,
-                    12
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ]
@@ -2687,9 +2890,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ],
@@ -2754,16 +2988,40 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
-                    10,
-                    12
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ]
@@ -2817,9 +3075,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ],
@@ -2916,9 +3205,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ],
@@ -2980,8 +3300,38 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    41,
+                    42,
+                    43,
+                    44
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    50,
+                    51,
+                    52,
+                    53,
+                    54,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    21,
+                    22,
+                    23,
+                    24
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    14,
+                    15
                   ]
                 }
               ]
@@ -2995,32 +3345,42 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            41,
+            42,
+            43,
+            44
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            58
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            21,
+            22,
+            23,
+            24
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            14,
+            15
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u3",
@@ -3608,9 +3968,36 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    8,
+                    9,
+                    28
                   ]
                 }
               ],
@@ -3707,9 +4094,36 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    8,
+                    9,
+                    28
                   ]
                 }
               ],
@@ -3806,9 +4220,36 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    8,
+                    9,
+                    28
                   ]
                 }
               ],
@@ -3905,9 +4346,36 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    8,
+                    9,
+                    28
                   ]
                 }
               ],
@@ -3969,8 +4437,34 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    32,
+                    33,
+                    34,
+                    35,
+                    36,
+                    37,
+                    38,
+                    39,
+                    40
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    8,
+                    9,
+                    28
                   ]
                 }
               ]
@@ -3984,32 +4478,38 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
-          ]
-        },
-        {
-          "sourceId": "first-english",
-          "pdfPages": [
-            3,
-            4
+            16,
+            17,
+            18,
+            19,
+            20,
+            21
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            8,
+            9,
+            28
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u4",
@@ -4593,9 +5093,42 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    49,
+                    50
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11
                   ]
                 }
               ],
@@ -4660,16 +5193,42 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    49,
+                    50
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
                     10,
-                    12
+                    11
                   ]
                 }
               ]
@@ -4723,9 +5282,42 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    49,
+                    50
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11
                   ]
                 }
               ],
@@ -4822,9 +5414,42 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    49,
+                    50
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11
                   ]
                 }
               ],
@@ -4921,9 +5546,42 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    49,
+                    50
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11
                   ]
                 }
               ],
@@ -4985,8 +5643,40 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
+                    49,
+                    50
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    4,
+                    5,
                     6,
-                    7
+                    7,
+                    8,
+                    9
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    26,
+                    27,
+                    28,
+                    29,
+                    30,
+                    31,
+                    32,
+                    33,
+                    34
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11
                   ]
                 }
               ]
@@ -5000,32 +5690,44 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            49,
+            50
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            10,
+            11
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u5",
@@ -5610,9 +6312,29 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    54
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ],
@@ -5677,16 +6399,29 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    10,
+                    11,
+                    54
                   ]
                 },
                 {
-                  "sourceId": "first-english",
+                  "sourceId": "picture-grammar",
                   "pdfPages": [
-                    10,
-                    12
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ]
@@ -5740,9 +6475,29 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    54
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ],
@@ -5839,9 +6594,29 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    54
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ],
@@ -5938,9 +6713,29 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    54
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ],
@@ -6002,8 +6797,27 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    10,
+                    11,
+                    54
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    56,
+                    57,
+                    58,
+                    59,
+                    60,
+                    61
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    25,
+                    31
                   ]
                 }
               ]
@@ -6017,32 +6831,31 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            10,
+            11,
+            54
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
-          ]
-        },
-        {
-          "sourceId": "first-english",
-          "pdfPages": [
-            3,
-            4
+            56,
+            57,
+            58,
+            59,
+            60,
+            61
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            25,
+            31
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u6",
@@ -6633,9 +7446,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ],
@@ -6700,16 +7544,40 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
                     10,
-                    12
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ]
@@ -6763,9 +7631,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ],
@@ -6830,16 +7729,40 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
                     10,
-                    12
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ]
@@ -6893,9 +7816,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ],
@@ -6992,9 +7946,40 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ],
@@ -7056,8 +8041,38 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    14,
+                    15,
+                    16,
+                    17
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    24,
+                    25,
+                    26,
+                    27,
+                    28,
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    10,
+                    11,
+                    12,
+                    13,
+                    14
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    18,
+                    19
                   ]
                 }
               ]
@@ -7071,32 +8086,42 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            14,
+            15,
+            16,
+            17
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            24,
+            25,
+            26,
+            27,
+            28,
+            29
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            10,
+            11,
+            12,
+            13,
+            14
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            18,
+            19
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u7",
@@ -7693,9 +8718,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    52,
+                    55
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ],
@@ -7760,16 +8809,33 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    52,
+                    55
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
-                    10,
-                    12
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ]
@@ -7823,9 +8889,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    52,
+                    55
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ],
@@ -7890,16 +8980,33 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    52,
+                    55
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
-                    10,
-                    12
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ]
@@ -7953,9 +9060,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    52,
+                    55
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ],
@@ -8052,9 +9183,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    52,
+                    55
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ],
@@ -8116,8 +9271,31 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    52,
+                    55
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    31
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    16,
+                    17,
+                    26,
+                    29
                   ]
                 }
               ]
@@ -8131,32 +9309,35 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            18,
+            19,
+            20
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            52,
+            55
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            31
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            16,
+            17,
+            26,
+            29
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u8",
@@ -8731,9 +9912,25 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    25,
+                    26,
+                    27,
+                    28
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7,
+                    28
                   ]
                 }
               ],
@@ -8830,9 +10027,25 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    25,
+                    26,
+                    27,
+                    28
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7,
+                    28
                   ]
                 }
               ],
@@ -8929,9 +10142,25 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    25,
+                    26,
+                    27,
+                    28
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7,
+                    28
                   ]
                 }
               ],
@@ -9028,9 +10257,25 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
-                  "sourceId": "picture-grammar",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    3
+                    25,
+                    26,
+                    27,
+                    28
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7,
+                    28
                   ]
                 }
               ],
@@ -9092,8 +10337,23 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    25,
+                    26,
+                    27,
+                    28
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    5
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    7,
+                    28
                   ]
                 }
               ]
@@ -9107,32 +10367,27 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
-          ]
-        },
-        {
-          "sourceId": "picture-grammar",
-          "pdfPages": [
-            3
+            25,
+            26,
+            27,
+            28
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            5
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            7,
+            28
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u9",
@@ -9728,9 +10983,45 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    29
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11,
+                    29
                   ]
                 }
               ],
@@ -9827,9 +11118,45 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    29
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11,
+                    29
                   ]
                 }
               ],
@@ -9926,9 +11253,45 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    29
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11,
+                    29
                   ]
                 }
               ],
@@ -10025,9 +11388,45 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    29
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11,
+                    29
                   ]
                 }
               ],
@@ -10089,8 +11488,43 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
+                    29
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    4,
+                    5,
                     6,
-                    7
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    10,
+                    11,
+                    29
                   ]
                 }
               ]
@@ -10104,32 +11538,47 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            29
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            10,
+            11,
+            29
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u10",
@@ -10717,9 +12166,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ],
@@ -10784,16 +12257,33 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
                   ]
                 },
                 {
                   "sourceId": "first-english",
                   "pdfPages": [
-                    10,
-                    12
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ]
@@ -10847,9 +12337,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ],
@@ -10946,9 +12460,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ],
@@ -11045,9 +12583,33 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ],
@@ -11109,8 +12671,31 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    45,
+                    46,
+                    47,
+                    48
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "first-english",
+                  "pdfPages": [
+                    35,
+                    36,
+                    37,
+                    38,
+                    39
                   ]
                 }
               ]
@@ -11124,32 +12709,35 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            45,
+            46,
+            47,
+            48
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
           ]
         },
         {
           "sourceId": "first-english",
           "pdfPages": [
-            3,
-            4
-          ]
-        },
-        {
-          "sourceId": "starters",
-          "pdfPages": [
-            3,
-            4,
-            5
+            35,
+            36,
+            37,
+            38,
+            39
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "u11",
@@ -11734,9 +13322,32 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    55,
+                    58
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ],
@@ -11801,16 +13412,32 @@
               "explanation": "Observe les objets, leur nombre et leur position dans le dessin.",
               "sourceRefs": [
                 {
-                  "sourceId": "starters",
+                  "sourceId": "play-english",
                   "pdfPages": [
-                    4
+                    41,
+                    42,
+                    55,
+                    58
                   ]
                 },
                 {
-                  "sourceId": "first-english",
+                  "sourceId": "picture-grammar",
                   "pdfPages": [
-                    10,
-                    12
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ]
@@ -11864,9 +13491,32 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    55,
+                    58
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ],
@@ -11963,9 +13613,32 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    55,
+                    58
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ],
@@ -12062,9 +13735,32 @@
               "objective": "grammar-in-context",
               "sourceRefs": [
                 {
+                  "sourceId": "play-english",
+                  "pdfPages": [
+                    41,
+                    42,
+                    55,
+                    58
+                  ]
+                },
+                {
                   "sourceId": "picture-grammar",
                   "pdfPages": [
-                    3
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ],
@@ -12126,8 +13822,30 @@
                 {
                   "sourceId": "play-english",
                   "pdfPages": [
-                    6,
-                    7
+                    41,
+                    42,
+                    55,
+                    58
+                  ]
+                },
+                {
+                  "sourceId": "picture-grammar",
+                  "pdfPages": [
+                    30,
+                    31,
+                    32,
+                    33,
+                    34,
+                    35
+                  ]
+                },
+                {
+                  "sourceId": "starters",
+                  "pdfPages": [
+                    20,
+                    21,
+                    22,
+                    23
                   ]
                 }
               ]
@@ -12141,32 +13859,34 @@
         {
           "sourceId": "play-english",
           "pdfPages": [
-            6,
-            7
+            41,
+            42,
+            55,
+            58
           ]
         },
         {
           "sourceId": "picture-grammar",
           "pdfPages": [
-            3
-          ]
-        },
-        {
-          "sourceId": "first-english",
-          "pdfPages": [
-            3,
-            4
+            30,
+            31,
+            32,
+            33,
+            34,
+            35
           ]
         },
         {
           "sourceId": "starters",
           "pdfPages": [
-            3,
-            4,
-            5
+            20,
+            21,
+            22,
+            23
           ]
         }
-      ]
+      ],
+      "sourceRefUse": "topic-inspiration; original activities require independent review"
     },
     {
       "id": "en-a2-u0",

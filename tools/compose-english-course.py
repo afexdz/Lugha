@@ -68,15 +68,36 @@ scene_rows={
 10:[('picnic','Which description fits the sky?','It is sunny.','It is snowing.','It is raining.','It is foggy.')],
 11:[('classroom','What time does the clock show?','Nine o’clock','Twelve o’clock','Three o’clock','Six o’clock')]
 }
+# Page numbers below are PDF positions, not the printed page numbers.
+# References document topic inspiration; original questions are not textbook copies.
+a1_topic_sources = [
+    [('play-english',[8,9,10,11]),('first-english',[5,6,7]),('starters',[7])],
+    [('play-english',[12]),('first-english',[6,9]),('starters',[12,13,29])],
+    [('play-english',[41,42,43,44]),('picture-grammar',[50,51,52,53,54,55,58]),('first-english',[21,22,23,24]),('starters',[14,15])],
+    [('play-english',[32,33,34,35,36,37,38,39,40]),('picture-grammar',[16,17,18,19,20,21]),('starters',[8,9,28])],
+    [('play-english',[49,50]),('picture-grammar',[4,5,6,7,8,9]),('first-english',[26,27,28,29,30,31,32,33,34]),('starters',[10,11])],
+    [('play-english',[10,11,54]),('picture-grammar',[56,57,58,59,60,61]),('starters',[25,31])],
+    [('play-english',[14,15,16,17]),('picture-grammar',[24,25,26,27,28,29]),('first-english',[10,11,12,13,14]),('starters',[18,19])],
+    [('play-english',[18,19,20]),('picture-grammar',[52,55]),('first-english',[31]),('starters',[16,17,26,29])],
+    [('play-english',[25,26,27,28]),('first-english',[5]),('starters',[7,28])],
+    [('play-english',[29]),('picture-grammar',[4,5,6,7,8,9,10,11,12,13,14,15]),('first-english',[15,16,17,18,19,20]),('starters',[10,11,29])],
+    [('play-english',[45,46,47,48]),('picture-grammar',[30,31,32,33,34,35]),('first-english',[35,36,37,38,39])],
+    [('play-english',[41,42,55,58]),('picture-grammar',[30,31,32,33,34,35]),('starters',[20,21,22,23])]
+]
+def topic_refs(ui):
+    return [dict(sourceId=source,pdfPages=pages) for source,pages in a1_topic_sources[ui]]
+
 for ui,u in enumerate(d['units']):
     u['level']='A1';u['status']='review-required'
-    u['sourceRefs']=[dict(sourceId='play-english',pdfPages=[6,7]),dict(sourceId='picture-grammar',pdfPages=[3]),dict(sourceId='first-english',pdfPages=[3,4]),dict(sourceId='starters',pdfPages=[3,4,5])]
+    u['sourceRefs']=topic_refs(ui)
+    u['sourceRefUse']='topic-inspiration; original activities require independent review'
     for li,q in enumerate(choices(a1[ui],dict(sourceId='picture-grammar',pdfPages=[3]))):
+        q['sourceRefs']=topic_refs(ui)
         q['id']=f'en-a1-u{ui}-grammar-{li}';u['lessons'][li]['questions'].insert(5,q)
     # A matching round is distinct from a vocabulary question, and is labelled review.
-    u['lessons'][3]['questions'].append(dict(id=f'en-a1-u{ui}-match',type='match',pairIds=[w['id'] for w in u['words'][:4]],objective='vocabulary-review',sourceRefs=[dict(sourceId='play-english',pdfPages=[6,7])]))
+    u['lessons'][3]['questions'].append(dict(id=f'en-a1-u{ui}-match',type='match',pairIds=[w['id'] for w in u['words'][:4]],objective='vocabulary-review',sourceRefs=topic_refs(ui)))
     for li,(scene,prompt,*opts) in enumerate(scene_rows.get(ui,[])):
-        u['lessons'][li]['questions'].append(dict(id=f'en-a1-u{ui}-picture-{li}',type='choice',prompt=prompt,choices=opts,answer=0,image=f'assets/english/{scene}.svg',imageAlt=f'Illustration originale : {scene}',objective='picture-comprehension',explanation='Observe les objets, leur nombre et leur position dans le dessin.',sourceRefs=[dict(sourceId='starters',pdfPages=[4]),dict(sourceId='first-english',pdfPages=[10,12])]))
+        u['lessons'][li]['questions'].append(dict(id=f'en-a1-u{ui}-picture-{li}',type='choice',prompt=prompt,choices=opts,answer=0,image=f'assets/english/{scene}.svg',imageAlt=f'Illustration originale : {scene}',objective='picture-comprehension',explanation='Observe les objets, leur nombre et leur position dans le dessin.',sourceRefs=topic_refs(ui)))
 
 # Each extension unit has four compact lessons. These are reviewed-course candidates,
 # not a claim that forty questions establish CEFR proficiency.
