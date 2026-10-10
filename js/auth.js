@@ -348,7 +348,7 @@
       const pick = (sel, key, parse = v => v) => $$(sel, ob).forEach(b => b.addEventListener('click', () => {
         st[key] = parse(b.dataset[key === 'avatar' ? 'av' : key]);
         $$(sel, ob).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute(x.getAttribute('role') === 'radio' ? 'aria-checked' : 'aria-pressed', String(on)); });
-        refresh();
+        LZ.Sfx.tap(); refresh();
       }));
       if (s === 'child') {
         const n = $('#cname'); n.addEventListener('input', () => { st.name = n.value; $('#cname-err').textContent = ''; refresh(); });

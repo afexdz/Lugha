@@ -37,11 +37,10 @@ window.LZ = (() => {
 
   // ---------- Stockage local ----------
   const KEY = 'lugha:v1';
-  const fresh = () => ({ users: [], session: null, prefs: { theme: 'auto', motion: 'auto' } });
+  const fresh = () => ({ users: [], session: null, prefs: { sound: true, theme: 'auto', motion: 'auto' } });
   let db;
   try { db = JSON.parse(localStorage.getItem(KEY)) || fresh(); } catch { db = fresh(); }
   db.prefs = Object.assign(fresh().prefs, db.prefs || {});
-  delete db.prefs.sound;
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch { /* quota */ } };
   const me = () => db.users.find(u => u.id === db.session) || null;
   const prof = () => { const u = me(); return u ? (u.profiles.find(p => p.id === u.active) || null) : null; };
@@ -175,6 +174,40 @@ window.LZ = (() => {
     io.observe(el);
     return () => io.disconnect();
   }
+
+  // ---------- Sons (Web Audio) ----------
+  const Sfx = (() => {
+    let ctx;
+    const get = () => {
+      if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ctx = new C(); }
+      if (ctx.state === 'suspended') ctx.resume().catch(() => {});
+      return ctx;
+    };
+    function play(notes, { type = 'sine', vol = 0.1, len = 0.14, gap = 0.08 } = {}) {
+      if (!db.prefs.sound) return;
+      try {
+      const c = get(); if (!c) return;
+      const t0 = c.currentTime + 0.01;
+      notes.forEach((f, i) => {
+        const o = c.createOscillator(), g = c.createGain(), t = t0 + i * gap;
+        o.type = type; o.frequency.setValueAtTime(f, t);
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(vol, t + 0.015);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + len);
+        o.connect(g).connect(c.destination); o.start(t); o.stop(t + len + 0.05);
+      });
+      } catch { /* Device audio failures must never interrupt a lesson. */ }
+    }
+    return {
+      tap: () => play([540], { type: 'triangle', vol: 0.05, len: 0.06 }),
+      ok: () => play([659, 880, 1319], { type: 'triangle', gap: 0.07, len: 0.18 }),
+      bad: () => play([311, 233], { type: 'sawtooth', vol: 0.04, gap: 0.12, len: 0.2 }),
+      pop: () => play([880, 1175], { vol: 0.06, gap: 0.05, len: 0.09 }),
+      done: () => play([523, 659, 784, 1047, 1319], { type: 'triangle', gap: 0.1, len: 0.32 }),
+      streak: () => play([392, 523, 659, 784, 1047], { type: 'square', vol: 0.035, gap: 0.11, len: 0.26 }),
+      coin: () => play([988, 1319], { type: 'square', vol: 0.03, gap: 0.07, len: 0.12 })
+    };
+  })();
 
   // ---------- Icônes ----------
   const P = {
@@ -352,7 +385,7 @@ window.LZ = (() => {
     D, M, $, $$, esc, clamp, rand, shuffle, dayKey, addDays, daysBetween, weekKey, uid, fmtTime, hashStr, rng, norm, loose, hash,
     get db() { return db; }, save, me, prof, course, newProfile,
     MAX_H, HEART_MS, rankOf, leagueList, tick, overLimit, quests, claimQuests, ACH, achLevel, checkAch,
-    reduced, applyPrefs, spring, stagger, animate, countUp, onView,
+    reduced, applyPrefs, spring, stagger, animate, countUp, onView, Sfx,
     icon, mascot, logo, toast, modal, confirmBox, confetti, tilt, canHover
   };
 })();

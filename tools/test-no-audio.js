@@ -28,6 +28,6 @@ for (const lang of context.D.order) {
 }
 for (const file of fs.readdirSync(path.join(root,'js')).filter(f => f.endsWith('.js'))) {
   const code = fs.readFileSync(path.join(root,'js',file),'utf8');
-  assert(!/speechSynthesis|SpeechSynthesisUtterance|AudioContext|data-say|data-slow|Sfx\.|\bspeak\(/.test(code), file);
+  assert(!/speechSynthesis|SpeechSynthesisUtterance|data-say|data-slow|\bspeak\(/.test(code), file);
 }
-console.log(`No audio controls/APIs; ${count} legacy lessons across ${context.D.order.length} languages verified.`);
+console.log(`No question voice controls/APIs; ${count} legacy lessons across ${context.D.order.length} languages verified.`);

@@ -8,7 +8,7 @@
   const {
     D, $, $$, esc, rand, shuffle, clamp, dayKey, addDays, fmtTime, loose, norm, save, prof, course,
     MAX_H, rankOf, overLimit, claimQuests, checkAch, animate, spring, stagger, countUp,
-    icon, mascot, toast, modal, confirmBox, confetti
+    icon, mascot, toast, modal, confirmBox, confetti, Sfx
   } = LZ;
   const PER_UNIT = 5, TOTAL = D.units.length * PER_UNIT;
 
@@ -74,7 +74,7 @@
       s.i = +b.dataset.i;
       $$('.opt', card).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       animate(b, { scale: [0.94, 1] }, spring(600, 18));
-      ctx.setReady(true);
+      Sfx.tap(); ctx.setReady(true);
       onPick && onPick(s.i);
     }));
     return s;
@@ -159,15 +159,15 @@
         if (b.classList.contains('matched')) return;
         const side = b.dataset.side;
         if (sel[side]) sel[side].classList.remove('sel');
-        sel[side] = b; b.classList.add('sel'); if (sel.l && sel.r) {
+        sel[side] = b; b.classList.add('sel'); Sfx.tap(); if (sel.l && sel.r) {
           const a = sel.l, c = sel.r; sel = { l: null, r: null };
           if (a.dataset.id === c.dataset.id) {
             [a, c].forEach(x => { x.classList.remove('sel'); x.classList.add('matched'); x.disabled = true; });
-            animate([a, c], { scale: [1.08, 1] }, spring(500, 15)); found++;
+            animate([a, c], { scale: [1.08, 1] }, spring(500, 15)); Sfx.pop(); found++;
             if (found === e.pairs.length) setTimeout(() => ctx.submit(), 350);
           } else {
             [a, c].forEach(x => { x.classList.remove('sel'); x.classList.add('miss'); setTimeout(() => x.classList.remove('miss'), 500); });
-            animate([a, c], { x: [0, -6, 6, -4, 4, 0] }, { duration: 0.35 }); ctx.slip();
+            animate([a, c], { x: [0, -6, 6, -4, 4, 0] }, { duration: 0.35 }); Sfx.bad(); ctx.slip();
           }
         }
       }));
@@ -187,9 +187,9 @@
       const sync = () => ctx.setReady(ans.children.length > 0);
       $$('.bank .tile', card).forEach(b => b.addEventListener('click', () => {
         if (b.classList.contains('used') || ctx.locked()) return;
-        b.classList.add('used'); const c = document.createElement('button');
+        b.classList.add('used'); Sfx.tap(); const c = document.createElement('button');
         c.className = 'tile'; c.textContent = b.textContent; c.dataset.k = b.dataset.k;
-        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); });
+        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); Sfx.tap(); });
         ans.appendChild(c);
         animate(c, { scale: [0.6, 1], y: [30, 0] }, spring(500, 22));
         sync();
@@ -241,9 +241,9 @@
       const sync = () => ctx.setReady(ans.children.length === e.word.t.length);
       $$('.bank .tile', card).forEach(b => b.addEventListener('click', () => {
         if (b.classList.contains('used') || ctx.locked()) return;
-        b.classList.add('used'); const c = document.createElement('button');
+        b.classList.add('used'); Sfx.tap(); const c = document.createElement('button');
         c.className = 'tile'; c.textContent = b.dataset.ch;
-        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); });
+        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); Sfx.tap(); });
         ans.appendChild(c); animate(c, { scale: [0.6, 1], y: [20, 0] }, spring(500, 22)); sync();
       }));
       return { check: () => {
@@ -377,10 +377,10 @@
         if (!res.ok && e.options && (tgt || e.correctChoiceId)) { const good = e.options.findIndex(o => o.id === (e.correctChoiceId || tgt.id)); const g = $(`.opt[data-i="${good}"]`, card); g && g.classList.add('right'); }
       }
       if (res.ok) {
-        st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo);
+        st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo); Sfx.ok();
         animate(card, { scale: [1, 1.02, 1] }, { duration: 0.3 });
       } else {
-        st.wrong++; st.combo = 0; animate(card, { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 });
+        st.wrong++; st.combo = 0; Sfx.bad(); animate(card, { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 });
         if (!practice) { if (p.hearts === LZ.MAX_H) p.heartsAt = Date.now(); p.hearts = Math.max(0, p.hearts - 1); $('#lh').textContent = p.hearts; animate($('.l-top .heart'), { scale: [1.5, 1] }, spring(500, 12)); save(); }
         if (!e._retry) st.queue.push({ ...e, _retry: true, options: e.options ? shuffle(e.options) : undefined });
       }
@@ -429,7 +429,7 @@
         <button class="btn btn-ghost btn-block" id="qt">Quitter la leçon</button></div></div>`, {
         dismiss: false,
         onMount: (box, close) => {
-          $('#rf', box).addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next(); });
+          $('#rf', box).addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next(); });
           $('#qt', box).addEventListener('click', () => { close(); back(); });
         }
       });
@@ -455,7 +455,7 @@
       p.quest.lessons++; p.quest.combo = Math.max(p.quest.combo, st.maxCombo);
       const rankAfter = rankOf(p.xp);
       const goalHit = beforeToday < p.goal && p.days[t] >= p.goal;
-      save();
+      save(); Sfx.done();
       const acc = Math.round(st.correct / Math.max(1, st.correct + st.wrong) * 100);
       const newEarned = c.done - Math.floor(c.done / 5);
       const stickerIdx = newEarned - 1;
@@ -512,7 +512,7 @@
             <p class="end-sub">${now === 1 ? 'Une flamme vient de s’allumer. Reviens demain pour la faire grandir.' : 'Tu as appris chaque jour. Reviens demain pour continuer.'}</p>
           </div><footer class="end-foot"><button class="btn btn-sun btn-lg" id="endNext">Je reviens demain</button></footer></div>`;
         animate($('.big-flame'), { scale: [0, 1.15, 1], rotate: [-20, 8, 0] }, { duration: 0.8 });
-        setTimeout(() => { const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
+        setTimeout(() => { Sfx.streak(); const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
         const today = $('.week .today i'); today && animate(today, { scale: [0, 1.3, 1] }, { delay: 0.9, duration: 0.5 });
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
       };
@@ -527,7 +527,7 @@
           <h1>${R.name}</h1>
           <p class="end-sub">${D.ranks[ri + 1] ? `Prochain statut : ${D.ranks[ri + 1].name}, à ${D.ranks[ri + 1].min} XP.` : 'Le plus haut statut. Tu es une légende.'}</p>
           </div><footer class="end-foot"><button class="btn btn-primary btn-lg" id="endNext">Génial</button></footer></div>`;
-        animate($('.medal'), { rotateY: [540, 0], scale: [0.3, 1] }, spring(60, 12));
+        animate($('.medal'), { rotateY: [540, 0], scale: [0.3, 1] }, spring(60, 12)); Sfx.streak();
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
       };
     }
@@ -549,7 +549,7 @@
             <button class="btn btn-primary btn-lg" id="endNext">Continuer</button>
           </footer>
         </div>`;
-        animate($('#sCard'), { rotateY: [-90, 0], scale: [0.4, 1.08, 1] }, { delay: 0.3, ...spring(150, 12) });
+        animate($('#sCard'), { rotateY: [-90, 0], scale: [0.4, 1.08, 1] }, { delay: 0.3, ...spring(150, 12) }); Sfx.coin();
         $('#endNext').addEventListener('click', nextFn);
         setTimeout(() => { const k = $('#endNext'); k && k.focus(); }, 200);
       };
