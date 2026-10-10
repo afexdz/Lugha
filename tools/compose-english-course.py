@@ -107,6 +107,12 @@ for authored in json.loads((root/'content/en/A1-reading.json').read_text()):
     q['sourceRefs'] = topic_refs(ui)
     d['units'][ui]['lessons'][li]['questions'].append(q)
 
+for authored in json.loads((root/'content/en/A1-expanded.json').read_text()):
+    q = dict(authored)
+    ui = q.pop('unitIndex')
+    q['sourceRefs'] = topic_refs(ui)
+    d['units'][ui].setdefault('questionBank', []).append(q)
+
 # Each extension unit has four compact lessons. These are reviewed-course candidates,
 # not a claim that forty questions establish CEFR proficiency.
 extension=[
@@ -320,4 +326,4 @@ d['sources']=[dict(id='play-english',title='Play English Kids',pages=68,role='Be
 d['authorship']='Original AI-assisted exercises and original SVG scenes. Source books inform topic selection only. No textbook questions or illustrations reproduced. Independent linguistic review pending.'
 d['sources'].append(dict(id='cefr',title='Council of Europe CEFR global scale',url='https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-%20cefr-3.3-common-reference-levels-global-scale',role='Advanced draft objectives; not textbook source content or certification'))
 (root/'content/en/course.json').write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')
-print(len(d['units']),'units',sum(len(u['words']) for u in d['units']),'entries',sum(len(l['questions']) for u in d['units'] for l in u['lessons']),'questions')
+print(len(d['units']),'units',sum(len(u['words']) for u in d['units']),'entries',sum(sum(len(l['questions']) for l in u['lessons']) + len(u.get('questionBank', [])) for u in d['units']),'questions')

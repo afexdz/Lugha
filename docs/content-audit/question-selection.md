@@ -1,8 +1,21 @@
 # English question selection
 
-English lessons draw from their current topic unit only. A1 has 61–63 activities
+English lessons draw from their current topic unit only. A1 has 151–153 activities
 per unit and selects 12 per session. Pilot units A2–C2 have 40 activities and
 select eight per session; their content still needs expansion and review.
+
+The additional A1 bank adds 480 English vocabulary clues, 120 reading questions
+from 60 original short texts, and 480 distinct four-pair matching rounds. Matching
+rounds review the existing vocabulary; they are not new vocabulary entries. Each
+word occurs four times across the forty added rounds for its unit. Selection
+includes an unseen reading activity when available and up to three unseen matching
+rounds before filling from other formats. This avoids a disproportionate share
+of matching activities while there is enough other unseen content.
+
+The new clues, key alignment and distractors were checked during authoring,
+including exclusions for interchangeable greetings, overlapping family terms,
+room names, clothing names and singular/plural body parts. This is an internal
+content check, not independent teacher review or CEFR certification.
 
 The latest four started English sessions are excluded, including practice
 replays. The complete selection is reserved and saved when a lesson starts,

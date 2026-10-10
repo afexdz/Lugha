@@ -85,8 +85,10 @@ data.units.forEach((unit, ui) => {
   }
   const words = new Map(unit.words.map(w => [w.id, w]));
   const phrases = new Map(unit.phrases.map(p => [p.id, p]));
-  unit.lessons.forEach((lesson, li) => {
-    if (!Array.isArray(lesson.questions) || lesson.questions.length < 8 || lesson.questions.length > 20) {
+  const collections = [...unit.lessons, ...(unit.questionBank ? [{ questions: unit.questionBank, isBank: true }] : [])];
+  if (unit.level === 'A1' && unit.questionBank && collections.reduce((n,l) => n + l.questions.length, 0) < 150) fail(`Unit ${ui}: expanded A1 pool must contain at least 150 activities`);
+  collections.forEach((lesson, li) => {
+    if (!Array.isArray(lesson.questions) || (!lesson.isBank && (lesson.questions.length < 8 || lesson.questions.length > 20))) {
       fail(`Unit ${ui} lesson ${li}: expected eight to twenty questions`);
       return;
     }

@@ -175,7 +175,7 @@
       const uDone = clamp(done - start, 0, PER_UNIT);
       html += `<section class="unit ${done < start ? 'future' : ''}" style="--u:${un.color}">
         <div class="unit-head">
-          <div><p class="unit-k">Unité ${ui + 1}</p><h2>${un.title}</h2><p class="unit-s">${un.sub}</p></div>
+          <div><p class="unit-k">Unité ${ui + 1}</p><h2>${un.title}</h2><p class="unit-s">${un.sub}</p>${un.questionCount ? `<p class="small">${un.questionCount} activités disponibles · sélection renouvelée à chaque leçon</p>` : ''}</div>
           <button class="unit-guide" data-guide="${ui}" aria-label="Guide de l’unité ${ui + 1}">${icon('book')}<span>Guide</span></button>
           <span class="unit-prog" aria-label="${uDone} étapes sur ${PER_UNIT}"><i style="width:${uDone / PER_UNIT * 100}%"></i></span>
         </div>

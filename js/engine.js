@@ -41,7 +41,7 @@
     status = 'loading'; lastError = null;
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
-    pending = fetch('content/en/course.json', ctrl ? { signal: ctrl.signal } : undefined)
+    pending = fetch('content/en/course.json?v=20261010-a1-expanded', ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
       .catch(err => { status = 'error'; lastError = err; throw err; })
@@ -58,7 +58,8 @@
     if (!_a1) return null;
     return _a1.units.map((u, i) => ({
       title: u.level + ' · ' + u.nom, sub: u.emoji + ' ' + (u.objectives?.[0] || u.nom),
-      icon: u.emoji, color: UNIT_COLORS[i] || '#6C4DFF'
+      icon: u.emoji, color: UNIT_COLORS[i] || '#6C4DFF',
+      questionCount: u.lessons.reduce((n,l) => n + l.questions.length, 0) + (u.questionBank?.length || 0)
     }));
   }
 
@@ -255,7 +256,7 @@
     const phrases = new Map(unit.phrases.map(p => [p.id, p]));
     // A unit is a topic/CEFR pool. Reserve at most one fifth per session so
     // four subsequent sessions can exclude this entire set, even on replay.
-    const pool = unit.lessons.flatMap(l => l.questions);
+    const pool = [...unit.lessons.flatMap(l => l.questions), ...(unit.questionBank || [])];
     const history = profile?.courses?.en?.questionHistory;
     const recent = new Set((history?.recent || []).slice(-4).flat());
     const seen = history?.seen || {};
@@ -267,12 +268,18 @@
     review.sort((a, b) => seen[a.id] - seen[b.id]);
     // Put a new reading/dialogue activity into the session when available.
     const reading = fresh.find(q => q.objective === 'reading-comprehension');
-    const selected = reading
-      ? [reading, ...fresh.filter(q => q !== reading).slice(0, size - 1)]
-      : fresh.slice(0, size);
+    const matches = fresh.filter(q => q.type === 'match').slice(0, unit.questionBank ? 3 : 1);
+    const starters = [reading, ...matches].filter(Boolean);
+    const selected = [...starters, ...fresh.filter(q => !starters.includes(q) && q.type !== 'match').slice(0, size - starters.length)];
     // One eligible older question (8.3% for A1), only after the cooldown.
     if (review.length && selected.length === size && size >= 10) selected.pop();
-    selected.push(...review.slice(0, size - selected.length));
+    selected.push(...review.filter(q => q.type !== 'match' || !selected.some(s => s.type === 'match')).slice(0, size - selected.length));
+    // When the remaining unseen material consists only of games, rotate it
+    // rather than return an empty session. Four-session exclusion still wins.
+    if (selected.length < size) {
+      const chosen = new Set(selected.map(q => q.id));
+      selected.push(...[...fresh, ...review].filter(q => !chosen.has(q.id)).slice(0, size - selected.length));
+    }
     return noConsecutive(shuf(selected).map(q => {
       let ex;
       if (q.type === 'build') ex = { type: 'build', ph: normalizePh(phrases.get(q.phraseId)) };
