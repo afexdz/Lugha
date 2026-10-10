@@ -8,7 +8,7 @@
   const {
     D, $, $$, esc, clamp, dayKey, addDays, save, me, prof, course, newProfile, hash,
     MAX_H, HEART_MS, rankOf, leagueList, overLimit, quests, ACH, achLevel,
-    animate, spring, stagger, countUp, speak, icon, mascot, logo, toast, modal, confirmBox, applyPrefs, Sfx
+    animate, spring, stagger, countUp, icon, mascot, logo, toast, modal, confirmBox, applyPrefs
   } = LZ;
   const db = () => LZ.db;
   const PER_UNIT = 5;
@@ -125,7 +125,7 @@
       <h2 class="modal-title">${p.hearts === MAX_H ? 'Tous tes cœurs sont là' : `${p.hearts} cœur${p.hearts > 1 ? 's' : ''} sur ${MAX_H}`}</h2>
       <p class="modal-text">Une erreur coûte un cœur. ${p.hearts < MAX_H ? `Prochain cœur dans ${next} min.` : ''} Les révisions ne coûtent rien.</p>
       <div class="modal-actions"><button class="btn btn-ghost" data-close>Fermer</button>${p.hearts < MAX_H ? `<button class="btn btn-primary" id="refill" ${p.gems < 350 ? 'disabled' : ''}>${icon('gem')}Tout recharger (350)</button>` : ''}</div></div>`, {
-      onMount: (box, close) => { const b = $('#refill', box); b && b.addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); close(); toast('Cœurs rechargés !', { icon: '❤️' }); LZ.render(); }); }
+      onMount: (box, close) => { const b = $('#refill', box); b && b.addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); close(); toast('Cœurs rechargés !', { icon: '❤️' }); LZ.render(); }); }
     });
   }
 
@@ -237,7 +237,6 @@
     const p = prof(), c = course(p);
     if (idx !== c.done) return;
     c.done++; p.gems += 20; save();
-    Sfx.done();
     modal(`<div class="chest-m"><div class="cm-box">🎁</div><h2 class="modal-title">Coffre ouvert !</h2><p class="modal-text">Unité terminée. Voici 20 gemmes pour toi.</p>
       <p class="cm-gems">${icon('gem')}<b>+20</b></p><div class="modal-actions"><button class="btn btn-primary" data-close>Super !</button></div></div>`, {
       onMount: box => {
@@ -258,12 +257,11 @@
     const phrases = unit ? unit.phrases.map(LZ.engine.normalizePh) : [D.phrase(p.lang, ui)];
     const sep = L.noSpace ? '' : ' ';
     const phraseText = ph => unit ? LZ.engine.joinTokens(ph.tokens) : ph.tokens.join(sep);
-    modal(`<h2 class="modal-title">${unit?.emoji || D.units[ui].icon} ${esc(unit?.nom || D.units[ui].title)}</h2><p class="modal-text">Les mots de l’unité. Touche un mot pour l’écouter.</p>
-      <div class="guide">${ws.map(w => `<button class="g-w" data-say="${esc(w.t)}"><span class="g-e">${w.e}</span><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(w.t)}</span>${w.r ? `<small>${esc(w.r)}</small>` : ''}<em>${esc(w.m)}</em>${icon('volume')}</button>`).join('')}</div>
-      <div class="g-ph"><p class="small">Phrases de l’unité</p>${phrases.map(ph => `<button class="g-w wide" data-say="${esc(phraseText(ph))}"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(phraseText(ph))}</span><em>${esc(ph.m)}</em>${icon('volume')}</button>`).join('')}</div>
+    modal(`<h2 class="modal-title">${unit?.emoji || D.units[ui].icon} ${esc(unit?.nom || D.units[ui].title)}</h2><p class="modal-text">Les mots et les phrases de l’unité.</p>
+      <div class="guide">${ws.map(w => `<button class="g-w"><span class="g-e">${w.e}</span><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(w.t)}</span>${w.r ? `<small>${esc(w.r)}</small>` : ''}<em>${esc(w.m)}</em></button>`).join('')}</div>
+      <div class="g-ph"><p class="small">Phrases de l’unité</p>${phrases.map(ph => `<button class="g-w wide"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(phraseText(ph))}</span><em>${esc(ph.m)}</em></button>`).join('')}</div>
       <div class="modal-actions"><button class="btn btn-primary" data-close>Fermer</button></div>`, {
       cls: 'wide',
-      onMount: box => $$('[data-say]', box).forEach(b => b.addEventListener('click', () => speak(b.dataset.say, p.lang)))
     });
   }
 
@@ -306,8 +304,7 @@
       if (it.id === 'freeze') p.freeze++;
       if (it.id === 'hearts') { p.hearts = MAX_H; p.heartsAt = Date.now(); }
       if (it.id === 'boost') p.boostUntil = Date.now() + 15 * 60000;
-      save(); Sfx.coin();
-      toast(`${it.t} : c’est à toi !`, { icon: it.e });
+      save(); toast(`${it.t} : c’est à toi !`, { icon: it.e });
       LZ.render();
     }));
     animate($$('.item', el), { opacity: [0, 1], y: [20, 0] }, { delay: stagger(0.06), ...spring(220, 22) });
@@ -471,7 +468,7 @@
       ${pinInputs()}<p class="err center" id="pinErr" aria-live="polite"></p><a class="link small" href="#/apprendre">Retour</a></div></div>`;
     wirePin(el, async code => {
       if (await hash('pin:' + code) === u.pin) { parentsOk = true; sessionStorage.setItem('lugha:pin', u.id); LZ.render(); }
-      else { $('#pinErr').textContent = 'Code incorrect. Réessayez.'; animate($('.pins', el), { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 }); Sfx.bad(); return false; }
+      else { $('#pinErr').textContent = 'Code incorrect. Réessayez.'; animate($('.pins', el), { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 }); return false; }
     });
   }
   function setPin(u, change, el) {
@@ -521,8 +518,7 @@
         <div class="set-row"><span>Langues</span><a class="btn btn-ghost btn-sm" href="#/langues">Gérer mes langues</a></div>
       </section>
       <section class="card set">
-        <h2 class="card-title">Affichage et son</h2>
-        <div class="set-row"><span id="sndL">Effets sonores</span><button class="switch ${pr.sound ? 'on' : ''}" role="switch" aria-checked="${pr.sound}" aria-labelledby="sndL" id="snd"><i></i></button></div>
+        <h2 class="card-title">Affichage</h2>
         <div class="set-row col"><span>Thème</span>${seg('theme', pr.theme, [['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']])}</div>
         <div class="set-row col"><span>Animations</span>${seg('motion', pr.motion, [['auto', 'Selon l’appareil'], ['reduce', 'Réduites']])}</div>
       </section>
@@ -541,7 +537,6 @@
     $$('[data-goal]', el).forEach(b => b.addEventListener('click', () => { p.goal = +b.dataset.goal; save(); toast(`Objectif : ${p.goal} XP par jour`, { icon: '🎯' }); LZ.render(); }));
     $$('[data-theme]', el).forEach(b => b.addEventListener('click', () => { pr.theme = b.dataset.theme; save(); applyPrefs(); LZ.render(); }));
     $$('[data-motion]', el).forEach(b => b.addEventListener('click', () => { pr.motion = b.dataset.motion; save(); applyPrefs(); LZ.render(); }));
-    $('#snd').addEventListener('click', () => { pr.sound = !pr.sound; save(); if (pr.sound) Sfx.ok(); LZ.render(); });
     $('#reset').addEventListener('click', async () => {
       if (!(await confirmBox('Recommencer ce cours ?', `Toutes les étapes du cours de ${D.langs[p.lang].name.toLowerCase()} seront reverrouillées. Tes XP et ta série sont conservés.`, 'Recommencer', true))) return;
       p.courses[p.lang] = { done: 0, started: Date.now() }; save(); toast('Cours remis à zéro', { icon: '🔄' }); location.hash = '#/apprendre';
@@ -574,7 +569,7 @@
     $$('[data-c]', el).forEach(b => b.addEventListener('click', () => {
       const c = b.dataset.c, isNew = !p.courses[c];
       p.lang = c; course(p); LZ.checkAch(p); save();
-      speak(D.words(c)[0].t, c);
+
       toast(isNew ? `C’est parti pour le ${D.langs[c].name.toLowerCase()} !` : `Cours de ${D.langs[c].name.toLowerCase()}`, { icon: '🌍' });
       location.hash = '#/apprendre';
     }));

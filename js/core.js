@@ -1,6 +1,6 @@
 /* ============================================================
    LISSAN — noyau partagé
-   Utilitaires, stockage local, sons (Web Audio), voix (Speech),
+   Utilitaires, stockage local,
    animations (Motion 12), icônes SVG, mascotte, toasts, modales.
    ============================================================ */
 window.LZ = (() => {
@@ -37,10 +37,11 @@ window.LZ = (() => {
 
   // ---------- Stockage local ----------
   const KEY = 'lugha:v1';
-  const fresh = () => ({ users: [], session: null, prefs: { sound: true, theme: 'auto', motion: 'auto' } });
+  const fresh = () => ({ users: [], session: null, prefs: { theme: 'auto', motion: 'auto' } });
   let db;
   try { db = JSON.parse(localStorage.getItem(KEY)) || fresh(); } catch { db = fresh(); }
   db.prefs = Object.assign(fresh().prefs, db.prefs || {});
+  delete db.prefs.sound;
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(db)); } catch { /* quota */ } };
   const me = () => db.users.find(u => u.id === db.session) || null;
   const prof = () => { const u = me(); return u ? (u.profiles.find(p => p.id === u.active) || null) : null; };
@@ -175,77 +176,6 @@ window.LZ = (() => {
     return () => io.disconnect();
   }
 
-  // ---------- Sons (Web Audio) ----------
-  const Sfx = (() => {
-    let ctx;
-    const get = () => {
-      if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ctx = new C(); }
-      if (ctx.state === 'suspended') ctx.resume();
-      return ctx;
-    };
-    function play(notes, { type = 'sine', vol = 0.1, len = 0.14, gap = 0.08 } = {}) {
-      if (!db.prefs.sound) return;
-      const c = get(); if (!c) return;
-      const t0 = c.currentTime + 0.01;
-      notes.forEach((f, i) => {
-        const o = c.createOscillator(), g = c.createGain(), t = t0 + i * gap;
-        o.type = type; o.frequency.setValueAtTime(f, t);
-        g.gain.setValueAtTime(0.0001, t);
-        g.gain.exponentialRampToValueAtTime(vol, t + 0.015);
-        g.gain.exponentialRampToValueAtTime(0.0001, t + len);
-        o.connect(g).connect(c.destination); o.start(t); o.stop(t + len + 0.05);
-      });
-    }
-    return {
-      tap: () => play([540], { type: 'triangle', vol: 0.05, len: 0.06 }),
-      ok: () => play([659, 880, 1319], { type: 'triangle', gap: 0.07, len: 0.18 }),
-      bad: () => play([311, 233], { type: 'sawtooth', vol: 0.04, gap: 0.12, len: 0.2 }),
-      pop: () => play([880, 1175], { vol: 0.06, gap: 0.05, len: 0.09 }),
-      done: () => play([523, 659, 784, 1047, 1319], { type: 'triangle', gap: 0.1, len: 0.32 }),
-      streak: () => play([392, 523, 659, 784, 1047], { type: 'square', vol: 0.035, gap: 0.11, len: 0.26 }),
-      coin: () => play([988, 1319], { type: 'square', vol: 0.03, gap: 0.07, len: 0.12 })
-    };
-  })();
-
-  // ---------- Voix (Speech Synthesis) ----------
-  // Certains navigateurs et WebView exposent speechSynthesis sans moteur utilisable
-  const canSpeak = !!(window.speechSynthesis && typeof window.SpeechSynthesisUtterance === 'function');
-  if (canSpeak) { speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged = () => speechSynthesis.getVoices(); }
-  const _noVoiceWarn = new Set();
-  function speak(text, lang, rate = 0.85) {
-    if (!canSpeak) return;
-    const L = D.langs[lang]; if (!L) return;
-    function _doSpeak() {
-      const voices = speechSynthesis.getVoices();
-      const code = L.voice.slice(0, 2).toLowerCase();
-      const v = voices.find(v => v.lang.replace('_', '-').toLowerCase() === L.voice.toLowerCase())
-        || voices.find(v => v.lang.toLowerCase().startsWith(code));
-      if (!v && voices.length > 0 && !_noVoiceWarn.has(lang)) {
-        _noVoiceWarn.add(lang);
-        toast(`Aucune voix ${L.name} sur cet appareil.`, { icon: '🔇' });
-      }
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = L.voice; u.rate = rate;
-      if (v) u.voice = v;
-      LZ._utt = u;
-      speechSynthesis.resume();
-      if (speechSynthesis.speaking) {
-        speechSynthesis.cancel();
-        setTimeout(() => { speechSynthesis.resume(); speechSynthesis.speak(LZ._utt); }, 80);
-      } else {
-        speechSynthesis.speak(u);
-      }
-    }
-    if (speechSynthesis.getVoices().length > 0) {
-      _doSpeak();
-    } else {
-      let fired = false;
-      const onReady = () => { if (fired) return; fired = true; speechSynthesis.removeEventListener('voiceschanged', onReady); _doSpeak(); };
-      speechSynthesis.addEventListener('voiceschanged', onReady);
-      setTimeout(onReady, 1500);
-    }
-  }
-
   // ---------- Icônes ----------
   const P = {
     home: '<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/>',
@@ -258,7 +188,6 @@ window.LZ = (() => {
     x: '<path d="M6 6l12 12M18 6 6 18"/>',
     lock: '<rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
     star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
-    volume: '<path d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/>',
     chev: '<path d="M6 9l6 6 6-6"/>',
     back: '<path d="M15 18l-6-6 6-6"/>',
     next: '<path d="M9 18l6-6-6-6"/>',
@@ -423,7 +352,7 @@ window.LZ = (() => {
     D, M, $, $$, esc, clamp, rand, shuffle, dayKey, addDays, daysBetween, weekKey, uid, fmtTime, hashStr, rng, norm, loose, hash,
     get db() { return db; }, save, me, prof, course, newProfile,
     MAX_H, HEART_MS, rankOf, leagueList, tick, overLimit, quests, claimQuests, ACH, achLevel, checkAch,
-    reduced, applyPrefs, spring, stagger, animate, countUp, onView, Sfx, speak, canSpeak,
+    reduced, applyPrefs, spring, stagger, animate, countUp, onView,
     icon, mascot, logo, toast, modal, confirmBox, confetti, tilt, canHover
   };
 })();

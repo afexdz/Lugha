@@ -3,7 +3,7 @@
    ============================================================ */
 (() => {
   'use strict';
-  const { D, $, $$, esc, uid, hash, save, me, prof, course, newProfile, animate, spring, stagger, icon, mascot, logo, toast, speak, dayKey, addDays } = LZ;
+  const { D, $, $$, esc, uid, hash, save, me, prof, course, newProfile, animate, spring, stagger, icon, mascot, logo, toast, dayKey, addDays } = LZ;
   const db = () => LZ.db;
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -348,8 +348,7 @@
       const pick = (sel, key, parse = v => v) => $$(sel, ob).forEach(b => b.addEventListener('click', () => {
         st[key] = parse(b.dataset[key === 'avatar' ? 'av' : key]);
         $$(sel, ob).forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute(x.getAttribute('role') === 'radio' ? 'aria-checked' : 'aria-pressed', String(on)); });
-        LZ.Sfx.tap(); refresh();
-        if (key === 'lang') speak(D.words(st.lang)[0].t, st.lang);
+        refresh();
       }));
       if (s === 'child') {
         const n = $('#cname'); n.addEventListener('input', () => { st.name = n.value; $('#cname-err').textContent = ''; refresh(); });

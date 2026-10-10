@@ -32,7 +32,6 @@
   function render() {
     cleanups.forEach(f => { try { f(); } catch (e) { console.warn(e); } });
     cleanups = [];
-    if (LZ.canSpeak) speechSynthesis.cancel();
     $('#modal-root').innerHTML = '';
 
     const r = parse();

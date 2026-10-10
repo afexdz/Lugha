@@ -183,17 +183,17 @@
     pickImage: w => ({ type: 'pickImage', w, options: options(w) }),
     pickWord: w => ({ type: 'pickWord', w, options: options(w) }),
     meaning: w => ({ type: 'meaning', w, options: options(w) }),
-    listen: w => ({ type: 'listen', w, options: options(w) }),
+    listen: w => ({ type: 'pickWord', w, options: options(w) }),
     frToEn: w => ({ type: 'frToEn', w, options: options(w) }),
-    soundImage: w => ({ type: 'soundImage', w, options: options(w) }),
-    dictation: w => ({ type: 'dictation', word: w }),
+    soundImage: w => ({ type: 'pickImage', w, options: options(w) }),
+    dictation: w => ({ type: 'type', w }),
     fillBlank: (w, unit) => {
       const c = clozeFor(w, unit); if (!c) return null;
       return { type: 'fillBlank', word: w, masked: c.masked, fr: c.fr, options: options(w) };
     },
     listeningCloze: (w, unit) => {
       const c = clozeFor(w, unit); if (!c) return null;
-      return { type: 'listeningCloze', word: w, masked: c.masked, phrase: c.phrase, fr: c.fr, options: options(w) };
+      return { type: 'fillBlank', word: w, masked: c.masked, phrase: c.phrase, fr: c.fr, options: options(w) };
     },
     anagram: w => {
       if (!/^[a-z]{3,8}$/i.test(w.t)) return null;
@@ -265,7 +265,11 @@
     const review = shuf(available.filter(q => seen[q.id]));
     // Random tie breaks, then least frequently used questions first.
     review.sort((a, b) => seen[a.id] - seen[b.id]);
-    const selected = fresh.slice(0, size);
+    // Put a new reading/dialogue activity into the session when available.
+    const reading = fresh.find(q => q.objective === 'reading-comprehension');
+    const selected = reading
+      ? [reading, ...fresh.filter(q => q !== reading).slice(0, size - 1)]
+      : fresh.slice(0, size);
     // One eligible older question (8.3% for A1), only after the cooldown.
     if (review.length && selected.length === size && size >= 10) selected.pop();
     selected.push(...review.slice(0, size - selected.length));

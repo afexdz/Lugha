@@ -50,6 +50,7 @@ const norm = s => String(s || '').toLowerCase().trim();
 
 function checkExercise(e, fails, ctx) {
   const f = msg => fails.push(`${ctx} [${e.type}] ${msg}`);
+  if (['listen', 'dictation', 'soundImage', 'listeningCloze'].includes(e.type)) f('Audio exercise remains');
   const t = target(e);
 
   // Les exercices à choix doivent contenir la cible une seule fois,

@@ -5,7 +5,7 @@
    ============================================================ */
 (() => {
   'use strict';
-  const { D, $, $$, esc, clamp, animate, spring, stagger, onView, speak, icon, mascot, logo, toast, tilt, reduced, me, prof, save, course, countUp } = LZ;
+  const { D, $, $$, esc, clamp, animate, spring, stagger, onView, icon, mascot, logo, toast, tilt, reduced, me, prof, save, course, countUp } = LZ;
   const hello = c => D.words(c)[0].t;
   const thanks = c => D.words(c)[1].t;
 
@@ -45,7 +45,7 @@
             <a class="btn btn-primary btn-lg" href="${ctaHref}">${ctaLabel}</a>
             ${u ? '' : '<a class="btn btn-ghost btn-lg" href="#/connexion">J’ai déjà un compte</a>'}
           </div>
-          <p class="hero-tip">${icon('volume')} Touchez un mot qui passe pour l’entendre</p>
+          <p class="hero-tip">Découvre les mots et leur traduction</p>
         </div>
         <a href="#methode" data-scroll class="scroll-hint" aria-label="Découvrir la méthode"><span></span></a>
       </section>
@@ -59,9 +59,9 @@
           <div class="j-text">
             <h2 class="sec-title">Trois gestes, répétés chaque jour.</h2>
             <ol class="j-steps">
-              <li data-s="0"><b>Jouer</b><span>Chaque leçon est une suite de petits jeux : trouver l’image, écouter, relier, construire une phrase.</span><i></i></li>
+              <li data-s="0"><b>Jouer</b><span>Chaque leçon est une suite de petits jeux : trouver l’image, écrire, relier, construire une phrase.</span><i></i></li>
               <li data-s="1"><b>Progresser</b><span>Un chemin d’étapes, une série de jours, des gemmes et des ligues : l’envie de revenir demain.</span><i></i></li>
-              <li data-s="2"><b>Parler</b><span>Chaque mot est prononcé par une voix native. On écoute, on répète, on retient.</span><i></i></li>
+              <li data-s="2"><b>Comprendre</b><span>Lis des mots et des phrases, puis vérifie leur sens avec des exercices.</span><i></i></li>
             </ol>
           </div>
           <div class="j-stage" id="jstage">
@@ -90,7 +90,7 @@
           <p class="sec-lead">Jamais deux fois la même chose : le cerveau reste éveillé, l’enfant aussi.</p>
           <div class="game-grid">
             <article class="game-card tilt3d" style="--g:#6C4DFF"><div class="gc-demo gd-pick"><span>🍎</span><span class="hit">🍞</span><span>💧</span><span>🥛</span></div><h3>Trouve l’image</h3><p>« pan » ? Un seul dessin correspond.</p></article>
-            <article class="game-card tilt3d" style="--g:#14B8A6"><div class="gc-demo gd-listen">${icon('volume')}<span class="bars"><i></i><i></i><i></i><i></i><i></i></span></div><h3>Écoute et choisis</h3><p>La voix dit un mot, on reconnaît la bonne écriture.</p></article>
+            <article class="game-card tilt3d" style="--g:#14B8A6"><div class="gc-demo">✍️</div><h3>Lis et écris</h3><p>Retrouve le mot à partir de sa traduction.</p></article>
             <article class="game-card tilt3d" style="--g:#E64980"><div class="gc-demo gd-match"><span>cat</span><span>chat</span><span>dog</span><span>chien</span><svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M30 14 C50 14 50 14 70 14"/><path d="M30 46 C50 46 50 46 70 46"/></svg></div><h3>Relie les paires</h3><p>Un mot, sa traduction, le plus vite possible.</p></article>
             <article class="game-card tilt3d" style="--g:#F59F00"><div class="gc-demo gd-build"><span>Ich</span><span>trinke</span><span>Wasser</span></div><h3>Construis la phrase</h3><p>On pose les mots dans le bon ordre.</p></article>
             <article class="game-card tilt3d" style="--g:#1C7ED6"><div class="gc-demo gd-type"><span class="typed">merhaba</span></div><h3>Écris le mot</h3><p>Au clavier, pour ancrer l’orthographe.</p></article>
@@ -162,7 +162,7 @@
             </div></div>
             <div class="soon-card">
               <p class="soon-tag">Bientôt</p><h3>Famille+</h3>
-              <p>Histoires audio, niveaux avancés, certificats à imprimer. Les comptes créés pendant le lancement garderont un avantage.</p>
+              <p>Textes à lire, niveaux avancés, certificats à imprimer. Les comptes créés pendant le lancement garderont un avantage.</p>
               <button class="btn btn-ghost" id="notify">Me prévenir</button>
             </div>
           </div>
@@ -246,7 +246,7 @@
 
     $$('.lang-card', app).forEach(b => b.addEventListener('click', () => {
       const c = b.dataset.lang;
-      speak(hello(c), c);
+
       const p = prof();
       if (p) { p.lang = c; course(p); save(); location.hash = '#/apprendre'; }
       else setTimeout(() => { location.hash = `#/inscription?l=${c}`; }, 450);
@@ -323,9 +323,9 @@
       b.className = 'ow ring' + ri;
       b.style.setProperty('--c', L.color);
       b.innerHTML = `<span ${L.rtl ? 'dir="rtl"' : ''}>${esc(rd.get(c))}</span>`;
-      b.setAttribute('aria-label', `Écouter « ${rd.get(c)} » en ${L.name.toLowerCase()}`);
+      b.setAttribute('aria-label', `Découvrir « ${rd.get(c)} » en ${L.name.toLowerCase()}`);
       b.addEventListener('click', e => {
-        e.stopPropagation(); speak(rd.get(c), c);
+        e.stopPropagation();
         b.dataset.tip = L.name;
         b.classList.add('said'); setTimeout(() => b.classList.remove('said'), 1400);
       });

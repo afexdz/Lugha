@@ -8,21 +8,21 @@ window.LISSAN_DATA = (() => {
 
   // ---------- Langues ----------
   const langs = {
-    en: { name: 'Anglais',    native: 'English',    voice: 'en-US', color: '#4F7CFF', latin: true,  abbr: 'EN' },
-    fr: { name: 'Français',   native: 'Français',   voice: 'fr-FR', color: '#3B5BDB', latin: true,  abbr: 'FR' },
-    es: { name: 'Espagnol',   native: 'Español',    voice: 'es-ES', color: '#F59F00', latin: true,  abbr: 'ES' },
-    de: { name: 'Allemand',   native: 'Deutsch',    voice: 'de-DE', color: '#E8590C', latin: true,  abbr: 'DE' },
-    it: { name: 'Italien',    native: 'Italiano',   voice: 'it-IT', color: '#2F9E44', latin: true,  abbr: 'IT' },
-    pt: { name: 'Portugais',  native: 'Português',  voice: 'pt-BR', color: '#0CA678', latin: true,  abbr: 'PT' },
-    tr: { name: 'Turc',       native: 'Türkçe',     voice: 'tr-TR', color: '#E03131', latin: true,  abbr: 'TR' },
-    ko: { name: 'Coréen',     native: '한국어',      voice: 'ko-KR', color: '#D6336C', latin: false, abbr: 'KO' },
-    zh: { name: 'Chinois',    native: '中文',        voice: 'zh-CN', color: '#C92A2A', latin: false, abbr: 'ZH', noSpace: true },
-    ja: { name: 'Japonais',   native: '日本語',      voice: 'ja-JP', color: '#AE3EC9', latin: false, abbr: 'JA', noSpace: true },
-    ru: { name: 'Russe',      native: 'Русский',    voice: 'ru-RU', color: '#1971C2', latin: false, abbr: 'RU' },
-    ar: { name: 'Arabe',      native: 'العربية',     voice: 'ar-SA', color: '#087F5B', latin: false, abbr: 'AR', rtl: true },
-    hi: { name: 'Hindi',      native: 'हिन्दी',       voice: 'hi-IN', color: '#F76707', latin: false, abbr: 'HI' },
-    nl: { name: 'Néerlandais',native: 'Nederlands', voice: 'nl-NL', color: '#FD7E14', latin: true,  abbr: 'NL' },
-    sv: { name: 'Suédois',    native: 'Svenska',    voice: 'sv-SE', color: '#1C7ED6', latin: true,  abbr: 'SV' }
+    en: { name: 'Anglais',    native: 'English',    color: '#4F7CFF', latin: true,  abbr: 'EN' },
+    fr: { name: 'Français',   native: 'Français',   color: '#3B5BDB', latin: true,  abbr: 'FR' },
+    es: { name: 'Espagnol',   native: 'Español',    color: '#F59F00', latin: true,  abbr: 'ES' },
+    de: { name: 'Allemand',   native: 'Deutsch',    color: '#E8590C', latin: true,  abbr: 'DE' },
+    it: { name: 'Italien',    native: 'Italiano',   color: '#2F9E44', latin: true,  abbr: 'IT' },
+    pt: { name: 'Portugais',  native: 'Português',  color: '#0CA678', latin: true,  abbr: 'PT' },
+    tr: { name: 'Turc',       native: 'Türkçe',     color: '#E03131', latin: true,  abbr: 'TR' },
+    ko: { name: 'Coréen',     native: '한국어',      color: '#D6336C', latin: false, abbr: 'KO' },
+    zh: { name: 'Chinois',    native: '中文',        color: '#C92A2A', latin: false, abbr: 'ZH', noSpace: true },
+    ja: { name: 'Japonais',   native: '日本語',      color: '#AE3EC9', latin: false, abbr: 'JA', noSpace: true },
+    ru: { name: 'Russe',      native: 'Русский',    color: '#1971C2', latin: false, abbr: 'RU' },
+    ar: { name: 'Arabe',      native: 'العربية',     color: '#087F5B', latin: false, abbr: 'AR', rtl: true },
+    hi: { name: 'Hindi',      native: 'हिन्दी',       color: '#F76707', latin: false, abbr: 'HI' },
+    nl: { name: 'Néerlandais',native: 'Nederlands', color: '#FD7E14', latin: true,  abbr: 'NL' },
+    sv: { name: 'Suédois',    native: 'Svenska',    color: '#1C7ED6', latin: true,  abbr: 'SV' }
   };
   const order = ['en', 'fr', 'es', 'de', 'it', 'pt', 'tr', 'ko', 'zh', 'ja', 'ru', 'ar', 'hi', 'nl', 'sv'];
 

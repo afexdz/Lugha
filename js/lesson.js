@@ -7,8 +7,8 @@
   'use strict';
   const {
     D, $, $$, esc, rand, shuffle, clamp, dayKey, addDays, fmtTime, loose, norm, save, prof, course,
-    MAX_H, rankOf, overLimit, claimQuests, checkAch, animate, spring, stagger, countUp, speak, canSpeak,
-    icon, mascot, toast, modal, confirmBox, confetti, Sfx
+    MAX_H, rankOf, overLimit, claimQuests, checkAch, animate, spring, stagger, countUp,
+    icon, mascot, toast, modal, confirmBox, confetti
   } = LZ;
   const PER_UNIT = 5, TOTAL = D.units.length * PER_UNIT;
 
@@ -54,7 +54,7 @@
   const rtl = lang => D.langs[lang].rtl ? 'dir="rtl"' : '';
   // Mot visé par un exercice, quel que soit son format (e.w ou e.word)
   const targetOf = e => e.w || e.word || null;
-  // Appareil sans synthèse vocale : version écrite équivalente, jamais un exercice impossible
+  // Compatibilité avec les anciens types : exercices écrits uniquement
   function silentVersion(e) {
     switch (e.type) {
       case 'listen': return { ...e, type: 'pickWord' };
@@ -74,7 +74,7 @@
       s.i = +b.dataset.i;
       $$('.opt', card).forEach(x => x.setAttribute('aria-pressed', String(x === b)));
       animate(b, { scale: [0.94, 1] }, spring(600, 18));
-      Sfx.tap(); ctx.setReady(true);
+      ctx.setReady(true);
       onPick && onPick(s.i);
     }));
     return s;
@@ -99,19 +99,15 @@
         <div class="intro-card"><span class="ic-e">${e.w.e}</span>
           <b class="ic-t" ${rtl(ctx.lang)}>${esc(e.w.t)}</b>${roman(e.w)}
           <p class="ic-m">${esc(e.w.m)}</p>
-          <button class="say-btn" data-say aria-label="Écouter">${icon('volume')}</button></div>`;
-      $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 450);
+          </div>`;
       animate($('.intro-card', card), { rotateY: [-90, 0], opacity: [0, 1] }, spring(140, 16));
       ctx.setReady(true);
       return { check: () => ({ ok: true }) };
     },
     pickImage(card, e, ctx) {
       card.innerHTML = `<h2 class="ex-title">Lequel est « <span class="tw" ${rtl(ctx.lang)}>${esc(e.w.t)}</span> » ?</h2>
-        <div class="ex-sub">${roman(e.w)}<button class="say-mini" data-say aria-label="Écouter">${icon('volume')}</button></div>
+        <div class="ex-sub">${roman(e.w)}</div>
         <div class="opts grid">${e.options.map((o, i) => `<button class="opt pic" data-i="${i}" aria-pressed="false"><span class="pic-e">${o.e}</span><span class="pic-t">${esc(o.m)}</span><kbd>${i + 1}</kbd></button>`).join('')}</div>`;
-      $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 300);
       const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: `${e.w.e} ${e.w.m}`, pick: s.i }) };
     },
@@ -119,30 +115,15 @@
       card.innerHTML = `<h2 class="ex-title">Comment dit-on « ${esc(e.w.m)} » ?</h2>
         <div class="big-e">${e.w.e}</div>
         <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" ${rtl(ctx.lang)}>${esc(o.t)}</span>${o.r ? `<small>${esc(o.r)}</small>` : ''}</button>`).join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
     meaning(card, e, ctx) {
       card.innerHTML = `<h2 class="ex-title">Que veut dire ce mot ?</h2>
-        <div class="speech">${mascot('happy')}<button class="bubble" data-say aria-label="Écouter le mot">${icon('volume')}<span ${rtl(ctx.lang)}>${esc(e.w.t)}</span>${e.w.r ? `<small>${esc(e.w.r)}</small>` : ''}</button></div>
+        <div class="speech">${mascot('happy')}<div class="bubble"><span ${rtl(ctx.lang)}>${esc(e.w.t)}</span>${e.w.r ? `<small>${esc(e.w.r)}</small>` : ''}</div></div>
         <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot">${esc(o.m)}</span></button>`).join('')}</div>`;
-      $('[data-say]', card).addEventListener('click', () => speak(e.w.t, ctx.lang));
-      setTimeout(() => speak(e.w.t, ctx.lang), 300);
       const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.m, pick: s.i }) };
-    },
-    listen(card, e, ctx) {
-      card.innerHTML = `<h2 class="ex-title">Écoute et choisis ce que tu entends</h2>
-        <div class="listen-row"><button class="say-big" data-say aria-label="Écouter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Écouter lentement">🐢</button></div>
-        ${canSpeak ? '' : `<p class="note">Voix indisponible sur ce navigateur. Indice : ${e.w.e}</p>`}
-        <div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" ${rtl(ctx.lang)}>${esc(o.t)}</span></button>`).join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.w.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i].id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
     type(card, e, ctx) {
       const extra = [...new Set(D.words(ctx.lang).map(w => w.t).join('').split('').filter(ch => /[^\x00-\x7F]/.test(ch) && ch.trim()))].slice(0, 10);
@@ -178,17 +159,15 @@
         if (b.classList.contains('matched')) return;
         const side = b.dataset.side;
         if (sel[side]) sel[side].classList.remove('sel');
-        sel[side] = b; b.classList.add('sel'); Sfx.tap();
-        if (side === 'l') { const w = e.pairs.find(x => x.id === b.dataset.id); speak(w.t, ctx.lang); }
-        if (sel.l && sel.r) {
+        sel[side] = b; b.classList.add('sel'); if (sel.l && sel.r) {
           const a = sel.l, c = sel.r; sel = { l: null, r: null };
           if (a.dataset.id === c.dataset.id) {
             [a, c].forEach(x => { x.classList.remove('sel'); x.classList.add('matched'); x.disabled = true; });
-            animate([a, c], { scale: [1.08, 1] }, spring(500, 15)); Sfx.pop(); found++;
+            animate([a, c], { scale: [1.08, 1] }, spring(500, 15)); found++;
             if (found === e.pairs.length) setTimeout(() => ctx.submit(), 350);
           } else {
             [a, c].forEach(x => { x.classList.remove('sel'); x.classList.add('miss'); setTimeout(() => x.classList.remove('miss'), 500); });
-            animate([a, c], { x: [0, -6, 6, -4, 4, 0] }, { duration: 0.35 }); Sfx.bad(); ctx.slip();
+            animate([a, c], { x: [0, -6, 6, -4, 4, 0] }, { duration: 0.35 }); ctx.slip();
           }
         }
       }));
@@ -208,13 +187,11 @@
       const sync = () => ctx.setReady(ans.children.length > 0);
       $$('.bank .tile', card).forEach(b => b.addEventListener('click', () => {
         if (b.classList.contains('used') || ctx.locked()) return;
-        b.classList.add('used'); Sfx.tap();
-        const c = document.createElement('button');
+        b.classList.add('used'); const c = document.createElement('button');
         c.className = 'tile'; c.textContent = b.textContent; c.dataset.k = b.dataset.k;
-        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); Sfx.tap(); });
+        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); });
         ans.appendChild(c);
         animate(c, { scale: [0.6, 1], y: [30, 0] }, spring(500, 22));
-        speak(b.textContent, ctx.lang, 1);
         sync();
       }));
       return {
@@ -232,7 +209,7 @@
         + `<p class="fb-sentence" ${rtl(ctx.lang)}>${esc(e.masked)}</p>`
         + `<p class="ic-m">${esc(e.fr)}</p>`
         + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i]?.id === e.word.id, answer: e.word.t, say: e.word.t, pick: s.i }) };
     },
     trueFalse(card, e, ctx) {
@@ -264,10 +241,9 @@
       const sync = () => ctx.setReady(ans.children.length === e.word.t.length);
       $$('.bank .tile', card).forEach(b => b.addEventListener('click', () => {
         if (b.classList.contains('used') || ctx.locked()) return;
-        b.classList.add('used'); Sfx.tap();
-        const c = document.createElement('button');
+        b.classList.add('used'); const c = document.createElement('button');
         c.className = 'tile'; c.textContent = b.dataset.ch;
-        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); Sfx.tap(); });
+        c.addEventListener('click', () => { if (ctx.locked()) return; c.remove(); b.classList.remove('used'); sync(); });
         ans.appendChild(c); animate(c, { scale: [0.6, 1], y: [20, 0] }, spring(500, 22)); sync();
       }));
       return { check: () => {
@@ -276,64 +252,13 @@
         return { ok, answer: e.word.t, say: e.word.t };
       }};
     },
-    dictation(card, e, ctx) {
-      const extra = [...new Set(D.words(ctx.lang).map(w => w.t).join('').split('').filter(ch => /[^\x00-\x7F]/.test(ch) && ch.trim()))].slice(0, 10);
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute et \u00e9cris le mot</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Lentement">\U0001f422</button></div>`
-        + '<input class="type-in" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ce que tu entends" aria-label="Ta r\u00e9ponse">'
-        + (extra.length ? `<div class="accents">${extra.map(ch => '<button type="button" data-ch="' + esc(ch) + '">' + esc(ch) + '</button>').join('')}</div>` : '');
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.word.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const inp = $('#typeIn', card);
-      inp.addEventListener('input', () => ctx.setReady(inp.value.trim().length > 0));
-      $$('[data-ch]', card).forEach(b => b.addEventListener('click', () => {
-        const p = inp.selectionStart ?? inp.value.length;
-        inp.value = inp.value.slice(0, p) + b.dataset.ch + inp.value.slice(inp.selectionEnd ?? p);
-        inp.focus(); inp.setSelectionRange(p + 1, p + 1); ctx.setReady(true);
-      }));
-      setTimeout(() => inp.focus(), 600);
-      return { check: () => {
-        const v = inp.value; inp.disabled = true;
-        if (loose(v) === loose(e.word.t)) return { ok: true, say: e.word.t };
-        if (norm(v) === norm(e.word.t)) return { ok: true, note: 'Attention : ' + e.word.t, say: e.word.t };
-        return { ok: false, answer: e.word.t, say: e.word.t };
-      }};
-    },
     frToEn(card, e, ctx) {
       card.innerHTML = '<h2 class="ex-title">Comment dit-on en anglais ?</h2>'
         + `<div class="speech">${mascot('happy')}<div class="bubble">${esc(e.w.m)}</div></div>`
         + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const s = selectable(card, ctx, i => speak(e.options[i].t, ctx.lang));
+      const s = selectable(card, ctx);
       return { check: () => ({ ok: e.options[s.i]?.id === e.w.id, answer: e.w.t, say: e.w.t, pick: s.i }) };
     },
-    soundImage(card, e, ctx) {
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute et trouve l\u2019image</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button><button class="say-slow" data-slow aria-label="Lentement">\U0001f422</button></div>`
-        + `<div class="opts grid">${e.options.map((o, i) => '<button class="opt pic" data-i="' + i + '" aria-pressed="false"><span class="pic-e">' + o.e + '</span><span class="pic-t">' + esc(o.m) + '</span><kbd>' + (i+1) + '</kbd></button>').join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = rate => { speak(e.w.t, ctx.lang, rate); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', () => play(0.85));
-      $('[data-slow]', card).addEventListener('click', () => play(0.5));
-      setTimeout(() => play(0.85), 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i]?.id === e.w.id, answer: e.w.e + ' ' + e.w.m, say: e.w.t, pick: s.i }) };
-    },
-    listeningCloze(card, e, ctx) {
-      const phText = e.phrase?.tokens?.join(' ') || e.word.t;
-      card.innerHTML = '<h2 class="ex-title">\u00c9coute la phrase et compl\u00e8te</h2>'
-        + `<div class="listen-row"><button class="say-big" data-say aria-label="\u00c9couter">${icon('volume')}</button></div>`
-        + `<p class="fb-sentence">${esc(e.masked)}</p>`
-        + `<div class="opts list">${e.options.map((o, i) => '<button class="opt" data-i="' + i + '" aria-pressed="false"><kbd>' + (i+1) + '</kbd><span class="ot" ' + rtl(ctx.lang) + '>' + esc(o.t) + '</span></button>').join('')}</div>`;
-      const big = $('[data-say]', card);
-      const play = () => { speak(phText, ctx.lang, 0.75); big.classList.remove('pulse'); void big.offsetWidth; big.classList.add('pulse'); };
-      big.addEventListener('click', play);
-      setTimeout(play, 350);
-      const s = selectable(card, ctx);
-      return { check: () => ({ ok: e.options[s.i]?.id === e.word.id, answer: e.word.t, say: e.word.t, pick: s.i }) };
-    }
 
   };
 
@@ -365,7 +290,7 @@
     let queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
     if (!queue || !queue.length) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }
     if (lang === 'en' && eng) { eng.recordLessonSelection(p, queue); save(); }
-    if (!canSpeak) queue = queue.map(silentVersion);
+    queue = queue.map(silentVersion);
     const st = { attempts: {}, queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
 
     const unitColor = (lang === 'en' && eng?.getA1Units()) ? (eng.getA1Units()[ui]?.color || '#6C4DFF') : D.units[ui]?.color || '#6C4DFF';
@@ -453,11 +378,9 @@
       }
       if (res.ok) {
         st.correct++; st.combo++; st.maxCombo = Math.max(st.maxCombo, st.combo);
-        Sfx.ok(); if (res.say) speak(res.say, lang);
         animate(card, { scale: [1, 1.02, 1] }, { duration: 0.3 });
       } else {
-        st.wrong++; st.combo = 0; Sfx.bad();
-        animate(card, { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 });
+        st.wrong++; st.combo = 0; animate(card, { x: [0, -10, 10, -6, 6, 0] }, { duration: 0.4 });
         if (!practice) { if (p.hearts === LZ.MAX_H) p.heartsAt = Date.now(); p.hearts = Math.max(0, p.hearts - 1); $('#lh').textContent = p.hearts; animate($('.l-top .heart'), { scale: [1.5, 1] }, spring(500, 12)); save(); }
         if (!e._retry) st.queue.push({ ...e, _retry: true, options: e.options ? shuffle(e.options) : undefined });
       }
@@ -470,10 +393,9 @@
       foot.className = 'l-foot ' + (res.ok ? 'ok' : 'bad');
       foot.innerHTML = `<div class="l-foot-in"><div class="fb"><span class="fb-ic">${icon(res.ok ? 'check' : 'x')}</span>
         <div><b>${res.ok ? rand(D.praise) : rand(D.comfort)}</b>${res.ok ? '' : `<p>Bonne réponse : <span class="fb-ans" ${rtl(lang)}>${esc(res.answer)}</span></p>`}${res.note ? `<p>${esc(res.note)}</p>` : ''}</div>
-        ${res.say && !res.ok ? `<button class="icon-btn fb-say" aria-label="Écouter la bonne réponse">${icon('volume')}</button>` : ''}</div>
+        </div>
         <button class="btn ${res.ok ? 'btn-ok' : 'btn-bad'} btn-lg" id="check">Continuer</button></div>`;
       animate(foot.firstElementChild, { y: [30, 0], opacity: [0, 1] }, spring(420, 30));
-      const fs = $('.fb-say', foot); fs && fs.addEventListener('click', () => speak(res.say, lang));
       $('#check').addEventListener('click', onCheck);
       setTimeout(() => { const k = $('#check'); k && k.focus(); }, 60);
     }
@@ -507,7 +429,7 @@
         <button class="btn btn-ghost btn-block" id="qt">Quitter la leçon</button></div></div>`, {
         dismiss: false,
         onMount: (box, close) => {
-          $('#rf', box).addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); Sfx.coin(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next(); });
+          $('#rf', box).addEventListener('click', () => { p.gems -= 350; p.hearts = MAX_H; p.heartsAt = Date.now(); save(); $('#lh').textContent = p.hearts; close(); st.phase = 'feedback'; next(); });
           $('#qt', box).addEventListener('click', () => { close(); back(); });
         }
       });
@@ -534,7 +456,6 @@
       const rankAfter = rankOf(p.xp);
       const goalHit = beforeToday < p.goal && p.days[t] >= p.goal;
       save();
-      Sfx.done();
       const acc = Math.round(st.correct / Math.max(1, st.correct + st.wrong) * 100);
       const newEarned = c.done - Math.floor(c.done / 5);
       const stickerIdx = newEarned - 1;
@@ -591,7 +512,7 @@
             <p class="end-sub">${now === 1 ? 'Une flamme vient de s’allumer. Reviens demain pour la faire grandir.' : 'Tu as appris chaque jour. Reviens demain pour continuer.'}</p>
           </div><footer class="end-foot"><button class="btn btn-sun btn-lg" id="endNext">Je reviens demain</button></footer></div>`;
         animate($('.big-flame'), { scale: [0, 1.15, 1], rotate: [-20, 8, 0] }, { duration: 0.8 });
-        setTimeout(() => { Sfx.streak(); const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
+        setTimeout(() => { const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
         const today = $('.week .today i'); today && animate(today, { scale: [0, 1.3, 1] }, { delay: 0.9, duration: 0.5 });
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
       };
@@ -607,7 +528,6 @@
           <p class="end-sub">${D.ranks[ri + 1] ? `Prochain statut : ${D.ranks[ri + 1].name}, à ${D.ranks[ri + 1].min} XP.` : 'Le plus haut statut. Tu es une légende.'}</p>
           </div><footer class="end-foot"><button class="btn btn-primary btn-lg" id="endNext">Génial</button></footer></div>`;
         animate($('.medal'), { rotateY: [540, 0], scale: [0.3, 1] }, spring(60, 12));
-        Sfx.streak();
         $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
       };
     }
@@ -630,7 +550,6 @@
           </footer>
         </div>`;
         animate($('#sCard'), { rotateY: [-90, 0], scale: [0.4, 1.08, 1] }, { delay: 0.3, ...spring(150, 12) });
-        Sfx.coin();
         $('#endNext').addEventListener('click', nextFn);
         setTimeout(() => { const k = $('#endNext'); k && k.focus(); }, 200);
       };
@@ -651,7 +570,6 @@
       if (st.phase !== 'answer' || ev.target.tagName === 'INPUT') return;
       const n = parseInt(ev.key, 10);
       if (n >= 1 && n <= 4) { const b = $(`.opt[data-i="${n - 1}"]`, stage); b && b.click(); }
-      if (ev.key === ' ' && $('[data-say]', stage)) { ev.preventDefault(); $('[data-say]', stage).click(); }
     };
     document.addEventListener('keydown', onKey);
     onLeave(() => document.removeEventListener('keydown', onKey));
