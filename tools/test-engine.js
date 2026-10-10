@@ -117,18 +117,19 @@ function checkExercise(e, fails, ctx) {
   const fails = [];
   let lessons = 0, exercises = 0;
 
-  // Play the complete fresh course, then retry with a different strength profile.
+  // Every unit draws only from its own pool, regardless of lesson slot.
   const seen = new Set();
   for (let ui = 0; ui < units; ui++) {
     for (let li = 0; li < 4; li++) {
       const first = eng.buildA1Lesson(ui, li, {});
       const replay = eng.buildA1Lesson(ui, li, { strength: { en: { 'en-u0-w0': 5 } } });
-      if (!first || first.length !== data.units[ui].lessons[li].questions.length) fails.push(`u${ui} l${li}: missing scheduled lesson`);
-      if (JSON.stringify(first.map(e => e.questionId)) !== JSON.stringify(replay.map(e => e.questionId))) {
-        fails.push(`u${ui} l${li}: curriculum changes with random seed/profile`);
-      }
+      const pool = data.units[ui].lessons.flatMap(l => l.questions);
+      if (!first || first.length !== Math.min(12, Math.floor(pool.length / 5))) fails.push(`u${ui} l${li}: wrong session size`);
+      if (!replay.length) fails.push(`u${ui} l${li}: empty replay`);
+      const sessionIds = new Set();
       first.forEach(e => {
-        if (!e.questionId || seen.has(e.questionId)) fails.push(`Repeated/missing question ID ${e.questionId}`);
+        if (!e.questionId || sessionIds.has(e.questionId) || !pool.some(q => q.id === e.questionId)) fails.push(`Invalid session question ID ${e.questionId}`);
+        sessionIds.add(e.questionId);
         seen.add(e.questionId);
         if (e.options && e.options.length !== 4) fails.push(`${e.questionId}: fewer than four choices`);
         if (e.options && e.type !== 'choice' && e.options.some(w => w.u > ui)) fails.push(`${e.questionId}: future-unit distractor`);
@@ -136,7 +137,49 @@ function checkExercise(e, fails, ctx) {
     }
     if (eng.buildA1Lesson(ui, 4, {}) !== null) fails.push(`u${ui}: chest should not generate a lesson`);
   }
-  console.log(`Complete course: ${seen.size} distinct scheduled questions`);
+  console.log(`Pool selection: ${seen.size} distinct questions sampled`);
+
+  // Real persisted profile state, repeated replay, pool exhaustion and cooldown.
+  for (let ui = 0; ui < units; ui++) {
+    let profile = { courses: { en: { done: 0 } } };
+    const used = new Set();
+    for (let session = 0; session < 100; session++) {
+      const prior = profile.courses.en.questionHistory;
+      const blocked = new Set((prior?.recent || []).flat());
+      const seq = eng.buildA1Lesson(ui, session % 4, profile);
+      if (!seq.length) fails.push(`u${ui}: pool exhausted at session ${session}`);
+      for (const e of seq) {
+        if (blocked.has(e.questionId)) fails.push(`u${ui}: cooldown violated at session ${session}`);
+        used.add(e.questionId);
+      }
+      if (session < 5 && seq.some(e => e.isReview)) fails.push(`u${ui}: early repeat`);
+      eng.recordLessonSelection(profile, seq);
+      profile = JSON.parse(JSON.stringify(profile)); // browser reload round-trip
+      if (profile.courses.en.questionHistory.recent.length > 4) fails.push('Unbounded recent history');
+    }
+    const pool = data.units[ui].lessons.flatMap(l => l.questions);
+    if (used.size !== pool.length) fails.push(`u${ui}: starvation (${used.size}/${pool.length})`);
+    const other = { courses: {} };
+    if (eng.buildA1Lesson(ui, 0, other).some(e => e.isReview)) fails.push('History leaks between profiles');
+    if (other.courses.en) fails.push('Selection mutates a profile before reservation');
+  }
+  console.log('Cooldown: 2200 persisted sessions; four-session exclusion and full pool coverage checked');
+
+  // Review quota while unseen material remains, and course reset migration.
+  const reviewProfile = { courses: { en: { questionHistory: { recent: [], seen: {} } } } };
+  const firstUnitPool = data.units[0].lessons.flatMap(l => l.questions);
+  reviewProfile.courses.en.questionHistory.seen[firstUnitPool[0].id] = 1;
+  const reviewLesson = eng.buildA1Lesson(0, 0, reviewProfile);
+  if (reviewLesson.filter(e => e.isReview).length !== 1) fails.push('A1 review quota should be one of twelve');
+  const crossUnitProfile = { courses: {} };
+  for (let i = 0; i < 40; i++) {
+    const seq = eng.buildA1Lesson(i % 2, 0, crossUnitProfile);
+    const blocked = new Set((crossUnitProfile.courses.en?.questionHistory?.recent || []).flat());
+    if (seq.some(e => blocked.has(e.questionId))) fails.push('Cooldown fails when switching units');
+    eng.recordLessonSelection(crossUnitProfile, seq);
+  }
+  crossUnitProfile.courses.en = { done: 0 };
+  if (eng.buildA1Lesson(0, 0, crossUnitProfile).some(e => e.isReview)) fails.push('Course reset keeps stale history');
 
   // 1) Protocole de l'audit : unités i modulo 12, leçon 3, profil vide
   for (let i = 0; i < N; i++) {

@@ -253,9 +253,23 @@
     if (!lesson) return null;
     const words = new Map(unit.words.map(w => [w.id, normalize(w)]));
     const phrases = new Map(unit.phrases.map(p => [p.id, p]));
-    // The curriculum owns selection. Randomness only changes option order.
-    // Reopening a completed lesson is explicit practice of that same lesson.
-    return lesson.questions.map(q => {
+    // A unit is a topic/CEFR pool. Reserve at most one fifth per session so
+    // four subsequent sessions can exclude this entire set, even on replay.
+    const pool = unit.lessons.flatMap(l => l.questions);
+    const history = profile?.courses?.en?.questionHistory;
+    const recent = new Set((history?.recent || []).slice(-4).flat());
+    const seen = history?.seen || {};
+    const available = pool.filter(q => !recent.has(q.id));
+    const size = Math.min(12, Math.floor(pool.length / 5));
+    const fresh = shuf(available.filter(q => !seen[q.id]));
+    const review = shuf(available.filter(q => seen[q.id]));
+    // Random tie breaks, then least frequently used questions first.
+    review.sort((a, b) => seen[a.id] - seen[b.id]);
+    const selected = fresh.slice(0, size);
+    // One eligible older question (8.3% for A1), only after the cooldown.
+    if (review.length && selected.length === size && size >= 10) selected.pop();
+    selected.push(...review.slice(0, size - selected.length));
+    return noConsecutive(shuf(selected).map(q => {
       let ex;
       if (q.type === 'build') ex = { type: 'build', ph: normalizePh(phrases.get(q.phraseId)) };
       else if (q.type === 'match') ex = { type: 'match', pairs: q.pairIds.map(id => words.get(id)) };
@@ -266,8 +280,23 @@
         correctChoiceId: q.id + '-option-' + q.answer
       };
       else ex = B[q.type](words.get(q.wordId), unit, ui);
-      return { ...ex, questionId: q.id, objective: q.objective, sourceRefs: q.sourceRefs || unit.sourceRefs };
-    });
+      return { ...ex, questionId: q.id, isReview: !!seen[q.id], objective: q.objective, sourceRefs: q.sourceRefs || unit.sourceRefs };
+    }));
+  }
+
+  // Called once when a live lesson starts, never on wrong-answer retries.
+  // Reserving the full session also prevents quit/reload from bypassing cooldown.
+  function recordLessonSelection(profile, exercises) {
+    if (!profile || !exercises?.length) return;
+    profile.courses ||= {};
+    profile.courses.en ||= { done: 0, started: Date.now() };
+    const course = profile.courses.en;
+    const history = course.questionHistory ||= { recent: [], seen: {} };
+    history.recent ||= [];
+    history.seen ||= {};
+    const ids = [...new Set(exercises.map(e => e.questionId).filter(Boolean))];
+    for (const id of ids) history.seen[id] = (history.seen[id] || 0) + 1;
+    history.recent = [...history.recent.slice(-3), ids];
   }
 
   // ── Pas deux fois le même type d'affilée ──────────────────
@@ -287,7 +316,7 @@
   LZ.engine = {
     getA1Data, getTotal, getA1Units, ensureA1, getStatus, reload: () => { status = 'idle'; return load(); },
     normalize, normalizePh, joinTokens,
-    buildA1Lesson,
+    buildA1Lesson, recordLessonSelection,
     updateStrength, getStrengths
   };
 })();

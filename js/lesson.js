@@ -364,6 +364,7 @@
     const ui = Math.floor(idx / PER_UNIT), li = idx % PER_UNIT;
     let queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
     if (!queue || !queue.length) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }
+    if (lang === 'en' && eng) { eng.recordLessonSelection(p, queue); save(); }
     if (!canSpeak) queue = queue.map(silentVersion);
     const st = { attempts: {}, queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
 
