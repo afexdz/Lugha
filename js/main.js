@@ -117,7 +117,7 @@
   LZ.go = go;
   applyPrefs();
   matchMedia('(prefers-reduced-motion: reduce)').addEventListener?.('change', applyPrefs);
-  addEventListener('hashchange', render);
+  addEventListener('hashchange', () => { const r=parse(); if(r.name==='wbx' && LZ.wbx.navigate?.(r)) return; render(); });
   addEventListener('storage', e => { if (e.key === 'lugha:v1') location.reload(); });
 
   // Initialisation Supabase puis premier rendu
