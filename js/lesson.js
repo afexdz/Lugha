@@ -461,7 +461,7 @@
       const stickerIdx = newEarned - 1;
       const screens = [
         () => resultScreen({ xp, gems, acc, secs, perfect, boost, goalHit }),
-        (!practice && D.islands && D.islands[lang]) ? () => stickerScreen(lang, stickerIdx) : null,
+        (!practice && D.islands?.[lang]?.stickers?.[stickerIdx]) ? () => stickerScreen(lang, stickerIdx) : null,
         first ? () => streakScreen(prevStreak, p.streak) : null,
         rankAfter > rankBefore ? () => rankScreen(rankAfter) : null
       ].filter(Boolean);

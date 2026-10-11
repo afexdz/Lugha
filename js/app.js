@@ -159,11 +159,12 @@
     let html = '';
     if (limit) html += `<div class="limit-note">${mascot('calm')}<div><b>C’est tout pour aujourd’hui</b><p>Le temps fixé par tes parents est atteint. Rendez-vous demain, ta série t’attend !</p></div></div>`;
     const isle = D.islands[p.lang];
-    const vcEarned = done - Math.floor(done / 5);
+    const vcTotal = isle.stickers.length;
+    const vcEarned = clamp(done - Math.floor(done / 5), 0, vcTotal);
     html += `<a class="voyage-card" href="#/voyage" style="--c:${L.color}">`
       + `<span class="vc-isle">${isle.embleme}</span>`
       + `<div class="vc-info"><b>Mon voyage · ${esc(L.name)}</b>`
-      + `<small>${vcEarned === 1 ? '1 autocollant collecté' : vcEarned + ' autocollants collectés'} sur 20</small></div>`
+      + `<small>${vcEarned === 1 ? '1 autocollant collecté' : vcEarned + ' autocollants collectés'} sur ${vcTotal}</small></div>`
       + `${icon('next')}</a>`;
 
     const activeUnits = (p.lang === 'en' && LZ.engine?.getA1Units()) ? LZ.engine.getA1Units() : D.units;
@@ -583,18 +584,19 @@
   function voyage(el) {
     const p = prof();
     const TOTAL_STEPS = D.units.length * PER_UNIT;
-    const stickerCount = lang => { const c = p.courses[lang]; const d = c ? c.done : 0; return d - Math.floor(d / 5); };
+    const stickerCount = lang => { const c = p.courses[lang]; const d = c ? c.done : 0; return clamp(d - Math.floor(d / 5), 0, D.islands[lang].stickers.length); };
 
     const pathHtml = D.order.map((lang, i) => {
       const L = D.langs[lang], isle = D.islands[lang], c = p.courses[lang];
-      const started = !!c, earned = stickerCount(lang), pct = c ? Math.round(c.done / TOTAL_STEPS * 100) : 0;
+      const totalSteps = lang === 'en' && LZ.engine ? LZ.engine.getTotal() : TOTAL_STEPS;
+      const started = !!c, earned = stickerCount(lang), pct = c ? clamp(Math.round(c.done / totalSteps * 100), 0, 100) : 0;
       const isActive = lang === p.lang, side = i % 2 === 0 ? 'left' : 'right';
       return `<div class="isle-stop ${started ? 'started' : 'locked'} ${isActive ? 'active' : ''} ${side}" data-lang="${lang}" style="--c:${L.color}">`
         + (isActive ? `<div class="bulle-float">${mascot('happy', 'isle-mascot')}</div>` : '')
         + `<button class="isle-btn" ${!started ? 'disabled' : ''} aria-label="${esc(L.name)}${started ? `, ${earned} autocollants, ${pct}%` : ', non commencee'}">`
         + `<div class="isle-dot"><span>${started ? isle.embleme : '\u{1F310}'}</span></div>`
         + `<div class="isle-info"><b>${esc(L.name)}</b>`
-        + `<small>${started ? earned + '/20 autocollants · ' + pct + '%' : 'Pas encore commencée'}</small>`
+        + `<small>${started ? earned + '/' + isle.stickers.length + ' autocollants · ' + pct + '%' : 'Pas encore commencée'}</small>`
         + `</div></button></div>`;
     }).join('');
 
@@ -618,7 +620,7 @@
       ).join('');
       albumEl.innerHTML = `<div class="album-header">`
         + `<div class="album-badge" style="--c:${L.color}"><span>${isle.embleme}</span><b>${esc(L.name)}</b></div>`
-        + `<span class="album-count">${earned} / 20 autocollants</span>`
+        + `<span class="album-count">${earned} / ${isle.stickers.length} autocollants</span>`
         + `</div><div class="sticker-grid">${stickersHtml}</div>`
         + (!c ? `<p class="album-empty">Commence le cours de ${esc(L.name.toLowerCase())} pour débloquer des autocollants.</p>` : '');
 
