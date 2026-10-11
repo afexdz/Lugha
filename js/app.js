@@ -258,9 +258,10 @@
     const phrases = unit ? unit.phrases.map(LZ.engine.normalizePh) : [D.phrase(p.lang, ui)];
     const sep = L.noSpace ? '' : ' ';
     const phraseText = ph => unit ? LZ.engine.joinTokens(ph.tokens) : ph.tokens.join(sep);
-    modal(`<h2 class="modal-title">${unit?.emoji || D.units[ui].icon} ${esc(unit?.nom || D.units[ui].title)}</h2><p class="modal-text">Les mots et les phrases de l’unité.</p>
-      <div class="guide">${ws.map(w => `<button class="g-w"><span class="g-e">${w.e}</span><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(w.t)}</span>${w.r ? `<small>${esc(w.r)}</small>` : ''}<em>${esc(w.m)}</em></button>`).join('')}</div>
-      <div class="g-ph"><p class="small">Phrases de l’unité</p>${phrases.map(ph => `<button class="g-w wide"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(phraseText(ph))}</span><em>${esc(ph.m)}</em></button>`).join('')}</div>
+    modal(`<div class="guide-close"><button class="btn btn-ghost" data-close aria-label="Fermer le guide">Fermer</button></div><h2 class="modal-title">${unit?.emoji || D.units[ui].icon} ${esc(unit?.nom || D.units[ui].title)}</h2><p class="modal-text">Les mots et les phrases de l’unité.</p>
+      ${(unit?.teachingNotes || []).map(n => `<section class="guide-note"><h3>${esc(n.title)}</h3><p>${esc(n.rule)}</p><p lang="en"><b>${esc(n.example)}</b></p><p class="small">${esc(n.translation)}</p></section>`).join('')}
+      <div class="guide">${ws.map(w => `<div class="g-w"><span class="g-e" aria-hidden="true">${w.e}</span><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(w.t)}</span>${w.r ? `<small>${esc(w.r)}</small>` : ''}<em>${esc(w.m)}</em></div>`).join('')}</div>
+      <div class="g-ph"><p class="small">Phrases de l’unité</p>${phrases.map(ph => `<div class="g-w wide"><span class="g-t" ${L.rtl ? 'dir="rtl"' : ''}>${esc(phraseText(ph))}</span><em>${esc(ph.m)}</em></div>`).join('')}</div>
       <div class="modal-actions"><button class="btn btn-primary" data-close>Fermer</button></div>`, {
       cls: 'wide',
     });

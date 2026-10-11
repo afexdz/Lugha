@@ -227,7 +227,7 @@
           "id": "en-u0-w27",
           "t": "good afternoon",
           "fr": "bonjour (après-midi)",
-          "e": "👋",
+          "e": "🌇",
           "type": "phrase",
           "unite": 0
         },
@@ -235,7 +235,7 @@
           "id": "en-u0-w28",
           "t": "good evening",
           "fr": "bonsoir",
-          "e": "👋",
+          "e": "🌆",
           "type": "phrase",
           "unite": 0
         },
@@ -243,7 +243,7 @@
           "id": "en-u0-w29",
           "t": "see you tomorrow",
           "fr": "à demain",
-          "e": "👋",
+          "e": "📅",
           "type": "phrase",
           "unite": 0
         },
@@ -251,7 +251,7 @@
           "id": "en-u0-w30",
           "t": "how old are you",
           "fr": "quel âge as-tu",
-          "e": "👋",
+          "e": "🎂",
           "type": "phrase",
           "unite": 0
         },
@@ -259,7 +259,7 @@
           "id": "en-u0-w31",
           "t": "I'm from",
           "fr": "je viens de",
-          "e": "👋",
+          "e": "🌍",
           "type": "phrase",
           "unite": 0
         },
@@ -267,7 +267,7 @@
           "id": "en-u0-w32",
           "t": "country",
           "fr": "pays",
-          "e": "👋",
+          "e": "🌍",
           "type": "word",
           "unite": 0
         },
@@ -275,7 +275,7 @@
           "id": "en-u0-w33",
           "t": "city",
           "fr": "ville",
-          "e": "👋",
+          "e": "🏙️",
           "type": "word",
           "unite": 0
         },
@@ -283,7 +283,7 @@
           "id": "en-u0-w34",
           "t": "address",
           "fr": "adresse",
-          "e": "👋",
+          "e": "🏠",
           "type": "word",
           "unite": 0
         },
@@ -291,7 +291,7 @@
           "id": "en-u0-w35",
           "t": "phone number",
           "fr": "numéro de téléphone",
-          "e": "👋",
+          "e": "☎️",
           "type": "phrase",
           "unite": 0
         },
@@ -299,7 +299,7 @@
           "id": "en-u0-w36",
           "t": "repeat",
           "fr": "répéter",
-          "e": "👋",
+          "e": "🔁",
           "type": "word",
           "unite": 0
         },
@@ -307,7 +307,7 @@
           "id": "en-u0-w37",
           "t": "speak",
           "fr": "parler",
-          "e": "👋",
+          "e": "💬",
           "type": "word",
           "unite": 0
         },
@@ -315,7 +315,7 @@
           "id": "en-u0-w38",
           "t": "slowly",
           "fr": "lentement",
-          "e": "👋",
+          "e": "🐌",
           "type": "word",
           "unite": 0
         },
@@ -323,7 +323,7 @@
           "id": "en-u0-w39",
           "t": "English",
           "fr": "anglais",
-          "e": "👋",
+          "e": "🔤",
           "type": "word",
           "unite": 0
         }
@@ -1056,7 +1056,7 @@
           "id": "en-u1-w25",
           "t": "people",
           "fr": "gens",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "👥",
           "type": "word",
           "unite": 1
         },
@@ -1064,7 +1064,7 @@
           "id": "en-u1-w26",
           "t": "man",
           "fr": "homme",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "👨",
           "type": "word",
           "unite": 1
         },
@@ -1072,7 +1072,7 @@
           "id": "en-u1-w27",
           "t": "woman",
           "fr": "femme",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "👩",
           "type": "word",
           "unite": 1
         },
@@ -1080,7 +1080,7 @@
           "id": "en-u1-w28",
           "t": "teenager",
           "fr": "adolescent / adolescente",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🧑",
           "type": "word",
           "unite": 1
         },
@@ -1088,7 +1088,7 @@
           "id": "en-u1-w29",
           "t": "adult",
           "fr": "adulte",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🧑",
           "type": "word",
           "unite": 1
         },
@@ -1096,7 +1096,7 @@
           "id": "en-u1-w30",
           "t": "neighbour",
           "fr": "voisin / voisine",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🏘️",
           "type": "word",
           "unite": 1
         },
@@ -1104,7 +1104,7 @@
           "id": "en-u1-w31",
           "t": "person",
           "fr": "personne",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🧑",
           "type": "word",
           "unite": 1
         },
@@ -1112,7 +1112,7 @@
           "id": "en-u1-w32",
           "t": "we",
           "fr": "nous",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "👥",
           "type": "word",
           "unite": 1
         },
@@ -1120,7 +1120,7 @@
           "id": "en-u1-w33",
           "t": "they",
           "fr": "ils / elles",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "👥",
           "type": "word",
           "unite": 1
         },
@@ -1128,7 +1128,7 @@
           "id": "en-u1-w34",
           "t": "our",
           "fr": "notre / nos",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🔤",
           "type": "word",
           "unite": 1
         },
@@ -1136,7 +1136,7 @@
           "id": "en-u1-w35",
           "t": "their",
           "fr": "leur / leurs",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🔤",
           "type": "word",
           "unite": 1
         },
@@ -1144,7 +1144,7 @@
           "id": "en-u1-w36",
           "t": "my",
           "fr": "mon / ma / mes",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🔤",
           "type": "word",
           "unite": 1
         },
@@ -1152,7 +1152,7 @@
           "id": "en-u1-w37",
           "t": "your",
           "fr": "ton / ta / tes",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🔤",
           "type": "word",
           "unite": 1
         },
@@ -1160,7 +1160,7 @@
           "id": "en-u1-w38",
           "t": "live",
           "fr": "habiter",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🏠",
           "type": "word",
           "unite": 1
         },
@@ -1168,7 +1168,7 @@
           "id": "en-u1-w39",
           "t": "visit",
           "fr": "rendre visite",
-          "e": "👨‍👩‍👧‍👦",
+          "e": "🚶",
           "type": "word",
           "unite": 1
         }
@@ -1899,7 +1899,7 @@
           "id": "en-u2-w25",
           "t": "potato",
           "fr": "pomme de terre",
-          "e": "🍎",
+          "e": "🥔",
           "type": "word",
           "unite": 2
         },
@@ -1907,7 +1907,7 @@
           "id": "en-u2-w26",
           "t": "carrot",
           "fr": "carotte",
-          "e": "🍎",
+          "e": "🥕",
           "type": "word",
           "unite": 2
         },
@@ -1915,7 +1915,7 @@
           "id": "en-u2-w27",
           "t": "onion",
           "fr": "oignon",
-          "e": "🍎",
+          "e": "🧅",
           "type": "word",
           "unite": 2
         },
@@ -1923,7 +1923,7 @@
           "id": "en-u2-w28",
           "t": "salad",
           "fr": "salade",
-          "e": "🍎",
+          "e": "🥗",
           "type": "word",
           "unite": 2
         },
@@ -1931,7 +1931,7 @@
           "id": "en-u2-w29",
           "t": "pasta",
           "fr": "pâtes",
-          "e": "🍎",
+          "e": "🍝",
           "type": "word",
           "unite": 2
         },
@@ -1939,7 +1939,7 @@
           "id": "en-u2-w30",
           "t": "butter",
           "fr": "beurre",
-          "e": "🍎",
+          "e": "🧈",
           "type": "word",
           "unite": 2
         },
@@ -1947,7 +1947,7 @@
           "id": "en-u2-w31",
           "t": "salt",
           "fr": "sel",
-          "e": "🍎",
+          "e": "🧂",
           "type": "word",
           "unite": 2
         },
@@ -1955,7 +1955,7 @@
           "id": "en-u2-w32",
           "t": "sugar",
           "fr": "sucre",
-          "e": "🍎",
+          "e": "🍬",
           "type": "word",
           "unite": 2
         },
@@ -1963,7 +1963,7 @@
           "id": "en-u2-w33",
           "t": "tea",
           "fr": "thé",
-          "e": "🍎",
+          "e": "🍵",
           "type": "word",
           "unite": 2
         },
@@ -1971,7 +1971,7 @@
           "id": "en-u2-w34",
           "t": "lunch",
           "fr": "déjeuner",
-          "e": "🍎",
+          "e": "🍽️",
           "type": "word",
           "unite": 2
         },
@@ -1979,7 +1979,7 @@
           "id": "en-u2-w35",
           "t": "dinner",
           "fr": "dîner",
-          "e": "🍎",
+          "e": "🍽️",
           "type": "word",
           "unite": 2
         },
@@ -1987,7 +1987,7 @@
           "id": "en-u2-w36",
           "t": "plate",
           "fr": "assiette",
-          "e": "🍎",
+          "e": "🍽️",
           "type": "word",
           "unite": 2
         },
@@ -1995,7 +1995,7 @@
           "id": "en-u2-w37",
           "t": "cup",
           "fr": "tasse",
-          "e": "🍎",
+          "e": "☕",
           "type": "word",
           "unite": 2
         },
@@ -2003,7 +2003,7 @@
           "id": "en-u2-w38",
           "t": "spoon",
           "fr": "cuillère",
-          "e": "🍎",
+          "e": "🥄",
           "type": "word",
           "unite": 2
         },
@@ -2011,7 +2011,7 @@
           "id": "en-u2-w39",
           "t": "fork",
           "fr": "fourchette",
-          "e": "🍎",
+          "e": "🍴",
           "type": "word",
           "unite": 2
         }
@@ -2749,7 +2749,7 @@
           "id": "en-u3-w25",
           "t": "sheep",
           "fr": "mouton",
-          "e": "🐶",
+          "e": "🐑",
           "type": "word",
           "unite": 3
         },
@@ -2757,7 +2757,7 @@
           "id": "en-u3-w26",
           "t": "goat",
           "fr": "chèvre",
-          "e": "🐶",
+          "e": "🐐",
           "type": "word",
           "unite": 3
         },
@@ -2765,7 +2765,7 @@
           "id": "en-u3-w27",
           "t": "pig",
           "fr": "cochon",
-          "e": "🐶",
+          "e": "🐖",
           "type": "word",
           "unite": 3
         },
@@ -2773,7 +2773,7 @@
           "id": "en-u3-w28",
           "t": "mouse",
           "fr": "souris",
-          "e": "🐶",
+          "e": "🐁",
           "type": "word",
           "unite": 3
         },
@@ -2781,7 +2781,7 @@
           "id": "en-u3-w29",
           "t": "tiger",
           "fr": "tigre",
-          "e": "🐶",
+          "e": "🐅",
           "type": "word",
           "unite": 3
         },
@@ -2789,7 +2789,7 @@
           "id": "en-u3-w30",
           "t": "giraffe",
           "fr": "girafe",
-          "e": "🐶",
+          "e": "🦒",
           "type": "word",
           "unite": 3
         },
@@ -2797,7 +2797,7 @@
           "id": "en-u3-w31",
           "t": "zebra",
           "fr": "zèbre",
-          "e": "🐶",
+          "e": "🦓",
           "type": "word",
           "unite": 3
         },
@@ -2805,7 +2805,7 @@
           "id": "en-u3-w32",
           "t": "turtle",
           "fr": "tortue",
-          "e": "🐶",
+          "e": "🐢",
           "type": "word",
           "unite": 3
         },
@@ -2813,7 +2813,7 @@
           "id": "en-u3-w33",
           "t": "bee",
           "fr": "abeille",
-          "e": "🐶",
+          "e": "🐝",
           "type": "word",
           "unite": 3
         },
@@ -2821,7 +2821,7 @@
           "id": "en-u3-w34",
           "t": "ant",
           "fr": "fourmi",
-          "e": "🐶",
+          "e": "🐜",
           "type": "word",
           "unite": 3
         },
@@ -2829,7 +2829,7 @@
           "id": "en-u3-w35",
           "t": "spider",
           "fr": "araignée",
-          "e": "🐶",
+          "e": "🕷️",
           "type": "word",
           "unite": 3
         },
@@ -2837,7 +2837,7 @@
           "id": "en-u3-w36",
           "t": "tail",
           "fr": "queue (animal)",
-          "e": "🐶",
+          "e": "🔤",
           "type": "word",
           "unite": 3
         },
@@ -2845,7 +2845,7 @@
           "id": "en-u3-w37",
           "t": "wing",
           "fr": "aile",
-          "e": "🐶",
+          "e": "🪽",
           "type": "word",
           "unite": 3
         },
@@ -2853,7 +2853,7 @@
           "id": "en-u3-w38",
           "t": "feed",
           "fr": "nourrir",
-          "e": "🐶",
+          "e": "🥣",
           "type": "word",
           "unite": 3
         },
@@ -2861,7 +2861,7 @@
           "id": "en-u3-w39",
           "t": "sleep",
           "fr": "dormir",
-          "e": "🐶",
+          "e": "😴",
           "type": "word",
           "unite": 3
         }
@@ -3598,7 +3598,7 @@
           "id": "en-u4-w25",
           "t": "silver",
           "fr": "argenté",
-          "e": "🎨",
+          "e": "🔤",
           "type": "word",
           "unite": 4
         },
@@ -3606,7 +3606,7 @@
           "id": "en-u4-w26",
           "t": "gold",
           "fr": "doré",
-          "e": "🎨",
+          "e": "🔤",
           "type": "word",
           "unite": 4
         },
@@ -3614,7 +3614,7 @@
           "id": "en-u4-w27",
           "t": "dark blue",
           "fr": "bleu foncé",
-          "e": "🎨",
+          "e": "🔤",
           "type": "phrase",
           "unite": 4
         },
@@ -3622,7 +3622,7 @@
           "id": "en-u4-w28",
           "t": "light green",
           "fr": "vert clair",
-          "e": "🎨",
+          "e": "🔤",
           "type": "phrase",
           "unite": 4
         },
@@ -3630,7 +3630,7 @@
           "id": "en-u4-w29",
           "t": "dark green",
           "fr": "vert foncé",
-          "e": "🎨",
+          "e": "🔤",
           "type": "phrase",
           "unite": 4
         },
@@ -3638,7 +3638,7 @@
           "id": "en-u4-w30",
           "t": "bright",
           "fr": "vif / lumineux",
-          "e": "🎨",
+          "e": "🔆",
           "type": "word",
           "unite": 4
         },
@@ -3646,7 +3646,7 @@
           "id": "en-u4-w31",
           "t": "pale",
           "fr": "pâle",
-          "e": "🎨",
+          "e": "🔤",
           "type": "word",
           "unite": 4
         },
@@ -3654,7 +3654,7 @@
           "id": "en-u4-w32",
           "t": "colourful",
           "fr": "coloré",
-          "e": "🎨",
+          "e": "🌈",
           "type": "word",
           "unite": 4
         },
@@ -3662,7 +3662,7 @@
           "id": "en-u4-w33",
           "t": "picture",
           "fr": "image",
-          "e": "🎨",
+          "e": "🖼️",
           "type": "word",
           "unite": 4
         },
@@ -3670,7 +3670,7 @@
           "id": "en-u4-w34",
           "t": "drawing",
           "fr": "dessin",
-          "e": "🎨",
+          "e": "✏️",
           "type": "word",
           "unite": 4
         },
@@ -3678,7 +3678,7 @@
           "id": "en-u4-w35",
           "t": "draw",
           "fr": "dessiner",
-          "e": "🎨",
+          "e": "✏️",
           "type": "word",
           "unite": 4
         },
@@ -3686,7 +3686,7 @@
           "id": "en-u4-w36",
           "t": "brush",
           "fr": "pinceau",
-          "e": "🎨",
+          "e": "🖌️",
           "type": "word",
           "unite": 4
         },
@@ -3694,7 +3694,7 @@
           "id": "en-u4-w37",
           "t": "paper",
           "fr": "papier",
-          "e": "🎨",
+          "e": "📄",
           "type": "word",
           "unite": 4
         },
@@ -3702,7 +3702,7 @@
           "id": "en-u4-w38",
           "t": "leaf",
           "fr": "feuille (arbre)",
-          "e": "🎨",
+          "e": "🍃",
           "type": "word",
           "unite": 4
         },
@@ -3710,7 +3710,7 @@
           "id": "en-u4-w39",
           "t": "star",
           "fr": "étoile",
-          "e": "🎨",
+          "e": "⭐",
           "type": "word",
           "unite": 4
         }
@@ -4443,7 +4443,7 @@
           "id": "en-u5-w25",
           "t": "thirteen",
           "fr": "treize",
-          "e": "🔢",
+          "e": "13",
           "type": "word",
           "unite": 5
         },
@@ -4451,7 +4451,7 @@
           "id": "en-u5-w26",
           "t": "fourteen",
           "fr": "quatorze",
-          "e": "🔢",
+          "e": "14",
           "type": "word",
           "unite": 5
         },
@@ -4459,7 +4459,7 @@
           "id": "en-u5-w27",
           "t": "fifteen",
           "fr": "quinze",
-          "e": "🔢",
+          "e": "15",
           "type": "word",
           "unite": 5
         },
@@ -4467,7 +4467,7 @@
           "id": "en-u5-w28",
           "t": "sixteen",
           "fr": "seize",
-          "e": "🔢",
+          "e": "16",
           "type": "word",
           "unite": 5
         },
@@ -4475,7 +4475,7 @@
           "id": "en-u5-w29",
           "t": "seventeen",
           "fr": "dix-sept",
-          "e": "🔢",
+          "e": "17",
           "type": "word",
           "unite": 5
         },
@@ -4483,7 +4483,7 @@
           "id": "en-u5-w30",
           "t": "eighteen",
           "fr": "dix-huit",
-          "e": "🔢",
+          "e": "18",
           "type": "word",
           "unite": 5
         },
@@ -4491,7 +4491,7 @@
           "id": "en-u5-w31",
           "t": "nineteen",
           "fr": "dix-neuf",
-          "e": "🔢",
+          "e": "19",
           "type": "word",
           "unite": 5
         },
@@ -4499,7 +4499,7 @@
           "id": "en-u5-w32",
           "t": "thirty",
           "fr": "trente",
-          "e": "🔢",
+          "e": "30",
           "type": "word",
           "unite": 5
         },
@@ -4507,7 +4507,7 @@
           "id": "en-u5-w33",
           "t": "forty",
           "fr": "quarante",
-          "e": "🔢",
+          "e": "40",
           "type": "word",
           "unite": 5
         },
@@ -4515,7 +4515,7 @@
           "id": "en-u5-w34",
           "t": "fifty",
           "fr": "cinquante",
-          "e": "🔢",
+          "e": "50",
           "type": "word",
           "unite": 5
         },
@@ -4523,7 +4523,7 @@
           "id": "en-u5-w35",
           "t": "sixty",
           "fr": "soixante",
-          "e": "🔢",
+          "e": "60",
           "type": "word",
           "unite": 5
         },
@@ -4531,7 +4531,7 @@
           "id": "en-u5-w36",
           "t": "second",
           "fr": "deuxième",
-          "e": "🔢",
+          "e": "2ᵉ",
           "type": "word",
           "unite": 5
         },
@@ -4539,7 +4539,7 @@
           "id": "en-u5-w37",
           "t": "third",
           "fr": "troisième",
-          "e": "🔢",
+          "e": "3ᵉ",
           "type": "word",
           "unite": 5
         },
@@ -4555,7 +4555,7 @@
           "id": "en-u5-w39",
           "t": "plus",
           "fr": "plus (addition)",
-          "e": "🔢",
+          "e": "➕",
           "type": "word",
           "unite": 5
         }
@@ -5289,7 +5289,7 @@
           "id": "en-u6-w25",
           "t": "notebook",
           "fr": "cahier",
-          "e": "🏫",
+          "e": "📓",
           "type": "word",
           "unite": 6
         },
@@ -5297,7 +5297,7 @@
           "id": "en-u6-w26",
           "t": "eraser",
           "fr": "gomme",
-          "e": "🏫",
+          "e": "🔤",
           "type": "word",
           "unite": 6
         },
@@ -5305,7 +5305,7 @@
           "id": "en-u6-w27",
           "t": "ruler",
           "fr": "règle (instrument)",
-          "e": "🏫",
+          "e": "📏",
           "type": "word",
           "unite": 6
         },
@@ -5313,7 +5313,7 @@
           "id": "en-u6-w28",
           "t": "board",
           "fr": "tableau",
-          "e": "🏫",
+          "e": "🔤",
           "type": "word",
           "unite": 6
         },
@@ -5321,7 +5321,7 @@
           "id": "en-u6-w29",
           "t": "computer",
           "fr": "ordinateur",
-          "e": "🏫",
+          "e": "💻",
           "type": "word",
           "unite": 6
         },
@@ -5329,7 +5329,7 @@
           "id": "en-u6-w30",
           "t": "screen",
           "fr": "écran",
-          "e": "🏫",
+          "e": "🖥️",
           "type": "word",
           "unite": 6
         },
@@ -5337,7 +5337,7 @@
           "id": "en-u6-w31",
           "t": "keyboard",
           "fr": "clavier",
-          "e": "🏫",
+          "e": "⌨️",
           "type": "word",
           "unite": 6
         },
@@ -5345,7 +5345,7 @@
           "id": "en-u6-w32",
           "t": "dictionary",
           "fr": "dictionnaire",
-          "e": "🏫",
+          "e": "📖",
           "type": "word",
           "unite": 6
         },
@@ -5353,7 +5353,7 @@
           "id": "en-u6-w33",
           "t": "page",
           "fr": "page",
-          "e": "🏫",
+          "e": "📄",
           "type": "word",
           "unite": 6
         },
@@ -5361,7 +5361,7 @@
           "id": "en-u6-w34",
           "t": "sentence",
           "fr": "phrase",
-          "e": "🏫",
+          "e": "🔤",
           "type": "word",
           "unite": 6
         },
@@ -5369,7 +5369,7 @@
           "id": "en-u6-w35",
           "t": "word",
           "fr": "mot",
-          "e": "🏫",
+          "e": "🔤",
           "type": "word",
           "unite": 6
         },
@@ -5377,7 +5377,7 @@
           "id": "en-u6-w36",
           "t": "listen",
           "fr": "écouter",
-          "e": "🏫",
+          "e": "👂",
           "type": "word",
           "unite": 6
         },
@@ -5385,15 +5385,15 @@
           "id": "en-u6-w37",
           "t": "ask",
           "fr": "demander",
-          "e": "🏫",
+          "e": "❓",
           "type": "word",
           "unite": 6
         },
         {
           "id": "en-u6-w38",
-          "t": "practice",
+          "t": "practise",
           "fr": "s'entraîner",
-          "e": "🏫",
+          "e": "🔁",
           "type": "word",
           "unite": 6
         },
@@ -5401,7 +5401,7 @@
           "id": "en-u6-w39",
           "t": "help",
           "fr": "aider",
-          "e": "🏫",
+          "e": "🤝",
           "type": "word",
           "unite": 6
         }
@@ -6100,7 +6100,7 @@
         {
           "id": "en-u7-w20",
           "t": "close",
-          "fr": "fermer / fermé",
+          "fr": "fermer",
           "e": "🔒",
           "type": "verb",
           "unite": 7
@@ -6141,7 +6141,7 @@
           "id": "en-u7-w25",
           "t": "sofa",
           "fr": "canapé",
-          "e": "🏠",
+          "e": "🛋️",
           "type": "word",
           "unite": 7
         },
@@ -6149,7 +6149,7 @@
           "id": "en-u7-w26",
           "t": "mirror",
           "fr": "miroir",
-          "e": "🏠",
+          "e": "🪞",
           "type": "word",
           "unite": 7
         },
@@ -6157,7 +6157,7 @@
           "id": "en-u7-w27",
           "t": "carpet",
           "fr": "tapis",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6165,7 +6165,7 @@
           "id": "en-u7-w28",
           "t": "shelf",
           "fr": "étagère",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6173,7 +6173,7 @@
           "id": "en-u7-w29",
           "t": "cupboard",
           "fr": "placard",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6181,7 +6181,7 @@
           "id": "en-u7-w30",
           "t": "oven",
           "fr": "four",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6189,7 +6189,7 @@
           "id": "en-u7-w31",
           "t": "sink",
           "fr": "évier",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6197,7 +6197,7 @@
           "id": "en-u7-w32",
           "t": "shower",
           "fr": "douche",
-          "e": "🏠",
+          "e": "🚿",
           "type": "word",
           "unite": 7
         },
@@ -6205,7 +6205,7 @@
           "id": "en-u7-w33",
           "t": "toilet",
           "fr": "toilettes",
-          "e": "🏠",
+          "e": "🚽",
           "type": "word",
           "unite": 7
         },
@@ -6213,7 +6213,7 @@
           "id": "en-u7-w34",
           "t": "key",
           "fr": "clé",
-          "e": "🏠",
+          "e": "🔑",
           "type": "word",
           "unite": 7
         },
@@ -6221,7 +6221,7 @@
           "id": "en-u7-w35",
           "t": "towel",
           "fr": "serviette",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6229,7 +6229,7 @@
           "id": "en-u7-w36",
           "t": "pillow",
           "fr": "oreiller",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6237,7 +6237,7 @@
           "id": "en-u7-w37",
           "t": "blanket",
           "fr": "couverture",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6245,7 +6245,7 @@
           "id": "en-u7-w38",
           "t": "under",
           "fr": "sous",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         },
@@ -6253,7 +6253,7 @@
           "id": "en-u7-w39",
           "t": "behind",
           "fr": "derrière",
-          "e": "🏠",
+          "e": "🔤",
           "type": "word",
           "unite": 7
         }
@@ -6886,7 +6886,7 @@
         {
           "id": "en-u8-w11",
           "t": "hair",
-          "fr": "cheveux / poils",
+          "fr": "cheveux",
           "e": "💇",
           "type": "noun",
           "unite": 8
@@ -6999,7 +6999,7 @@
           "id": "en-u8-w25",
           "t": "neck",
           "fr": "cou",
-          "e": "🧍",
+          "e": "🔤",
           "type": "word",
           "unite": 8
         },
@@ -7007,7 +7007,7 @@
           "id": "en-u8-w26",
           "t": "toe",
           "fr": "orteil",
-          "e": "🧍",
+          "e": "🔤",
           "type": "word",
           "unite": 8
         },
@@ -7015,7 +7015,7 @@
           "id": "en-u8-w27",
           "t": "thumb",
           "fr": "pouce",
-          "e": "🧍",
+          "e": "👍",
           "type": "word",
           "unite": 8
         },
@@ -7023,7 +7023,7 @@
           "id": "en-u8-w28",
           "t": "elbow",
           "fr": "coude",
-          "e": "🧍",
+          "e": "🔤",
           "type": "word",
           "unite": 8
         },
@@ -7031,7 +7031,7 @@
           "id": "en-u8-w29",
           "t": "chin",
           "fr": "menton",
-          "e": "🧍",
+          "e": "🔤",
           "type": "word",
           "unite": 8
         },
@@ -7039,7 +7039,7 @@
           "id": "en-u8-w30",
           "t": "lip",
           "fr": "lèvre",
-          "e": "🧍",
+          "e": "👄",
           "type": "word",
           "unite": 8
         },
@@ -7047,7 +7047,7 @@
           "id": "en-u8-w31",
           "t": "tooth",
           "fr": "dent",
-          "e": "🧍",
+          "e": "🦷",
           "type": "word",
           "unite": 8
         },
@@ -7055,7 +7055,7 @@
           "id": "en-u8-w32",
           "t": "feet",
           "fr": "pieds",
-          "e": "🧍",
+          "e": "🦶🦶",
           "type": "word",
           "unite": 8
         },
@@ -7063,7 +7063,7 @@
           "id": "en-u8-w33",
           "t": "healthy",
           "fr": "en bonne santé",
-          "e": "🧍",
+          "e": "🙂",
           "type": "word",
           "unite": 8
         },
@@ -7071,7 +7071,7 @@
           "id": "en-u8-w34",
           "t": "doctor",
           "fr": "médecin",
-          "e": "🧍",
+          "e": "🧑‍⚕️",
           "type": "word",
           "unite": 8
         },
@@ -7079,7 +7079,7 @@
           "id": "en-u8-w35",
           "t": "nurse",
           "fr": "infirmier / infirmière",
-          "e": "🧍",
+          "e": "🧑‍⚕️",
           "type": "word",
           "unite": 8
         },
@@ -7087,7 +7087,7 @@
           "id": "en-u8-w36",
           "t": "medicine",
           "fr": "médicament",
-          "e": "🧍",
+          "e": "💊",
           "type": "word",
           "unite": 8
         },
@@ -7095,7 +7095,7 @@
           "id": "en-u8-w37",
           "t": "rest",
           "fr": "se reposer",
-          "e": "🧍",
+          "e": "🛌",
           "type": "word",
           "unite": 8
         },
@@ -7103,7 +7103,7 @@
           "id": "en-u8-w38",
           "t": "walk",
           "fr": "marcher",
-          "e": "🧍",
+          "e": "🚶",
           "type": "word",
           "unite": 8
         },
@@ -7111,7 +7111,7 @@
           "id": "en-u8-w39",
           "t": "smile",
           "fr": "sourire",
-          "e": "🧍",
+          "e": "😊",
           "type": "word",
           "unite": 8
         }
@@ -7843,7 +7843,7 @@
           "id": "en-u9-w26",
           "t": "jeans",
           "fr": "jean",
-          "e": "👕",
+          "e": "👖",
           "type": "word",
           "unite": 9
         },
@@ -7851,7 +7851,7 @@
           "id": "en-u9-w27",
           "t": "shorts",
           "fr": "short",
-          "e": "👕",
+          "e": "🩳",
           "type": "word",
           "unite": 9
         },
@@ -7859,7 +7859,7 @@
           "id": "en-u9-w28",
           "t": "jumper",
           "fr": "pull",
-          "e": "👕",
+          "e": "🔤",
           "type": "word",
           "unite": 9
         },
@@ -7867,7 +7867,7 @@
           "id": "en-u9-w29",
           "t": "boots",
           "fr": "bottes",
-          "e": "👕",
+          "e": "👢",
           "type": "word",
           "unite": 9
         },
@@ -7875,7 +7875,7 @@
           "id": "en-u9-w30",
           "t": "trainers",
           "fr": "baskets",
-          "e": "👕",
+          "e": "👟",
           "type": "word",
           "unite": 9
         },
@@ -7883,7 +7883,7 @@
           "id": "en-u9-w31",
           "t": "cap",
           "fr": "casquette",
-          "e": "👕",
+          "e": "🧢",
           "type": "word",
           "unite": 9
         },
@@ -7891,7 +7891,7 @@
           "id": "en-u9-w32",
           "t": "swimsuit",
           "fr": "maillot de bain",
-          "e": "👕",
+          "e": "🩱",
           "type": "word",
           "unite": 9
         },
@@ -7899,7 +7899,7 @@
           "id": "en-u9-w33",
           "t": "pocket",
           "fr": "poche",
-          "e": "👕",
+          "e": "🔤",
           "type": "word",
           "unite": 9
         },
@@ -7907,7 +7907,7 @@
           "id": "en-u9-w34",
           "t": "button",
           "fr": "bouton (vêtement)",
-          "e": "👕",
+          "e": "🔘",
           "type": "word",
           "unite": 9
         },
@@ -7915,7 +7915,7 @@
           "id": "en-u9-w35",
           "t": "small size",
           "fr": "petite taille",
-          "e": "👕",
+          "e": "🔤",
           "type": "phrase",
           "unite": 9
         },
@@ -7923,7 +7923,7 @@
           "id": "en-u9-w36",
           "t": "large size",
           "fr": "grande taille",
-          "e": "👕",
+          "e": "🔤",
           "type": "phrase",
           "unite": 9
         },
@@ -7931,7 +7931,7 @@
           "id": "en-u9-w37",
           "t": "buy",
           "fr": "acheter",
-          "e": "👕",
+          "e": "🛍️",
           "type": "word",
           "unite": 9
         },
@@ -7939,7 +7939,7 @@
           "id": "en-u9-w38",
           "t": "price",
           "fr": "prix",
-          "e": "👕",
+          "e": "💰",
           "type": "word",
           "unite": 9
         },
@@ -7947,7 +7947,7 @@
           "id": "en-u9-w39",
           "t": "try on",
           "fr": "essayer (vêtement)",
-          "e": "👕",
+          "e": "🔤",
           "type": "phrase",
           "unite": 9
         }
@@ -8692,7 +8692,7 @@
           "id": "en-u10-w25",
           "t": "cool",
           "fr": "frais",
-          "e": "🌦️",
+          "e": "🌡️",
           "type": "word",
           "unite": 10
         },
@@ -8700,7 +8700,7 @@
           "id": "en-u10-w26",
           "t": "dry",
           "fr": "sec",
-          "e": "🌦️",
+          "e": "🔤",
           "type": "word",
           "unite": 10
         },
@@ -8708,7 +8708,7 @@
           "id": "en-u10-w27",
           "t": "wet",
           "fr": "mouillé",
-          "e": "🌦️",
+          "e": "💧",
           "type": "word",
           "unite": 10
         },
@@ -8716,7 +8716,7 @@
           "id": "en-u10-w28",
           "t": "ice",
           "fr": "glace (eau gelée)",
-          "e": "🌦️",
+          "e": "🧊",
           "type": "word",
           "unite": 10
         },
@@ -8724,7 +8724,7 @@
           "id": "en-u10-w29",
           "t": "snowman",
           "fr": "bonhomme de neige",
-          "e": "🌦️",
+          "e": "☃️",
           "type": "word",
           "unite": 10
         },
@@ -8732,7 +8732,7 @@
           "id": "en-u10-w30",
           "t": "raincoat",
           "fr": "imperméable",
-          "e": "🌦️",
+          "e": "🧥",
           "type": "word",
           "unite": 10
         },
@@ -8748,7 +8748,7 @@
           "id": "en-u10-w32",
           "t": "degree",
           "fr": "degré",
-          "e": "🌦️",
+          "e": "°",
           "type": "word",
           "unite": 10
         },
@@ -8756,7 +8756,7 @@
           "id": "en-u10-w33",
           "t": "air",
           "fr": "air",
-          "e": "🌦️",
+          "e": "💨",
           "type": "word",
           "unite": 10
         },
@@ -8764,7 +8764,7 @@
           "id": "en-u10-w34",
           "t": "sky is clear",
           "fr": "le ciel est dégagé",
-          "e": "🌦️",
+          "e": "☀️",
           "type": "phrase",
           "unite": 10
         },
@@ -8772,7 +8772,7 @@
           "id": "en-u10-w35",
           "t": "it is raining",
           "fr": "il pleut",
-          "e": "🌦️",
+          "e": "🌧️",
           "type": "phrase",
           "unite": 10
         },
@@ -8780,15 +8780,15 @@
           "id": "en-u10-w36",
           "t": "it is snowing",
           "fr": "il neige",
-          "e": "🌦️",
+          "e": "❄️",
           "type": "phrase",
           "unite": 10
         },
         {
           "id": "en-u10-w37",
           "t": "it is sunny",
-          "fr": "il fait beau",
-          "e": "🌦️",
+          "fr": "il fait du soleil",
+          "e": "☀️",
           "type": "phrase",
           "unite": 10
         },
@@ -8796,7 +8796,7 @@
           "id": "en-u10-w38",
           "t": "it is windy",
           "fr": "il y a du vent",
-          "e": "🌦️",
+          "e": "🌬️",
           "type": "phrase",
           "unite": 10
         },
@@ -8804,7 +8804,7 @@
           "id": "en-u10-w39",
           "t": "it is hot",
           "fr": "il fait chaud",
-          "e": "🌦️",
+          "e": "🌡️",
           "type": "phrase",
           "unite": 10
         }
@@ -8819,7 +8819,7 @@
             "today",
             "."
           ],
-          "fr": "Il fait ensoleillé aujourd'hui.",
+          "fr": "Il fait du soleil aujourd'hui.",
           "unite": 10
         },
         {
@@ -8930,15 +8930,14 @@
         {
           "id": "en-u10-p9",
           "tokens": [
-            "The",
-            "temperature",
+            "It",
             "is",
             "cold",
             "in",
             "winter",
             "."
           ],
-          "fr": "La température est froide en hiver.",
+          "fr": "Il fait froid en hiver.",
           "unite": 10
         },
         {
@@ -9549,7 +9548,7 @@
           "id": "en-u11-w26",
           "t": "calendar",
           "fr": "calendrier",
-          "e": "📅",
+          "e": "🗓️",
           "type": "word",
           "unite": 11
         },
@@ -9557,7 +9556,7 @@
           "id": "en-u11-w27",
           "t": "birthday",
           "fr": "anniversaire",
-          "e": "📅",
+          "e": "🎂",
           "type": "word",
           "unite": 11
         },
@@ -9573,15 +9572,15 @@
           "id": "en-u11-w29",
           "t": "tonight",
           "fr": "ce soir",
-          "e": "📅",
+          "e": "🌙",
           "type": "word",
           "unite": 11
         },
         {
           "id": "en-u11-w30",
           "t": "daily",
-          "fr": "quotidien",
-          "e": "📅",
+          "fr": "quotidien / quotidiennement",
+          "e": "🔁",
           "type": "word",
           "unite": 11
         },
@@ -9589,7 +9588,7 @@
           "id": "en-u11-w31",
           "t": "every day",
           "fr": "tous les jours",
-          "e": "📅",
+          "e": "🔁",
           "type": "phrase",
           "unite": 11
         },
@@ -9597,7 +9596,7 @@
           "id": "en-u11-w32",
           "t": "at noon",
           "fr": "à midi",
-          "e": "📅",
+          "e": "🕛",
           "type": "phrase",
           "unite": 11
         },
@@ -9605,7 +9604,7 @@
           "id": "en-u11-w33",
           "t": "midnight",
           "fr": "minuit",
-          "e": "📅",
+          "e": "🌙",
           "type": "word",
           "unite": 11
         },
@@ -9613,7 +9612,7 @@
           "id": "en-u11-w34",
           "t": "half past",
           "fr": "et demie (heure)",
-          "e": "📅",
+          "e": "🔤",
           "type": "phrase",
           "unite": 11
         },
@@ -9621,7 +9620,7 @@
           "id": "en-u11-w35",
           "t": "quarter past",
           "fr": "et quart (heure)",
-          "e": "📅",
+          "e": "🔤",
           "type": "phrase",
           "unite": 11
         },
@@ -9629,7 +9628,7 @@
           "id": "en-u11-w36",
           "t": "quarter to",
           "fr": "moins le quart (heure)",
-          "e": "📅",
+          "e": "🔤",
           "type": "phrase",
           "unite": 11
         },
@@ -9637,7 +9636,7 @@
           "id": "en-u11-w37",
           "t": "before",
           "fr": "avant",
-          "e": "📅",
+          "e": "🔤",
           "type": "word",
           "unite": 11
         },
@@ -9645,7 +9644,7 @@
           "id": "en-u11-w38",
           "t": "after",
           "fr": "après",
-          "e": "📅",
+          "e": "🔤",
           "type": "word",
           "unite": 11
         },
@@ -9653,7 +9652,7 @@
           "id": "en-u11-w39",
           "t": "on time",
           "fr": "à l'heure",
-          "e": "📅",
+          "e": "⏰",
           "type": "phrase",
           "unite": 11
         }
@@ -9681,7 +9680,7 @@
             "Monday",
             "."
           ],
-          "fr": "Je me lève tôt le lundi.",
+          "fr": "Je me réveille tôt le lundi.",
           "unite": 11
         },
         {

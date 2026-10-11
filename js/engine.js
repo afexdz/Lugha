@@ -41,7 +41,7 @@
     status = 'loading'; lastError = null;
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
-    pending = fetch('content/en/course.json?v=20261010-a1-expanded', ctrl ? { signal: ctrl.signal } : undefined)
+    pending = fetch('content/en/course.json?v=20261011-a1-reviewed', ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
       .catch(err => { status = 'error'; lastError = err; throw err; })
@@ -65,8 +65,9 @@
 
   // ── Normalisation ──────────────────────────────────────────
   function normalize(w) { return { id: w.id, t: w.t, m: w.fr, e: w.e, r: '', u: w.unite, type: w.type }; }
-  function normalizePh(p) { return { tokens: p.tokens, m: p.fr, unit: p.unite }; }
+  function normalizePh(p) { return { tokens: p.tokens, acceptedTokens: p.acceptedTokens, m: p.fr, unit: p.unite }; }
   const low = s => String(s || '').toLowerCase().trim();
+  const meanings = s => low(s).replace(/\([^)]*\)/g, '').split(' / ').map(x => x.trim());
 
   // Index : mots, traductions valables par texte anglais, ambiguïtés
   function index(d) {
@@ -122,6 +123,9 @@
   function clash(a, b) {
     const ta = low(a.t), tb = low(b.t), ma = low(a.m), mb = low(b.m);
     if (a.id === b.id || ta === tb || ma === mb || a.e === b.e) return true;
+    // A slash separates valid translations: “bien” must not be offered
+    // against “bon / bien”, nor “femme” against “femme / épouse”.
+    if (meanings(ma).some(m => meanings(mb).includes(m))) return true;
     const trA = _idx.transByEn.get(ta), trB = _idx.transByEn.get(tb);
     return (trA && trA.has(mb)) || (trB && trB.has(ma));
   }

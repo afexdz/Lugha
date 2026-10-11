@@ -197,8 +197,10 @@
       return {
         check: () => {
           const got = $$('.tile', ans).map(x => x.textContent);
-          const ok = got.length === e.ph.tokens.length && got.every((t, i) => loose(t) === loose(e.ph.tokens[i]));
-          return { ok, answer: e.ph.tokens.join(sep), say: e.ph.tokens.join(sep) };
+          const ok = [e.ph.tokens, ...(e.ph.acceptedTokens || [])].some(tokens =>
+            got.length === tokens.length && got.every((t, i) => loose(t) === loose(tokens[i])));
+          const answer = ctx.lang === 'en' && LZ.engine ? LZ.engine.joinTokens(e.ph.tokens) : e.ph.tokens.join(sep);
+          return { ok, answer, say: answer };
         }
       };
     }
@@ -292,6 +294,8 @@
     if (lang === 'en' && eng) { eng.recordLessonSelection(p, queue); save(); }
     queue = queue.map(silentVersion);
     const st = { attempts: {}, queue, i: 0, phase: 'answer', correct: 0, wrong: 0, combo: 0, maxCombo: 0, start: Date.now(), bar: 0, cur: null };
+
+    onLeave(() => { st.phase = 'done'; });
 
     const unitColor = (lang === 'en' && eng?.getA1Units()) ? (eng.getA1Units()[ui]?.color || '#6C4DFF') : D.units[ui]?.color || '#6C4DFF';
     app.innerHTML = `<div class="lesson" style="--u:${unitColor}">
@@ -494,8 +498,10 @@
         animate($('.end-m'), { y: [80, 0], scale: [0.5, 1], rotate: [-15, 0] }, spring(160, 11));
         animate($$('.es'), { opacity: [0, 1], rotateX: [-90, 0], y: [20, 0] }, { delay: stagger(0.12, { startDelay: 0.3 }), ...spring(160, 15) });
         animate($$('.end-pill'), { opacity: [0, 1], scale: [0.7, 1] }, { delay: stagger(0.1, { startDelay: 0.8 }), ...spring(300, 16) });
-        setTimeout(() => { countUp($('#cx'), xp, { dur: 900 }); countUp($('#ca'), acc, { dur: 900 }); }, 450);
-        $('#endNext').addEventListener('click', () => { stop(); nextFn(); });
+        const xpEl = $('#cx'), accEl = $('#ca');
+        const timer = setTimeout(() => { if (!xpEl.isConnected) return; countUp(xpEl, xp, { dur: 900 }); countUp(accEl, acc, { dur: 900 }); }, 450);
+        onLeave(() => clearTimeout(timer));
+        $('#endNext').addEventListener('click', () => { clearTimeout(timer); stop(); nextFn(); });
         $('#endNext').focus();
       };
     }
@@ -512,9 +518,11 @@
             <p class="end-sub">${now === 1 ? 'Une flamme vient de s’allumer. Reviens demain pour la faire grandir.' : 'Tu as appris chaque jour. Reviens demain pour continuer.'}</p>
           </div><footer class="end-foot"><button class="btn btn-sun btn-lg" id="endNext">Je reviens demain</button></footer></div>`;
         animate($('.big-flame'), { scale: [0, 1.15, 1], rotate: [-20, 8, 0] }, { duration: 0.8 });
-        setTimeout(() => { Sfx.streak(); const n = $('#sn'); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
+        const n = $('#sn');
+        const timer = setTimeout(() => { if (!n.isConnected) return; Sfx.streak(); n.textContent = now; animate(n, { scale: [1.6, 1], y: [-20, 0] }, spring(400, 12)); }, 650);
+        onLeave(() => clearTimeout(timer));
         const today = $('.week .today i'); today && animate(today, { scale: [0, 1.3, 1] }, { delay: 0.9, duration: 0.5 });
-        $('#endNext').addEventListener('click', nextFn); $('#endNext').focus();
+        $('#endNext').addEventListener('click', () => { clearTimeout(timer); nextFn(); }); $('#endNext').focus();
       };
     }
 

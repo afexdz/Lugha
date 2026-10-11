@@ -15,7 +15,7 @@ async function setup() {
   const w=dom.window;
   w.matchMedia=()=>({matches:true}); w.scrollTo=()=>{};
   w.fetch=async()=>({ok:true,json:async()=>structuredClone(data)});
-  const timeout=w.setTimeout.bind(w); w.setTimeout=(cb,ms,...args)=>timeout(cb,Math.min(ms,5),...args);
+  const timeout=w.setTimeout.bind(w); w.setTimeout=(cb,ms,...args)=>timeout(cb,ms === 650 ? 650 : Math.min(ms,5),...args);
   for (const f of ['data','core','engine']) w.eval(fs.readFileSync(path.join(root,`js/${f}.js`),'utf8'));
   const L=w.LZ; L.render=()=>{}; await L.engine.ensureA1();
   const sounds={};for(const name of Object.keys(L.Sfx)) L.Sfx[name]=()=>{sounds[name]=(sounds[name]||0)+1;};
@@ -26,7 +26,8 @@ async function setup() {
   let queue;const build=L.engine.buildA1Lesson;L.engine.buildA1Lesson=(...args)=>{queue=build(...args);return queue;};
   const cleanups=[]; const app=w.document.querySelector('#app');
   const mount=idx=>{cleanups.splice(0).forEach(f=>f());L.views.lesson(app,{args:[String(idx)]},f=>cleanups.push(f));return queue.slice();};
-  return {dom,w,L,p,sounds,errors,app,mount,cleanups};
+  const force=seq=>{L.engine.buildA1Lesson=()=>{queue=seq;return seq;};};
+  return {dom,w,L,p,sounds,errors,app,mount,cleanups,force};
 }
 async function until(check,label) {
   for(let i=0;i<100;i++){if(check())return;await sleep(2);}throw new Error('Timeout: '+label);
@@ -94,5 +95,22 @@ async function play(s,idx,{mistakes=false}={}) {
  const r=await play(s,0,{mistakes:true});assert(r.wrong&&r.skip);assert.equal(s.p.courses.en.done,60,'Practice changed progress');
  for(const name of ['tap','ok','pop','bad','done','streak','coin'])assert(s.sounds[name]>0,'Sound hook not reached: '+name);
  console.log('48 A1 lessons + 12 chests completed; replay/wrong/skip/retry, rewards, sounds and journey checked.');
+ const variants=data.units.filter(u=>u.level==='A1').flatMap(u=>u.phrases).filter(p=>p.acceptedTokens?.length);
+ for(const ph of variants){
+   const ex={type:'build',ph:s.L.engine.normalizePh(ph),questionId:'review-'+ph.id};
+   s.force([ex]);s.mount(0);
+   await answer(s,{...ex,ph:{...ex.ph,tokens:ph.acceptedTokens[0]}});
+   s.w.document.querySelector('#check').click();
+   await until(()=>s.w.document.querySelector('#endNext'),'variant completion');
+   for(let guard=0;guard<8&&s.w.document.querySelector('#endNext');guard++){s.w.document.querySelector('#endNext').click();await sleep(10);}
+ }
+ const ph=data.units[2].phrases.find(p=>p.id==='en-u2-p4');
+ const ex={type:'build',ph:s.L.engine.normalizePh(ph),questionId:'review-invalid-order'};
+ s.force([ex]);s.mount(0);
+ const invalid=[...ph.tokens];[invalid[0],invalid[1]]=[invalid[1],invalid[0]];
+ await answer(s,{...ex,ph:{...ex.ph,tokens:invalid}},'wrong');
+ assert.equal(s.errors.length,0,'Variant tests raised DOM errors');
+ console.log(`${variants.length} valid alternative orders accepted; invalid word order rejected.`);
+
  s.dom.window.close();
 })().catch(e=>{console.error(e.stack);process.exitCode=1;});

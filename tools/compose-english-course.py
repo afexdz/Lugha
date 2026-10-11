@@ -12,7 +12,7 @@ def choices(rows,source):
 a1=[
 '''Lina ___ fourteen years old.|is|are|am|be|Avec un sujet singulier, on emploie is.
 I ___ from Oran.|am|is|are|be|Avec I, on emploie am.
-You meet a friend at 8 a.m. What do you say?|Good morning!|Good night!|Goodbye!|See you later!|Le matin, on salue avec Good morning.
+You arrive at school at 8 a.m. Choose a morning greeting.|Good morning!|Good night!|Goodbye!|See you later!|Le matin, on salue avec Good morning.
 Your friend says Thank you. Choose a reply.|You're welcome.|I'm fourteen.|Good night.|I am from Oran.|You're welcome répond à un remerciement.''',
 '''My sister and I ___ at home.|are|is|am|be|Deux personnes forment un sujet pluriel : are.
 This is Sami. ___ is my brother.|He|She|They|We|He reprend Sami, un frère.
@@ -26,12 +26,12 @@ I am thirsty. Can I have some ___?|water|bread|rice|cheese|Thirsty signifie avoi
 There are two ___ in the field.|sheep|sheeps|sheepes|sheeping|Le pluriel de sheep est sheep.
 The cat is sleeping now. It ___ running.|isn't|aren't|don't|doesn't|Avec It et un verbe en -ing : isn't.
 I have one mouse. My friend has three ___.|mice|mouses|mouse|mices|Le pluriel de mouse est mice.''',
-'''A red pen and a blue pen are two ___.|colours|animals|meals|days|Red et blue désignent des couleurs.
+'''Red and blue are two ___.|colours|animals|meals|days|Red et blue désignent des couleurs.
 Choose the usual word order.|a green bag|a bag green|green a bag|bag a green|L'adjectif de couleur précède le nom.
 ___ colour is your notebook?|What|Who|When|How many|What colour demande la couleur.
 I like this drawing. ___ is beautiful.|It|He|They|We|It reprend une chose au singulier.''',
 '''Nina has 10 pens and gets 3 more. How many pens does she have?|thirteen|twelve|fourteen|thirty|Ten plus three equals thirteen.
-Choose the sentence about age.|I am fifteen years old.|I have fifteen years old.|I is fifteen years old.|I are fifteen years old.|En anglais, on exprime l'âge avec be.
+Choose the correct sentence about age.|I am fifteen years old.|I have fifteen years old.|I is fifteen years old.|I are fifteen years old.|En anglais, on exprime l'âge avec be.
 There ___ twenty students in the room.|are|is|am|be|Twenty students est pluriel : there are.
 Which number comes after nineteen?|twenty|eighteen|thirty|twelve|Twenty suit nineteen.''',
 '''Our teacher ___ English every day.|teaches|teach|teaching|are teach|Au présent simple, troisième personne : teaches.
@@ -45,7 +45,7 @@ This is my room. ___ door is white.|Its|It's|Their|They|Its est possessif. It's 
 '''I have two ___.|feet|foots|foot|feets|Le pluriel de foot est feet.
 ___ your hands before lunch.|Wash|Washes|Washing|Washed|À l'impératif, on emploie Wash.
 She ___ tired today.|is|are|am|be|Avec she, on emploie is.
-My brother has brown ___.|hair|hairses|a hairs|an hair|Pour la chevelure, hair est indénombrable.''',
+My brother ___ brown hair.|has|have|is|are|Avec he ou my brother, on emploie has pour dire avoir.''',
 '''These shoes ___ new.|are|is|am|be|Shoes est pluriel : are.
 I ___ a blue shirt today.|am wearing|wears|is wearing|are wearing|Avec I et une action en cours : am wearing.
 This coat belongs to me. It is ___.|mine|my|me|I|Mine signifie le mien sans répéter coat.
@@ -87,8 +87,30 @@ a1_topic_sources = [
 def topic_refs(ui):
     return [dict(sourceId=source,pdfPages=pages) for source,pages in a1_topic_sources[ui]]
 
+a1_teaching_notes = [
+    [('Se présenter', 'Avec I, on utilise am ; avec he ou she, is ; avec you, we ou they, are.', 'I am fourteen. She is my friend.', "J’ai quatorze ans. Elle est mon amie."), ('Saluer', 'Good morning le matin, good afternoon après midi, good evening le soir. Good night avant de dormir.', 'Good morning, Lina!', 'Bonjour, Lina !')],
+    [('Parler de la famille', 'He remplace un garçon ou un homme ; she, une fille ou une femme ; they, plusieurs personnes.', 'They are my cousins.', 'Ce sont mes cousins.'), ('Dire à qui appartient une chose', 'My = mon, ma, mes ; your = ton, ta, tes ; her = son, sa, ses quand la personne est une fille ou une femme.', 'Her brother is ten.', 'Son frère a dix ans.')],
+    [('A ou an', 'Utilise a devant un son consonne et an devant un son voyelle.', 'an apple, a banana', 'une pomme, une banane'), ('Quantités', 'Some indique une quantité. How many pose une question sur des choses que l’on peut compter.', 'How many eggs do we need?', "De combien d’œufs avons-nous besoin ?")],
+    [('Can', 'Can signifie pouvoir. Après can, le verbe garde sa forme simple.', 'A bird can fly.', 'Un oiseau peut voler.'), ('Pluriels particuliers', 'Mouse devient mice au pluriel. Sheep garde la même forme.', 'one mouse, three mice; one sheep, two sheep', 'une souris, trois souris ; un mouton, deux moutons')],
+    [('Couleurs', 'Place la couleur avant le nom en anglais.', 'a green bag', 'un sac vert'), ('Une chose', 'It peut reprendre une chose au singulier.', 'This drawing is beautiful. It is blue.', 'Ce dessin est beau. Il est bleu.')],
+    [('Dire son âge', 'En anglais, on utilise be pour dire son âge.', 'I am fifteen years old.', 'J’ai quinze ans.'), ('Il y a', 'There is devant une chose ; there are devant plusieurs choses.', 'There are twenty students.', 'Il y a vingt élèves.')],
+    [('Une habitude', 'Au présent simple, on ajoute généralement -s avec he ou she. Teach devient teaches.', 'Our teacher teaches English.', 'Notre professeur enseigne l’anglais.'), ('Poser une question', 'Avec you, utilise Do pour une question au présent simple. Après do not, le verbe reste à sa forme simple.', 'Do you understand? I do not use my phone.', 'Comprends-tu ? Je n’utilise pas mon téléphone.')],
+    [('Situer les objets', 'Under = sous ; behind = derrière ; beside = à côté de.', 'The shoes are under the bed.', 'Les chaussures sont sous le lit.'), ('Its et it’s', 'Its indique une possession. It’s est la forme courte de it is.', 'Its door is white. It’s a small room.', 'Sa porte est blanche. C’est une petite pièce.')],
+    [('Parties du corps', 'Foot devient feet ; tooth devient teeth au pluriel.', 'I have two feet.', 'J’ai deux pieds.'), ('Une consigne', 'Pour donner une consigne, commence par le verbe simple.', 'Wash your hands, please.', 'Lave tes mains, s’il te plaît.')],
+    [('Ce que l’on porte maintenant', 'Pour une action en cours : am, is ou are puis le verbe en -ing.', 'I am wearing a blue shirt.', 'Je porte une chemise bleue.'), ('Essayer et posséder', 'Try on signifie essayer un vêtement. Mine signifie le mien ou la mienne, sans répéter le nom.', 'Can I try on this jacket? This coat is mine.', 'Puis-je essayer cette veste ? Ce manteau est à moi.')],
+    [('Décrire le temps', 'Pour parler du temps, commence souvent par It is.', 'It is cold. It is raining.', 'Il fait froid. Il pleut.'), ('Jamais', 'Never se place avant le verbe principal au présent simple.', 'We never see snow in summer here.', 'Nous ne voyons jamais de neige en été ici.')],
+    [('Jours et heures', 'At devant une heure précise, on devant un jour, in devant the morning, the afternoon ou the evening.', 'at nine, on Saturday, in the evening', 'à neuf heures, le samedi, le soir'), ('Lire l’heure', 'Half past = et demie ; quarter past = et quart ; quarter to = moins le quart.', 'half past seven, quarter to eight', 'sept heures et demie, huit heures moins le quart')],
+]
+
 for ui,u in enumerate(d['units']):
-    u['level']='A1';u['status']='review-required'
+    u['level']='A1';u['status']='ai-reviewed-independent-review-pending'
+    u['teachingNotes']=[dict(title=t,rule=r,example=e,translation=f) for t,r,e,f in a1_teaching_notes[ui]]
+    for ph in u['phrases']:
+        for ending in ['every morning', 'every day', 'at the weekend', 'in winter', 'in summer', 'on Monday', 'on Sunday', 'at noon', 'before dinner', 'today', 'tonight']:
+            tail=ending.split()
+            if ph['id']!='en-u11-p10' and ph['tokens'][-1]=='.' and ph['tokens'][-len(tail)-1:-1]==tail and not any(t in ',.!?' for t in ph['tokens'][:-1]):
+                ph['acceptedTokens']=[tail+ph['tokens'][:-len(tail)-1]+['.']]
+                break
     u['sourceRefs']=topic_refs(ui)
     u['sourceRefUse']='topic-inspiration; original activities require independent review'
     for li,q in enumerate(choices(a1[ui],dict(sourceId='picture-grammar',pdfPages=[3]))):
@@ -281,7 +303,7 @@ The spokesperson says that the team did not intend to mislead readers, while ack
 In a retrospective account, the writer describes the decision as understandable at the time but difficult to defend with hindsight. The information that later exposed its weaknesses was unavailable when the decision was made. The writer therefore resists calling the original decision either plainly irrational or ultimately sound.|Which paraphrase preserves the nuance?|The decision had a contemporary rationale but looks weaker in light of later knowledge.|The decision was irrational according to information everyone already had.|Later evidence conclusively vindicated the decision.|The writer refuses to assess the decision in any way.
 An observer characterises the board's silence as tacit approval. The minutes, however, record that the board postponed discussion pending legal advice. A second observer cautions that silence under those circumstances need not imply endorsement. No vote was taken, and no member stated an opinion.|Which conclusion is warranted?|The available record does not establish approval.|The silence proves unanimous endorsement.|The postponement demonstrates unanimous rejection.|The absence of a vote makes the first observer's claim certain.'''),
 ('C2','Discours et reformulation','🗣️','Faithful reformulation, rhetoric, multi-source synthesis',
-'''rhetoric|rhétorique;irony|ironie;understatement|atténuation volontaire;overstatement|exagération;implication|implication de sens;presupposition|présupposé;proviso|condition / réserve;caveat|mise en garde / réserve;proportional|proportionné;disparate|disparate;reconstruct|reconstituer;encapsulate|résumer en peu de mots;recast|reformuler;distort|déformer;foreground|mettre au premier plan;contextualise|mettre en contexte;corroborate|corroborer;contention|thèse défendue;rebuttal|réfutation;convergence|convergence''',
+'''rhetoric|rhétorique;irony|ironie;understatement|atténuation volontaire;overstatement|exagération;implication|implication de sens;presupposition|présupposé;proviso|condition explicite;caveat|mise en garde / réserve;proportional|proportionné;disparate|disparate;reconstruct|reconstituer;encapsulate|résumer en peu de mots;recast|reformuler;distort|déformer;foreground|mettre au premier plan;contextualise|mettre en contexte;corroborate|corroborer;contention|thèse défendue;rebuttal|réfutation;convergence|convergence''',
 '''Which reformulation preserves a necessary caveat?|The estimate is useful, provided its uncertainty is acknowledged.|The estimate is useful and entirely certain.|The estimate is useless because all estimates are uncertain.|The estimate proves the outcome will occur.|Provided conserve la condition attachée au jugement.
 Which sentence presupposes that an error has occurred?|When did you correct the error?|Did an error occur?|Could there have been an error?|Is the result free from errors?|When did you correct... suppose déjà l'existence d'une erreur corrigée.
 Which is an understatement of a serious failure?|The system had a few difficulties, after a complete collapse.|The system collapsed completely.|Every service failed.|The failure affected all users.|A few difficulties atténue fortement un effondrement total.
@@ -318,11 +340,12 @@ for level,name,emoji,objective,lex,grammar,phrases,readings in extension:
         for k,q in enumerate(qs):q['id']=f'{uid}-l{li}-q{k}'
         u['lessons'].append(dict(id=f'{uid}-l{li}',questions=qs))
     d['units'].append(u)
-d['edition']='2026-10-10'
+d['edition']='2026-10-11'
 d['level']='A1-C2-draft'
 d['courseStatus']='review-required-not-cefr-certified'
 d['levels']=[dict(id='A1',title='Fondations',status='review-required'),dict(id='A2',title='Communication quotidienne',status='pilot-review-required'),dict(id='B1',title='Récits et coopération',status='pilot-review-required'),dict(id='B2',title='Arguments et rapports',status='pilot-review-required'),dict(id='C1',title='Nuance, synthèse et registre',status='original-draft-source-gap'),dict(id='C2',title='Précision et maîtrise du discours',status='original-draft-source-gap')]
 d['sources']=[dict(id='play-english',title='Play English Kids',pages=68,role='Beginner topics and activity formats'),dict(id='picture-grammar',title='Picture Grammar for Children 2',pages=68,role='Basic grammar topics; scanned pages'),dict(id='first-english',title='My First English Book',pages=48,role='Pre-A1 oral learning and visual tasks'),dict(id='murphy',title='English Grammar in Use, Fifth Edition',pages=392,role='Intermediate grammar reference; not a complete skills curriculum'),dict(id='starters',title='Pre A1 Starters Word List Picture Book',pages=36,role='Pre-A1 vocabulary topics and visual comprehension')]
+d['pedagogicalReview']=dict(date='2026-10-11',reviewerType='AI',scope='A1 vocabulary, phrases, authored choices, visual answer keys and matching ambiguity',independentTeacherReviewPending=True,skills=['reading','vocabulary','grammar','controlled-writing'])
 d['authorship']='Original AI-assisted exercises and original SVG scenes. Source books inform topic selection only. No textbook questions or illustrations reproduced. Independent linguistic review pending.'
 d['sources'].append(dict(id='cefr',title='Council of Europe CEFR global scale',url='https://www.coe.int/en/web/common-european-framework-reference-languages/table-1-%20cefr-3.3-common-reference-levels-global-scale',role='Advanced draft objectives; not textbook source content or certification'))
 (root/'content/en/course.json').write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')

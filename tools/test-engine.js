@@ -47,6 +47,7 @@ async function loadEngine() {
 
 const target = e => e.w || e.word;
 const norm = s => String(s || '').toLowerCase().trim();
+const meanings = s => norm(s).replace(/\([^)]*\)/g, '').split(' / ').map(x => x.trim());
 
 function checkExercise(e, fails, ctx) {
   const f = msg => fails.push(`${ctx} [${e.type}] ${msg}`);
@@ -63,6 +64,9 @@ function checkExercise(e, fails, ctx) {
     if (!t) return f('options sans cible (e.w / e.word absent)');
     const hits = e.options.filter(o => o.id === t.id).length;
     if (hits !== 1) f(`cible présente ${hits} fois dans les choix`);
+    for (let i = 0; i < e.options.length; i++) for (const b of e.options.slice(i + 1)) {
+      if (meanings(e.options[i].m).some(m => meanings(b.m).includes(m))) f('overlapping valid translations');
+    }
     for (const key of ['t', 'm', 'e']) {
       const vals = e.options.map(o => norm(o[key]));
       if (new Set(vals).size !== vals.length) f(`deux choix identiques sur « ${key} » : ${vals.join(' / ')}`);
@@ -99,6 +103,9 @@ function checkExercise(e, fails, ctx) {
     }
     case 'match': {
       const pairs = e.pairs || [];
+      for (let i = 0; i < pairs.length; i++) for (const b of pairs.slice(i + 1)) {
+        if (meanings(pairs[i].m).some(m => meanings(b.m).includes(m))) f('matching accepts overlapping translations');
+      }
       for (const key of ['t', 'm']) {
         const vals = pairs.map(p => norm(p[key]));
         if (new Set(vals).size !== vals.length) f(`paires ambiguës sur « ${key} »`);

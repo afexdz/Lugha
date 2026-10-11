@@ -1134,3 +1134,7 @@ html.rm .bulle-float { animation: none; }
 /* English visual and reading activities. */
 .english-scene{display:block;width:100%;max-height:270px;object-fit:contain;border-radius:20px;margin:12px auto 20px}
 .reading-passage{background:var(--bg,#F4F5FF);border:1px solid #C9BFF5;border-radius:18px;padding:18px;line-height:1.7;text-align:left;max-width:640px;margin:12px auto 20px}
+.guide-note{background:var(--brand-soft);border-radius:16px;padding:1rem;margin:1rem 0;text-align:left;line-height:1.6}
+.guide-note h3{margin:0 0 .5rem}
+.guide-note p{margin:.4rem 0}
+.guide-close{display:flex;justify-content:flex-end;margin-bottom:.5rem}
