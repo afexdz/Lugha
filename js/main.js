@@ -10,14 +10,14 @@
   const onLeave = f => { if (typeof f === 'function') cleanups.push(f); };
 
   const APP = {
-    apprendre: V.learn, classement: V.league, voyage: V.voyage, boutique: V.shop, profil: V.profile,
+    abonnement: LZ.billing.offer, paiements: LZ.billing.admin, apprendre: V.learn, classement: V.league, voyage: V.voyage, boutique: V.shop, profil: V.profile,
     parents: V.parents, parametres: V.settings, langues: V.courses
   };
   const TITLES = {
     '': 'Lugha : apprends les langues en jouant', connexion: 'Connexion', inscription: 'Créer un compte',
     'mot-de-passe': 'Mot de passe oublié', 'nouveau-mot-de-passe': 'Nouveau mot de passe',
     bienvenue: 'Bienvenue', lecon: 'Leçon', apprendre: 'Apprendre', classement: 'Classement',
-    voyage: 'Mon voyage', boutique: 'Boutique', profil: 'Profil', parents: 'Espace parents',
+    abonnement: 'Lugha Pro', paiements: 'Gestion des paiements', voyage: 'Mon voyage', boutique: 'Boutique', profil: 'Profil', parents: 'Espace parents',
     parametres: 'Réglages', langues: 'Langues'
   };
 

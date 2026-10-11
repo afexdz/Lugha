@@ -323,7 +323,7 @@
         .map(([g, n, d]) => `<button class="ob-opt ${st.goal === g ? 'on' : ''}" data-goal="${g}" aria-pressed="${st.goal === g}"><span>${g === 10 ? '🐢' : g === 20 ? '🚲' : g === 30 ? '🚀' : '⚡'}</span><div><b>${n}</b><small>${d}</small></div><em>${g} XP</em></button>`).join('')}</div>`,
       ready: () => { const L = D.langs[st.lang]; return `<div class="ob-ready">
           <div class="ob-sum"><span class="ob-sum-av">${isParent ? st.avatar : '🎒'}</span><div><b>${esc(isParent ? st.name : u.name)}</b><small>${L.name}, objectif ${st.goal} XP par jour</small></div></div>
-          <p>La première leçon dure environ trois minutes. Mets le son : chaque mot est prononcé.</p></div>`; }
+          <p>La première leçon dure environ trois minutes. Découvre les mots, les images et les jeux à ton rythme.</p></div>`; }
     };
     const canNext = () => ({ child: st.name.trim().length >= 2, lang: !!st.lang, why: !!st.why, level: true, goal: true, ready: true }[steps[i]]);
 

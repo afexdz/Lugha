@@ -1138,3 +1138,5 @@ html.rm .bulle-float { animation: none; }
 .guide-note h3{margin:0 0 .5rem}
 .guide-note p{margin:.4rem 0}
 .guide-close{display:flex;justify-content:flex-end;margin-bottom:.5rem}
+
+.subscription .card{margin:1.25rem 0;padding:1.5rem}.subscription li{margin:.6rem 0}.subscription form{display:grid;gap:.7rem}.subscription input:not([type=checkbox]),[data-reason]{width:100%;min-width:0;padding:.8rem;border:2px solid #e5e1f3;border-radius:12px;font:inherit}.payment-rip{font-family:monospace!important;font-size:1rem!important}.payment-confirm{display:flex;gap:.7rem;align-items:flex-start}

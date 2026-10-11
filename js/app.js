@@ -22,7 +22,7 @@
     const sideNav = [
       ['apprendre', 'Apprendre', 'home'], ['classement', 'Classement', 'trophy'],
       ['voyage', 'Voyage', 'globe'], ['boutique', 'Boutique', 'gem'],
-      ['profil', 'Profil', 'user'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []),
+      ['profil', 'Profil', 'user'], ['abonnement', 'Lugha Pro', 'gem'], ...(u.role === 'parent' ? [['parents', 'Parents', 'family']] : []),
       ['parametres', 'Réglages', 'settings']
     ];
     const tabNav = [
@@ -156,7 +156,7 @@
   function learn(el, r, onLeave) {
     const p = prof(), c = course(p), L = D.langs[p.lang], done = c.done;
     const limit = overLimit(p);
-    let html = '';
+    let html = '<a class="card subscription-teaser" href="#/abonnement"><b>Lugha Pro · 2 000 DA / 3 mois</b><p>Un profil, des jeux et quinze langues à explorer. Découvrir l’offre.</p></a>';
     if (limit) html += `<div class="limit-note">${mascot('calm')}<div><b>C’est tout pour aujourd’hui</b><p>Le temps fixé par tes parents est atteint. Rendez-vous demain, ta série t’attend !</p></div></div>`;
     const isle = D.islands[p.lang];
     const vcTotal = isle.stickers.length;
@@ -365,7 +365,7 @@
     const kids = u.profiles;
     const sel = kids.find(k => k.id === r.args[0]) || kids.find(k => k.id === u.active) || kids[0];
     el.innerHTML = `<div class="page parents-page">
-      <div class="pp-head"><div><h1 class="page-title">Espace parents</h1><p class="page-sub">Suivez les progrès, fixez le temps d’écran, gérez les profils.</p></div>
+      <div class="pp-head"><div><h1 class="page-title">Espace parents</h1><p class="page-sub">Suivez les progrès de votre enfant et fixez son temps d’écran. Un profil par compte.</p></div>
         <button class="btn btn-primary" id="addKid">${icon('plus')}Ajouter un enfant</button></div>
       <div class="kids">${kids.map(k => { const L = k.lang && D.langs[k.lang]; const t = dayKey();
         return `<article class="kid ${k.id === sel?.id ? 'on' : ''}" data-id="${k.id}">
@@ -389,10 +389,11 @@
     $$('[data-use]', el).forEach(b => b.addEventListener('click', () => { u.active = b.dataset.use; save(); const p = prof(); toast(`Profil de ${p.name} activé`, { icon: p.avatar }); location.hash = p.lang ? '#/apprendre' : '#/langues'; }));
     $$('[data-edit]', el).forEach(b => b.addEventListener('click', () => kidForm(u, u.profiles.find(k => k.id === b.dataset.edit))));
     $('#addKid').addEventListener('click', () => {
-      if (u.profiles.filter(k => k.kind === 'child').length >= 5) return toast('Cinq profils enfants maximum pour l’instant.', { icon: 'ℹ️' });
+      if (u.profiles.length >= 1) return toast('Lugha Pro comprend un seul profil. Tu peux modifier le profil existant.', { icon: 'ℹ️' });
       kidForm(u, null);
     });
     const as = $('#addSelf'); as && as.addEventListener('click', () => {
+      if (u.profiles.length >= 1) return toast('Un seul profil par compte Lugha Pro.', { icon: 'ℹ️' });
       const p = newProfile({ name: u.name, avatar: '🦉', kind: 'self' }); p.lang = 'en'; course(p);
       u.profiles.push(p); save(); toast('Ton profil est créé. Choisis ta langue !', { icon: '🦉' });
       u.active = p.id; save(); location.hash = '#/langues';

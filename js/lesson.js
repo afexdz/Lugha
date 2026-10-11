@@ -288,6 +288,18 @@
     if (overLimit(p)) { toast('Le temps d’écran du jour est atteint. À demain !', { icon: '⏱️' }); return back(); }
     const practice = idx < c.done;
     if (p.hearts <= 0 && !practice) { back(); setTimeout(LZ.heartsModal, 400); return; }
+    if (LZ.billing && !r.billingGranted) {
+      app.innerHTML = '<p class="load-state" role="status">Vérification de ton accès…</p>';
+      let active = true;
+      onLeave(() => { active = false; });
+      LZ.billing.startLesson(lang).then(() => {
+        if (active) view(app, { ...r, billingGranted: true }, onLeave);
+      }).catch(error => {
+        if (!active) return;
+        app.innerHTML = `<div class="load-state"><h2>Ton accès à Lugha</h2><p role="alert">${esc(error.message)}</p><a class="btn btn-primary" href="#/abonnement">Découvrir Lugha Pro</a><a class="btn btn-ghost" href="#/apprendre">Retour</a></div>`;
+      });
+      return;
+    }
     const ui = Math.floor(idx / PER_UNIT), li = idx % PER_UNIT;
     let queue = (lang === 'en' && eng) ? eng.buildA1Lesson(ui, li, p) : buildLesson(lang, ui, li);
     if (!queue || !queue.length) { toast('Données de leçon indisponibles.', { icon: '⚠️' }); return back(); }

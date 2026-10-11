@@ -40,7 +40,7 @@
         <div class="hero-copy">
           <p class="hero-hi"><span class="hero-m">${mascot('happy')}</span><span>Salut, moi c’est Bulle. On apprend ensemble ?</span></p>
           <h1 class="hero-title" id="heroTitle">Le monde entier, un mot à la fois.</h1>
-          <p class="hero-lead">Des petits jeux de dix minutes pour apprendre l’anglais, le coréen, le turc et douze autres langues. Gratuit, sans publicité, pensé pour les enfants et suivi par les parents.</p>
+          <p class="hero-lead">Des petits jeux de dix minutes pour apprendre l’anglais, le coréen, le turc et douze autres langues. Une découverte gratuite, sans publicité, pour les adolescents, les adultes et les familles.</p>
           <div class="hero-cta">
             <a class="btn btn-primary btn-lg" href="${ctaHref}">${ctaLabel}</a>
             ${u ? '' : '<a class="btn btn-ghost btn-lg" href="#/connexion">J’ai déjà un compte</a>'}
@@ -119,7 +119,7 @@
               <li>${icon('chart')}<div><b>Un rapport chaque semaine</b><span>XP, minutes, mots appris, jour par jour.</span></div></li>
               <li>${icon('clock')}<div><b>Temps d’écran maîtrisé</b><span>Vous fixez une durée par jour, l’appli s’arrête d’elle-même.</span></div></li>
               <li>${icon('shield')}<div><b>Réglages sous code parent</b><span>Un code à 4 chiffres protège votre espace.</span></div></li>
-              <li>${icon('family')}<div><b>Toute la fratrie</b><span>Un profil par enfant, chacun sa langue et son rythme.</span></div></li>
+              <li>${icon('family')}<div><b>Un suivi personnel</b><span>Un seul profil pour votre enfant, avec sa langue et son rythme.</span></div></li>
             </ul>
             <a class="btn btn-sun btn-lg" href="${u ? '#/parents' : '#/inscription?role=parent'}">${u ? 'Ouvrir l’espace parents' : 'Créer mon espace parent'}</a>
           </div>
@@ -145,26 +145,22 @@
 
       <section class="pricing" id="tarif">
         <div class="wrap">
-          <h2 class="sec-title">Gratuit, pendant tout le lancement.</h2>
-          <p class="sec-lead">Tout est ouvert. Aucune carte bancaire demandée.</p>
+          <h2 class="sec-title">Une petite habitude. De grands progrès.</h2>
+          <p class="sec-lead">Lugha Pro : un profil, quinze langues à explorer, trois mois pour avancer à ton rythme.</p>
           <div class="price-row">
             <div class="price-stage"><div class="price-card" id="priceCard">
-              <div class="pc-shine"></div>
-              <p class="pc-name">Lugha Libre</p>
-              <p class="pc-price"><b id="priceNum">0</b><span>DA / mois</span></p>
+              <div class="pc-shine"></div><p class="pc-name">Lugha Pro</p>
+              <p class="pc-price"><b id="priceNum">2000</b><span>DA / 3 mois</span></p>
               <ul class="pc-list">
-                <li>${icon('check')}Les 15 langues et tous les jeux</li>
-                <li>${icon('check')}Espace parents et rapports</li>
-                <li>${icon('check')}Jusqu’à 5 profils enfants</li>
-                <li>${icon('check')}Aucune publicité, jamais</li>
+                <li>${icon('check')}Un profil pour un adolescent ou un adulte</li>
+                <li>${icon('check')}Jeux, images, lecture et questions variées</li>
+                <li>${icon('check')}Objectifs, séries et récompenses</li>
+                <li>${icon('check')}Suivi parental et temps d’écran</li>
               </ul>
-              <a class="btn btn-primary btn-lg btn-block" href="${ctaHref}">${u ? 'Continuer' : 'Créer mon compte gratuit'}</a>
+              <a class="btn btn-primary btn-lg btn-block" href="${u ? '#/abonnement' : '#/inscription'}">${u ? 'Découvrir Lugha Pro' : 'Créer mon compte'}</a>
+              <p class="small">Paiement Baridi en préparation. Un seul paiement, sans renouvellement automatique. Aucun virement demandé avant l’ouverture du paiement.</p>
             </div></div>
-            <div class="soon-card">
-              <p class="soon-tag">Bientôt</p><h3>Famille+</h3>
-              <p>Textes à lire, niveaux avancés, certificats à imprimer. Les comptes créés pendant le lancement garderont un avantage.</p>
-              <button class="btn btn-ghost" id="notify">Me prévenir</button>
-            </div>
+            <div class="soon-card"><p class="soon-tag">Découverte</p><h3>3 jours · 3 leçons</h3><p>Essaie une langue, sans carte bancaire. Trois leçons commencées au total pour ton compte, sur un seul profil. Cette limite sera activée avec le paiement.</p><p>Anglais A1 : 1 822 activités. Les niveaux avancés sont en préparation ; le contenu varie selon les langues.</p><a class="btn btn-ghost" href="${ctaHref}">Commencer ma découverte</a></div>
           </div>
         </div>
       </section>
@@ -172,8 +168,8 @@
       <section class="faq"><div class="wrap narrow">
         <h2 class="sec-title">Questions des parents</h2>
         ${[
-          ['C’est vraiment gratuit ?', 'Oui. Pendant le lancement, tout Lugha est gratuit et sans publicité. Une formule Famille+ arrivera plus tard avec des contenus en plus ; la version gratuite restera.'],
-          ['À partir de quel âge ?', 'Dès 5 ou 6 ans avec un parent à côté, en autonomie à partir de 7 ans. Les jeux avec images et la voix aident ceux qui lisent encore peu.'],
+          ['Comment fonctionne l’essai ?', 'L’offre prévue comprend trois jours et trois leçons commencées au total, sur une seule langue et un seul profil, sans carte bancaire. Ces limites et le paiement seront activés ensemble. Lugha Pro coûte 2 000 DA pour trois mois, par virement Baridi vérifié manuellement.'],
+          ['Pour qui ?', 'Pour les adolescents à partir de 13 ans et les adultes. Un parent peut créer et suivre le profil de son enfant. Les activités utilisent des textes, des images et des jeux ; les questions vocales sont désactivées.'],
           ['Combien de temps par jour ?', 'Dix minutes suffisent. La régularité compte plus que la durée : c’est pour ça que Lugha récompense les séries de jours.'],
           ['Puis-je limiter le temps d’écran ?', 'Oui. Dans l’espace parents, fixez une durée par jour pour chaque enfant. Une fois atteinte, les leçons se mettent en pause jusqu’au lendemain.'],
           ['Quelles langues ?', 'Anglais, français, espagnol, allemand, italien, portugais, turc, coréen, chinois, japonais, russe, arabe, hindi, néerlandais et suédois.'],
@@ -262,10 +258,9 @@
     onLeave(onView(card, () => {
       card.classList.remove('pre');
       animate(card, { rotateY: [-200, 0], opacity: [0, 1], scale: [0.7, 1] }, spring(38, 9)).then(() => card.classList.add('floating'));
-      countUp($('#priceNum'), 0, { from: 15, dur: 1400 });
+      countUp($('#priceNum'), 2000, { from: 0, dur: 1400 });
     }, 0.35));
     onLeave(tilt(card, 14));
-    $('#notify').addEventListener('click', () => toast('C’est noté. Vous serez prévenu au lancement de Famille+.', { icon: '🔔' }));
 
     // FAQ : animation d'ouverture
     $$('.qa', app).forEach(d => d.addEventListener('toggle', () => { if (d.open) animate($('p', d), { opacity: [0, 1], y: [-6, 0] }, { duration: 0.3 }); }));
