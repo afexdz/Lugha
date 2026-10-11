@@ -10,18 +10,19 @@
   const onLeave = f => { if (typeof f === 'function') cleanups.push(f); };
 
   const APP = {
-    abonnement: LZ.billing.offer, paiements: LZ.billing.admin, apprendre: V.learn, classement: V.league, voyage: V.voyage, boutique: V.shop, profil: V.profile,
+    abonnement: LZ.billing.offer,  apprendre: V.learn, classement: V.league, voyage: V.voyage, boutique: V.shop, profil: V.profile,
     parents: V.parents, parametres: V.settings, langues: V.courses
   };
   const TITLES = {
     '': 'Lugha : apprends les langues en jouant', connexion: 'Connexion', inscription: 'Créer un compte',
     'mot-de-passe': 'Mot de passe oublié', 'nouveau-mot-de-passe': 'Nouveau mot de passe',
     bienvenue: 'Bienvenue', lecon: 'Leçon', apprendre: 'Apprendre', classement: 'Classement',
-    abonnement: 'Lugha Pro', paiements: 'Gestion des paiements', voyage: 'Mon voyage', boutique: 'Boutique', profil: 'Profil', parents: 'Espace parents',
+    wbx: 'Gestion', abonnement: 'Lugha Pro', paiements: 'Gestion des paiements', voyage: 'Mon voyage', boutique: 'Boutique', profil: 'Profil', parents: 'Espace parents',
     parametres: 'Réglages', langues: 'Langues'
   };
 
   function parse() {
+    if (/^\/wbx\/?$/.test(location.pathname)) return { name: 'wbx', args: [location.hash.replace(/^#\/?/, '') || 'overview'], q: new URLSearchParams() };
     const raw = location.hash.replace(/^#\/?/, '');
     const [path, qs] = raw.split('?');
     const parts = path.split('/').filter(Boolean);
@@ -44,6 +45,8 @@
 
     if (r.name !== '') { const ld = document.getElementById('loader'); ld && ld.remove(); }
     const needOnb = u && (!p || !p.lang);
+    if (r.name === 'wbx') return LZ.wbx.view(app, r, onLeave);
+    if (r.name === 'paiements') { location.replace('/wbx#payments'); return; }
     if (r.name === '') return V.home(app, r, onLeave);
     if (r.name === 'nouveau-mot-de-passe') return V.newPassword(app, r, onLeave);
     if (['connexion', 'inscription', 'mot-de-passe'].includes(r.name)) {

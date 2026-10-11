@@ -8,7 +8,7 @@ async function call(name,method='POST',body={},headers={}){let code,data;const r
  assert.equal((await call('membership','GET')).code,401);
  process.env.SUPABASE_URL='https://db.example';process.env.SUPABASE_PUBLISHABLE_KEY='public-test-key';process.env.APP_ORIGIN='https://www.lugha.world';process.env.BILLING_ADMIN_USER_IDS='owner-1';process.env.BILLING_ENABLED='false';
  assert.equal((await call('membership','GET')).code,401);
- let calls=[];global.fetch=async(url,options={})=>{calls.push({url,options});const data=url.endsWith('/lugha_is_admin')?options.headers.Authorization==='Bearer owner':url.endsWith('/auth/v1/user')?{id:options.headers.Authorization==='Bearer owner'?'owner-1':'user-1'}:{status:'pending',id:'payment-1'};return {ok:true,json:async()=>data};};
+ let calls=[];global.fetch=async(url,options={})=>{calls.push({url,options});const data=url.endsWith('/lugha_lesson_restriction')?false:url.endsWith('/lugha_is_admin')?options.headers.Authorization==='Bearer owner':url.endsWith('/auth/v1/user')?{id:options.headers.Authorization==='Bearer owner'?'owner-1':'user-1'}:{status:'pending',id:'payment-1'};return {ok:true,json:async()=>data};};
  const auth={authorization:'Bearer user',origin:'https://www.lugha.world'},owner={...auth,authorization:'Bearer owner'};
  const today=new Date().toISOString().slice(0,10),payment={reference:'TRX-12345',transferDate:today,amount:1};
  assert.equal((await call('payment-request','POST',payment,auth)).code,503);
