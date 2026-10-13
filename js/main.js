@@ -7,6 +7,7 @@
   const V = LZ.views;
   const app = document.getElementById('app');
   let cleanups = [];
+  let verifiedAdmin = false, roleUser = null, rolePromise = null;
   const onLeave = f => { if (typeof f === 'function') cleanups.push(f); };
 
   const APP = {
@@ -37,7 +38,8 @@
 
     const r = parse();
     if (r.name && !TITLES[r.name] && document.getElementById(r.name)) return;
-    const u = me(), p = prof();
+    if (verifiedAdmin && r.name !== 'wbx' && r.name !== 'nouveau-mot-de-passe') { location.replace('/wbx'); return; }
+    const u = me(), p = verifiedAdmin ? null : prof();
     if (p) { tick(p); save(); }
     document.title = r.name ? `${TITLES[r.name] || 'Lugha'} · Lugha` : TITLES[''];
     document.body.dataset.route = r.name || 'home';
@@ -79,12 +81,31 @@
   }
 
   // Crée ou met à jour l'utilisateur local à partir de la session Supabase
-  async function syncUser(sbUser) {
+  async function syncUser(sbUser, session) {
+    if (roleUser !== sbUser.id || !rolePromise) {
+      roleUser = sbUser.id;
+      rolePromise = (async () => {
+        const current = session || (await LZ.sb.auth.getSession()).data.session;
+        if (!current?.access_token) throw new Error('Session indisponible');
+        const response = await fetch('/api/account-role', {
+          headers: { Authorization: `Bearer ${current.access_token}` },
+          signal: AbortSignal.timeout(15000)
+        });
+        if (!response.ok) throw new Error('Vérification du compte indisponible');
+        const result = await response.json();
+        if (typeof result.isAdmin !== 'boolean') throw new Error('Réponse invalide');
+        return result.isAdmin;
+      })();
+    }
+    try { verifiedAdmin = await rolePromise; }
+    catch (error) { rolePromise = null; throw error; }
+    const meta = sbUser.user_metadata || {};
+    const role = verifiedAdmin ? 'admin' : meta.role === 'parent' ? 'parent' : 'learner';
     const db = LZ.db;
     let u = db.users.find(x => x.id === sbUser.id);
     if (!u) {
       const meta = sbUser.user_metadata || {};
-      const role = meta.role || 'learner';
+
       u = {
         id: sbUser.id,
         name: meta.prenom || sbUser.email?.split('@')[0] || 'Utilisateur',
@@ -107,6 +128,7 @@
       const meta = sbUser.user_metadata || {};
       if (meta.prenom && !u.name) u.name = meta.prenom;
     }
+    u.role = role;
     db.session = u.id;
     LZ.save();
     return u;
@@ -124,26 +146,36 @@
   init();
 
   async function init() {
+    try {
     if (LZ.sb) {
       const { data: { session } } = await LZ.sb.auth.getSession();
-      if (session) await syncUser(session.user);
+      if (session) await syncUser(session.user, session);
 
       LZ.sb.auth.onAuthStateChange(async (event, session) => {
         if (event === 'INITIAL_SESSION') return; // déjà géré via getSession
+        try {
         if (session) {
-          await syncUser(session.user);
+          await syncUser(session.user, session);
           if (event === 'PASSWORD_RECOVERY') {
             location.hash = '#/nouveau-mot-de-passe';
             render();
             return;
           }
         } else if (event === 'SIGNED_OUT') {
+          verifiedAdmin = false; roleUser = null; rolePromise = null;
           LZ.db.session = null;
           LZ.save();
         }
         render();
+        } catch (error) { roleError(); }
       });
     }
     render();
+    } catch (error) { roleError(); }
+  }
+  function roleError() {
+    app.innerHTML = '<main class="page"><h1>Vérification du compte indisponible</h1><p>Vérifie ta connexion puis réessaie.</p><button class="btn btn-primary" id="retryAccount">Réessayer</button></main>';
+    document.getElementById("loader")?.remove();
+    $("#retryAccount").onclick = () => location.reload();
   }
 })();

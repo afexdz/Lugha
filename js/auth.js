@@ -97,7 +97,9 @@
         setErr(f, e2.field, e2.text);
         return;
       }
-      await LZ.syncUser(data.user);
+      try { await LZ.syncUser(data.user, data.session); }
+      catch (error) { toast('Impossible de vérifier ton compte. Recharge la page pour réessayer.', { icon: '❌' }); return; }
+      if (me()?.role === 'admin') { location.replace('/wbx'); return; }
       toast(`Content de te revoir !`, { icon: '👋' });
       const u = me(), p = prof();
       location.hash = (!p || !p.lang) ? '#/bienvenue' : '#/apprendre';
@@ -177,7 +179,9 @@
         animate(conf, { opacity: [0, 1], y: [12, 0] }, spring(200, 20));
         return;
       }
-      await LZ.syncUser(data.user);
+      try { await LZ.syncUser(data.user, data.session); }
+      catch (error) { toast('Impossible de vérifier ton compte. Recharge la page pour réessayer.', { icon: '❌' }); return; }
+      if (me()?.role === 'admin') { location.replace('/wbx'); return; }
       location.hash = '#/bienvenue';
     });
     intro();
