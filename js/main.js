@@ -61,7 +61,7 @@
     const view = APP[r.name];
     if (!view) return go('#/apprendre');
     // Never show the legacy five-unit English map while the A1 bank loads.
-    if (p.lang === 'en' && LZ.engine && !LZ.engine.getA1Data()) {
+    if (['apprendre','voyage','profil'].includes(r.name) && p.lang === 'en' && LZ.engine && !LZ.engine.getA1Data()) {
       const state = LZ.engine.getStatus();
       app.innerHTML = state.status === 'error'
         ? '<main class="page"><h1>Contenu indisponible</h1><p>Vérifie ta connexion puis réessaie.</p><button class="btn btn-primary" id="retryCourse">Réessayer</button></main>'

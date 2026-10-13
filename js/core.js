@@ -75,7 +75,7 @@ window.LZ = (() => {
     if (p.hearts < MAX_H) {
       const g = Math.floor((now - p.heartsAt) / HEART_MS);
       if (g > 0) { p.hearts = Math.min(MAX_H, p.hearts + g); p.heartsAt = p.hearts >= MAX_H ? now : p.heartsAt + g * HEART_MS; }
-    } else p.heartsAt = now;
+    } else if (!Number.isFinite(p.heartsAt)) p.heartsAt = now;
     const t = dayKey(), y = addDays(t, -1);
     if (p.lastDay && p.lastDay < y && p.streak > 0) {
       const missed = daysBetween(p.lastDay, t) - 1;
