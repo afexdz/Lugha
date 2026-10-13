@@ -199,6 +199,12 @@
     html += `<div class="path-end">${icon('sparkle')}<div><b>De nouvelles unités arrivent</b><p>Histoires, verbes et conversations complètent bientôt le cours de ${L.name.toLowerCase()}.</p></div></div>`;
     el.innerHTML = `<div class="learn">${html}</div>`;
 
+    let accessActive=true;onLeave(()=>{accessActive=false;});
+    LZ.billing?.refresh?.().then(a=>{if(!accessActive)return;if(a.billingEnabled&&a.status!=='paid'){
+      const note=document.createElement('p');note.className='card';note.textContent='Accès gratuit : les trois premières leçons et leurs révisions, sans limite de jours. La suite est réservée à Lugha Pro.';el.querySelector('.learn').prepend(note);
+      $$('.node',el).filter(b=>+b.dataset.idx>2).forEach(b=>{b.classList.add('pro-only');b.setAttribute('aria-label',b.getAttribute('aria-label')+' · Lugha Pro');});
+    }}).catch(()=>{});
+
     // Popover d'étape
     const closePop = () => { const x = $('.node-pop'); x && x.remove(); };
     $$('.node', el).forEach(b => b.addEventListener('click', e => {
@@ -208,7 +214,8 @@
       const state = idx < done ? 'done' : idx === done ? 'current' : 'locked';
       const pop = document.createElement('div');
       pop.className = `node-pop ${state}`; pop.style.setProperty('--u', activeUnits[ui].color);
-      if (state === 'locked') pop.innerHTML = `<b>${chest ? 'Coffre verrouillé' : `Leçon ${li + 1}`}</b><p>Termine les étapes précédentes pour la débloquer.</p>`;
+      if (LZ.billing?.access?.billingEnabled && LZ.billing.access.status!=='paid' && (idx>2 || LZ.billing.access.freeLanguage && LZ.billing.access.freeLanguage!==p.lang)) pop.innerHTML='<b>Lugha Pro</b><p>L’accès gratuit comprend les trois premières leçons dans une seule langue. Débloque la suite pour 2 000 DA / 3 mois.</p><a class="btn btn-white btn-block" href="#/abonnement">Découvrir Lugha Pro</a>';
+      else if (state === 'locked') pop.innerHTML = `<b>${chest ? 'Coffre verrouillé' : `Leçon ${li + 1}`}</b><p>Termine les étapes précédentes pour la débloquer.</p>`;
       else if (chest) pop.innerHTML = `<b>Coffre de l’unité ${ui + 1}</b><p>${state === 'done' ? 'Déjà ouvert. Bravo !' : 'Tu as fini l’unité : ouvre ton coffre.'}</p>${state === 'current' ? `<button class="btn btn-sun btn-block" data-open>Ouvrir le coffre</button>` : ''}`;
       else pop.innerHTML = `<b>${esc(activeUnits[ui].title)}</b><p>Leçon ${li + 1} sur 4</p>
         ${limit ? '<p class="small">Temps du jour atteint.</p>' : `<a class="btn ${state === 'done' ? 'btn-ghost' : 'btn-white'} btn-block" href="#/lecon/${idx}">${state === 'done' ? 'Réviser, +5 XP' : 'Commencer, +10 XP'}</a>`}`;

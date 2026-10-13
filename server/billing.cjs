@@ -1,9 +1,9 @@
 'use strict';
-const PLAN = Object.freeze({ id:'lugha-quarter', amount:2000, currency:'dzd', months:3, trialDays:3, trialLessons:3, profiles:1 });
+const PLAN = Object.freeze({ id:'lugha-quarter', amount:2000, currency:'dzd', months:3, freeLessons:3, profiles:1 });
 class HttpError extends Error { constructor(status,message) { super(message); this.status=status; } }
 function config() {
   const env=process.env;
-  return { url:(env.SUPABASE_URL || 'https://rdbybcorqbbfshimgfnr.supabase.co').replace(/\/$/,''), key:env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_Euo6P0bAB6DClY1obRXNrg_rKJstRHv', origin:env.APP_ORIGIN || 'https://www.lugha.world', enabled:env.BILLING_ENABLED==='true' };
+  return { url:(env.SUPABASE_URL || 'https://rdbybcorqbbfshimgfnr.supabase.co').replace(/\/$/,''), key:env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_Euo6P0bAB6DClY1obRXNrg_rKJstRHv', origin:env.APP_ORIGIN || 'https://www.lugha.world', enabled:env.BILLING_ENABLED!=='false' };
 }
 async function request(url,opts) {
   const r=await fetch(url,{...opts,signal:AbortSignal.timeout(15000)});

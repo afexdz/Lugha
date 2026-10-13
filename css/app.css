@@ -1152,3 +1152,7 @@ body[data-route=wbx]{background:#f5f6fa;color:#202238}.wbx{display:grid;grid-tem
 .english-choice{gap:1rem}
 .english-choice .reading-passage{margin:0;padding:12px;line-height:1.45}
 .english-choice .english-scene{margin:0;max-height:160px}
+
+.payment-receipt-preview{display:block;max-width:100%;max-height:420px;object-fit:contain;margin:16px auto}#wbxReceiptPreview{overflow-wrap:anywhere}
+
+.node.pro-only{filter:saturate(.35)}

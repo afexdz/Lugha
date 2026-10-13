@@ -295,7 +295,7 @@
       app.innerHTML = '<p class="load-state" role="status">Vérification de ton accès…</p>';
       let active = true;
       onLeave(() => { active = false; });
-      LZ.billing.startLesson(lang).then(() => {
+      LZ.billing.startLesson(lang,idx).then(() => {
         if (active) view(app, { ...r, billingGranted: true }, onLeave);
       }).catch(error => {
         if (!active) return;

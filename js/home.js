@@ -160,7 +160,7 @@
               <a class="btn btn-primary btn-lg btn-block" href="${u ? '#/abonnement' : '#/inscription'}">${u ? 'Découvrir Lugha Pro' : 'Créer mon compte'}</a>
               <p class="small">Paiement Baridi en préparation. Un seul paiement, sans renouvellement automatique. Aucun virement demandé avant l’ouverture du paiement.</p>
             </div></div>
-            <div class="soon-card"><p class="soon-tag">Découverte</p><h3>3 jours · 3 leçons</h3><p>Essaie une langue, sans carte bancaire. Trois leçons commencées au total pour ton compte, sur un seul profil. Cette limite sera activée avec le paiement.</p><p>Anglais A1 : 1 822 activités. Les niveaux avancés sont en préparation ; le contenu varie selon les langues.</p><a class="btn btn-ghost" href="${ctaHref}">Commencer ma découverte</a></div>
+            <div class="soon-card"><p class="soon-tag">Découverte</p><h3>3 leçons gratuites</h3><p>Crée ton compte gratuit, choisis une langue et découvre les trois premières leçons A1. Rejoue-les autant que tu veux, sans limite de jours, sur un seul profil.</p><p>Anglais A1 : 2 999 activités. Les niveaux avancés sont en préparation ; le contenu varie selon les langues.</p><a class="btn btn-ghost" href="${ctaHref}">Commencer ma découverte</a></div>
           </div>
         </div>
       </section>

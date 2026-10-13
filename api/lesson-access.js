@@ -4,7 +4,8 @@ module.exports=B.wrap(async(req,res)=>{
  if(await B.rpc('lugha_lesson_restriction',{p_user:u.id},req))return res.status(403).json({allowed:false,reason:'suspended'});
  if(!c.enabled)return res.status(200).json({allowed:true,status:'preview'});
  const body=req.body || {};
- if(typeof body.sessionId!=='string'||!/^[-a-zA-Z0-9]{8,80}$/.test(body.sessionId)||typeof body.profileId!=='string'||!/^[-a-zA-Z0-9]{5,80}$/.test(body.profileId)||typeof body.language!=='string'||!/^[a-z]{2}$/.test(body.language))throw new B.HttpError(400,'Session de leçon invalide.');
- const access=await B.rpc('lugha_reserve_lesson',{p_user:u.id,p_session:body.sessionId,p_language:body.language,p_profile:body.profileId},req);
+ if(body.lessonIndex===undefined)throw new B.HttpError(409,'L’application a été mise à jour. Recharge la page pour continuer.');
+ if(typeof body.sessionId!=='string'||!/^[-a-zA-Z0-9]{8,80}$/.test(body.sessionId)||typeof body.profileId!=='string'||!/^[-a-zA-Z0-9]{5,80}$/.test(body.profileId)||!Number.isInteger(body.lessonIndex)||body.lessonIndex<0||body.lessonIndex>1000||typeof body.language!=='string'||!/^[a-z]{2}$/.test(body.language))throw new B.HttpError(400,'Session de leçon invalide.');
+ const access=await B.rpc('lugha_free_lesson_access',{p_user:u.id,p_session:body.sessionId,p_language:body.language,p_profile:body.profileId,p_lesson:body.lessonIndex},req);
  res.status(access.allowed?200:403).json(access);
 });

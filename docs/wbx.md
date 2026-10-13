@@ -15,7 +15,7 @@ Les revenus ne couvrent que les nouvelles déclarations Baridi. La progression l
 
 Appliquer d’abord `20261011150000_lugha_billing.sql`, puis une seule fois `20261011170000_lugha_wbx.sql`. Les deux migrations ont été installées dans le projet Supabase Lugha ; les privilèges anonymes du dashboard et les privilèges clients de la fonction interne sans contrôle ont été vérifiés absents.
 
-Le compte support demandé existe dans Supabase, mais son attribution au rôle administrateur reste en attente de confirmation explicite. Aucun mot de passe n’est intégré au code. `BILLING_ENABLED` reste désactivé jusqu’à la configuration de l’administrateur et la vérification du parcours de paiement réel.
+Le compte support a été confirmé et activé comme administrateur le 11 octobre 2026. Aucun mot de passe n’est intégré au code. Depuis le 13 octobre, le parcours utilise un reçu privé, la validation manuelle et trois premières leçons gratuites sans limite de jours ; voir `receipts-free-access.md`.
 
 ## Validation
 
