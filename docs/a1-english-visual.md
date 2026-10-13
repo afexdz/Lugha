@@ -1,0 +1,9 @@
+# English A1 visual revision — 13 October 2026
+
+The live course bank is `content/en/course.json`. A1 now contains 2,039 activities across 12 topic units. Previous translation prompts and pair-matching questions were removed from the live A1 pool. Historical source-bank files are retained for reference, not loaded by the app.
+
+Instructions, choices, hints, teaching notes and sentence-order activities use English. French vocabulary metadata remains for compatibility but is not displayed by these A1 exercises. Activities include illustrated situations, word-to-picture choices, visual vocabulary, missing-letter challenges, sentence ordering, grammar choices and short reading tasks. The picture bank uses emoji illustrations alongside six original SVG scenes, including new greeting and bedtime illustrations; it is not a photographic library.
+
+Each lesson starts with a visual activity. The first greeting lesson starts with two friends meeting and the answer “hello”. Vocabulary grows through the four lesson steps (12, 24, 32, then 40 words per unit); sentence pools grow too. Reading passages are introduced from step three. Questions from the last four started sessions remain excluded, including after quitting/reloading. The same target word or phrase is not selected twice within a session. Wrong answers can return in the same lesson for correction; later review is still deliberate.
+
+Validation: content validator; 1,200 English A1 selection sessions checking visual starts, no pairs/translations, distinct targets and cooldown; 2,200 persisted multi-level engine sessions; all 48 A1 lessons and 12 reward chests in simulated DOM; valid alternate sentence orders; voice-removal and seven sound-effects tests. Browser checks confirmed the greeting activity and English feedback. These checks do not constitute certification by a human English teacher or tests on physical phones.

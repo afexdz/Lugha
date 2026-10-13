@@ -48,7 +48,7 @@ async function answer(s,e,mode='right') {
     const input=doc.querySelector('#typeIn');input.value=(e.w||e.word).t;input.dispatchEvent(new w.Event('input',{bubbles:true}));doc.querySelector('#check').click();
   } else {
     const t=e.w||e.word;
-    const label=e.type==='choice'?e.options.find(o=>o.id===e.correctChoiceId).t:['meaning','pickImage'].includes(e.type)?t.m:t.t;
+    const label=e.type==='choice'?(e.options.find(o=>o.id===e.correctChoiceId).picture || e.options.find(o=>o.id===e.correctChoiceId).t):['meaning','pickImage'].includes(e.type)?t.m:t.t;
     const choices=[...doc.querySelectorAll('.opt')];
     const b=choices.find(b=>{const text=b.querySelector('.ot,.pic-t')?.textContent;return mode==='wrong'?text!==label:text===label;});
     assert(b,'Missing answer '+label+' ('+e.type+')');b.click();assert(!doc.querySelector('#check').disabled);doc.querySelector('#check').click();

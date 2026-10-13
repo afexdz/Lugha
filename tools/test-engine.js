@@ -131,12 +131,12 @@ function checkExercise(e, fails, ctx) {
     for (let li = 0; li < 4; li++) {
       const first = eng.buildA1Lesson(ui, li, {});
       const replay = eng.buildA1Lesson(ui, li, { strength: { en: { 'en-u0-w0': 5 } } });
-      const pool = [...data.units[ui].lessons.flatMap(l => l.questions), ...(data.units[ui].questionBank || [])];
+      const pool = eng.lessonPool(ui,li);
       if (!first || first.length !== Math.min(12, Math.floor(pool.length / 5))) fails.push(`u${ui} l${li}: wrong session size`);
       if (!replay.length) fails.push(`u${ui} l${li}: empty replay`);
       const sessionIds = new Set();
       if (first.filter(e => e.type === 'match').length > (data.units[ui].questionBank ? 3 : 1)) fails.push(`u${ui}: matching games dominate a fresh lesson`);
-      if (!first.some(e => e.objective === 'reading-comprehension')) fails.push(`u${ui}: fresh lesson missing a reading activity`);
+      if (pool.some(q=>q.objective==='reading-comprehension') && !first.some(e => e.objective === 'reading-comprehension')) fails.push(`u${ui}: fresh lesson missing a reading activity`);
       first.forEach(e => {
         if (!e.questionId || sessionIds.has(e.questionId) || !pool.some(q => q.id === e.questionId)) fails.push(`Invalid session question ID ${e.questionId}`);
         sessionIds.add(e.questionId);
@@ -180,7 +180,7 @@ function checkExercise(e, fails, ctx) {
   const firstUnitPool = [...data.units[0].lessons.flatMap(l => l.questions), ...(data.units[0].questionBank || [])];
   reviewProfile.courses.en.questionHistory.seen[firstUnitPool[0].id] = 1;
   const reviewLesson = eng.buildA1Lesson(0, 0, reviewProfile);
-  if (reviewLesson.filter(e => e.isReview).length !== 1) fails.push('A1 review quota should be one of twelve');
+  if (reviewLesson.filter(e => e.isReview).length !== (reviewLesson.length>=10?1:0)) fails.push('A1 review quota must respect the session size');
   const crossUnitProfile = { courses: {} };
   for (let i = 0; i < 40; i++) {
     const seq = eng.buildA1Lesson(i % 2, 0, crossUnitProfile);

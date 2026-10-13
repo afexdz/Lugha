@@ -83,11 +83,14 @@
   // ---------- Exercices ----------
   const EX = {
     choice(card, e, ctx) {
+      card.classList.add('english-choice');
       card.innerHTML = `<h2 class="ex-title">${esc(e.prompt)}</h2>`
         + (e.passage ? `<p class="reading-passage" lang="en">${esc(e.passage)}</p>` : '')
-        + (e.image ? `<img class="english-scene" src="${esc(e.image)}" alt="${esc(e.imageAlt || 'Illustration de la question')}" />` : '')
-        + `<div class="opts list">${e.options.map((o, i) => `<button class="opt" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" lang="en">${esc(o.t)}</span></button>`).join('')}</div>`;
+        + (e.visual ? `<div class="big-e" role="img" aria-label="Picture clue">${esc(e.visual)}</div>` : '')
+        + (e.image ? `<img class="english-scene" src="${esc(e.image)}" alt="${esc(e.imageAlt || 'Question illustration')}" />` : '')
+        + `<div class="opts ${(e.visual || e.image || e.options.some(o=>o.picture)) ? 'grid' : 'list'}">${e.options.map((o, i) => `<button class="opt ${o.picture ? 'pic' : ''}" data-i="${i}" aria-pressed="false"><kbd>${i + 1}</kbd><span class="ot" lang="en">${o.picture ? `<span class="pic-e" role="img" aria-label="${esc(o.t)}">${esc(o.picture)}</span>` : esc(o.t)}</span></button>`).join('')}</div>`;
       const s = selectable(card, ctx);
+      if(e.options.some(o=>o.picture))$$('.opt',card).forEach(b=>b.addEventListener('click',()=>Sfx.pop()));
       return { check: () => ({
         ok: e.options[s.i]?.id === e.correctChoiceId,
         answer: e.options.find(o => o.id === e.correctChoiceId).t,
@@ -129,7 +132,7 @@
       const extra = [...new Set(D.words(ctx.lang).map(w => w.t).join('').split('').filter(ch => /[^\x00-\x7F]/.test(ch) && ch.trim()))].slice(0, 10);
       card.innerHTML = `<h2 class="ex-title">Écris « ${esc(e.w.m)} » en ${D.langs[ctx.lang].name.toLowerCase()}</h2>
         <div class="big-e">${e.w.e}</div>
-        <input class="type-in" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ta réponse" aria-label="Ta réponse">
+        <input class="type-in" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ta réponse" aria-label="Your answer">
         ${extra.length ? `<div class="accents" aria-label="Lettres spéciales">${extra.map(ch => `<button type="button" data-ch="${esc(ch)}">${esc(ch)}</button>`).join('')}</div>` : ''}`;
       const inp = $('#typeIn', card);
       inp.addEventListener('input', () => ctx.setReady(inp.value.trim().length > 0));
@@ -179,9 +182,9 @@
       const others = D.phrases(ctx.lang).filter((_, i) => i !== e.ph.unit).flat();
       const dis = [...new Set(others.filter(t => !e.ph.tokens.includes(t)))];
       const tiles = shuffle([...e.ph.tokens.map((t, i) => ({ t, k: 'a' + i })), ...shuffle(dis).slice(0, 3).map((t, i) => ({ t, k: 'd' + i }))]);
-      card.innerHTML = `<h2 class="ex-title">Traduis cette phrase</h2>
-        <div class="speech">${mascot('calm')}<div class="bubble">${esc(e.ph.m)}</div></div>
-        <div class="answer" id="ans" aria-label="Ta réponse" ${rtl(ctx.lang)}></div>
+      card.innerHTML = `<h2 class="ex-title">${e.ph.englishOnly ? "Put the words in order." : "Traduis cette phrase"}</h2>
+        <div class="speech">${mascot('calm')}<div class="bubble">${e.ph.englishOnly ? "Build a complete sentence with the words below." : esc(e.ph.m)}</div></div>
+        <div class="answer" id="ans" aria-label="Your answer" ${rtl(ctx.lang)}></div>
         <div class="bank" ${rtl(ctx.lang)}>${tiles.map(x => `<button class="tile" data-k="${x.k}">${esc(x.t)}</button>`).join('')}</div>`;
       const ans = $('#ans', card);
       const sync = () => ctx.setReady(ans.children.length > 0);
@@ -312,9 +315,9 @@
     const unitColor = (lang === 'en' && eng?.getA1Units()) ? (eng.getA1Units()[ui]?.color || '#6C4DFF') : D.units[ui]?.color || '#6C4DFF';
     app.innerHTML = `<div class="lesson" style="--u:${unitColor}">
       <header class="l-top">
-        <button class="icon-btn" id="quit" aria-label="Quitter la leçon">${icon('x')}</button>
+        <button class="icon-btn" id="quit" aria-label="${lang === 'en' ? 'Leave lesson' : 'Quitter la leçon'}">${icon('x')}</button>
         <div class="l-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="lbar"></i><span class="combo" id="combo" hidden></span></div>
-        <span class="stat heart ${practice ? 'inf' : ''}" aria-label="Cœurs">${icon('heart')}<b id="lh">${practice ? '∞' : p.hearts}</b></span>
+        <span class="stat heart ${practice ? 'inf' : ''}" aria-label="${lang === 'en' ? 'Hearts' : 'Cœurs'}">${icon('heart')}<b id="lh">${practice ? '∞' : p.hearts}</b></span>
       </header>
       <main class="l-stage" id="stage"></main>
       <footer class="l-foot" id="foot"></footer>
@@ -337,15 +340,15 @@
     };
     const showCombo = () => {
       const el = $('#combo');
-      if (st.combo >= 3) { el.hidden = false; el.textContent = `${st.combo} d’affilée`; animate(el, { scale: [1.3, 1] }, spring(500, 14)); }
+      if (st.combo >= 3) { el.hidden = false; el.textContent = `${st.combo} ${lang === "en" ? "in a row" : "d’affilée"}`; animate(el, { scale: [1.3, 1] }, spring(500, 14)); }
       else el.hidden = true;
     };
 
     function drawFoot() {
       foot.className = 'l-foot';
       const e = st.queue[st.i];
-      foot.innerHTML = `<div class="l-foot-in">${e.type === 'intro' || e.type === 'match' ? '<span></span>' : '<button class="btn btn-ghost btn-lg" id="skip">Passer</button>'}
-        <button class="btn btn-primary btn-lg" id="check" ${e.type === 'intro' ? '' : 'disabled'}>${e.type === 'intro' ? 'Continuer' : 'Vérifier'}</button></div>`;
+      foot.innerHTML = `<div class="l-foot-in">${e.type === 'intro' || e.type === 'match' ? '<span></span>' : `<button class="btn btn-ghost btn-lg" id="skip">${lang === "en" ? "Skip" : "Passer"}</button>`}
+        <button class="btn btn-primary btn-lg" id="check" ${e.type === 'intro' ? '' : 'disabled'}>${lang === 'en' ? (e.type === 'intro' ? 'Continue' : 'Check') : (e.type === 'intro' ? 'Continuer' : 'Vérifier')}</button></div>`;
       $('#check').addEventListener('click', onCheck);
       const sk = $('#skip'); sk && sk.addEventListener('click', () => { if (st.phase !== 'answer') return; grade({ ok: false, skipped: true, answer: answerOf(e), note: e.explanation, say: targetOf(e)?.t }); });
     }
@@ -401,16 +404,16 @@
         if (!e._retry) st.queue.push({ ...e, _retry: true, options: e.options ? shuffle(e.options) : undefined });
       }
       showCombo();
-      if (st.combo === 5 || st.combo === 10) toast(`${st.combo} bonnes réponses d’affilée !`, { icon: '🔥' });
+      if (st.combo === 5 || st.combo === 10) toast(lang === "en" ? `${st.combo} correct answers in a row!` : `${st.combo} bonnes réponses d’affilée !`, { icon: '🔥' });
       feedback(res);
     }
 
     function feedback(res) {
       foot.className = 'l-foot ' + (res.ok ? 'ok' : 'bad');
       foot.innerHTML = `<div class="l-foot-in"><div class="fb"><span class="fb-ic">${icon(res.ok ? 'check' : 'x')}</span>
-        <div><b>${res.ok ? rand(D.praise) : rand(D.comfort)}</b>${res.ok ? '' : `<p>Bonne réponse : <span class="fb-ans" ${rtl(lang)}>${esc(res.answer)}</span></p>`}${res.note ? `<p>${esc(res.note)}</p>` : ''}</div>
+        <div><b>${lang === 'en' ? (res.ok ? rand(['Great job!','Well done!','Nice work!']) : 'Keep trying!') : (res.ok ? rand(D.praise) : rand(D.comfort))}</b>${res.ok ? '' : `<p>${lang === "en" ? "Correct answer:" : "Bonne réponse :"} <span class="fb-ans" ${rtl(lang)}>${esc(res.answer)}</span></p>`}${res.note ? `<p>${esc(res.note)}</p>` : ''}</div>
         </div>
-        <button class="btn ${res.ok ? 'btn-ok' : 'btn-bad'} btn-lg" id="check">Continuer</button></div>`;
+        <button class="btn ${res.ok ? 'btn-ok' : 'btn-bad'} btn-lg" id="check">${lang === "en" ? "Continue" : "Continuer"}</button></div>`;
       animate(foot.firstElementChild, { y: [30, 0], opacity: [0, 1] }, spring(420, 30));
       $('#check').addEventListener('click', onCheck);
       setTimeout(() => { const k = $('#check'); k && k.focus(); }, 60);
@@ -494,17 +497,17 @@
         app.innerHTML = `<div class="end"><canvas class="confetti" id="cf"></canvas>
           <div class="end-in">
             <div class="end-m">${mascot(perfect ? 'wow' : 'happy')}</div>
-            <h1>${perfect ? 'Leçon parfaite !' : practice ? 'Révision terminée !' : 'Leçon terminée !'}</h1>
-            <p class="end-sub">${perfect ? 'Pas une seule erreur. Impressionnant.' : 'Chaque erreur t’a appris quelque chose.'}</p>
+            <h1>${lang === 'en' ? (perfect ? 'Perfect lesson!' : practice ? 'Practice complete!' : 'Lesson complete!') : (perfect ? 'Leçon parfaite !' : practice ? 'Révision terminée !' : 'Leçon terminée !')}</h1>
+            <p class="end-sub">${lang === 'en' ? (perfect ? 'Every answer correct. Great work!' : 'Keep practising. You are making progress!') : (perfect ? 'Pas une seule erreur. Impressionnant.' : 'Chaque erreur t’a appris quelque chose.')}</p>
             <div class="end-stats">
-              <div class="es xp"><small>XP gagnés</small><b><span id="cx">0</span>${boost ? '<em>x2</em>' : ''}</b></div>
-              <div class="es acc"><small>${perfect ? 'Parfait' : 'Précision'}</small><b><span id="ca">0</span>%</b></div>
-              <div class="es time"><small>Temps</small><b>${fmtTime(secs)}</b></div>
+              <div class="es xp"><small>${lang === "en" ? "XP earned" : "XP gagnés"}</small><b><span id="cx">0</span>${boost ? '<em>x2</em>' : ''}</b></div>
+              <div class="es acc"><small>${lang === 'en' ? (perfect ? 'Perfect' : 'Accuracy') : (perfect ? 'Parfait' : 'Précision')}</small><b><span id="ca">0</span>%</b></div>
+              <div class="es time"><small>${lang === "en" ? "Time" : "Temps"}</small><b>${fmtTime(secs)}</b></div>
             </div>
-            ${gems ? `<p class="end-pill">${icon('gem')}+${gems} gemmes</p>` : ''}
-            ${goalHit ? `<p class="end-pill goal">${icon('target')}Objectif du jour atteint !</p>` : ''}
+            ${gems ? `<p class="end-pill">${icon('gem')}+${gems} ${lang === "en" ? "gems" : "gemmes"}</p>` : ''}
+            ${goalHit ? `<p class="end-pill goal">${icon('target')}${lang === "en" ? "Daily goal complete!" : "Objectif du jour atteint !"}</p>` : ''}
           </div>
-          <footer class="end-foot"><button class="btn btn-primary btn-lg" id="endNext">Continuer</button></footer></div>`;
+          <footer class="end-foot"><button class="btn btn-primary btn-lg" id="endNext">${lang === "en" ? "Continue" : "Continuer"}</button></footer></div>`;
         const stop = confetti($('#cf'));
         onLeave(stop);
         animate($('.end-m'), { y: [80, 0], scale: [0.5, 1], rotate: [-15, 0] }, spring(160, 11));
@@ -566,7 +569,7 @@
           </div>
           <footer class="end-foot">
             <a class="btn btn-ghost btn-lg" href="#/voyage">Voir l'album</a>
-            <button class="btn btn-primary btn-lg" id="endNext">Continuer</button>
+            <button class="btn btn-primary btn-lg" id="endNext">${lang === "en" ? "Continue" : "Continuer"}</button>
           </footer>
         </div>`;
         animate($('#sCard'), { rotateY: [-90, 0], scale: [0.4, 1.08, 1] }, { delay: 0.3, ...spring(150, 12) }); Sfx.coin();

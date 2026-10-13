@@ -41,7 +41,7 @@
     status = 'loading'; lastError = null;
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
-    pending = fetch('content/en/course.json?v=20261011-a1-reviewed', ctrl ? { signal: ctrl.signal } : undefined)
+    pending = fetch('content/en/course.json?v=20261013-a1-english', ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
       .catch(err => { status = 'error'; lastError = err; throw err; })
@@ -249,6 +249,14 @@
   }
 
   // ── Construction d'une leçon ───────────────────────────────
+  function lessonPool(ui,li) {
+    const unit=_a1?.units[ui];if(!unit)return [];
+    const pool=[...unit.lessons.flatMap(l=>l.questions),...(unit.questionBank||[])];
+    if(unit.level!=='A1'||li===3)return pool;
+    const words=new Set(unit.words.slice(0,[12,24,32][li]).map(w=>w.id));
+    const phrases=new Set(unit.phrases.slice(0,[4,8,12][li]).map(p=>p.id));
+    return pool.filter(q=>q.wordId?words.has(q.wordId):q.phraseId?phrases.has(q.phraseId):q.objective==='reading-comprehension'?li>=2:true);
+  }
   function buildA1Lesson(ui, li, profile) {
     if (!_a1) return null;
     const unit = _a1.units[ui];
@@ -260,7 +268,7 @@
     const phrases = new Map(unit.phrases.map(p => [p.id, p]));
     // A unit is a topic/CEFR pool. Reserve at most one fifth per session so
     // four subsequent sessions can exclude this entire set, even on replay.
-    const pool = [...unit.lessons.flatMap(l => l.questions), ...(unit.questionBank || [])];
+    const pool = lessonPool(ui,li);
     const history = profile?.courses?.en?.questionHistory;
     const recent = new Set((history?.recent || []).slice(-4).flat());
     const seen = history?.seen || {};
@@ -272,31 +280,41 @@
     review.sort((a, b) => seen[a.id] - seen[b.id]);
     // Put a new reading/dialogue activity into the session when available.
     const reading = fresh.find(q => q.objective === 'reading-comprehension');
-    const matches = fresh.filter(q => q.type === 'match').slice(0, unit.questionBank ? 3 : 1);
-    const starters = [reading, ...matches].filter(Boolean);
+    const matches = unit.level === 'A1' ? [] : fresh.filter(q => q.type === 'match').slice(0, 1);
+    const isVisual=q=>q.objective!=='spelling' && (q.visual||q.image||q.pictureChoices) && (ui!==0||li!==0||!q.wordId||unit.words.slice(0,12).some(w=>w.id===q.wordId));
+    const visual = (ui===0&&li===0 ? fresh.find(q=>q.wordId==='en-u0-w0'&&q.objective==='visual-vocabulary') : null) || fresh.find(isVisual) || review.find(isVisual);
+    const starters = [visual, reading, ...matches].filter((q,i,a) => q && a.indexOf(q)===i);
     const selected = [...starters, ...fresh.filter(q => !starters.includes(q) && q.type !== 'match').slice(0, size - starters.length)];
     // One eligible older question (8.3% for A1), only after the cooldown.
     if (review.length && selected.length === size && size >= 10) selected.pop();
-    selected.push(...review.filter(q => q.type !== 'match' || !selected.some(s => s.type === 'match')).slice(0, size - selected.length));
+    selected.push(...review.filter(q => !selected.some(s=>s.id===q.id) && (q.type !== 'match' || !selected.some(s => s.type === 'match'))).slice(0, size - selected.length));
     // When the remaining unseen material consists only of games, rotate it
     // rather than return an empty session. Four-session exclusion still wins.
     if (selected.length < size) {
       const chosen = new Set(selected.map(q => q.id));
       selected.push(...[...fresh, ...review].filter(q => !chosen.has(q.id)).slice(0, size - selected.length));
     }
-    return noConsecutive(shuf(selected).map(q => {
+    if(unit.level === 'A1') {
+      const keys=new Set(), varied=[];
+      const key=q=>q.wordId ? 'word:'+q.wordId : q.phraseId ? 'phrase:'+q.phraseId : q.prompt+'|'+(q.passage||'');
+      for(const q of [...selected,...fresh,...review]) { const k=key(q);if(!keys.has(k)){keys.add(k);varied.push(q);}if(varied.length===size)break; }
+      selected.splice(0,selected.length,...varied);
+    }
+    const ordered = noConsecutive(shuf(selected));
+    if (unit.level === 'A1') { const i=ordered.findIndex(q=>q.id===visual?.id);if(i>0)ordered.unshift(...ordered.splice(i,1)); }
+    return ordered.map(q => {
       let ex;
-      if (q.type === 'build') ex = { type: 'build', ph: normalizePh(phrases.get(q.phraseId)) };
+      if (q.type === 'build') ex = { type: 'build', ph: { ...normalizePh(phrases.get(q.phraseId)), englishOnly: unit.level === 'A1' } };
       else if (q.type === 'match') ex = { type: 'match', pairs: q.pairIds.map(id => words.get(id)) };
       else if (q.type === 'choice') ex = {
-        type: 'choice', prompt: q.prompt, passage: q.passage, image: q.image,
-        imageAlt: q.imageAlt, explanation: q.explanation,
-        options: shuf(q.choices.map((label, i) => ({ id: q.id + '-option-' + i, t: label }))),
+        type: 'choice', w: q.wordId ? words.get(q.wordId) : undefined, prompt: q.prompt, passage: q.passage, image: q.image,
+        imageAlt: q.imageAlt, visual: q.visual, explanation: q.explanation,
+        options: shuf(q.choices.map((label, i) => ({ id: q.id + '-option-' + i, t: label, picture: q.pictureChoices?.[i] }))),
         correctChoiceId: q.id + '-option-' + q.answer
       };
       else ex = B[q.type](words.get(q.wordId), unit, ui);
       return { ...ex, questionId: q.id, isReview: !!seen[q.id], objective: q.objective, sourceRefs: q.sourceRefs || unit.sourceRefs };
-    }));
+    });
   }
 
   // Called once when a live lesson starts, never on wrong-answer retries.
@@ -331,7 +349,7 @@
   LZ.engine = {
     getA1Data, getTotal, getA1Units, ensureA1, getStatus, reload: () => { status = 'idle'; return load(); },
     normalize, normalizePh, joinTokens,
-    buildA1Lesson, recordLessonSelection,
+    buildA1Lesson, lessonPool, recordLessonSelection,
     updateStrength, getStrengths
   };
 })();
