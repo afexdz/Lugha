@@ -41,7 +41,7 @@
     status = 'loading'; lastError = null;
     const ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
     const timer = setTimeout(() => ctrl && ctrl.abort(), 12000);
-    pending = fetch('content/en/course.json?v=20261013-a1-english', ctrl ? { signal: ctrl.signal } : undefined)
+    pending = fetch('content/en/course.json?v=20261013-a1-pairs', ctrl ? { signal: ctrl.signal } : undefined)
       .then(r => { if (r.ok === false) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(d => { _a1 = d; _idx = index(d); status = 'ready'; return d; })
       .catch(err => { status = 'error'; lastError = err; throw err; })
@@ -64,7 +64,7 @@
   }
 
   // ── Normalisation ──────────────────────────────────────────
-  function normalize(w) { return { id: w.id, t: w.t, m: w.fr, e: w.e, r: '', u: w.unite, type: w.type }; }
+  function normalize(w) { return { id: w.id, t: w.t, m: w.fr, e: w.e, r: '', u: w.unite, type: w.type, clue: w.englishClue }; }
   function normalizePh(p) { return { tokens: p.tokens, acceptedTokens: p.acceptedTokens, m: p.fr, unit: p.unite }; }
   const low = s => String(s || '').toLowerCase().trim();
   const meanings = s => low(s).replace(/\([^)]*\)/g, '').split(' / ').map(x => x.trim());
@@ -255,7 +255,7 @@
     if(unit.level!=='A1'||li===3)return pool;
     const words=new Set(unit.words.slice(0,[12,24,32][li]).map(w=>w.id));
     const phrases=new Set(unit.phrases.slice(0,[4,8,12][li]).map(p=>p.id));
-    return pool.filter(q=>q.wordId?words.has(q.wordId):q.phraseId?phrases.has(q.phraseId):q.objective==='reading-comprehension'?li>=2:true);
+    return pool.filter(q=>q.pairIds?q.pairIds.every(id=>words.has(id)):q.wordId?words.has(q.wordId):q.phraseId?phrases.has(q.phraseId):q.objective==='reading-comprehension'?li>=2:true);
   }
   function buildA1Lesson(ui, li, profile) {
     if (!_a1) return null;
@@ -272,32 +272,36 @@
     const history = profile?.courses?.en?.questionHistory;
     const recent = new Set((history?.recent || []).slice(-4).flat());
     const seen = history?.seen || {};
-    const available = pool.filter(q => !recent.has(q.id));
-    const size = Math.min(12, Math.floor(pool.length / 5));
+    const allMatchIds=new Set(_a1.units.flatMap(u=>[...u.lessons.flatMap(l=>l.questions),...(u.questionBank||[])].filter(q=>q.type==='match').map(q=>q.id)));
+    const canMatch=unit.level!=='A1'||(history?.sessionsStarted||0)%5===0 && !(history?.recent||[]).slice(-3).flat().some(id=>allMatchIds.has(id));
+    const previousPairs=new Set(history?.recentPairSets?.at(-1)||[]);
+    const available = pool.filter(q => !recent.has(q.id) && (q.type!=='match'||canMatch && (!q.pairIds||q.pairIds.every(id=>!previousPairs.has(id)) && !(history?.recentPairSets||[]).some(ps=>ps.length===q.pairIds.length&&q.pairIds.every(id=>ps.includes(id))))));
+    const size = Math.min(12, Math.floor((unit.level==='A1'?pool.filter(q=>q.type!=='match').length:pool.length) / 5));
     const fresh = shuf(available.filter(q => !seen[q.id]));
     const review = shuf(available.filter(q => seen[q.id]));
     // Random tie breaks, then least frequently used questions first.
     review.sort((a, b) => seen[a.id] - seen[b.id]);
     // Put a new reading/dialogue activity into the session when available.
     const reading = fresh.find(q => q.objective === 'reading-comprehension');
-    const matches = unit.level === 'A1' ? [] : fresh.filter(q => q.type === 'match').slice(0, 1);
+    let matches = [];
     const isVisual=q=>q.objective!=='spelling' && (q.visual||q.image||q.pictureChoices) && (ui!==0||li!==0||!q.wordId||unit.words.slice(0,12).some(w=>w.id===q.wordId));
     const visual = (ui===0&&li===0 ? fresh.find(q=>q.wordId==='en-u0-w0'&&q.objective==='visual-vocabulary') : null) || fresh.find(isVisual) || review.find(isVisual);
+    matches=[...fresh,...review].filter(q=>q.type==='match'&&!q.pairIds.includes(visual?.wordId)).slice(0,1);
     const starters = [visual, reading, ...matches].filter((q,i,a) => q && a.indexOf(q)===i);
     const selected = [...starters, ...fresh.filter(q => !starters.includes(q) && q.type !== 'match').slice(0, size - starters.length)];
     // One eligible older question (8.3% for A1), only after the cooldown.
     if (review.length && selected.length === size && size >= 10) selected.pop();
-    selected.push(...review.filter(q => !selected.some(s=>s.id===q.id) && (q.type !== 'match' || !selected.some(s => s.type === 'match'))).slice(0, size - selected.length));
+    selected.push(...review.filter(q => !selected.some(s=>s.id===q.id) && q.type !== 'match').slice(0, size - selected.length));
     // When the remaining unseen material consists only of games, rotate it
     // rather than return an empty session. Four-session exclusion still wins.
     if (selected.length < size) {
       const chosen = new Set(selected.map(q => q.id));
-      selected.push(...[...fresh, ...review].filter(q => !chosen.has(q.id)).slice(0, size - selected.length));
+      selected.push(...[...fresh, ...review].filter(q => !chosen.has(q.id) && q.type!=='match').slice(0, size - selected.length));
     }
     if(unit.level === 'A1') {
       const keys=new Set(), varied=[];
       const key=q=>q.wordId ? 'word:'+q.wordId : q.phraseId ? 'phrase:'+q.phraseId : q.prompt+'|'+(q.passage||'');
-      for(const q of [...selected,...fresh,...review]) { const k=key(q);if(!keys.has(k)){keys.add(k);varied.push(q);}if(varied.length===size)break; }
+      for(const q of [...selected,...fresh.filter(q=>q.type!=='match'),...review.filter(q=>q.type!=='match')]) { const ks=q.type==='match'?q.pairIds.map(id=>'word:'+id):[key(q)];if(!ks.some(k=>keys.has(k))){ks.forEach(k=>keys.add(k));varied.push(q);}if(varied.length===size)break; }
       selected.splice(0,selected.length,...varied);
     }
     const ordered = noConsecutive(shuf(selected));
@@ -305,7 +309,7 @@
     return ordered.map(q => {
       let ex;
       if (q.type === 'build') ex = { type: 'build', ph: { ...normalizePh(phrases.get(q.phraseId)), englishOnly: unit.level === 'A1' } };
-      else if (q.type === 'match') ex = { type: 'match', pairs: q.pairIds.map(id => words.get(id)) };
+      else if (q.type === 'match') ex = { type: 'match', englishOnly: unit.level === 'A1', pairMode: q.pairMode, pairs: q.pairIds.map(id => words.get(id)) };
       else if (q.type === 'choice') ex = {
         type: 'choice', w: q.wordId ? words.get(q.wordId) : undefined, prompt: q.prompt, passage: q.passage, image: q.image,
         imageAlt: q.imageAlt, visual: q.visual, explanation: q.explanation,
@@ -330,6 +334,9 @@
     const ids = [...new Set(exercises.map(e => e.questionId).filter(Boolean))];
     for (const id of ids) history.seen[id] = (history.seen[id] || 0) + 1;
     history.recent = [...history.recent.slice(-3), ids];
+    history.sessionsStarted=(history.sessionsStarted||0)+1;
+    const pairs=exercises.filter(e=>e.type==='match'&&e.englishOnly).flatMap(e=>e.pairs.map(w=>w.id));
+    if(pairs.length)history.recentPairSets=[...(history.recentPairSets||[]).slice(-3),pairs];
   }
 
   // ── Pas deux fois le même type d'affilée ──────────────────

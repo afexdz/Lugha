@@ -154,9 +154,9 @@
     },
     match(card, e, ctx) {
       const left = shuffle(e.pairs), right = shuffle(e.pairs);
-      card.innerHTML = `<h2 class="ex-title">Relie les paires</h2>
+      card.innerHTML = `<h2 class="ex-title">${e.englishOnly ? (e.pairMode === 'picture' ? 'Match the words to the pictures.' : 'Match the words to the clues.') : 'Relie les paires'}</h2>
         <div class="match"><div class="mcol">${left.map(w => `<button class="mt" data-side="l" data-id="${w.id}" ${rtl(ctx.lang)}>${esc(w.t)}</button>`).join('')}</div>
-        <div class="mcol">${right.map(w => `<button class="mt" data-side="r" data-id="${w.id}">${w.e} ${esc(w.m)}</button>`).join('')}</div></div>`;
+        <div class="mcol">${right.map(w => `<button class="mt" data-side="r" data-id="${w.id}">${e.englishOnly ? (e.pairMode==='picture' ? `<span role="img" aria-label="${esc(w.t)}">${w.e}</span>` : esc(w.clue)) : w.e+' '+esc(w.m)}</button>`).join('')}</div></div>`;
       let sel = { l: null, r: null }, found = 0;
       $$('.mt', card).forEach(b => b.addEventListener('click', () => {
         if (b.classList.contains('matched')) return;

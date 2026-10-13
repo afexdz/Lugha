@@ -103,6 +103,7 @@ function checkExercise(e, fails, ctx) {
     }
     case 'match': {
       const pairs = e.pairs || [];
+      if(e.englishOnly){if(pairs.length!==4||new Set(pairs.map(p=>norm(p.t))).size!==4)f('English matching needs four distinct words');const labels=pairs.map(p=>e.pairMode==='picture'?p.e:p.clue);if(labels.some(x=>!x)||new Set(labels).size!==4)f('English matching needs four unambiguous images/clues');break;}
       for (let i = 0; i < pairs.length; i++) for (const b of pairs.slice(i + 1)) {
         if (meanings(pairs[i].m).some(m => meanings(b.m).includes(m))) f('matching accepts overlapping translations');
       }
@@ -132,7 +133,7 @@ function checkExercise(e, fails, ctx) {
       const first = eng.buildA1Lesson(ui, li, {});
       const replay = eng.buildA1Lesson(ui, li, { strength: { en: { 'en-u0-w0': 5 } } });
       const pool = eng.lessonPool(ui,li);
-      if (!first || first.length !== Math.min(12, Math.floor(pool.length / 5))) fails.push(`u${ui} l${li}: wrong session size`);
+      if (!first || first.length !== Math.min(12, Math.floor((data.units[ui].level==='A1'?pool.filter(q=>q.type!=='match').length:pool.length) / 5))) fails.push(`u${ui} l${li}: wrong session size`);
       if (!replay.length) fails.push(`u${ui} l${li}: empty replay`);
       const sessionIds = new Set();
       if (first.filter(e => e.type === 'match').length > (data.units[ui].questionBank ? 3 : 1)) fails.push(`u${ui}: matching games dominate a fresh lesson`);
@@ -153,7 +154,7 @@ function checkExercise(e, fails, ctx) {
   for (let ui = 0; ui < units; ui++) {
     let profile = { courses: { en: { done: 0 } } };
     const used = new Set();
-    for (let session = 0; session < 100; session++) {
+    for (let session = 0; session < 1000; session++) {
       const prior = profile.courses.en.questionHistory;
       const blocked = new Set((prior?.recent || []).flat());
       const seq = eng.buildA1Lesson(ui, session % 4, profile);
@@ -173,7 +174,7 @@ function checkExercise(e, fails, ctx) {
     if (eng.buildA1Lesson(ui, 0, other).some(e => e.isReview)) fails.push('History leaks between profiles');
     if (other.courses.en) fails.push('Selection mutates a profile before reservation');
   }
-  console.log('Cooldown: 2200 persisted sessions; four-session exclusion and full pool coverage checked');
+  console.log('Cooldown: 22000 persisted sessions; four-session exclusion and full pool coverage checked');
 
   // Review quota while unseen material remains, and course reset migration.
   const reviewProfile = { courses: { en: { questionHistory: { recent: [], seen: {} } } } };
